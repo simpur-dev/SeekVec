@@ -1,0 +1,22 @@
+node_modules/
+dist/
+build/
+.vite/
+*.log
+.DS_Store
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+.env.local
+
+# seekdb data
+server/seekdb.db
+server/seekdb.db-journal
+server/seekdb.db-wal
+server/seekdb.db-shm
+
+# transformers model cache
+web/public/models/
+.cache/

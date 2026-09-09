@@ -1,0 +1,23 @@
+{
+  "name": "seekvec",
+  "private": true,
+  "version": "0.1.0",
+  "description": "端侧量化向量化 + SeekDB 语义检索知识库 (2026 OceanBase 数据库大赛参赛项目)",
+  "scripts": {
+    "predev": "node scripts/check-seekdb.mjs",
+    "install:all": "npm install --prefix server && npm install --prefix web && npm install --prefix scripts && npm install",
+    "dev": "concurrently -n server,web -c blue,green \"npm run dev --prefix server\" \"npm run dev --prefix web\"",
+    "dev:server": "npm run dev --prefix server",
+    "dev:web": "npm run dev --prefix web",
+    "build": "npm run build --prefix web && npm run build --prefix server",
+    "bench": "npm run bench --prefix scripts",
+    "start": "npm run start --prefix server",
+    "probe": "node scripts/probe-seekdb.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}
