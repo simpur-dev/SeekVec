@@ -5,12 +5,15 @@
  * - SEEKDB_PATH 设置时走嵌入式（仅 Linux/macOS；Windows 直接拒绝，
  *   官方文档标注嵌入式 "Not supported yet" on Windows，实测 1.4.0 引擎启动挂死）
  *
- * 合规约束：本进程只做存储与检索，禁止引入任何 embedding 推理依赖
- * （@seekdb/default-embed 已从依赖移除，向量一律由 web 端传入）。
+ * 合规约束：本进程只做存储与检索，禁止引入任何向量化推理依赖
+ * （seekdb 客户端的默认向量化依赖已从依赖移除，向量一律由 web 端传入）。
  *
  * 连接韧性：seekdb 服务/容器重启后旧连接会失效
  * （典型报错 "Can't add new command when connection is in closed state"），
  * 路由层用 retryOnConnectionError 做一次「重建连接 + 重试」，dev 无需重启。
+ *
+ * 查询超时：SEEKDB_QUERY_TIMEOUT_MS（默认 30000）通过 queryTimeout 透传给 SDK，
+ * 避免慢查询把 HTTP 请求无限期挂住。
  */
 import { SeekdbClient, SeekdbAdminClient } from 'seekdb';
 import { SERVER_CONFIG } from '../config.js';
@@ -58,6 +61,7 @@ function buildClient(): SeekdbClient {
     return new SeekdbClient({
       path: SERVER_CONFIG.seekdbPath,
       database: SERVER_CONFIG.seekdbDatabase,
+      queryTimeout: SERVER_CONFIG.queryTimeoutMs,
     });
   }
   return new SeekdbClient({
@@ -66,6 +70,7 @@ function buildClient(): SeekdbClient {
     user: SERVER_CONFIG.seekdbUser,
     password: SERVER_CONFIG.seekdbPassword,
     database: SERVER_CONFIG.seekdbDatabase,
+    queryTimeout: SERVER_CONFIG.queryTimeoutMs,
   });
 }
 

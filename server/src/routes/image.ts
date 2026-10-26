@@ -1,14 +1,27 @@
 /**
- * 图片入库路由（v1.1 stretch）
+ * 图片入库路由（v1.1 预留 / stretch）
  * POST /api/images
  * body: { collectionName, ids, embeddings, metadatas, refreshIndex? }
+ *
+ * 与文本入库共用同一套校验 + 错误语义（400/404/409/503）；
+ * 图片向量由 web 端 CLIP 视觉塔产出，server 不做任何推理。
  */
 import { Router } from 'express';
 import type { Metadata } from 'seekdb';
 import { getCollection } from '../db/collections.js';
 import { retryOnConnectionError } from '../db/client.js';
-import { errorStatus, HttpError } from './errors.js';
-import type { IngestImageRequest } from '../types.js';
+import { asyncHandler, HttpError } from './errors.js';
+import {
+  assertSameLength,
+  fail,
+  requireJsonBody,
+  validateCollectionName,
+  validateEmbeddings,
+  validateIds,
+  validateMetadatas,
+  validateRefreshIndex,
+} from './validation.js';
+import { elapsedMs, nowMs } from '../util/timing.js';
 
 /** 同 document.ts，将 unknown 字段收敛为合法 MetadataValue */
 function toMeta(record: Record<string, unknown>): Metadata {
@@ -17,49 +30,66 @@ function toMeta(record: Record<string, unknown>): Metadata {
   ) as Metadata;
 }
 
+function toMetadataList(
+  metadatas: Array<Record<string, unknown> | null> | undefined,
+): Metadata[] | undefined {
+  return metadatas?.map((record) => (record === null ? {} : toMeta(record)));
+}
+
 export const imageRouter = Router();
 
-imageRouter.post('/', async (req, res) => {
-  const body = req.body as IngestImageRequest;
-  if (
-    !body?.collectionName ||
-    !Array.isArray(body.ids) ||
-    !Array.isArray(body.embeddings) ||
-    !Array.isArray(body.metadatas)
-  ) {
-    res.status(400).json({ error: '字段不完整' });
-    return;
-  }
-  if (body.ids.length !== body.embeddings.length || body.ids.length !== body.metadatas.length) {
-    res.status(400).json({ error: 'ids / embeddings / metadatas 长度不一致' });
-    return;
-  }
+imageRouter.post(
+  '/',
+  asyncHandler(async (req, res) => {
+    const body = requireJsonBody(req.body);
+    const collectionName = validateCollectionName(body.collectionName);
+    const ids = validateIds(body.ids);
+    const embeddings = validateEmbeddings(body.embeddings);
+    assertSameLength(embeddings.length, ids.length, 'embeddings');
+    // metadatas 为图片必填字段（保持原接口语义），但允许 null 占位
+    if (body.metadatas === undefined) {
+      fail('metadatas 必填（图片元数据：fileName/size/mimeType/createdAt）', 'INVALID_METADATAS');
+    }
+    const metadatas = validateMetadatas(body.metadatas, ids.length) ?? [];
+    const refreshIndex = validateRefreshIndex(body.refreshIndex);
+    const shouldRefresh = refreshIndex !== false;
 
-  try {
-    const result = await retryOnConnectionError(async () => {
-      const collection = await getCollection(body.collectionName);
+    const totalStartedAt = nowMs();
+    const upsertStartedAt = nowMs();
+    await retryOnConnectionError(async () => {
+      const collection = await getCollection(collectionName);
       const dimension = collection.dimension;
-      const badIndex = body.embeddings.findIndex((embedding) => embedding.length !== dimension);
+      const badIndex = embeddings.findIndex((embedding) => embedding.length !== dimension);
       if (badIndex !== -1) {
         throw new HttpError(
           400,
-          `第 ${badIndex + 1} 条图片向量维度为 ${body.embeddings[badIndex].length}，` +
-            `集合 ${body.collectionName} 需要 ${dimension} 维`,
+          `第 ${badIndex + 1} 条图片向量维度为 ${embeddings[badIndex].length}，` +
+            `集合 ${collectionName} 需要 ${dimension} 维`,
+          'DIMENSION_MISMATCH',
         );
       }
       await collection.upsert({
-        ids: body.ids,
-        metadatas: body.metadatas.map(toMeta),
-        embeddings: body.embeddings,
+        ids,
+        metadatas: toMetadataList(metadatas),
+        embeddings,
       });
-      if (body.refreshIndex !== false) {
-        await collection.refresh_index();
-      }
-      return { ok: true as const, count: body.ids.length };
     });
-    res.json(result);
-  } catch (err) {
-    console.error('[images] ingest failed', err);
-    res.status(errorStatus(err)).json({ error: (err as Error).message });
-  }
-});
+    const upsertMs = elapsedMs(upsertStartedAt);
+
+    let refreshMs: number | null = null;
+    if (shouldRefresh) {
+      const refreshStartedAt = nowMs();
+      await retryOnConnectionError(async () => {
+        const collection = await getCollection(collectionName);
+        await collection.refresh_index();
+      });
+      refreshMs = elapsedMs(refreshStartedAt);
+    }
+
+    res.json({
+      ok: true,
+      count: ids.length,
+      timings: { upsertMs, refreshMs, totalMs: elapsedMs(totalStartedAt) },
+    });
+  }),
+);

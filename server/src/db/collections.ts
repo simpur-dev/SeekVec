@@ -4,12 +4,18 @@
  * 合规策略：向量必须由 web 端推理后传入，server 禁止做 embedding。
  * 实现方式：Schema 显式声明 embeddingFunction: null，
  * add/query/hybridSearch 一律传预计算 embeddings（queryEmbeddings）。
- * 不使用 getOrCreateCollection 默认路径——那会隐式绑定 @seekdb/default-embed
+ * 不使用 getOrCreateCollection 默认路径——那会隐式绑定 seekdb 的默认向量化组件
  * （Node 端推理），与「端侧运行」审计要求冲突，且该依赖已从 server 移除。
  */
 import { getClient } from './client.js';
 import { buildSchema } from './schema.js';
-import type { CollectionListItem, ModelKey, Modality } from '../types.js';
+import type { Schema } from 'seekdb';
+import type {
+  CollectionListItem,
+  CollectionSchemaInfo,
+  ModelKey,
+  Modality,
+} from '../types.js';
 
 export { dimensionForModel } from './schema.js';
 export type { ModelKey };
@@ -78,6 +84,39 @@ export async function ensureCollection(
 export async function getCollection(name: string) {
   const client = await getClient();
   return client.getCollection({ name, embeddingFunction: null });
+}
+
+/**
+ * 删除集合（维护/评测清理用）。
+ *
+ * 返回 false 表示集合本来就不存在（路由层映射 404），
+ * 避免先 hasCollection 再 deleteCollection 的两次往返。
+ */
+export async function deleteCollection(name: string): Promise<boolean> {
+  const client = await getClient();
+  const exists = await client.hasCollection(name);
+  if (!exists) return false;
+  await client.deleteCollection(name);
+  return true;
+}
+
+/**
+ * 把 SDK 的 Schema 收敛为可 JSON 序列化的索引摘要：
+ * - hnsw：HNSW 参数（维度/距离等）
+ * - fulltext：全文索引 analyzer/properties（图片集合为 null）
+ */
+export function serializeCollectionSchema(schema?: Schema): CollectionSchemaInfo {
+  const hnsw = schema?.vectorIndex?.hnsw;
+  const fulltext = schema?.fulltextIndex;
+  return {
+    ...(hnsw ? { hnsw: { ...hnsw } } : {}),
+    fulltext: fulltext
+      ? {
+          analyzer: fulltext.analyzer,
+          properties: fulltext.properties ?? null,
+        }
+      : null,
+  };
 }
 
 /**

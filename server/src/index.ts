@@ -1,44 +1,29 @@
 /**
  * SeekVec server 入口
  *
- * - Express HTTP API
- * - seekdb-js 嵌入式客户端（懒初始化）
- * - 严格遵守「端侧向量化」：server 只做存储与检索，禁止调用任何 embedding/ONNX 推理
+ * 只负责启动/关闭：
+ * - 建库（ensureDatabase）与启动时真实连通性检查（SELECT 1），不可达则退出
+ * - 监听 HTTP 端口
+ * - SIGINT/SIGTERM 优雅关闭（先停 HTTP，再关 seekdb 连接）
+ *
+ * HTTP 应用组装在 app.ts 的 createApp()，便于 supertest 复用。
+ *
+ * 合规：严格遵守「端侧向量化」——server 只做存储与检索，
+ * 禁止调用任何本地推理库。
  */
-import express from 'express';
-import cors from 'cors';
+import type { Server } from 'node:http';
+import { createApp } from './app.js';
 import { SERVER_CONFIG } from './config.js';
-import { collectionsRouter } from './routes/collection.js';
-import { documentsRouter } from './routes/document.js';
-import { searchRouter } from './routes/search.js';
-import { imageRouter } from './routes/image.js';
 import {
-  getClient,
   closeClient,
   describeConnection,
   ensureDatabase,
+  getClient,
 } from './db/client.js';
 
-const app = express();
+let httpServer: Server | null = null;
 
-app.use(
-  cors({
-    origin: SERVER_CONFIG.corsOrigins,
-    credentials: false,
-  }),
-);
-app.use(express.json({ limit: '20mb' }));
-
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', ts: Date.now() });
-});
-
-app.use('/api/collections', collectionsRouter);
-app.use('/api/documents', documentsRouter);
-app.use('/api/search', searchRouter);
-app.use('/api/images', imageRouter);
-
-async function start() {
+async function start(): Promise<void> {
   // 建库（仅 server 模式需要；嵌入式 database 自动创建）
   await ensureDatabase();
 
@@ -47,13 +32,20 @@ async function start() {
   await client.execute('SELECT 1');
   console.log(`[server] seekdb-js connected: ${describeConnection()}`);
 
-  app.listen(SERVER_CONFIG.port, () => {
+  const app = createApp();
+  httpServer = app.listen(SERVER_CONFIG.port, () => {
     console.log(`[server] http api listening on http://localhost:${SERVER_CONFIG.port}`);
   });
 }
 
-async function shutdown() {
+async function shutdown(): Promise<void> {
   console.log('\n[server] shutting down');
+  if (httpServer) {
+    await new Promise<void>((resolve) => {
+      httpServer?.close(() => resolve());
+    });
+    httpServer = null;
+  }
   await closeClient();
   process.exit(0);
 }
