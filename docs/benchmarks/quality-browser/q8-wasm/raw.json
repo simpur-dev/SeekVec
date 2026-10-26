@@ -1,0 +1,5884 @@
+{
+  "groupId": "q8-wasm",
+  "requested": {
+    "backend": "wasm",
+    "dtype": "q8",
+    "baseline": false
+  },
+  "collection": "qeval_q8_wasm_20261026_113711",
+  "ok": true,
+  "assertions": [
+    {
+      "ok": true,
+      "name": "ingest chunk 数与评测集一致",
+      "detail": "写入 73，期望 73（浏览器分块需与 qrels 映射一致）"
+    },
+    {
+      "ok": true,
+      "name": "可读取实际 backend/dtype",
+      "detail": "backend=wasm，dtype=q8"
+    },
+    {
+      "ok": true,
+      "name": "每条查询都有结果",
+      "detail": "60 条查询均有 hit"
+    },
+    {
+      "ok": true,
+      "name": "hit metadata 可映射（source/chunkIndex 完整）",
+      "detail": "全部 hit 均含 source + chunkIndex"
+    },
+    {
+      "ok": true,
+      "name": "hit source 均属于评测语料",
+      "detail": "60 篇语料内"
+    },
+    {
+      "ok": true,
+      "name": "search mode 与 keyword 预期一致",
+      "detail": "keyword→hybrid，无 keyword→vector"
+    },
+    {
+      "ok": true,
+      "name": "qrels 均可解析到语料 chunk",
+      "detail": "229 条 qrels 全部可解析"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "startedAt": "2026-10-26T03:37:11.236Z",
+  "actual": {
+    "backend": "wasm",
+    "dtype": "q8",
+    "backendReason": null,
+    "model": {
+      "key": "text_zh",
+      "id": "Xenova/bge-small-zh-v1.5",
+      "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+      "dtype": "q8"
+    },
+    "gpuAdapter": null,
+    "fallback": false,
+    "dtypeMismatch": false
+  },
+  "ingest": {
+    "count": 73,
+    "times": {
+      "readMs": 178.8400000333786,
+      "chunkMs": 0.8599998950958252,
+      "embedMs": 2133.9950000047684,
+      "writeMs": 819.7000000476837,
+      "refreshMs": 508.35,
+      "cleanupMs": 678.5749999880791,
+      "totalMs": 3924.0050000548363
+    }
+  },
+  "phases": {
+    "model.download": {
+      "n": 1,
+      "p50": 311.67,
+      "p95": 311.67,
+      "mean": 311.67
+    },
+    "model.init": {
+      "n": 1,
+      "p50": 318.86,
+      "p95": 318.86,
+      "mean": 318.86
+    },
+    "model.total": {
+      "n": 1,
+      "p50": 630.53,
+      "p95": 630.53,
+      "mean": 630.53
+    },
+    "doc.read": {
+      "n": 60,
+      "p50": 2.748,
+      "p95": 6.135,
+      "mean": 2.981
+    },
+    "doc.chunk": {
+      "n": 60,
+      "p50": 0.01,
+      "p95": 0.03,
+      "mean": 0.014
+    },
+    "doc.embed": {
+      "n": 5,
+      "p50": 447.405,
+      "p95": 609.936,
+      "mean": 426.799
+    },
+    "doc.write": {
+      "n": 5,
+      "p50": 61.775,
+      "p95": 461.803,
+      "mean": 163.94
+    },
+    "index.refresh": {
+      "n": 1,
+      "p50": 508.35,
+      "p95": 508.35,
+      "mean": 508.35
+    },
+    "ingest.total": {
+      "n": 1,
+      "p50": 3924.005,
+      "p95": 3924.005,
+      "mean": 3924.005
+    }
+  },
+  "perfEnv": {
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 28,
+    "deviceMemory": 16,
+    "gpuAdapter": null,
+    "backend": "wasm",
+    "backendReason": null,
+    "model": {
+      "key": "text_zh",
+      "id": "Xenova/bge-small-zh-v1.5",
+      "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+      "dtype": "q8"
+    },
+    "seekdb": {
+      "reachable": true,
+      "latencyMs": 4.99,
+      "version": "5.7.25-OceanBase seekdb-v1.4.0.0",
+      "refreshIndexSupported": true
+    }
+  },
+  "mapping": {
+    "hitsTotal": 600,
+    "hitsResolvable": 600,
+    "queries": 60,
+    "qrelEntries": 229,
+    "qrelResolvable": 229,
+    "modeCounts": {
+      "vector": 40,
+      "hybrid": 20
+    },
+    "hitsInQrels": 154
+  },
+  "metrics": {
+    "queries": 60,
+    "recallAt1": 0.2365,
+    "recallAt3": 0.4544,
+    "recallAt5": 0.5592,
+    "ndcgAt5": 0.7267,
+    "ndcgAt10": 0.7619,
+    "mrr": 0.8992
+  },
+  "metricsByCategory": {
+    "keyword": {
+      "queries": 20,
+      "recallAt1": 0.2642,
+      "recallAt3": 0.5017,
+      "recallAt5": 0.5642,
+      "ndcgAt5": 0.7968,
+      "ndcgAt10": 0.8298,
+      "mrr": 0.95
+    },
+    "paraphrase": {
+      "queries": 20,
+      "recallAt1": 0.2375,
+      "recallAt3": 0.4625,
+      "recallAt5": 0.575,
+      "ndcgAt5": 0.7346,
+      "ndcgAt10": 0.7655,
+      "mrr": 0.86
+    },
+    "semantic": {
+      "queries": 20,
+      "recallAt1": 0.2079,
+      "recallAt3": 0.3992,
+      "recallAt5": 0.5383,
+      "ndcgAt5": 0.6487,
+      "ndcgAt10": 0.6904,
+      "mrr": 0.8875
+    }
+  },
+  "metricsByLang": {
+    "en": {
+      "queries": 20,
+      "recallAt1": 0.1763,
+      "recallAt3": 0.3133,
+      "recallAt5": 0.3942,
+      "ndcgAt5": 0.6679,
+      "ndcgAt10": 0.7147,
+      "mrr": 0.9017
+    },
+    "zh": {
+      "queries": 40,
+      "recallAt1": 0.2667,
+      "recallAt3": 0.525,
+      "recallAt5": 0.6417,
+      "ndcgAt5": 0.7561,
+      "ndcgAt10": 0.7855,
+      "mrr": 0.8979
+    }
+  },
+  "queryRows": [
+    {
+      "qid": "sem-01",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "seekdb 和传统数据库有什么不同？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 4,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.97000002861023,
+      "embeddingMs": 10.264999985694885,
+      "httpMs": 17.97000002861023,
+      "dbMs": 4.58,
+      "e2eMs": 36,
+      "recallAt1": 0.25,
+      "recallAt3": 0.75,
+      "recallAt5": 1,
+      "ndcgAt5": 1,
+      "ndcgAt10": 1,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.27209308480106775,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.3441265391926246,
+          "score": null
+        },
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": 0.3586134865379048,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.36017655846299557,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.39977080824723144,
+          "score": null
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.41281930131797084,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.42650617045090555,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.4412275552749594,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.4487377940103605,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.4578760589435056,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-02",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "OceanBase 如何保证数据安全可靠？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 14.389999985694885,
+      "embeddingMs": 6.6700000166893005,
+      "httpMs": 14.389999985694885,
+      "dbMs": 2.13,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7852134991855584,
+      "ndcgAt10": 0.8814340589326981,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.4344344476201967,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.469637271122592,
+          "score": null
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": 0.4843320576550115,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.48649981698390443,
+          "score": null
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": 0.4885519133271923,
+          "score": null
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": 0.49096934255135105,
+          "score": null
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.4960391221069542,
+          "score": null
+        },
+        {
+          "key": "en-02.md#1",
+          "id": "chunk_phni2r",
+          "distance": 0.5004115700721421,
+          "score": null
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.5036525434826313,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.5058449506759328,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-03",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "怎么判断两段文本在语义上有多接近？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 14.240000009536743,
+      "embeddingMs": 11.0450000166893,
+      "httpMs": 14.240000009536743,
+      "dbMs": 2.06,
+      "e2eMs": 32,
+      "recallAt1": 0.25,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.6467429303328278,
+      "ndcgAt10": 0.7454748503310519,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": 0.4088780175302049,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.4641202368807924,
+          "score": null
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": 0.47020301755610416,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.49548031295425066,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.5090788288571326,
+          "score": null
+        },
+        {
+          "key": "zh-11.md#0",
+          "id": "chunk_1afivyq",
+          "distance": 0.5113579597001963,
+          "score": null
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": 0.5179545283317532,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.5185058977891175,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.5291513519973361,
+          "score": null
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": 0.5304885750135139,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-04",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "向量索引的参数会怎样影响召回和延迟？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.805000007152557,
+      "embeddingMs": 11.394999980926514,
+      "httpMs": 17.805000007152557,
+      "dbMs": 2.24,
+      "e2eMs": 38,
+      "recallAt1": 0.25,
+      "recallAt3": 0.75,
+      "recallAt5": 0.75,
+      "ndcgAt5": 0.668044114658964,
+      "ndcgAt10": 0.668044114658964,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.3015971391916752,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.3095599412917649,
+          "score": null
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.38405047464965425,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.4086748579323588,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.410366496952411,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.4271829730104907,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.42818846030510016,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.4314273583894058,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.43208544490175005,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.4323767407752751,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-05",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "怎样同时利用关键词和语义来提升搜索效果？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.705000042915344,
+      "embeddingMs": 10.870000004768372,
+      "httpMs": 16.705000042915344,
+      "dbMs": 2.77,
+      "e2eMs": 37,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.75,
+      "ndcgAt5": 0.7209669446813779,
+      "ndcgAt10": 0.7209669446813779,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.38133028856931284,
+          "score": null
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": 0.400042116629437,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.4393725873909541,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.43939144141776065,
+          "score": null
+        },
+        {
+          "key": "zh-20.md#0",
+          "id": "chunk_1e53zjm",
+          "distance": 0.4424262516420241,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.4478228750440031,
+          "score": null
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.4639615054061482,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.47417375907174986,
+          "score": null
+        },
+        {
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": 0.47671139240264526,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.4803018546464122,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-06",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "浏览器里直接运行 AI 模型需要哪些组件？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.719999969005585,
+      "embeddingMs": 8.219999969005585,
+      "httpMs": 12.719999969005585,
+      "dbMs": 2.25,
+      "e2eMs": 27,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.75,
+      "ndcgAt5": 0.8944296728234234,
+      "ndcgAt10": 0.8944296728234234,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.2893368350668949,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.31247919611446795,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.38231173859167666,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.401208650921727,
+          "score": null
+        },
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": 0.4020577306609413,
+          "score": null
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": 0.43594418884982067,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.4494905264096266,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4568745766207314,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.4573900103568992,
+          "score": null
+        },
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": 0.4595376575268625,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-07",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "电脑显卡不支持时检索功能还能用吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.149999976158142,
+      "embeddingMs": 8.689999997615814,
+      "httpMs": 12.149999976158142,
+      "dbMs": 2.01,
+      "e2eMs": 23,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.26727014332996396,
+      "ndcgAt10": 0.4828511201075732,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": 0.4336506782259869,
+          "score": null
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": 0.4503267107446687,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.4723943852202852,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.4827476205536255,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.49339843111113013,
+          "score": null
+        },
+        {
+          "key": "en-04.md#1",
+          "id": "chunk_p6qq06",
+          "distance": 0.511956124785135,
+          "score": null
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": 0.5131282484897907,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.5158847802166059,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.5238353269394436,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.5248004481314932,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-08",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "模型文件太大，有什么办法把它变小？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.6700000166893,
+      "embeddingMs": 9.125,
+      "httpMs": 12.6700000166893,
+      "dbMs": 2.16,
+      "e2eMs": 28,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.75,
+      "ndcgAt5": 0.89213757928353,
+      "ndcgAt10": 0.89213757928353,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.3755923061856459,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.40811454823022575,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.46046767539794164,
+          "score": null
+        },
+        {
+          "key": "zh-30.md#0",
+          "id": "chunk_zo78zc",
+          "distance": 0.47771513196409954,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.48036185024009725,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.48107161779492125,
+          "score": null
+        },
+        {
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.4892344144685302,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.4916990672645164,
+          "score": null
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": 0.4937115900172663,
+          "score": null
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.4979358315467691,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-09",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "怎样客观衡量一个检索系统的质量？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.775000035762787,
+      "embeddingMs": 9.509999990463257,
+      "httpMs": 11.775000035762787,
+      "dbMs": 1.98,
+      "e2eMs": 27,
+      "recallAt1": 0,
+      "recallAt3": 0,
+      "recallAt5": 0,
+      "ndcgAt5": 0,
+      "ndcgAt10": 0.23652291324556837,
+      "mrr": 0.16666666666666666,
+      "topHits": [
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.3904551369765549,
+          "score": null
+        },
+        {
+          "key": "zh-10.md#0",
+          "id": "chunk_10djblf",
+          "distance": 0.4656572978905046,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.47330443163281566,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.4849090115644623,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.4893424536365236,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.49069735463277286,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.49601674174861865,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.5028526776188047,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.5057484500708008,
+          "score": null
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": 0.5098677850084679,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-10",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "文档从导入到能被检索经历了哪些步骤？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.649999976158142,
+      "embeddingMs": 9.425000011920929,
+      "httpMs": 11.649999976158142,
+      "dbMs": 1.89,
+      "e2eMs": 23,
+      "recallAt1": 0.25,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.7125794632086186,
+      "ndcgAt10": 0.7488403098058309,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.353682195262381,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.4327996275426057,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.4474612599703607,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.4629097669339698,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.46553696794694865,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.4731675796405629,
+          "score": null
+        },
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": 0.4789279203758582,
+          "score": null
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": 0.482402302216522,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.48746201919113696,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.48868295752710045,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-11",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "为什么重复导入同一批文件不会产生重复数据？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.740000009536743,
+      "embeddingMs": 10.879999995231628,
+      "httpMs": 11.740000009536743,
+      "dbMs": 2.26,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7895959410076381,
+      "ndcgAt10": 0.7895959410076381,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.3180370709940086,
+          "score": null
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": 0.36163199706935545,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.37051886320110106,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.387539065626862,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.4171905864959098,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.4250808864928185,
+          "score": null
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.43538155766613107,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.44755344332538294,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.449297827231107,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.4523204891490168,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-12",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "embedding 向量的维度该选多大比较合适？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.064999997615814,
+      "embeddingMs": 8.014999985694885,
+      "httpMs": 11.064999997615814,
+      "dbMs": 1.68,
+      "e2eMs": 28,
+      "recallAt1": 0,
+      "recallAt3": 0,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.370773822660262,
+      "ndcgAt10": 0.40957195354402265,
+      "mrr": 0.25,
+      "topHits": [
+        {
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": 0.30693777716899606,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.3162395796204567,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.34458223509337516,
+          "score": null
+        },
+        {
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.3770459890365202,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.38523309494856295,
+          "score": null
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.39964609141892415,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.40195274353023525,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4085457501248474,
+          "score": null
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.41283766611210115,
+          "score": null
+        },
+        {
+          "key": "zh-10.md#0",
+          "id": "chunk_10djblf",
+          "distance": 0.4317768121430827,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-13",
+      "category": "semantic",
+      "lang": "zh",
+      "query": "怎么避免页面在长文本向量化时卡死？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.459999978542328,
+      "embeddingMs": 8.72000002861023,
+      "httpMs": 11.459999978542328,
+      "dbMs": 1.83,
+      "e2eMs": 23,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7984848580994974,
+      "ndcgAt10": 0.7984848580994974,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": 0.38369058662224265,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.44072538107170556,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4491976888422242,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.45351185077004996,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.45474432813424936,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.4603314172628882,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.46133916202937664,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.471825182437863,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4736784853434731,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.47445319168732425,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-14",
+      "category": "semantic",
+      "lang": "en",
+      "query": "What makes seekdb different from a dedicated vector database?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 4,
+      "relevantCount": 8,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.759999990463257,
+      "embeddingMs": 11.054999947547913,
+      "httpMs": 11.759999990463257,
+      "dbMs": 2.01,
+      "e2eMs": 28,
+      "recallAt1": 0.125,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.7428223494387413,
+      "ndcgAt10": 0.7800559470658815,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.20734219726135794,
+          "score": null
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.22707151819978377,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.27576819369409145,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.2917017688395248,
+          "score": null
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": 0.30637752045780664,
+          "score": null
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.3096057957175248,
+          "score": null
+        },
+        {
+          "key": "en-03.md#0",
+          "id": "chunk_k9ue02",
+          "distance": 0.31933609477707503,
+          "score": null
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": 0.3236607102942881,
+          "score": null
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": 0.3328065870308544,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.33664935886547465,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-15",
+      "category": "semantic",
+      "lang": "en",
+      "query": "How does OceanBase keep data safe when a server fails?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13.524999976158142,
+      "embeddingMs": 7.564999997615814,
+      "httpMs": 13.524999976158142,
+      "dbMs": 2.43,
+      "e2eMs": 23,
+      "recallAt1": 0.16666666666666666,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.292555651392097,
+      "ndcgAt10": 0.2835459947900571,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.29335611024947295,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.29546253789362387,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.30873645231611746,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.31036321869771455,
+          "score": null
+        },
+        {
+          "key": "en-01.md#1",
+          "id": "chunk_k30s82",
+          "distance": 0.3115771168778655,
+          "score": null
+        },
+        {
+          "key": "en-03.md#0",
+          "id": "chunk_k9ue02",
+          "distance": 0.31999457359507544,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.3375656589630822,
+          "score": null
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": 0.3400445175117407,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.34300561284751274,
+          "score": null
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": 0.3446729142643473,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-16",
+      "category": "semantic",
+      "lang": "en",
+      "query": "What are the trade-offs of graph-based nearest neighbor indexes?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 5,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.0799999833107,
+      "embeddingMs": 11.134999990463257,
+      "httpMs": 12.0799999833107,
+      "dbMs": 2.43,
+      "e2eMs": 28,
+      "recallAt1": 0.2,
+      "recallAt3": 0.4,
+      "recallAt5": 0.6,
+      "ndcgAt5": 0.6088807730827119,
+      "ndcgAt10": 0.6088807730827119,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.26180998910605846,
+          "score": null
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": 0.266383334017792,
+          "score": null
+        },
+        {
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": 0.27518942051310125,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.3144332204282474,
+          "score": null
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": 0.31899581181951153,
+          "score": null
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": 0.3251780450768147,
+          "score": null
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.32981566671951135,
+          "score": null
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": 0.3350824111405144,
+          "score": null
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.34430642595694627,
+          "score": null
+        },
+        {
+          "key": "en-11.md#1",
+          "id": "chunk_ngbktf",
+          "distance": 0.3558779358863785,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-17",
+      "category": "semantic",
+      "lang": "en",
+      "query": "How can a website run embedding models without a backend server?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 5,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 14.8299999833107,
+      "embeddingMs": 11.995000004768372,
+      "httpMs": 14.8299999833107,
+      "dbMs": 2.38,
+      "e2eMs": 33,
+      "recallAt1": 0.16666666666666666,
+      "recallAt3": 0.16666666666666666,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.7741869585498301,
+      "ndcgAt10": 0.8064375459210917,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.2681791622531796,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.2746512457520499,
+          "score": null
+        },
+        {
+          "key": "en-03.md#0",
+          "id": "chunk_k9ue02",
+          "distance": 0.2808793019724193,
+          "score": null
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.29315138581665257,
+          "score": null
+        },
+        {
+          "key": "en-10.md#1",
+          "id": "chunk_g2y1ma",
+          "distance": 0.30648473578509516,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.3102763480112748,
+          "score": null
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": 0.31957280389776177,
+          "score": null
+        },
+        {
+          "key": "en-11.md#1",
+          "id": "chunk_ngbktf",
+          "distance": 0.32605067802079657,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.3515465871882365,
+          "score": null
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": 0.35344712179268856,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-18",
+      "category": "semantic",
+      "lang": "en",
+      "query": "Why does a quantized model load faster in the browser?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.060000002384186,
+      "embeddingMs": 11.610000014305115,
+      "httpMs": 12.060000002384186,
+      "dbMs": 1.78,
+      "e2eMs": 32,
+      "recallAt1": 0,
+      "recallAt3": 0.16666666666666666,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.42533768052056226,
+      "ndcgAt10": 0.47850164965672576,
+      "mrr": 0.3333333333333333,
+      "topHits": [
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.2936177887810485,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.3312388867192618,
+          "score": null
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": 0.34947375360273725,
+          "score": null
+        },
+        {
+          "key": "en-10.md#1",
+          "id": "chunk_g2y1ma",
+          "distance": 0.35754187180338515,
+          "score": null
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": 0.3603291581491488,
+          "score": null
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": 0.362139653521824,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.38511131342240923,
+          "score": null
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": 0.3866887458151008,
+          "score": null
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": 0.3892489571721348,
+          "score": null
+        },
+        {
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": 0.39703420595072014,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-19",
+      "category": "semantic",
+      "lang": "en",
+      "query": "How should benchmark runs be summarized for a fair comparison?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 1,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.310000002384186,
+      "embeddingMs": 9.7049999833107,
+      "httpMs": 12.310000002384186,
+      "dbMs": 2.03,
+      "e2eMs": 27,
+      "recallAt1": 0.25,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.6467429303328278,
+      "ndcgAt10": 0.6467429303328278,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": 0.32511337843137544,
+          "score": null
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.32958134194310096,
+          "score": null
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.3300314956772036,
+          "score": null
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": 0.33190536550091077,
+          "score": null
+        },
+        {
+          "key": "en-05.md#1",
+          "id": "chunk_1jyd5gf",
+          "distance": 0.3334763844381511,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.34041968812471224,
+          "score": null
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": 0.34371057898744173,
+          "score": null
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": 0.3467245030092867,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.3514673467952194,
+          "score": null
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": 0.353085573955941,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "sem-20",
+      "category": "semantic",
+      "lang": "en",
+      "query": "Which metric punishes putting the best answer lower in the result list?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 4,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13.844999969005585,
+      "embeddingMs": 12.544999957084656,
+      "httpMs": 13.844999969005585,
+      "dbMs": 3.61,
+      "e2eMs": 33,
+      "recallAt1": 0.25,
+      "recallAt3": 0.75,
+      "recallAt5": 1,
+      "ndcgAt5": 0.9363759000898353,
+      "ndcgAt10": 0.9363759000898353,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": 0.2825153055732146,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.2862909688580787,
+          "score": null
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": 0.2880569433995934,
+          "score": null
+        },
+        {
+          "key": "en-16.md#1",
+          "id": "chunk_e3c20p",
+          "distance": 0.3066900698232269,
+          "score": null
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": 0.3161779265190865,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.32090189430058136,
+          "score": null
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.3227305065486352,
+          "score": null
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": 0.33469972975256246,
+          "score": null
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": 0.3399349451063891,
+          "score": null
+        },
+        {
+          "key": "en-05.md#1",
+          "id": "chunk_1jyd5gf",
+          "distance": 0.3422967163455122,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-01",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "HNSW 的 ef_search 调大以后召回和延迟怎么变化？",
+      "keyword": "HNSW",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 20.709999978542328,
+      "embeddingMs": 12.235000014305115,
+      "httpMs": 20.709999978542328,
+      "dbMs": 9.36,
+      "e2eMs": 43,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 1,
+      "recallAt5": 1,
+      "ndcgAt5": 1,
+      "ndcgAt10": 1,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": null,
+          "score": 2.030220282694497
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": null,
+          "score": 1.9081289172276399
+        },
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": null,
+          "score": 1.352410602721971
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": null,
+          "score": 1.1485783826944969
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": null,
+          "score": 0.9981408814268184
+        },
+        {
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": null,
+          "score": 0.9450900865478339
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": null,
+          "score": 0.9450900865478339
+        },
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": null,
+          "score": 0.80969179
+        },
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": null,
+          "score": 0.80953351
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": null,
+          "score": 0.80572339
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-02",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "BM25 打分公式考虑了哪些因素？",
+      "keyword": "BM25",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.519999980926514,
+      "embeddingMs": 7.365000009536743,
+      "httpMs": 16.519999980926514,
+      "dbMs": 5.54,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7984848580994974,
+      "ndcgAt10": 0.7984848580994974,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": null,
+          "score": 2.639085504804194
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": null,
+          "score": 1.624998850047748
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": null,
+          "score": 0.81784976
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": null,
+          "score": 0.81463439
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": null,
+          "score": 0.79779762
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": null,
+          "score": 0.79018032
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 0.78499264
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": null,
+          "score": 0.78228029
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.77910324
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": null,
+          "score": 0.77526298
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-03",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "RRF 是怎么把两路排名合并的？",
+      "keyword": "RRF",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 21,
+      "embeddingMs": 10.2049999833107,
+      "httpMs": 21,
+      "dbMs": 6.26,
+      "e2eMs": 38,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.9049495058460971,
+      "ndcgAt10": 0.9049495058460971,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": null,
+          "score": 2.877402742589092
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": null,
+          "score": 0.79845366
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": null,
+          "score": 0.79399147
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": null,
+          "score": 0.78544731
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": null,
+          "score": 0.78533723
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": null,
+          "score": 0.78441376
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": null,
+          "score": 0.77756813
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": null,
+          "score": 0.77751374
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.77391268
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 0.77263217
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-04",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "WebGPU 初始化失败时应用会怎样处理？",
+      "keyword": "WebGPU",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.62999999523163,
+      "embeddingMs": 7.365000009536743,
+      "httpMs": 17.62999999523163,
+      "dbMs": 6.63,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 1,
+      "recallAt5": 1,
+      "ndcgAt5": 1,
+      "ndcgAt10": 1,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": null,
+          "score": 2.1702267715372914
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": null,
+          "score": 2.081569781537291
+        },
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": null,
+          "score": 2.022245881566786
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 1.6936565546543305
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 1.2871789815372912
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 1.0318067988274882
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": null,
+          "score": 0.79798556
+        },
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": null,
+          "score": 0.79759296
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": null,
+          "score": 0.79621537
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": null,
+          "score": 0.79567599
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-05",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "INT8 量化之后模型体积大约变成多少？",
+      "keyword": "INT8",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.040000021457672,
+      "embeddingMs": 7.865000009536743,
+      "httpMs": 17.040000021457672,
+      "dbMs": 6.81,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.9049495058460971,
+      "ndcgAt10": 0.9428729785463599,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": null,
+          "score": 2.415320424918809
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": null,
+          "score": 1.4269815820535354
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": null,
+          "score": 0.85955133
+        },
+        {
+          "key": "zh-10.md#0",
+          "id": "chunk_10djblf",
+          "distance": null,
+          "score": 0.79654106
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": null,
+          "score": 0.79550104
+        },
+        {
+          "key": "zh-30.md#0",
+          "id": "chunk_zo78zc",
+          "distance": null,
+          "score": 0.77535214
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": null,
+          "score": 0.76487647
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 0.75862753
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": null,
+          "score": 0.75582326
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.75084348
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-06",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "FP16 的精度损失对检索质量影响大吗？",
+      "keyword": "FP16",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.094999969005585,
+      "embeddingMs": 8.64000004529953,
+      "httpMs": 16.094999969005585,
+      "dbMs": 5.79,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.882808018370203,
+      "ndcgAt10": 0.9148570708197291,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-30.md#0",
+          "id": "chunk_zo78zc",
+          "distance": null,
+          "score": 2.4220513493988713
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": null,
+          "score": 1.5056111794319949
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 0.79337888
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": null,
+          "score": 0.78059166
+        },
+        {
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": null,
+          "score": 0.77976157
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.77495287
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": null,
+          "score": 0.7688427
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": null,
+          "score": 0.76833683
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": null,
+          "score": 0.76667219
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": null,
+          "score": 0.76495962
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-07",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "Paxos 多副本协议怎样确认写入成功？",
+      "keyword": "Paxos",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.50499999523163,
+      "embeddingMs": 8.235000014305115,
+      "httpMs": 17.50499999523163,
+      "dbMs": 6.35,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.882808018370203,
+      "ndcgAt10": 0.9207314910704657,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": null,
+          "score": 2.686440174576229
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": null,
+          "score": 1.5630285549188088
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": null,
+          "score": 0.78556349
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": null,
+          "score": 0.78441871
+        },
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": null,
+          "score": 0.7840306
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": null,
+          "score": 0.78294628
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": null,
+          "score": 0.76787116
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": null,
+          "score": 0.76528934
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": null,
+          "score": 0.76314546
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": null,
+          "score": 0.762529
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-08",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "seekdb 里一条 SQL 能同时做元数据过滤和向量近邻吗？",
+      "keyword": "SQL",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 15.9549999833107,
+      "embeddingMs": 9.370000004768372,
+      "httpMs": 15.9549999833107,
+      "dbMs": 5.94,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 1,
+      "ndcgAt5": 0.9673387413348702,
+      "ndcgAt10": 0.9673387413348702,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": null,
+          "score": 2.5297255870101445
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": null,
+          "score": 2.3052830266865136
+        },
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": null,
+          "score": 1.5401403024930536
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": null,
+          "score": 1.300636842926099
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": null,
+          "score": 0.83522788
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.8221359
+        },
+        {
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": null,
+          "score": 0.81976712
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": null,
+          "score": 0.80863419
+        },
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": null,
+          "score": 0.80826528
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": null,
+          "score": 0.7972955
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-09",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "chunk id 是如何保证幂等导入的？",
+      "keyword": "chunk id",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.10499995946884,
+      "embeddingMs": 8.270000040531158,
+      "httpMs": 17.10499995946884,
+      "dbMs": 6.29,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.8556691603792903,
+      "ndcgAt10": 0.8556691603792903,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": null,
+          "score": 4.9707523412733705
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": null,
+          "score": 3.6197245106381746
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 2.200848219872631
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": null,
+          "score": 0.77699184
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": null,
+          "score": 0.77037789
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.77001065
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": null,
+          "score": 0.76822813
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": null,
+          "score": 0.76556782
+        },
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": null,
+          "score": 0.76446151
+        },
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": null,
+          "score": 0.76046376
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-10",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "Recall@K 衡量的是查全能力吗？",
+      "keyword": "Recall@K",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 19.724999964237213,
+      "embeddingMs": 7.6450000405311584,
+      "httpMs": 19.724999964237213,
+      "dbMs": 8.15,
+      "e2eMs": 33,
+      "recallAt1": 0,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.47020199776783905,
+      "ndcgAt10": 0.5022510502173653,
+      "mrr": 0.5,
+      "topHits": [
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": null,
+          "score": 2.28331960568696
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": null,
+          "score": 2.2074223625276046
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": null,
+          "score": 1.300636842926099
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": null,
+          "score": 1.228969098519967
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": null,
+          "score": 0.78846426
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": null,
+          "score": 0.78218677
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": null,
+          "score": 0.78156231
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": null,
+          "score": 0.78122743
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 0.77836217
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": null,
+          "score": 0.77687109
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-11",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "nDCG@K 的 gain 为什么取 2 的 rel 次方减一？",
+      "keyword": "nDCG@K",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 1,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 18.4099999666214,
+      "embeddingMs": 12.924999952316284,
+      "httpMs": 18.4099999666214,
+      "dbMs": 6.89,
+      "e2eMs": 38,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.6735439182299785,
+      "ndcgAt10": 0.6735439182299785,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": null,
+          "score": 2.1904511525276047
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": null,
+          "score": 1.5054871456869598
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": null,
+          "score": 1.300636842926099
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": null,
+          "score": 1.228969098519967
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": null,
+          "score": 0.80266386
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": null,
+          "score": 0.79590916
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": null,
+          "score": 0.7920334
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": null,
+          "score": 0.78078786
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 0.78036376
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": null,
+          "score": 0.77947737
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-12",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "query_string 里哪些特殊字符必须转义？",
+      "keyword": "query_string",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.22000002861023,
+      "embeddingMs": 7.730000019073486,
+      "httpMs": 16.22000002861023,
+      "dbMs": 5.82,
+      "e2eMs": 32,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.7452525342261976,
+      "ndcgAt10": 0.7773015866757238,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-20.md#0",
+          "id": "chunk_1e53zjm",
+          "distance": null,
+          "score": 2.550621628535958
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": null,
+          "score": 2.401651220047748
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": null,
+          "score": 0.77622288
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": null,
+          "score": 0.76892835
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": null,
+          "score": 0.7653186
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 0.7606682
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": null,
+          "score": 0.75568751
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": null,
+          "score": 0.75323845
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": null,
+          "score": 0.751858
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": null,
+          "score": 0.7507959
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-13",
+      "category": "keyword",
+      "lang": "zh",
+      "query": "Web Worker 能给主线程带来什么好处？",
+      "keyword": "Web Worker",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 18.67500001192093,
+      "embeddingMs": 11.634999990463257,
+      "httpMs": 18.67500001192093,
+      "dbMs": 7.39,
+      "e2eMs": 37,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7984848580994974,
+      "ndcgAt10": 0.9049495058460971,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": null,
+          "score": 3.908554325713454
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": null,
+          "score": 2.544504570055558
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 1.387147109166365
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 1.1119415704740403
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 1.0922418182412321
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": null,
+          "score": 0.80349032
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": null,
+          "score": 0.78545271
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": null,
+          "score": 0.77837263
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": null,
+          "score": 0.76712402
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": null,
+          "score": 0.76637381
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-14",
+      "category": "keyword",
+      "lang": "en",
+      "query": "What does the HNSW ef_search parameter change?",
+      "keyword": "HNSW",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 17.669999957084656,
+      "embeddingMs": 6.080000042915344,
+      "httpMs": 17.669999957084656,
+      "dbMs": 6.34,
+      "e2eMs": 32,
+      "recallAt1": 0,
+      "recallAt3": 0.5,
+      "recallAt5": 0.75,
+      "ndcgAt5": 0.6176227695319921,
+      "ndcgAt10": 0.6176227695319921,
+      "mrr": 0.5,
+      "topHits": [
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": null,
+          "score": 1.9781051826944969
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": null,
+          "score": 1.8243955014268185
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": null,
+          "score": 1.802631406547834
+        },
+        {
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": null,
+          "score": 1.7879299765478338
+        },
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": null,
+          "score": 1.352410602721971
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": null,
+          "score": 1.1485783826944969
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": null,
+          "score": 1.07888935722764
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": null,
+          "score": 0.83665917
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": null,
+          "score": 0.83483949
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": null,
+          "score": 0.83141336
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-15",
+      "category": "keyword",
+      "lang": "en",
+      "query": "How does nDCG combine position and relevance grades?",
+      "keyword": "nDCG",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.514999985694885,
+      "embeddingMs": 10.634999990463257,
+      "httpMs": 16.514999985694885,
+      "dbMs": 6.49,
+      "e2eMs": 33,
+      "recallAt1": 0.25,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.8176035833928883,
+      "ndcgAt10": 0.8565370873639782,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": null,
+          "score": 0.87827148
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": null,
+          "score": 0.83249368
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 0.83078623
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": null,
+          "score": 0.83032839
+        },
+        {
+          "key": "en-03.md#1",
+          "id": "chunk_1gvejal",
+          "distance": null,
+          "score": 0.83031275
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": null,
+          "score": 0.82461182
+        },
+        {
+          "key": "en-16.md#1",
+          "id": "chunk_e3c20p",
+          "distance": null,
+          "score": 0.82293229
+        },
+        {
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
+          "distance": null,
+          "score": 0.82237627
+        },
+        {
+          "key": "en-01.md#1",
+          "id": "chunk_k30s82",
+          "distance": null,
+          "score": 0.8188716
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": null,
+          "score": 0.81408896
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-16",
+      "category": "keyword",
+      "lang": "en",
+      "query": "When is MRR preferred over recall at a fixed K?",
+      "keyword": "MRR",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.414999961853027,
+      "embeddingMs": 10.979999959468842,
+      "httpMs": 16.414999961853027,
+      "dbMs": 5.99,
+      "e2eMs": 33,
+      "recallAt1": 0.25,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.7125794632086186,
+      "ndcgAt10": 0.8506373759784908,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": null,
+          "score": 2.3126676575785123
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": null,
+          "score": 1.844373694804194
+        },
+        {
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
+          "distance": null,
+          "score": 0.83492098
+        },
+        {
+          "key": "en-10.md#1",
+          "id": "chunk_g2y1ma",
+          "distance": null,
+          "score": 0.82958394
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 0.82693444
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": null,
+          "score": 0.82687875
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": null,
+          "score": 0.82490645
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": null,
+          "score": 0.82272346
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": null,
+          "score": 0.82120486
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": null,
+          "score": 0.82063539
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-17",
+      "category": "keyword",
+      "lang": "en",
+      "query": "When does a browser fall back from WebGPU to WASM?",
+      "keyword": "WebGPU",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.269999980926514,
+      "embeddingMs": 7.580000042915344,
+      "httpMs": 16.269999980926514,
+      "dbMs": 5.9,
+      "e2eMs": 27,
+      "recallAt1": 0.16666666666666666,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.7932681984677673,
+      "ndcgAt10": 0.7976572000188858,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 2.5169765046543304
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 1.8570304988274882
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 1.2871789815372912
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": null,
+          "score": 1.2871789815372912
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": null,
+          "score": 1.2871789815372912
+        },
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": null,
+          "score": 1.231750221566786
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": null,
+          "score": 0.81160715
+        },
+        {
+          "key": "en-11.md#1",
+          "id": "chunk_ngbktf",
+          "distance": null,
+          "score": 0.80906933
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": null,
+          "score": 0.8080658
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": null,
+          "score": 0.80264034
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-18",
+      "category": "keyword",
+      "lang": "en",
+      "query": "How much smaller is the INT8 model file than fp32?",
+      "keyword": "INT8",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 16.810000002384186,
+      "embeddingMs": 8.365000009536743,
+      "httpMs": 16.810000002384186,
+      "dbMs": 6.5,
+      "e2eMs": 28,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.7274395989643642,
+      "ndcgAt10": 0.801655081787207,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": null,
+          "score": 2.2723091120535353
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": null,
+          "score": 1.5630285549188088
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": null,
+          "score": 0.85947842
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": null,
+          "score": 0.84014265
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": null,
+          "score": 0.8281008
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": null,
+          "score": 0.82564312
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 0.82563928
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": null,
+          "score": 0.8191693
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 0.81802531
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": null,
+          "score": 0.81633453
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-19",
+      "category": "keyword",
+      "lang": "en",
+      "query": "How does Paxos replication protect acknowledged writes?",
+      "keyword": "Paxos",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 15.375,
+      "embeddingMs": 9.129999995231628,
+      "httpMs": 15.375,
+      "dbMs": 5.62,
+      "e2eMs": 28,
+      "recallAt1": 0.16666666666666666,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.7582300096510285,
+      "ndcgAt10": 0.7621532186249396,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": null,
+          "score": 2.450857164918809
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": null,
+          "score": 1.803788454576229
+        },
+        {
+          "key": "en-02.md#1",
+          "id": "chunk_phni2r",
+          "distance": null,
+          "score": 0.85493734
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": null,
+          "score": 0.8498261
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 0.84424078
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": null,
+          "score": 0.84300971
+        },
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": null,
+          "score": 0.84115833
+        },
+        {
+          "key": "en-01.md#1",
+          "id": "chunk_k30s82",
+          "distance": null,
+          "score": 0.83713763
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": null,
+          "score": 0.83611973
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": null,
+          "score": 0.83535665
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "kw-20",
+      "category": "keyword",
+      "lang": "en",
+      "query": "What fields does BM25 use to score a document?",
+      "keyword": "BM25",
+      "expectedMode": "hybrid",
+      "mode": "hybrid",
+      "metric": "score",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 5,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 15.465000033378601,
+      "embeddingMs": 6.789999961853027,
+      "httpMs": 15.465000033378601,
+      "dbMs": 5.78,
+      "e2eMs": 28,
+      "recallAt1": 0.2,
+      "recallAt3": 0.2,
+      "recallAt5": 0.2,
+      "ndcgAt5": 0.6244247138302588,
+      "ndcgAt10": 0.7466024683330346,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": null,
+          "score": 2.4874397400477477
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": null,
+          "score": 1.844373694804194
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": null,
+          "score": 0.8617378
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": null,
+          "score": 0.83885367
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": null,
+          "score": 0.83555394
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": null,
+          "score": 0.82657885
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 0.8262176
+        },
+        {
+          "key": "en-01.md#1",
+          "id": "chunk_k30s82",
+          "distance": null,
+          "score": 0.82599467
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": null,
+          "score": 0.82219192
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 0.82130558
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-01",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "用 8 位整数保存权重能把模型缩小到四分之一吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13.0450000166893,
+      "embeddingMs": 11.129999995231628,
+      "httpMs": 13.0450000166893,
+      "dbMs": 2.02,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 1,
+      "recallAt5": 1,
+      "ndcgAt5": 0.9721212198129313,
+      "ndcgAt10": 0.9721212198129313,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.3093594724321078,
+          "score": null
+        },
+        {
+          "key": "zh-30.md#0",
+          "id": "chunk_zo78zc",
+          "distance": 0.4123268268692686,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.4307813905785215,
+          "score": null
+        },
+        {
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.4658543941453913,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.4677250466965177,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.47202518082114464,
+          "score": null
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.4731977017881627,
+          "score": null
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": 0.475959922544934,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.48050159215923804,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.48366981160753186,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-02",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "多层图结构为什么能做到接近对数级的近邻查找？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.504999995231628,
+      "embeddingMs": 11.260000050067902,
+      "httpMs": 12.504999995231628,
+      "dbMs": 1.97,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.7452525342261976,
+      "ndcgAt10": 0.8460101051764489,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": 0.2767147624320436,
+          "score": null
+        },
+        {
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": 0.42139846086501664,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.447611103738335,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.45698444337115507,
+          "score": null
+        },
+        {
+          "key": "zh-11.md#0",
+          "id": "chunk_1afivyq",
+          "distance": 0.4617868523294707,
+          "score": null
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": 0.4795195819379062,
+          "score": null
+        },
+        {
+          "key": "zh-10.md#0",
+          "id": "chunk_10djblf",
+          "distance": 0.4873037658982686,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.4915684451542287,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.4984666706959402,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.5066310755454212,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-03",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "把向量化计算放到后台线程能不能解决界面卡顿？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.169999957084656,
+      "embeddingMs": 12.740000009536743,
+      "httpMs": 12.169999957084656,
+      "dbMs": 1.77,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.8124242481930318,
+      "ndcgAt10": 0.8124242481930318,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": 0.3182003389593707,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.3924938485061946,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4104739678765831,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.4115891457492079,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.41565908078981884,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.41936820552232423,
+          "score": null
+        },
+        {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.4267839208259877,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.44094013651706154,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.45193672351209635,
+          "score": null
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": 0.4563350665755841,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-04",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "显卡接口不可用时页面会自动切换执行路径吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 1,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.75,
+      "embeddingMs": 9.759999990463257,
+      "httpMs": 11.75,
+      "dbMs": 2.35,
+      "e2eMs": 28,
+      "recallAt1": 0,
+      "recallAt3": 0,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.045851828048001766,
+      "ndcgAt10": 0.045851828048001766,
+      "mrr": 0.25,
+      "topHits": [
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.3951094371471604,
+          "score": null
+        },
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": 0.4235454271868888,
+          "score": null
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": 0.42747122868035536,
+          "score": null
+        },
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": 0.4315971732138578,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.43375887282346437,
+          "score": null
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": 0.44774393981547156,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.45042544468281354,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.46707257432170435,
+          "score": null
+        },
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": 0.4691980128045835,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4700485676671531,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-05",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "把语义召回和字面匹配两路结果合并排序可行吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.939999997615814,
+      "embeddingMs": 12.064999997615814,
+      "httpMs": 12.939999997615814,
+      "dbMs": 2.66,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7895959410076381,
+      "ndcgAt10": 0.7895959410076381,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.27611328194493634,
+          "score": null
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": 0.32192983365891015,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.353289323653022,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.38749061673767327,
+          "score": null
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": 0.39117523379177277,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4039952944504511,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.4164576778684569,
+          "score": null
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.4169631899463576,
+          "score": null
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": 0.41767161103148176,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.4239078254809219,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-06",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "多数副本确认之后才算写入成功是怎么实现的？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.810000002384186,
+      "embeddingMs": 9.725000023841858,
+      "httpMs": 12.810000002384186,
+      "dbMs": 2.52,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.9467676761267002,
+      "ndcgAt10": 0.9467676761267002,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.30566195811849994,
+          "score": null
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.45058211389671,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.4606334908515616,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.46114509834587214,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.4755496353566063,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.47604975247082004,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.48561301913179333,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.4919277713169562,
+          "score": null
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": 0.5005954204924424,
+          "score": null
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": 0.5043265829864902,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-07",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "同样的内容重新导入为什么不会出现重复条目？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.65499997138977,
+      "embeddingMs": 8.810000002384186,
+      "httpMs": 12.65499997138977,
+      "dbMs": 2.05,
+      "e2eMs": 28,
+      "recallAt1": 0,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.6298989693877386,
+      "ndcgAt10": 0.6678224420880012,
+      "mrr": 0.5,
+      "topHits": [
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.3507813602219636,
+          "score": null
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": 0.3656178799438725,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.39115242852595844,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.4057576656341173,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.43559614207762676,
+          "score": null
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": 0.4442571599943239,
+          "score": null
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.4509214431596419,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.4533940823908851,
+          "score": null
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": 0.45889865372148453,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4619538417971958,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-08",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "模型权重能不能存在浏览器本地，避免每次重新下载？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.230000019073486,
+      "embeddingMs": 14.780000030994415,
+      "httpMs": 12.230000019073486,
+      "dbMs": 1.88,
+      "e2eMs": 36,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 1,
+      "ndcgAt5": 0.992619504174702,
+      "ndcgAt10": 0.992619504174702,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.2307800833975997,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.3453026218802515,
+          "score": null
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": 0.3798171115575233,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.40765651510098566,
+          "score": null
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": 0.41481287015791335,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.4420054693208847,
+          "score": null
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": 0.44331469794003253,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.44723142451489195,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.45813078187336753,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.46992737413318086,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-09",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "把两路排名按倒数累加就能融合出最终顺序吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13.870000004768372,
+      "embeddingMs": 12.10999995470047,
+      "httpMs": 13.870000004768372,
+      "dbMs": 1.97,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.882808018370203,
+      "ndcgAt10": 0.882808018370203,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.22040906901242585,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.35547268786537,
+          "score": null
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.37564490017380014,
+          "score": null
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": 0.3843400249277995,
+          "score": null
+        },
+        {
+          "key": "zh-10.md#0",
+          "id": "chunk_10djblf",
+          "distance": 0.4494604140198233,
+          "score": null
+        },
+        {
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": 0.45787321516828516,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.4603738047029273,
+          "score": null
+        },
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": 0.4608037699706057,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.46305170875474855,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.4697941311641666,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-10",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "既要考虑排名位置又要放大高相关等级的打分方式是什么？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.84500002861023,
+      "embeddingMs": 9.669999957084656,
+      "httpMs": 11.84500002861023,
+      "dbMs": 1.77,
+      "e2eMs": 27,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 1,
+      "ndcgAt5": 0.9359826917490579,
+      "ndcgAt10": 0.9359826917490579,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.3328560990098913,
+          "score": null
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.3580591634404775,
+          "score": null
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.36308554667075654,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.40006448027776254,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.40538941364789327,
+          "score": null
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": 0.4157531515786157,
+          "score": null
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.42774618533284503,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.42901207709014355,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.4325649899088353,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.43356610719994715,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-11",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "seekdb 有没有不用单独启动进程的运行方式？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.060000002384186,
+      "embeddingMs": 8.405000030994415,
+      "httpMs": 12.060000002384186,
+      "dbMs": 2.04,
+      "e2eMs": 23,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.9467676761267002,
+      "ndcgAt10": 0.984691148826963,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-02.md#0",
+          "id": "chunk_d03087",
+          "distance": 0.33057053916805035,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.34598513293443056,
+          "score": null
+        },
+        {
+          "key": "en-03.md#0",
+          "id": "chunk_k9ue02",
+          "distance": 0.3987730862172697,
+          "score": null
+        },
+        {
+          "key": "zh-25.md#0",
+          "id": "chunk_1km16vm",
+          "distance": 0.4170543500618824,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.42242940797980966,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.4230103836649417,
+          "score": null
+        },
+        {
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
+          "distance": 0.42497508004233453,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4301130771636963,
+          "score": null
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": 0.43882700436276123,
+          "score": null
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": 0.4422106353482955,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-12",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "从原始文件到可以被检索，中间要经过哪些阶段？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 1,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13.275000035762787,
+      "embeddingMs": 12.514999985694885,
+      "httpMs": 13.275000035762787,
+      "dbMs": 3.32,
+      "e2eMs": 28,
+      "recallAt1": 0,
+      "recallAt3": 0,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.3209627963360124,
+      "ndcgAt10": 0.3209627963360124,
+      "mrr": 0.25,
+      "topHits": [
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": 0.4627456389220701,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.4771300811404051,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.4823588707874712,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.5067176230809098,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.50713172597476,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.5086042613759976,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.5097363327990768,
+          "score": null
+        },
+        {
+          "key": "zh-40.md#0",
+          "id": "chunk_gb9zrw",
+          "distance": 0.510605781638235,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.514094950448851,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.5185289592688842,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-13",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "用 16 位浮点保存参数能让体积减半吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.394999980926514,
+      "embeddingMs": 8.649999976158142,
+      "httpMs": 12.394999980926514,
+      "dbMs": 1.95,
+      "e2eMs": 23,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 1,
+      "ndcgAt5": 0.992619504174702,
+      "ndcgAt10": 0.992619504174702,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-30.md#0",
+          "id": "chunk_zo78zc",
+          "distance": 0.31931209564208984,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.4293716122217941,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.46477431058883667,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.47454274963224463,
+          "score": null
+        },
+        {
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.4968638712520289,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.506701172596418,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.5155751379295859,
+          "score": null
+        },
+        {
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.5181324460348518,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.5239893680795032,
+          "score": null
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.5269694545955881,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-14",
+      "category": "paraphrase",
+      "lang": "zh",
+      "query": "搜索时扩大候选队列会提高命中率但变慢吗？",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 3,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13,
+      "embeddingMs": 10.784999966621399,
+      "httpMs": 13,
+      "dbMs": 1.84,
+      "e2eMs": 28,
+      "recallAt1": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
+      "recallAt5": 0.6666666666666666,
+      "ndcgAt5": 0.7984848580994974,
+      "ndcgAt10": 0.7984848580994974,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.37496145068218745,
+          "score": null
+        },
+        {
+          "key": "zh-18.md#0",
+          "id": "chunk_1mdst8",
+          "distance": 0.4034804942298219,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.43275217598728155,
+          "score": null
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.44130398073910204,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.44640445709228127,
+          "score": null
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.46635676232411727,
+          "score": null
+        },
+        {
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.46897893404458,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.4734563263110576,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.4793121504373631,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4829284066110485,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-15",
+      "category": "paraphrase",
+      "lang": "en",
+      "query": "How do databases find similar vectors without scanning every row?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 13.060000002384186,
+      "embeddingMs": 12.959999978542328,
+      "httpMs": 13.060000002384186,
+      "dbMs": 1.96,
+      "e2eMs": 28,
+      "recallAt1": 0,
+      "recallAt3": 0,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.10722613635357772,
+      "ndcgAt10": 0.3376006163494339,
+      "mrr": 0.2,
+      "topHits": [
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.22149415144289308,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.2416297649365683,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.2585337912162404,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.28027830837497103,
+          "score": null
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": 0.2976279968328418,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.3139807769048665,
+          "score": null
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": 0.3156504599423027,
+          "score": null
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": 0.3247527301900598,
+          "score": null
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.332331975420459,
+          "score": null
+        },
+        {
+          "key": "en-03.md#0",
+          "id": "chunk_k9ue02",
+          "distance": 0.3376963533343952,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-16",
+      "category": "paraphrase",
+      "lang": "en",
+      "query": "Why does half precision keep embedding quality almost unchanged?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 14.069999992847443,
+      "embeddingMs": 13.629999995231628,
+      "httpMs": 14.069999992847443,
+      "dbMs": 2.09,
+      "e2eMs": 37,
+      "recallAt1": 0.25,
+      "recallAt3": 0.25,
+      "recallAt5": 0.25,
+      "ndcgAt5": 0.7125794632086186,
+      "ndcgAt10": 0.8143765293812784,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": 0.24141232515787292,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.30407572838935537,
+          "score": null
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.32482481307095534,
+          "score": null
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": 0.33282826365244245,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.33413734029085873,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.3361182603554105,
+          "score": null
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": 0.33662098704946,
+          "score": null
+        },
+        {
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
+          "distance": 0.34098060971379984,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.35736824782272747,
+          "score": null
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": 0.35822463035581675,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-17",
+      "category": "paraphrase",
+      "lang": "en",
+      "query": "What is the average of reciprocal positions of the first correct hits?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.840000033378601,
+      "embeddingMs": 10.319999992847443,
+      "httpMs": 11.840000033378601,
+      "dbMs": 1.8,
+      "e2eMs": 27,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.9052598568324595,
+      "ndcgAt10": 0.9415207034296719,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": 0.19834575672796284,
+          "score": null
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": 0.269603176736641,
+          "score": null
+        },
+        {
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
+          "distance": 0.28445151858941886,
+          "score": null
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": 0.29830504716452255,
+          "score": null
+        },
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.30551342832721495,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.31238057840448163,
+          "score": null
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": 0.3210601976060904,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.32219378219879846,
+          "score": null
+        },
+        {
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": 0.33471280287044436,
+          "score": null
+        },
+        {
+          "key": "en-18.md#1",
+          "id": "chunk_2ia2n9",
+          "distance": 0.33573709024725296,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-18",
+      "category": "paraphrase",
+      "lang": "en",
+      "query": "How can ranking quality be scored when chunks carry relevance grades?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 3,
+      "relevantCount": 4,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 12.194999992847443,
+      "embeddingMs": 12.810000002384186,
+      "httpMs": 12.194999992847443,
+      "dbMs": 2,
+      "e2eMs": 28,
+      "recallAt1": 0.25,
+      "recallAt3": 0.5,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.9052598568324595,
+      "ndcgAt10": 0.93468580808533,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": 0.2239974203115671,
+          "score": null
+        },
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": 0.2928799710035297,
+          "score": null
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": 0.30503295033967703,
+          "score": null
+        },
+        {
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
+          "distance": 0.31178448726025265,
+          "score": null
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": 0.314407307768205,
+          "score": null
+        },
+        {
+          "key": "en-18.md#0",
+          "id": "chunk_1cpt6em",
+          "distance": 0.3219886634362904,
+          "score": null
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": 0.3262538508327141,
+          "score": null
+        },
+        {
+          "key": "en-13.md#1",
+          "id": "chunk_1enha5i",
+          "distance": 0.32932520056061243,
+          "score": null
+        },
+        {
+          "key": "en-18.md#1",
+          "id": "chunk_2ia2n9",
+          "distance": 0.33101705661756164,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.33827324472749487,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-19",
+      "category": "paraphrase",
+      "lang": "en",
+      "query": "Why should a downloaded model be cached on the user's machine?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 1,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.375,
+      "embeddingMs": 7.705000042915344,
+      "httpMs": 11.375,
+      "dbMs": 1.72,
+      "e2eMs": 23,
+      "recallAt1": 0.16666666666666666,
+      "recallAt3": 0.16666666666666666,
+      "recallAt5": 0.16666666666666666,
+      "ndcgAt5": 0.6244247138302588,
+      "ndcgAt10": 0.6051946896667617,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.24538065465570047,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.28460156046178875,
+          "score": null
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.3152604070771359,
+          "score": null
+        },
+        {
+          "key": "en-03.md#0",
+          "id": "chunk_k9ue02",
+          "distance": 0.32350238105665907,
+          "score": null
+        },
+        {
+          "key": "en-11.md#0",
+          "id": "chunk_ue5zgf",
+          "distance": 0.34022430784234525,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.34246798410817947,
+          "score": null
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": 0.3427263106540335,
+          "score": null
+        },
+        {
+          "key": "en-07.md#0",
+          "id": "chunk_6eg25u",
+          "distance": 0.3435798510503367,
+          "score": null
+        },
+        {
+          "key": "en-11.md#1",
+          "id": "chunk_ngbktf",
+          "distance": 0.3458005418301874,
+          "score": null
+        },
+        {
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": 0.34619327232910446,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    },
+    {
+      "qid": "pp-20",
+      "category": "paraphrase",
+      "lang": "en",
+      "query": "What keeps replicated data safe when one server crashes?",
+      "keyword": null,
+      "expectedMode": "vector",
+      "mode": "vector",
+      "metric": "distance",
+      "hits": 10,
+      "hitsInQrels": 2,
+      "relevantCount": 6,
+      "invalidHits": 0,
+      "notice": null,
+      "latencyMs": 11.495000004768372,
+      "embeddingMs": 8.615000009536743,
+      "httpMs": 11.495000004768372,
+      "dbMs": 1.77,
+      "e2eMs": 22,
+      "recallAt1": 0.16666666666666666,
+      "recallAt3": 0.16666666666666666,
+      "recallAt5": 0.16666666666666666,
+      "ndcgAt5": 0.6244247138302588,
+      "ndcgAt10": 0.6870165474698057,
+      "mrr": 1,
+      "topHits": [
+        {
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.28262325732428695,
+          "score": null
+        },
+        {
+          "key": "en-01.md#1",
+          "id": "chunk_k30s82",
+          "distance": 0.28566073942872205,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.28710342280204304,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.28941653433938475,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.2964731874183788,
+          "score": null
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.297369557462307,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.29845603099203166,
+          "score": null
+        },
+        {
+          "key": "en-02.md#1",
+          "id": "chunk_phni2r",
+          "distance": 0.3005751013070025,
+          "score": null
+        },
+        {
+          "key": "en-20.md#0",
+          "id": "chunk_tdb8s7",
+          "distance": 0.30127012729644276,
+          "score": null
+        },
+        {
+          "key": "en-17.md#1",
+          "id": "chunk_zgect6",
+          "distance": 0.3031161300858696,
+          "score": null
+        }
+      ],
+      "assertions": {
+        "hasHits": true,
+        "metadataValid": true,
+        "hitSourceKnown": true,
+        "modeMatches": true
+      }
+    }
+  ],
+  "runs": [
+    {
+      "run": 0,
+      "metrics": {
+        "queries": 60,
+        "recallAt1": 0.2365,
+        "recallAt3": 0.4544,
+        "recallAt5": 0.5592,
+        "ndcgAt5": 0.7267,
+        "ndcgAt10": 0.7619,
+        "mrr": 0.8992
+      }
+    }
+  ],
+  "durationMs": 6728,
+  "actualDurationMs": 6728,
+  "cleanup": {
+    "ok": true,
+    "status": 200
+  }
+}

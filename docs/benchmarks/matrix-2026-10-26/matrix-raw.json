@@ -1,0 +1,2216 @@
+{
+  "schemaVersion": 1,
+  "tool": "scripts/bench-matrix.mjs",
+  "generatedAt": "2026-10-26T03:50:15.727Z",
+  "matrixFile": "docs\\benchmarks\\matrix.json",
+  "abba": true,
+  "out": "docs\\benchmarks\\matrix-2026-10-26",
+  "sequence": [
+    {
+      "seq": 1,
+      "configId": "fp32-wasm",
+      "leg": "forward"
+    },
+    {
+      "seq": 2,
+      "configId": "q8-wasm",
+      "leg": "forward"
+    },
+    {
+      "seq": 3,
+      "configId": "fp16-webgpu",
+      "leg": "forward"
+    },
+    {
+      "seq": 4,
+      "configId": "q8-wasm-batch1",
+      "leg": "forward"
+    },
+    {
+      "seq": 5,
+      "configId": "q8-wasm-refresh-each",
+      "leg": "forward"
+    },
+    {
+      "seq": 6,
+      "configId": "cold-q8-wasm",
+      "leg": "forward"
+    },
+    {
+      "seq": 7,
+      "configId": "cold-q8-wasm",
+      "leg": "reverse"
+    },
+    {
+      "seq": 8,
+      "configId": "q8-wasm-refresh-each",
+      "leg": "reverse"
+    },
+    {
+      "seq": 9,
+      "configId": "q8-wasm-batch1",
+      "leg": "reverse"
+    },
+    {
+      "seq": 10,
+      "configId": "fp16-webgpu",
+      "leg": "reverse"
+    },
+    {
+      "seq": 11,
+      "configId": "q8-wasm",
+      "leg": "reverse"
+    },
+    {
+      "seq": 12,
+      "configId": "fp32-wasm",
+      "leg": "reverse"
+    }
+  ],
+  "executions": [
+    {
+      "seq": 1,
+      "leg": "forward",
+      "configId": "fp32-wasm",
+      "config": {
+        "id": "fp32-wasm",
+        "backend": "wasm",
+        "dtype": "fp32",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_fp32_wasm_1",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\01-fp32-wasm",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 63882,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.01,
+          "doc.chunk": 0.01,
+          "doc.embed": 797.05,
+          "doc.read": 1.61,
+          "doc.write": 41.84,
+          "index.refresh": 511.65,
+          "ingest.total": 9247.16,
+          "query.e2e": 32,
+          "query.embed": 11.51,
+          "query.http": 12.77
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.01,
+            "p50Iqr": 0.08,
+            "p95": 4.04,
+            "mean": 2.35
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 797.05,
+            "p50Iqr": 121.83,
+            "p95": 957.25,
+            "mean": 776.38
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.61,
+            "p50Iqr": 0.51,
+            "p95": 5.03,
+            "mean": 2.37
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 41.84,
+            "p50Iqr": 9.34,
+            "p95": 377.78,
+            "mean": 105.68
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 511.65,
+            "p50Iqr": 6.54,
+            "p95": 511.65,
+            "mean": 511.65
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 9247.16,
+            "p50Iqr": 782.5,
+            "p95": 9247.16,
+            "mean": 9247.16
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 32,
+            "p50Iqr": 4.5,
+            "p95": 40.65,
+            "mean": 32.3
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 11.51,
+            "p50Iqr": 0.08,
+            "p95": 16.6,
+            "mean": 12
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 12.77,
+            "p50Iqr": 0.57,
+            "p95": 16.1,
+            "mean": 12.94
+          }
+        ],
+        "ingestWallP50": 9263,
+        "queryE2eP50": 32,
+        "queryE2eP95": 42,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 2,
+      "leg": "forward",
+      "configId": "q8-wasm",
+      "config": {
+        "id": "q8-wasm",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_q8_wasm_2",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\02-q8-wasm",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 45373,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.09,
+          "doc.chunk": 0.01,
+          "doc.embed": 565.55,
+          "doc.read": 1.11,
+          "doc.write": 40.07,
+          "index.refresh": 413.52,
+          "ingest.total": 6776.61,
+          "query.e2e": 28,
+          "query.embed": 8.49,
+          "query.http": 12.62
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.09,
+            "p50Iqr": 0.18,
+            "p95": 3.41,
+            "mean": 2.22
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 565.55,
+            "p50Iqr": 22.14,
+            "p95": 590.93,
+            "mean": 533.44
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.11,
+            "p50Iqr": 0.19,
+            "p95": 3.87,
+            "mean": 1.68
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 40.07,
+            "p50Iqr": 2.69,
+            "p95": 308.21,
+            "mean": 92.23
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 413.52,
+            "p50Iqr": 301.05,
+            "p95": 413.52,
+            "mean": 413.52
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 6776.61,
+            "p50Iqr": 71.34,
+            "p95": 6776.61,
+            "mean": 6776.61
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 28,
+            "p50Iqr": 0,
+            "p95": 33.1,
+            "mean": 28.1
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.49,
+            "p50Iqr": 0.67,
+            "p95": 10.99,
+            "mean": 8.8
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 12.62,
+            "p50Iqr": 0.42,
+            "p95": 15.82,
+            "mean": 12.85
+          }
+        ],
+        "ingestWallP50": 6806,
+        "queryE2eP50": 28,
+        "queryE2eP95": 34,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 3,
+      "leg": "forward",
+      "configId": "fp16-webgpu",
+      "config": {
+        "id": "fp16-webgpu",
+        "backend": "webgpu",
+        "dtype": "fp16",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_fp16_webgpu_3",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\03-fp16-webgpu",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 28128,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.33,
+          "doc.chunk": 0.01,
+          "doc.embed": 71.52,
+          "doc.read": 1.3,
+          "doc.write": 41.34,
+          "index.refresh": 606.8,
+          "ingest.total": 3255.58,
+          "query.e2e": 36,
+          "query.embed": 14.09,
+          "query.http": 14.99
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.33,
+            "p50Iqr": 0.37,
+            "p95": 4.12,
+            "mean": 2.54
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 71.52,
+            "p50Iqr": 5.89,
+            "p95": 89.94,
+            "mean": 70.51
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.3,
+            "p50Iqr": 0.22,
+            "p95": 3.9,
+            "mean": 1.88
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 41.34,
+            "p50Iqr": 4.19,
+            "p95": 433.25,
+            "mean": 115.3
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 606.8,
+            "p50Iqr": 198.53,
+            "p95": 606.8,
+            "mean": 606.8
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 3255.58,
+            "p50Iqr": 78.57,
+            "p95": 3255.58,
+            "mean": 3255.58
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 36,
+            "p50Iqr": 3,
+            "p95": 44.65,
+            "mean": 36.7
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 14.09,
+            "p50Iqr": 0.4,
+            "p95": 18.37,
+            "mean": 14.01
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 14.99,
+            "p50Iqr": 0.88,
+            "p95": 17.66,
+            "mean": 14.86
+          }
+        ],
+        "ingestWallP50": 3296,
+        "queryE2eP50": 35.5,
+        "queryE2eP95": 48.75,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 4,
+      "leg": "forward",
+      "configId": "q8-wasm-batch1",
+      "config": {
+        "id": "q8-wasm-batch1",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 1,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_q8_wasm_batch1_4",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\04-q8-wasm-batch1",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 64544,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.24,
+          "doc.chunk": 0.01,
+          "doc.embed": 38.55,
+          "doc.read": 1.01,
+          "doc.write": 19.79,
+          "index.refresh": 507.69,
+          "ingest.total": 9238.13,
+          "query.e2e": 28,
+          "query.embed": 8.84,
+          "query.http": 13.34
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.24,
+            "p50Iqr": 0.14,
+            "p95": 3.68,
+            "mean": 2.46
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 120,
+            "p50": 38.55,
+            "p50Iqr": 0.59,
+            "p95": 48.53,
+            "mean": 39.06
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.01,
+            "p50Iqr": 0.08,
+            "p95": 3.13,
+            "mean": 1.54
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 120,
+            "p50": 19.79,
+            "p50Iqr": 0.55,
+            "p95": 23.4,
+            "mean": 24.71
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 507.69,
+            "p50Iqr": 99.36,
+            "p95": 507.69,
+            "mean": 507.69
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 9238.13,
+            "p50Iqr": 89.93,
+            "p95": 9238.13,
+            "mean": 9238.13
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 28,
+            "p50Iqr": 0,
+            "p95": 34.2,
+            "mean": 28.6
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.84,
+            "p50Iqr": 0.03,
+            "p95": 10.37,
+            "mean": 8.83
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 13.34,
+            "p50Iqr": 1.15,
+            "p95": 15.87,
+            "mean": 13.8
+          }
+        ],
+        "ingestWallP50": 9265,
+        "queryE2eP50": 28,
+        "queryE2eP95": 36.55,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 5,
+      "leg": "forward",
+      "configId": "q8-wasm-refresh-each",
+      "config": {
+        "id": "q8-wasm-refresh-each",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "each",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_q8_wasm_refresh_each_5",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\05-q8-wasm-refresh-each",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 76232,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.89,
+          "doc.chunk": 0.01,
+          "doc.embed": 598.72,
+          "doc.read": 1.27,
+          "doc.write": 647.41,
+          "index.refresh": 607.08,
+          "ingest.total": 11646.36,
+          "query.e2e": 32,
+          "query.embed": 8.96,
+          "query.http": 15.82
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.89,
+            "p50Iqr": 0.47,
+            "p95": 5.24,
+            "mean": 3.34
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 598.72,
+            "p50Iqr": 31.85,
+            "p95": 640.56,
+            "mean": 569.91
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.27,
+            "p50Iqr": 0.15,
+            "p95": 3.57,
+            "mean": 1.83
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 647.41,
+            "p50Iqr": 51.93,
+            "p95": 769.36,
+            "mean": 647.47
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 8,
+            "p50": 607.08,
+            "p50Iqr": 47.34,
+            "p95": 708.49,
+            "mean": 595.92
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 11646.36,
+            "p50Iqr": 551.23,
+            "p95": 11646.36,
+            "mean": 11646.36
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 32,
+            "p50Iqr": 4.5,
+            "p95": 39.2,
+            "mean": 32.7
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.96,
+            "p50Iqr": 1.66,
+            "p95": 11.16,
+            "mean": 9.05
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 15.82,
+            "p50Iqr": 3.91,
+            "p95": 19.45,
+            "mean": 16.06
+          }
+        ],
+        "ingestWallP50": 11675,
+        "queryE2eP50": 32,
+        "queryE2eP95": 41,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 6,
+      "leg": "forward",
+      "configId": "cold-q8-wasm",
+      "config": {
+        "id": "cold-q8-wasm",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "last",
+        "cold": true
+      },
+      "collection": "bench_matrix_20261026_113838_cold_q8_wasm_6",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\06-cold-q8-wasm",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 61965,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.4,
+          "doc.chunk": 0.01,
+          "doc.embed": 572.19,
+          "doc.read": 1.13,
+          "doc.write": 46.04,
+          "index.refresh": 606.4,
+          "ingest.total": 7153.05,
+          "model.download": 350.53,
+          "model.init": 357.85,
+          "model.total": 705.81,
+          "query.e2e": 28,
+          "query.embed": 8.68,
+          "query.http": 13.06
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.4,
+            "p50Iqr": 0.76,
+            "p95": 3.87,
+            "mean": 2.71
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 572.19,
+            "p50Iqr": 15.41,
+            "p95": 646.03,
+            "mean": 542.74
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.13,
+            "p50Iqr": 0.08,
+            "p95": 4.02,
+            "mean": 1.83
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 46.04,
+            "p50Iqr": 3.3,
+            "p95": 440.6,
+            "mean": 127.23
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 606.4,
+            "p50Iqr": 101.5,
+            "p95": 606.4,
+            "mean": 606.4
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 7153.05,
+            "p50Iqr": 171.04,
+            "p95": 7153.05,
+            "mean": 7153.05
+          },
+          {
+            "phase": "model.download",
+            "runs": 5,
+            "n": 1,
+            "p50": 350.53,
+            "p50Iqr": 14.03,
+            "p95": 350.53,
+            "mean": 350.53
+          },
+          {
+            "phase": "model.init",
+            "runs": 5,
+            "n": 1,
+            "p50": 357.85,
+            "p50Iqr": 13.57,
+            "p95": 357.85,
+            "mean": 357.85
+          },
+          {
+            "phase": "model.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 705.81,
+            "p50Iqr": 45.93,
+            "p95": 705.81,
+            "mean": 705.81
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 28,
+            "p50Iqr": 0.5,
+            "p95": 33.55,
+            "mean": 29.1
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.68,
+            "p50Iqr": 1.15,
+            "p95": 11.68,
+            "mean": 9.13
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 13.06,
+            "p50Iqr": 0.8,
+            "p95": 16.51,
+            "mean": 13.6
+          }
+        ],
+        "ingestWallP50": 7815,
+        "queryE2eP50": 28,
+        "queryE2eP95": 34.55,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 7,
+      "leg": "reverse",
+      "configId": "cold-q8-wasm",
+      "config": {
+        "id": "cold-q8-wasm",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "last",
+        "cold": true
+      },
+      "collection": "bench_matrix_20261026_113838_cold_q8_wasm_7",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\07-cold-q8-wasm",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 60716,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.34,
+          "doc.chunk": 0.01,
+          "doc.embed": 556.69,
+          "doc.read": 1.29,
+          "doc.write": 44.1,
+          "index.refresh": 506.7,
+          "ingest.total": 6971.14,
+          "model.download": 355.34,
+          "model.init": 354.52,
+          "model.total": 718.69,
+          "query.e2e": 28,
+          "query.embed": 8.59,
+          "query.http": 13.13
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.34,
+            "p50Iqr": 0.19,
+            "p95": 3.87,
+            "mean": 2.52
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 556.69,
+            "p50Iqr": 25.03,
+            "p95": 587.57,
+            "mean": 530.06
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.29,
+            "p50Iqr": 0.18,
+            "p95": 3.94,
+            "mean": 1.93
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 44.1,
+            "p50Iqr": 6.3,
+            "p95": 377.44,
+            "mean": 106.93
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 506.7,
+            "p50Iqr": 98.94,
+            "p95": 506.7,
+            "mean": 506.7
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 6971.14,
+            "p50Iqr": 53.69,
+            "p95": 6971.14,
+            "mean": 6971.14
+          },
+          {
+            "phase": "model.download",
+            "runs": 5,
+            "n": 1,
+            "p50": 355.34,
+            "p50Iqr": 36.98,
+            "p95": 355.34,
+            "mean": 355.34
+          },
+          {
+            "phase": "model.init",
+            "runs": 5,
+            "n": 1,
+            "p50": 354.52,
+            "p50Iqr": 49.59,
+            "p95": 354.52,
+            "mean": 354.52
+          },
+          {
+            "phase": "model.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 718.69,
+            "p50Iqr": 92,
+            "p95": 718.69,
+            "mean": 718.69
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 28,
+            "p50Iqr": 0.5,
+            "p95": 35.2,
+            "mean": 28.8
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.59,
+            "p50Iqr": 0.77,
+            "p95": 12.75,
+            "mean": 9.02
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 13.13,
+            "p50Iqr": 0.66,
+            "p95": 16.31,
+            "mean": 13.37
+          }
+        ],
+        "ingestWallP50": 7727,
+        "queryE2eP50": 28,
+        "queryE2eP95": 37.55,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 8,
+      "leg": "reverse",
+      "configId": "q8-wasm-refresh-each",
+      "config": {
+        "id": "q8-wasm-refresh-each",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "each",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_q8_wasm_refresh_each_8",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\08-q8-wasm-refresh-each",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 74794,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.02,
+          "doc.chunk": 0.01,
+          "doc.embed": 554.3,
+          "doc.read": 1.19,
+          "doc.write": 649.83,
+          "index.refresh": 606.78,
+          "ingest.total": 11286.3,
+          "query.e2e": 28,
+          "query.embed": 8.85,
+          "query.http": 12.69
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.02,
+            "p50Iqr": 0.32,
+            "p95": 3.66,
+            "mean": 2.48
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 554.3,
+            "p50Iqr": 16.77,
+            "p95": 593.03,
+            "mean": 519.82
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.19,
+            "p50Iqr": 0.2,
+            "p95": 3.41,
+            "mean": 1.73
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 649.83,
+            "p50Iqr": 91.93,
+            "p95": 823.42,
+            "mean": 645.13
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 8,
+            "p50": 606.78,
+            "p50Iqr": 99.27,
+            "p95": 772.79,
+            "mean": 596.94
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 11286.3,
+            "p50Iqr": 678.5,
+            "p95": 11286.3,
+            "mean": 11286.3
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 28,
+            "p50Iqr": 0,
+            "p95": 37,
+            "mean": 31
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.85,
+            "p50Iqr": 0.35,
+            "p95": 11.48,
+            "mean": 8.96
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 12.69,
+            "p50Iqr": 1.4,
+            "p95": 16.73,
+            "mean": 13.51
+          }
+        ],
+        "ingestWallP50": 11305,
+        "queryE2eP50": 28,
+        "queryE2eP95": 42.55,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 9,
+      "leg": "reverse",
+      "configId": "q8-wasm-batch1",
+      "config": {
+        "id": "q8-wasm-batch1",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 1,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_q8_wasm_batch1_9",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\09-q8-wasm-batch1",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 64058,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.23,
+          "doc.chunk": 0.01,
+          "doc.embed": 36.23,
+          "doc.read": 1.2,
+          "doc.write": 19.72,
+          "index.refresh": 507.28,
+          "ingest.total": 9309.96,
+          "query.e2e": 31.5,
+          "query.embed": 8.4,
+          "query.http": 13.75
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.23,
+            "p50Iqr": 0.28,
+            "p95": 3.81,
+            "mean": 2.42
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 120,
+            "p50": 36.23,
+            "p50Iqr": 2.88,
+            "p95": 44.45,
+            "mean": 36.78
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.2,
+            "p50Iqr": 0.16,
+            "p95": 3.5,
+            "mean": 1.72
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 120,
+            "p50": 19.72,
+            "p50Iqr": 1.23,
+            "p95": 30.02,
+            "mean": 25.34
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 507.28,
+            "p50Iqr": 1.43,
+            "p95": 507.28,
+            "mean": 507.28
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 9309.96,
+            "p50Iqr": 223.65,
+            "p95": 9309.96,
+            "mean": 9309.96
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 31.5,
+            "p50Iqr": 4,
+            "p95": 36,
+            "mean": 30.7
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 8.4,
+            "p50Iqr": 0.95,
+            "p95": 11.38,
+            "mean": 8.58
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 13.75,
+            "p50Iqr": 1.6,
+            "p95": 17.41,
+            "mean": 14.48
+          }
+        ],
+        "ingestWallP50": 9343,
+        "queryE2eP50": 28,
+        "queryE2eP95": 36.55,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 10,
+      "leg": "reverse",
+      "configId": "fp16-webgpu",
+      "config": {
+        "id": "fp16-webgpu",
+        "backend": "webgpu",
+        "dtype": "fp16",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_fp16_webgpu_10",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\10-fp16-webgpu",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 34264,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.79,
+          "doc.chunk": 0.01,
+          "doc.embed": 71.59,
+          "doc.read": 1.82,
+          "doc.write": 56.55,
+          "index.refresh": 608.28,
+          "ingest.total": 3604.43,
+          "query.e2e": 34,
+          "query.embed": 12.46,
+          "query.http": 14.98
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.79,
+            "p50Iqr": 0.81,
+            "p95": 4.76,
+            "mean": 3.11
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 71.59,
+            "p50Iqr": 5.39,
+            "p95": 107.2,
+            "mean": 79.81
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.82,
+            "p50Iqr": 1.85,
+            "p95": 4.31,
+            "mean": 2.4
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 56.55,
+            "p50Iqr": 6.91,
+            "p95": 444.93,
+            "mean": 127.28
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 608.28,
+            "p50Iqr": 102.04,
+            "p95": 608.28,
+            "mean": 608.28
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 3604.43,
+            "p50Iqr": 389.82,
+            "p95": 3604.43,
+            "mean": 3604.43
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 34,
+            "p50Iqr": 8.5,
+            "p95": 50.55,
+            "mean": 36.2
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 12.46,
+            "p50Iqr": 3.07,
+            "p95": 25.69,
+            "mean": 15.19
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 14.98,
+            "p50Iqr": 3.52,
+            "p95": 19.36,
+            "mean": 14.58
+          }
+        ],
+        "ingestWallP50": 3645,
+        "queryE2eP50": 37,
+        "queryE2eP95": 58.4,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 11,
+      "leg": "reverse",
+      "configId": "q8-wasm",
+      "config": {
+        "id": "q8-wasm",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_q8_wasm_11",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\11-q8-wasm",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 53004,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 3.16,
+          "doc.chunk": 0.01,
+          "doc.embed": 565.85,
+          "doc.read": 1.19,
+          "doc.write": 45.33,
+          "index.refresh": 606.1,
+          "ingest.total": 7635.93,
+          "query.e2e": 32,
+          "query.embed": 9.63,
+          "query.http": 16.18
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 3.16,
+            "p50Iqr": 0.77,
+            "p95": 4.61,
+            "mean": 3.33
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0.01,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 565.85,
+            "p50Iqr": 103.33,
+            "p95": 646.01,
+            "mean": 547.3
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.19,
+            "p50Iqr": 0.18,
+            "p95": 3.93,
+            "mean": 1.89
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 45.33,
+            "p50Iqr": 7.84,
+            "p95": 433.76,
+            "mean": 116.53
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 606.1,
+            "p50Iqr": 99.47,
+            "p95": 606.1,
+            "mean": 606.1
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 7635.93,
+            "p50Iqr": 693.8,
+            "p95": 7635.93,
+            "mean": 7635.93
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 32,
+            "p50Iqr": 2,
+            "p95": 39.2,
+            "mean": 32.8
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 9.63,
+            "p50Iqr": 0.45,
+            "p95": 12.19,
+            "mean": 9.57
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 16.18,
+            "p50Iqr": 1.99,
+            "p95": 21.11,
+            "mean": 16.7
+          }
+        ],
+        "ingestWallP50": 7667,
+        "queryE2eP50": 32,
+        "queryE2eP95": 44.55,
+        "pageErrorCount": 0
+      }
+    },
+    {
+      "seq": 12,
+      "leg": "reverse",
+      "configId": "fp32-wasm",
+      "config": {
+        "id": "fp32-wasm",
+        "backend": "wasm",
+        "dtype": "fp32",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "collection": "bench_matrix_20261026_113838_fp32_wasm_12",
+      "out": "docs\\benchmarks\\matrix-2026-10-26\\12-fp32-wasm",
+      "ok": true,
+      "exitCode": 0,
+      "signal": null,
+      "durationMs": 70523,
+      "result": {
+        "ok": true,
+        "mode": "eval",
+        "measuredRuns": 5,
+        "phases": {
+          "db.search": 2.82,
+          "doc.chunk": 0.01,
+          "doc.embed": 861.8,
+          "doc.read": 1.41,
+          "doc.write": 59.42,
+          "index.refresh": 608.88,
+          "ingest.total": 10163.24,
+          "query.e2e": 34.5,
+          "query.embed": 12.4,
+          "query.http": 16.68
+        },
+        "phaseDetails": [
+          {
+            "phase": "db.search",
+            "runs": 5,
+            "n": 10,
+            "p50": 2.82,
+            "p50Iqr": 0.77,
+            "p95": 5.72,
+            "mean": 3.41
+          },
+          {
+            "phase": "doc.chunk",
+            "runs": 5,
+            "n": 120,
+            "p50": 0.01,
+            "p50Iqr": 0,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          {
+            "phase": "doc.embed",
+            "runs": 5,
+            "n": 8,
+            "p50": 861.8,
+            "p50Iqr": 49.09,
+            "p95": 908.61,
+            "mean": 818.76
+          },
+          {
+            "phase": "doc.read",
+            "runs": 5,
+            "n": 120,
+            "p50": 1.41,
+            "p50Iqr": 0.59,
+            "p95": 4.11,
+            "mean": 2.18
+          },
+          {
+            "phase": "doc.write",
+            "runs": 5,
+            "n": 8,
+            "p50": 59.42,
+            "p50Iqr": 25.13,
+            "p95": 493.86,
+            "mean": 131.5
+          },
+          {
+            "phase": "index.refresh",
+            "runs": 5,
+            "n": 1,
+            "p50": 608.88,
+            "p50Iqr": 197.94,
+            "p95": 608.88,
+            "mean": 608.88
+          },
+          {
+            "phase": "ingest.total",
+            "runs": 5,
+            "n": 1,
+            "p50": 10163.24,
+            "p50Iqr": 1536.32,
+            "p95": 10163.24,
+            "mean": 10163.24
+          },
+          {
+            "phase": "query.e2e",
+            "runs": 5,
+            "n": 10,
+            "p50": 34.5,
+            "p50Iqr": 8.5,
+            "p95": 43.55,
+            "mean": 36.4
+          },
+          {
+            "phase": "query.embed",
+            "runs": 5,
+            "n": 10,
+            "p50": 12.4,
+            "p50Iqr": 2.75,
+            "p95": 14.3,
+            "mean": 12.54
+          },
+          {
+            "phase": "query.http",
+            "runs": 5,
+            "n": 10,
+            "p50": 16.68,
+            "p50Iqr": 4.78,
+            "p95": 21.28,
+            "mean": 17.21
+          }
+        ],
+        "ingestWallP50": 10196,
+        "queryE2eP50": 33,
+        "queryE2eP95": 46,
+        "pageErrorCount": 0
+      }
+    }
+  ],
+  "aggregate": [
+    {
+      "config": {
+        "id": "fp32-wasm",
+        "backend": "wasm",
+        "dtype": "fp32",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "invocations": 2,
+      "failedInvocations": 0,
+      "phases": [
+        {
+          "phase": "db.search",
+          "invocations": 2,
+          "p50": 2.42,
+          "p50Iqr": 0.4
+        },
+        {
+          "phase": "doc.chunk",
+          "invocations": 2,
+          "p50": 0.01,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "doc.embed",
+          "invocations": 2,
+          "p50": 829.43,
+          "p50Iqr": 32.38
+        },
+        {
+          "phase": "doc.read",
+          "invocations": 2,
+          "p50": 1.51,
+          "p50Iqr": 0.1
+        },
+        {
+          "phase": "doc.write",
+          "invocations": 2,
+          "p50": 50.63,
+          "p50Iqr": 8.79
+        },
+        {
+          "phase": "index.refresh",
+          "invocations": 2,
+          "p50": 560.27,
+          "p50Iqr": 48.62
+        },
+        {
+          "phase": "ingest.total",
+          "invocations": 2,
+          "p50": 9705.2,
+          "p50Iqr": 458.04
+        },
+        {
+          "phase": "query.e2e",
+          "invocations": 2,
+          "p50": 33.25,
+          "p50Iqr": 1.25
+        },
+        {
+          "phase": "query.embed",
+          "invocations": 2,
+          "p50": 11.96,
+          "p50Iqr": 0.45
+        },
+        {
+          "phase": "query.http",
+          "invocations": 2,
+          "p50": 14.73,
+          "p50Iqr": 1.96
+        }
+      ],
+      "queryE2eP50": 32.5,
+      "queryE2eP50Iqr": 0.5,
+      "queryE2eP95": 44,
+      "ingestWallP50": 9729.5,
+      "ingestWallP50Iqr": 466.5,
+      "pageErrorTotal": 0
+    },
+    {
+      "config": {
+        "id": "q8-wasm",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "invocations": 2,
+      "failedInvocations": 0,
+      "phases": [
+        {
+          "phase": "db.search",
+          "invocations": 2,
+          "p50": 2.63,
+          "p50Iqr": 0.54
+        },
+        {
+          "phase": "doc.chunk",
+          "invocations": 2,
+          "p50": 0.01,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "doc.embed",
+          "invocations": 2,
+          "p50": 565.7,
+          "p50Iqr": 0.15
+        },
+        {
+          "phase": "doc.read",
+          "invocations": 2,
+          "p50": 1.15,
+          "p50Iqr": 0.04
+        },
+        {
+          "phase": "doc.write",
+          "invocations": 2,
+          "p50": 42.7,
+          "p50Iqr": 2.63
+        },
+        {
+          "phase": "index.refresh",
+          "invocations": 2,
+          "p50": 509.81,
+          "p50Iqr": 96.29
+        },
+        {
+          "phase": "ingest.total",
+          "invocations": 2,
+          "p50": 7206.27,
+          "p50Iqr": 429.66
+        },
+        {
+          "phase": "query.e2e",
+          "invocations": 2,
+          "p50": 30,
+          "p50Iqr": 2
+        },
+        {
+          "phase": "query.embed",
+          "invocations": 2,
+          "p50": 9.06,
+          "p50Iqr": 0.57
+        },
+        {
+          "phase": "query.http",
+          "invocations": 2,
+          "p50": 14.4,
+          "p50Iqr": 1.78
+        }
+      ],
+      "queryE2eP50": 30,
+      "queryE2eP50Iqr": 2,
+      "queryE2eP95": 39.28,
+      "ingestWallP50": 7236.5,
+      "ingestWallP50Iqr": 430.5,
+      "pageErrorTotal": 0
+    },
+    {
+      "config": {
+        "id": "fp16-webgpu",
+        "backend": "webgpu",
+        "dtype": "fp16",
+        "batch": 16,
+        "refresh": "last",
+        "cold": false
+      },
+      "invocations": 2,
+      "failedInvocations": 0,
+      "phases": [
+        {
+          "phase": "db.search",
+          "invocations": 2,
+          "p50": 2.56,
+          "p50Iqr": 0.23
+        },
+        {
+          "phase": "doc.chunk",
+          "invocations": 2,
+          "p50": 0.01,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "doc.embed",
+          "invocations": 2,
+          "p50": 71.56,
+          "p50Iqr": 0.04
+        },
+        {
+          "phase": "doc.read",
+          "invocations": 2,
+          "p50": 1.56,
+          "p50Iqr": 0.26
+        },
+        {
+          "phase": "doc.write",
+          "invocations": 2,
+          "p50": 48.95,
+          "p50Iqr": 7.61
+        },
+        {
+          "phase": "index.refresh",
+          "invocations": 2,
+          "p50": 607.54,
+          "p50Iqr": 0.74
+        },
+        {
+          "phase": "ingest.total",
+          "invocations": 2,
+          "p50": 3430.01,
+          "p50Iqr": 174.42
+        },
+        {
+          "phase": "query.e2e",
+          "invocations": 2,
+          "p50": 35,
+          "p50Iqr": 1
+        },
+        {
+          "phase": "query.embed",
+          "invocations": 2,
+          "p50": 13.28,
+          "p50Iqr": 0.82
+        },
+        {
+          "phase": "query.http",
+          "invocations": 2,
+          "p50": 14.99,
+          "p50Iqr": 0.01
+        }
+      ],
+      "queryE2eP50": 36.25,
+      "queryE2eP50Iqr": 0.75,
+      "queryE2eP95": 53.58,
+      "ingestWallP50": 3470.5,
+      "ingestWallP50Iqr": 174.5,
+      "pageErrorTotal": 0
+    },
+    {
+      "config": {
+        "id": "q8-wasm-batch1",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 1,
+        "refresh": "last",
+        "cold": false
+      },
+      "invocations": 2,
+      "failedInvocations": 0,
+      "phases": [
+        {
+          "phase": "db.search",
+          "invocations": 2,
+          "p50": 2.24,
+          "p50Iqr": 0.01
+        },
+        {
+          "phase": "doc.chunk",
+          "invocations": 2,
+          "p50": 0.01,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "doc.embed",
+          "invocations": 2,
+          "p50": 37.39,
+          "p50Iqr": 1.16
+        },
+        {
+          "phase": "doc.read",
+          "invocations": 2,
+          "p50": 1.11,
+          "p50Iqr": 0.09
+        },
+        {
+          "phase": "doc.write",
+          "invocations": 2,
+          "p50": 19.76,
+          "p50Iqr": 0.04
+        },
+        {
+          "phase": "index.refresh",
+          "invocations": 2,
+          "p50": 507.49,
+          "p50Iqr": 0.2
+        },
+        {
+          "phase": "ingest.total",
+          "invocations": 2,
+          "p50": 9274.04,
+          "p50Iqr": 35.91
+        },
+        {
+          "phase": "query.e2e",
+          "invocations": 2,
+          "p50": 29.75,
+          "p50Iqr": 1.75
+        },
+        {
+          "phase": "query.embed",
+          "invocations": 2,
+          "p50": 8.62,
+          "p50Iqr": 0.22
+        },
+        {
+          "phase": "query.http",
+          "invocations": 2,
+          "p50": 13.55,
+          "p50Iqr": 0.21
+        }
+      ],
+      "queryE2eP50": 28,
+      "queryE2eP50Iqr": 0,
+      "queryE2eP95": 36.55,
+      "ingestWallP50": 9304,
+      "ingestWallP50Iqr": 39,
+      "pageErrorTotal": 0
+    },
+    {
+      "config": {
+        "id": "q8-wasm-refresh-each",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "each",
+        "cold": false
+      },
+      "invocations": 2,
+      "failedInvocations": 0,
+      "phases": [
+        {
+          "phase": "db.search",
+          "invocations": 2,
+          "p50": 2.46,
+          "p50Iqr": 0.44
+        },
+        {
+          "phase": "doc.chunk",
+          "invocations": 2,
+          "p50": 0.01,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "doc.embed",
+          "invocations": 2,
+          "p50": 576.51,
+          "p50Iqr": 22.21
+        },
+        {
+          "phase": "doc.read",
+          "invocations": 2,
+          "p50": 1.23,
+          "p50Iqr": 0.04
+        },
+        {
+          "phase": "doc.write",
+          "invocations": 2,
+          "p50": 648.62,
+          "p50Iqr": 1.21
+        },
+        {
+          "phase": "index.refresh",
+          "invocations": 2,
+          "p50": 606.93,
+          "p50Iqr": 0.15
+        },
+        {
+          "phase": "ingest.total",
+          "invocations": 2,
+          "p50": 11466.33,
+          "p50Iqr": 180.03
+        },
+        {
+          "phase": "query.e2e",
+          "invocations": 2,
+          "p50": 30,
+          "p50Iqr": 2
+        },
+        {
+          "phase": "query.embed",
+          "invocations": 2,
+          "p50": 8.91,
+          "p50Iqr": 0.06
+        },
+        {
+          "phase": "query.http",
+          "invocations": 2,
+          "p50": 14.26,
+          "p50Iqr": 1.56
+        }
+      ],
+      "queryE2eP50": 30,
+      "queryE2eP50Iqr": 2,
+      "queryE2eP95": 41.78,
+      "ingestWallP50": 11490,
+      "ingestWallP50Iqr": 185,
+      "pageErrorTotal": 0
+    },
+    {
+      "config": {
+        "id": "cold-q8-wasm",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 16,
+        "refresh": "last",
+        "cold": true
+      },
+      "invocations": 2,
+      "failedInvocations": 0,
+      "phases": [
+        {
+          "phase": "db.search",
+          "invocations": 2,
+          "p50": 2.37,
+          "p50Iqr": 0.03
+        },
+        {
+          "phase": "doc.chunk",
+          "invocations": 2,
+          "p50": 0.01,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "doc.embed",
+          "invocations": 2,
+          "p50": 564.44,
+          "p50Iqr": 7.75
+        },
+        {
+          "phase": "doc.read",
+          "invocations": 2,
+          "p50": 1.21,
+          "p50Iqr": 0.08
+        },
+        {
+          "phase": "doc.write",
+          "invocations": 2,
+          "p50": 45.07,
+          "p50Iqr": 0.97
+        },
+        {
+          "phase": "index.refresh",
+          "invocations": 2,
+          "p50": 556.55,
+          "p50Iqr": 49.85
+        },
+        {
+          "phase": "ingest.total",
+          "invocations": 2,
+          "p50": 7062.1,
+          "p50Iqr": 90.95
+        },
+        {
+          "phase": "model.download",
+          "invocations": 2,
+          "p50": 352.93,
+          "p50Iqr": 2.41
+        },
+        {
+          "phase": "model.init",
+          "invocations": 2,
+          "p50": 356.19,
+          "p50Iqr": 1.67
+        },
+        {
+          "phase": "model.total",
+          "invocations": 2,
+          "p50": 712.25,
+          "p50Iqr": 6.44
+        },
+        {
+          "phase": "query.e2e",
+          "invocations": 2,
+          "p50": 28,
+          "p50Iqr": 0
+        },
+        {
+          "phase": "query.embed",
+          "invocations": 2,
+          "p50": 8.64,
+          "p50Iqr": 0.04
+        },
+        {
+          "phase": "query.http",
+          "invocations": 2,
+          "p50": 13.1,
+          "p50Iqr": 0.04
+        }
+      ],
+      "queryE2eP50": 28,
+      "queryE2eP50Iqr": 0,
+      "queryE2eP95": 36.05,
+      "ingestWallP50": 7771,
+      "ingestWallP50Iqr": 44,
+      "pageErrorTotal": 0
+    }
+  ]
+}
