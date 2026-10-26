@@ -7,6 +7,10 @@
  *
  * 合规约束：本进程只做存储与检索，禁止引入任何 embedding 推理依赖
  * （@seekdb/default-embed 已从依赖移除，向量一律由 web 端传入）。
+ *
+ * 连接韧性：seekdb 服务/容器重启后旧连接会失效
+ * （典型报错 "Can't add new command when connection is in closed state"），
+ * 路由层用 retryOnConnectionError 做一次「重建连接 + 重试」，dev 无需重启。
  */
 import { SeekdbClient, SeekdbAdminClient } from 'seekdb';
 import { SERVER_CONFIG } from '../config.js';
@@ -44,29 +48,72 @@ export async function ensureDatabase(): Promise<void> {
   }
 }
 
+function buildClient(): SeekdbClient {
+  if (SERVER_CONFIG.seekdbPath) {
+    if (process.platform === 'win32') {
+      throw new Error(
+        'SEEKDB_PATH（嵌入式模式）在 Windows 上不受 seekdb 官方支持，请改用本机 seekdb server（默认 127.0.0.1:2881）。详见 README。',
+      );
+    }
+    return new SeekdbClient({
+      path: SERVER_CONFIG.seekdbPath,
+      database: SERVER_CONFIG.seekdbDatabase,
+    });
+  }
+  return new SeekdbClient({
+    host: SERVER_CONFIG.seekdbHost,
+    port: SERVER_CONFIG.seekdbPort,
+    user: SERVER_CONFIG.seekdbUser,
+    password: SERVER_CONFIG.seekdbPassword,
+    database: SERVER_CONFIG.seekdbDatabase,
+  });
+}
+
 export async function getClient(): Promise<SeekdbClient> {
-  if (!clientInstance) {
-    if (SERVER_CONFIG.seekdbPath) {
-      if (process.platform === 'win32') {
-        throw new Error(
-          'SEEKDB_PATH（嵌入式模式）在 Windows 上不受 seekdb 官方支持，请改用本机 seekdb server（默认 127.0.0.1:2881）。详见 README。',
-        );
-      }
-      clientInstance = new SeekdbClient({
-        path: SERVER_CONFIG.seekdbPath,
-        database: SERVER_CONFIG.seekdbDatabase,
-      });
-    } else {
-      clientInstance = new SeekdbClient({
-        host: SERVER_CONFIG.seekdbHost,
-        port: SERVER_CONFIG.seekdbPort,
-        user: SERVER_CONFIG.seekdbUser,
-        password: SERVER_CONFIG.seekdbPassword,
-        database: SERVER_CONFIG.seekdbDatabase,
-      });
+  if (clientInstance) {
+    if (clientInstance.isConnected()) return clientInstance;
+    // 连接已断开（seekdb 重启等）：丢弃旧实例后重建
+    await resetClientConnection();
+  }
+  clientInstance = buildClient();
+  return clientInstance;
+}
+
+/** 丢弃当前单例连接（不抛错），下一次 getClient 会重新建连 */
+export async function resetClientConnection(): Promise<void> {
+  const stale = clientInstance;
+  clientInstance = null;
+  if (stale) {
+    try {
+      await stale.close();
+    } catch {
+      // 连接已经坏了，close 失败可忽略
     }
   }
-  return clientInstance;
+}
+
+/** seekdb 重启/连接中断时 SDK 抛出的典型错误 */
+const CONNECTION_ERROR_RE =
+  /closed state|connection (?:is )?(?:lost|closed)|ECONNRESET|PROTOCOL_CONNECTION_LOST|EPIPE/i;
+
+export function isConnectionError(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err);
+  return CONNECTION_ERROR_RE.test(msg);
+}
+
+/**
+ * 执行一次数据库操作；若因连接中断失败，则重建连接后重试一次。
+ * 让 dev server 在 seekdb 容器重启后可以自愈，而不是一直 500 直到手动重启。
+ */
+export async function retryOnConnectionError<T>(fn: () => Promise<T>): Promise<T> {
+  try {
+    return await fn();
+  } catch (err) {
+    if (!isConnectionError(err)) throw err;
+    console.warn('[seekdb] connection lost, reconnecting and retrying once');
+    await resetClientConnection();
+    return fn();
+  }
 }
 
 export async function closeClient(): Promise<void> {

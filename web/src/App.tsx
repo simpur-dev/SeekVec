@@ -6,11 +6,14 @@ import { IngestPanel } from './components/IngestPanel';
 import { SearchPanel } from './components/SearchPanel';
 import { IngestImagePanel } from './components/IngestImagePanel';
 import { useBackendProbe } from './hooks/useBackendProbe';
+import { useCollections } from './hooks/useCollections';
 
 type Tab = 'text' | 'image';
 
 export default function App() {
   useBackendProbe();
+  // 刷新后从 server 回填已有集合，避免检索找不到集合而静默失败
+  useCollections();
   const [tab, setTab] = useState<Tab>('text');
 
   return (

@@ -18,7 +18,7 @@ export interface CreateCollectionRequest {
 
 export interface IngestTextRequest {
   collectionName: string;
-  /** 文档 ID，必须唯一 */
+  /** 文档 ID，必须唯一（web 端用内容 hash 生成，保证重复导入幂等） */
   ids: string[];
   /** 原文文本，与 ids 一一对应 */
   documents: string[];
@@ -26,6 +26,8 @@ export interface IngestTextRequest {
   embeddings: number[][];
   /** 元数据，可选 */
   metadatas?: Array<Record<string, unknown>>;
+  /** 是否刷新索引，默认 true；批量导入可在中间批次传 false，只刷新一次 */
+  refreshIndex?: boolean;
 }
 
 export interface IngestImageRequest {
@@ -35,6 +37,8 @@ export interface IngestImageRequest {
   embeddings: number[][];
   /** 图片元数据（包含 fileName / size / mimeType / createdAt） */
   metadatas: Array<Record<string, unknown>>;
+  /** 是否刷新索引，默认 true */
+  refreshIndex?: boolean;
 }
 
 export interface SearchRequest {
@@ -58,5 +62,20 @@ export interface SearchResponse {
   ids: string[][];
   documents: string[][];
   metadatas: Array<Array<Record<string, unknown> | undefined>>;
+  /** 纯向量检索：cosine 距离，越小越相关 */
   distances?: number[][];
+  /** 混合检索：SeekDB 返回的 RRF 融合分，越大越相关（语义与 distances 相反） */
+  scores?: number[][];
+}
+
+export interface CollectionListItem {
+  name: string;
+  modelKey: ModelKey;
+  dimension: 384 | 512;
+  modality: Modality;
+  count: number | null;
+}
+
+export interface ListCollectionsResponse {
+  collections: CollectionListItem[];
 }

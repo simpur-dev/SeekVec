@@ -12,7 +12,8 @@
     "build": "npm run build --prefix web && npm run build --prefix server",
     "bench": "npm run bench --prefix scripts",
     "start": "npm run start --prefix server",
-    "probe": "node scripts/probe-seekdb.mjs"
+    "probe": "node scripts/probe-seekdb.mjs",
+    "test": "npm run test --prefix server && npm run test --prefix web"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"

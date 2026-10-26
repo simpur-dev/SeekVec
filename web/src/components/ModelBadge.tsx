@@ -29,7 +29,7 @@ export function ModelBadge() {
                   : 'text-slate-600 hover:bg-slate-50',
                 k === 'image' ? 'cursor-not-allowed opacity-50' : '',
               )}
-              title={k === 'image' ? 'v1.1 待启用' : `${mi.id} · ${mi.dim}d · ${mi.lang}`}
+              title={k === 'image' ? 'v1.1 待启用' : `${mi.id} · ${mi.dim}d`}
             >
               {k === 'text_en' ? '英文' : k === 'text_zh' ? '中文' : '图片'}
               <span className="text-xs opacity-60">{mi.dim}d</span>

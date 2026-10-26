@@ -17,11 +17,22 @@ interface ServerCreateResponse {
   dimension: number;
 }
 
+interface ServerCollectionsResponse {
+  collections: Array<{
+    name: string;
+    modelKey: ModelKey;
+    dimension: 384 | 512;
+    modality: Modality;
+    count: number | null;
+  }>;
+}
+
 interface ServerSearchResponse {
   ids: string[][];
   documents?: string[][];
   metadatas?: Array<Array<Record<string, unknown> | undefined>>;
   distances?: number[][];
+  scores?: number[][];
 }
 
 async function post<T>(path: string, body: unknown): Promise<T> {
@@ -45,12 +56,34 @@ export async function ensureCollection(
   return post<ServerCreateResponse>('/api/collections', { name, modelKey, ikMode });
 }
 
+/**
+ * 列出 server 端已有集合。
+ * 页面刷新后 kbStore 会丢失集合清单，靠它恢复，否则检索会找不到集合。
+ */
+export async function listCollections(): Promise<CollectionSummary[]> {
+  const res = await fetch('/api/collections');
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(`HTTP ${res.status}: ${text || res.statusText}`);
+  }
+  const data = (await res.json()) as ServerCollectionsResponse;
+  return (data.collections ?? []).map((c) => ({
+    name: c.name,
+    modelKey: c.modelKey,
+    dimension: c.dimension,
+    modality: c.modality,
+    count: c.count,
+  }));
+}
+
 export async function ingestDocuments(args: {
   collectionName: string;
   ids: string[];
   documents: string[];
   embeddings: number[][];
   metadatas?: Array<Record<string, unknown>>;
+  /** 中间批次传 false，只在最后一批刷新索引 */
+  refreshIndex?: boolean;
 }): Promise<{ ok: boolean; count: number }> {
   return post<{ ok: boolean; count: number }>('/api/documents', args);
 }
@@ -60,6 +93,7 @@ export async function ingestImages(args: {
   ids: string[];
   embeddings: number[][];
   metadatas: Array<Record<string, unknown>>;
+  refreshIndex?: boolean;
 }): Promise<{ ok: boolean; count: number }> {
   return post<{ ok: boolean; count: number }>('/api/images', args);
 }
@@ -78,11 +112,13 @@ export async function search(args: {
     keyword: args.keyword,
   });
   const latencyMs = performance.now() - t0;
-  const hits = toHits(data);
+  // server 对混合检索返回 scores（越大越相关），纯向量返回 distances（越小越相关）
+  const metric = data.scores ? 'score' : 'distance';
   return {
     collectionName: args.collectionName,
-    hits,
+    hits: toHits(data),
     latencyMs,
+    metric,
   };
 }
 
@@ -94,41 +130,17 @@ export async function getCount(collectionName: string): Promise<number | null> {
   return (j.count as number | null) ?? null;
 }
 
-export async function healthCheck(): Promise<boolean> {
-  try {
-    const res = await fetch('/api/health');
-    return res.ok;
-  } catch {
-    return false;
-  }
-}
-
 export function toHits(data: ServerSearchResponse): SearchHit[] {
   const ids = data.ids?.[0] ?? [];
   const docs = data.documents?.[0] ?? [];
   const metas = data.metadatas?.[0] ?? [];
+  const scores = data.scores?.[0];
   const dists = data.distances?.[0] ?? [];
   return ids.map((id, i) => ({
     id,
     document: docs[i],
     metadata: metas[i],
-    distance: dists[i],
+    distance: scores ? undefined : dists[i],
+    score: scores?.[i],
   }));
-}
-
-export function modalityOf(modelKey: ModelKey): Modality {
-  return modelKey === 'image' ? 'image' : 'text';
-}
-
-export function makeSummary(
-  name: string,
-  modelKey: ModelKey,
-  dimension: 384 | 512,
-): CollectionSummary {
-  return {
-    name,
-    modelKey,
-    dimension,
-    modality: modalityOf(modelKey),
-  };
 }

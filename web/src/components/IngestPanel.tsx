@@ -1,10 +1,14 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { isTextLike } from '../utils/fileReader';
 import { useIngestText } from '../hooks/useIngest';
 import { useKbStore } from '../store/kbStore';
 import { useModelStore } from '../store/modelStore';
 
 const STEPS = ['拖入文件', '读取中', '向量化', '写入 DB', '完成'];
+
+function defaultCollectionName(modelKey: string): string {
+  return modelKey === 'text_en' ? 'kb_text_en' : 'kb_text_zh';
+}
 
 function StepIcon({ status }: { status: string }) {
   if (status === 'done') {
@@ -44,18 +48,26 @@ function statusStep(s: string): number {
 export function IngestPanel() {
   const modelKey = useModelStore((s) => s.modelKey);
   const dim = useModelStore((s) => s.dim);
-  const [collectionName, setCollectionName] = useState<string>(
-    `kb_text_${modelKey === 'text_en' ? 'en' : 'zh'}`,
-  );
+  const [collectionName, setCollectionName] = useState<string>(defaultCollectionName(modelKey));
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);
-  const { ingestFiles, ready } = useIngestText();
+  const { ingestFiles, ready, error: modelError, reload } = useIngestText();
   const ingestStatus = useKbStore((s) => s.ingestStatus);
   const progress = useKbStore((s) => s.ingestProgress);
   const [error, setError] = useState<string | null>(null);
 
+  const isActive =
+    ingestStatus === 'reading' || ingestStatus === 'embedding' || ingestStatus === 'writing';
+
+  // 切换模型时同步默认集合名，避免把新模型的向量写进旧集合（维度不匹配）
+  useEffect(() => {
+    setCollectionName(defaultCollectionName(modelKey));
+    setError(null);
+  }, [modelKey]);
+
   const onFiles = useCallback(
     async (files: File[]) => {
+      if (isActive) return;
       const filtered = files.filter(isTextLike);
       if (filtered.length === 0) {
         setError('请选择 .txt 或 .md 文件');
@@ -63,15 +75,14 @@ export function IngestPanel() {
       }
       setError(null);
       try {
-        await ingestFiles(filtered, collectionName.trim() || 'kb_text');
+        await ingestFiles(filtered, collectionName.trim() || defaultCollectionName(modelKey));
       } catch (e) {
         setError((e as Error).message);
       }
     },
-    [ingestFiles, collectionName],
+    [ingestFiles, collectionName, modelKey, isActive],
   );
 
-  const isActive = ingestStatus !== 'idle' && ingestStatus !== 'done';
   const step = statusStep(ingestStatus);
   const pct = progress.total === 0 ? 0 : Math.round((progress.done / progress.total) * 100);
 
@@ -104,16 +115,17 @@ export function IngestPanel() {
         <input
           value={collectionName}
           onChange={(e) => setCollectionName(e.target.value)}
-          className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-100"
-          placeholder="kb_text_zh"
+          disabled={isActive}
+          className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100 disabled:text-slate-400"
+          placeholder={defaultCollectionName(modelKey)}
         />
       </div>
 
       {/* Drop zone */}
       <div
-        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+        onDragOver={(e) => { e.preventDefault(); if (!isActive) setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
-        onDrop={(e) => { e.preventDefault(); setDragOver(false); onFiles(Array.from(e.dataTransfer.files)); }}
+        onDrop={(e) => { e.preventDefault(); setDragOver(false); if (!isActive) onFiles(Array.from(e.dataTransfer.files)); }}
         className={[
           'relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-14 transition-all duration-200',
           dragOver
@@ -132,16 +144,26 @@ export function IngestPanel() {
         <p className="mb-5 text-sm text-slate-400">或</p>
         <button
           type="button"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={!ready}
+          onClick={() => {
+            if (modelError && !ready) {
+              reload();
+              return;
+            }
+            fileInputRef.current?.click();
+          }}
+          disabled={isActive || (!ready && !modelError)}
           className={[
             'rounded-xl px-8 py-3 text-base font-medium transition-all active:scale-95',
-            ready
+            ready || modelError
               ? 'bg-indigo-600 text-white shadow-md hover:bg-indigo-500'
               : 'bg-slate-200 text-slate-400 cursor-not-allowed',
           ].join(' ')}
         >
-          {ready ? '选择文件' : '模型加载中…'}
+          {ready
+            ? '选择文件'
+            : modelError
+              ? '模型加载失败，点此重试'
+              : '模型加载中…'}
         </button>
         <input
           ref={fileInputRef}
@@ -149,14 +171,29 @@ export function IngestPanel() {
           accept=".txt,.md,text/plain,text/markdown"
           multiple
           hidden
+          disabled={isActive}
           onChange={(e) => {
             const files = Array.from(e.target.files ?? []);
-            onFiles(files);
+            if (!isActive) onFiles(files);
             e.target.value = '';
           }}
         />
         <p className="mt-4 text-sm text-slate-400">支持 .txt、.md；其他格式自动过滤</p>
       </div>
+
+      {/* Model load error */}
+      {modelError && !ready && (
+        <div className="mt-5 flex items-center justify-between gap-2 rounded-xl border border-red-100 bg-red-50 px-5 py-3.5 text-sm text-red-700">
+          <span>embedding 模型加载失败：{modelError}</span>
+          <button
+            type="button"
+            onClick={reload}
+            className="shrink-0 rounded-lg bg-red-600 px-3 py-1.5 text-white hover:bg-red-500"
+          >
+            重试
+          </button>
+        </div>
+      )}
 
       {/* Progress */}
       {(isActive || ingestStatus === 'done') && (
@@ -197,7 +234,7 @@ export function IngestPanel() {
             <span className="text-slate-600">
               {ingestStatus === 'reading' ? '正在读取文件…' :
                ingestStatus === 'embedding' ? '端侧向量化中…' :
-               '正在写入 SeekDB…'}
+               ingestStatus === 'writing' ? '正在写入 SeekDB…' : '已完成'}
             </span>
             <span className="font-mono text-slate-500">{progress.done} / {progress.total}</span>
           </div>
@@ -210,7 +247,7 @@ export function IngestPanel() {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0">
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
+            <line x1="16" y1="16" x2="16.01" y2="16" />
           </svg>
           {error}
         </div>

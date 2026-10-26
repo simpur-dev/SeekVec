@@ -2,6 +2,7 @@ node_modules/
 dist/
 build/
 .vite/
+*.tsbuildinfo
 *.log
 .DS_Store
 *.db
@@ -19,4 +20,6 @@ server/seekdb.db-shm
 
 # transformers model cache
 web/public/models/
+# 本地托管的 ONNX Runtime wasm 资源（从 node_modules 复制，不入库）
+web/public/ort/
 .cache/

@@ -5,6 +5,7 @@ import { backendColor, backendLabel } from '../inference/backend';
 export function BackendBadge() {
   const backend = useBackendStore((s) => s.backend);
   const reason = useBackendStore((s) => s.reason);
+  const modelLoadMs = useBackendStore((s) => s.modelLoadMs);
 
   if (!backend) {
     return (
@@ -15,13 +16,20 @@ export function BackendBadge() {
     );
   }
 
+  const title = [
+    reason,
+    modelLoadMs !== null ? `模型加载 ${(modelLoadMs / 1000).toFixed(1)}s` : null,
+  ]
+    .filter(Boolean)
+    .join(' · ') || undefined;
+
   return (
     <span
       className={clsx(
         'inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-medium shadow-sm',
         backendColor(backend),
       )}
-      title={reason ?? undefined}
+      title={title}
     >
       <span className="h-2 w-2 rounded-full bg-current opacity-80" />
       {backendLabel(backend)}

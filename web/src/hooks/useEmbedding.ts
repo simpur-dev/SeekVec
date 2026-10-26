@@ -4,7 +4,7 @@
  * 流程：
  *   1. 探测后端
  *   2. 调用 loadModelWithFallback（WebGPU 失败自动降级 WASM）
- *   3. 更新 backendStore
+ *   3. 更新 backendStore（含模型加载耗时）
  *   4. 缓存 pipeline 实例
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -28,23 +28,27 @@ export function useEmbedding(modelKey: ModelKey) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pipelineRef = useRef<any>(null);
   const setBackend = useBackendStore((s) => s.setBackend);
+  const setModelLoadMs = useBackendStore((s) => s.setModelLoadMs);
 
   const init = useCallback(async () => {
     setState({ loading: true, ready: false, error: null });
+    const startedAt = performance.now();
     try {
       const preferred: Backend = (await detectBackend()) ?? 'wasm';
       const { pipeline, backend } = await loadModelWithFallback(modelKey, preferred);
       pipelineRef.current = pipeline;
-      setBackend(backend, backend === 'wasm' ? '未检测到 WebGPU 或初始化失败' : null);
+      setBackend(backend, backend === 'wasm' ? '未检测到 WebGPU 或初始化失败' : undefined);
+      setModelLoadMs(Math.round(performance.now() - startedAt));
       setState({ loading: false, ready: true, error: null });
     } catch (err) {
+      setModelLoadMs(null);
       setState({
         loading: false,
         ready: false,
         error: (err as Error).message,
       });
     }
-  }, [modelKey, setBackend]);
+  }, [modelKey, setBackend, setModelLoadMs]);
 
   useEffect(() => {
     pipelineRef.current = null;

@@ -18,6 +18,26 @@ import { MODEL_REGISTRY } from './models';
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
+// 可选资源覆盖（默认不设置，行为与官方默认完全一致）：
+// - VITE_HF_ENDPOINT：模型下载源，如 https://hf-mirror.com/（huggingface.co 不可达的环境）
+// - VITE_ORT_WASM_PATH：ONNX Runtime wasm 资源目录，如 /ort/（jsDelivr CDN 不可达时本地托管）
+// 使用方式：在 web/.env.local 中设置（该文件已被 .gitignore 忽略）。
+const viteEnv =
+  (import.meta as unknown as { env?: Record<string, string | undefined> }).env ?? {};
+if (viteEnv.VITE_HF_ENDPOINT) {
+  env.remoteHost = viteEnv.VITE_HF_ENDPOINT;
+}
+if (viteEnv.VITE_ORT_WASM_PATH) {
+  const wasmBackend = env.backends?.onnx?.wasm;
+  if (wasmBackend) wasmBackend.wasmPaths = viteEnv.VITE_ORT_WASM_PATH;
+}
+// 可选：使用本地模型目录（web/public/models，已被 .gitignore 忽略），
+// 适合无外网环境；开启后本地存在的模型不再走远程下载。
+if (viteEnv.VITE_LOCAL_MODELS === '1') {
+  env.allowLocalModels = true;
+  env.localModelPath = viteEnv.VITE_LOCAL_MODEL_PATH ?? '/models/';
+}
+
 interface TextPipeline {
   kind: 'text';
   extract: (texts: string[]) => Promise<number[][]>;
@@ -31,7 +51,8 @@ interface ImagePipeline {
 
 type ModelPipeline = TextPipeline | ImagePipeline;
 
-const registry = new Map<ModelKey, Promise<ModelPipeline>>();
+// 缓存键包含 backend：同一模型在 WebGPU 加载失败后，仍可用 WASM 重新加载
+const registry = new Map<string, Promise<ModelPipeline>>();
 
 async function loadTextModel(
   modelKey: 'text_en' | 'text_zh',
@@ -61,9 +82,9 @@ async function loadImageModel(backend: Backend): Promise<ImagePipeline> {
     device: backend,
     dtype: 'q8',
   });
-  // 文本塔：用零样本分类任务的底层 feature-extraction pipeline 也能跑，
-  // 但更稳妥是另起一个 feature-extraction pipeline（CLIP 的 text encoder 与 visual encoder 在不同子模块中）
-  // 这里简化：用同一个 pipeline 处理文本（CLIP 对文本也输出 embedding）
+  // 文本塔：v1.1 应改用 AutoProcessor + CLIPTextModelWithProjection 获取 text_embeds，
+  // 当前 feature-extraction 方式对 CLIPModel 不可用（返回 undefined last_hidden_state）。
+  // 在 v1.1 启用前由 IMAGE_PIPELINE_ENABLED=false 保护，不会走到这里。
   const text = await pipeline('feature-extraction', modelId, {
     device: backend,
     dtype: 'q8',
@@ -77,7 +98,8 @@ async function loadImageModel(backend: Backend): Promise<ImagePipeline> {
       return (out as any).tolist() as number[][];
     },
     visionTower: async (imageUrls: string[]) => {
-      const out = await vision(imageUrls, { pooling: 'mean', normalize: true });
+      // image-feature-extraction 的选项只支持 pool（见 transformers.js 类型定义）
+      const out = await vision(imageUrls, { pool: true });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return (out as any).tolist() as number[][];
     },
@@ -85,7 +107,8 @@ async function loadImageModel(backend: Backend): Promise<ImagePipeline> {
 }
 
 export async function loadModel(modelKey: ModelKey, backend: Backend): Promise<ModelPipeline> {
-  const cached = registry.get(modelKey);
+  const cacheKey = `${modelKey}:${backend}`;
+  const cached = registry.get(cacheKey);
   if (cached) return cached;
 
   const task = (async () => {
@@ -95,7 +118,11 @@ export async function loadModel(modelKey: ModelKey, backend: Backend): Promise<M
     return loadTextModel(modelKey, backend);
   })();
 
-  registry.set(modelKey, task);
+  registry.set(cacheKey, task);
+  // 加载失败时移除缓存，否则降级重试会拿到同一个 rejected Promise（自动降级失效）
+  task.catch(() => {
+    if (registry.get(cacheKey) === task) registry.delete(cacheKey);
+  });
   return task;
 }
 
@@ -114,10 +141,6 @@ export async function loadModelWithFallback(
     }
     throw err;
   }
-}
-
-export function resetRegistry() {
-  registry.clear();
 }
 
 /**

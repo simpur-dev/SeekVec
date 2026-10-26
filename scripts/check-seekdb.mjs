@@ -18,28 +18,32 @@ const TIMEOUT_MS = 2000;
 
 const INSTALL_GUIDE = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠   SeekDB server 未启动（127.0.0.1:${PORT} 连接失败）
+⚠   SeekDB server 未就绪（${HOST}:${PORT} 连接失败）
 
-修复步骤（Windows）:
-  1. 下载 seekdb 1.3.0 MSI（若未安装）:
-     https://github.com/oceanbase/seekdb/releases/download/v1.3.0/seekdb-1.3.0.0-100000092026051510-win64.msi
+可选方案一：Docker（推荐，Windows 上无需装 MSI）
+  docker volume create seekvec_seekdb-data
+  docker run -d --name seekvec-seekdb -p 2882:2881 ^
+    -v seekvec_seekdb-data:/var/lib/seekdb ^
+    -e REPORTER=seekvec-seekdb quay.io/oceanbase/seekdb:latest
+  # 注意：卷必须挂到容器内 /var/lib/seekdb，否则数据不持久
+  # 然后设置端口后启动：
+  $env:SEEKDB_PORT="2882"; npm run dev
 
-  2. 以管理员身份运行 PowerShell，安装并启动服务:
+可选方案二：Windows MSI 安装（默认 127.0.0.1:2881）
+  1. 下载 seekdb 1.3.0+ MSI:
+     https://github.com/oceanbase/seekdb/releases
+  2. 以管理员身份运行 PowerShell，初始化并启动服务:
      cd "C:\\Program Files\\seekdb\\bin"
-     .\\seekdb_manage.ps1 install   # 初始化数据库 + 注册服务
-     .\\seekdb_manage.ps1 start     # 启动服务
-
+     .\\seekdb_manage.ps1 install
+     .\\seekdb_manage.ps1 start
   3. 验证端口:
-     Test-NetConnection 127.0.0.1 -Port ${PORT}
-
-  4. 重新运行 dev:
-     npm run dev
+     Test-NetConnection ${HOST} -Port ${PORT}
 
 Linux/macOS（嵌入式模式）:
-  设置 SEEKDB_PATH 环境变量:
-     export SEEKDB_PATH=/path/to/seekdb/data
+  export SEEKDB_PATH=/path/to/seekdb/data
   然后运行 dev。
 
+可用环境变量: SEEKDB_HOST / SEEKDB_PORT（默认 127.0.0.1:2881）
 详情见 README.md 或 docs/技术说明.md。
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `;

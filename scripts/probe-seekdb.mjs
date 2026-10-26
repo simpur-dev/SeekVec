@@ -1,19 +1,35 @@
 /**
  * seekdb 端到端探针（server 模式 + 嵌入式模式双检测）
  *
- * 通过 server/src 代码路径（tsx）验证 SeekDB 连通性与基础 CRUD：
- *   AdminClient 建库 → createCollection(Schema) → add 文档（含伪向量）
+ * 通过 seekdb-js 验证 SeekDB 连通性与基础 CRUD：
+ *   AdminClient 建库 → createCollection(Schema) → upsert 文档（含伪向量）
  *   → hybridSearch → query → refresh_index → close
  *
  * 用法:
  *   node scripts/probe-seekdb.mjs
+ *   SEEKDB_PORT=2882 node scripts/probe-seekdb.mjs   # Docker 独立容器场景
  *
  * 嵌入式模式（Linux/macOS，设 SEEKDB_PATH）：
  *   SEEKDB_PATH=/path/to/db node scripts/probe-seekdb.mjs
  *
- * Windows 必须用 server 模式（SEEKDB_PATH 不支持），且必须先装 seekdb 1.3.0 MSI。
+ * Windows 必须用 server 模式（SEEKDB_PATH 不支持），且必须先装 seekdb 1.3.0+ MSI
+ * 或用 Docker 启动 seekdb server。
  */
-import { SeekdbClient, SeekdbAdminClient, Schema, VectorIndexConfig, FulltextIndexConfig } from '../server/node_modules/seekdb/dist/index.mjs';
+
+// 优先按包名解析（在 server 工作区内运行）；否则回退到仓库内 server 的依赖路径
+let seekdbModule;
+try {
+  seekdbModule = await import('seekdb');
+} catch {
+  try {
+    seekdbModule = await import('../server/node_modules/seekdb/dist/index.mjs');
+  } catch {
+    console.error('[probe] 无法加载 seekdb SDK，请先在仓库根目录执行 npm run install:all');
+    process.exit(1);
+  }
+}
+const { SeekdbClient, SeekdbAdminClient, Schema, VectorIndexConfig, FulltextIndexConfig } =
+  seekdbModule;
 
 // ── 配置 ───────────────────────────────────────────────────────────────────────
 const HOST = process.env.SEEKDB_HOST ?? '127.0.0.1';
@@ -95,7 +111,7 @@ async function main() {
 
     const col = await client.getCollection({ name: COLLECTION, embeddingFunction: null });
 
-    // 5. add 6 条中英文文档
+    // 5. upsert 6 条中英文文档（与 web 端一致的写入方式）
     const ids = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'];
     const docs = [
       '端侧向量化是浏览器内推理的核心技术。',
@@ -108,8 +124,8 @@ async function main() {
     const embeddings = ids.map((_, i) => fakeEmbedding384d(i + 1));
     const metadatas = ids.map((id, i) => ({ id, lang: i < 3 ? 'zh' : 'en', seed: i + 1 }));
 
-    await col.add({ ids, documents: docs, embeddings, metadatas });
-    console.log(`[probe] ✓ add(6 docs)`);
+    await col.upsert({ ids, documents: docs, embeddings, metadatas });
+    console.log(`[probe] ✓ upsert(6 docs)`);
 
     // 6. refresh_index（赛题得分点）
     await col.refresh_index();
