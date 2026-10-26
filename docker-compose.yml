@@ -1,0 +1,45 @@
+# SeekVec — seekdb 数据库服务
+#
+# 用法（在仓库根目录）：
+#   docker compose up -d seekdb    # 或 npm run db:up
+#   docker compose down            # 或 npm run db:down（不会删除数据卷）
+#
+# 镜像固定说明（2026-10 本机实测，评测/复现同款）：
+#   quay.io/oceanbase/seekdb:latest
+#     = seekdb server 1.4.0（与 seekdb-js 1.3.0 客户端实测兼容）
+#     = digest sha256:4db4961869d554313520d6081fca29265ba6da6db7313311bd8acbed771a956b
+#   需要完全可复现时，把 SEEKDB_IMAGE 覆盖为上面的 @sha256:... 形式即可：
+#     SEEKDB_IMAGE=quay.io/oceanbase/seekdb@sha256:4db49618... docker compose up -d seekdb
+#   升级镜像请同步更新本注释与 THIRD_PARTY_NOTICES.md。
+#
+# 端口：宿主机默认 2882（避免与本机其它 seekdb 的 2881 冲突），
+#       容器内固定 2881；可用 SEEKDB_PORT 覆盖宿主机端口。
+# 数据：卷挂到容器内真实的数据库目录 /var/lib/seekdb（挂错目录不会持久化）。
+#       compose 会自动读取根目录 .env 做变量替换（见 .env.example）。
+name: seekvec
+
+services:
+  seekdb:
+    image: ${SEEKDB_IMAGE:-quay.io/oceanbase/seekdb:latest}
+    container_name: ${SEEKDB_CONTAINER_NAME:-seekvec-seekdb}
+    restart: unless-stopped
+    ports:
+      - "${SEEKDB_PORT:-2882}:2881"
+    volumes:
+      - seekvec_seekdb-data:/var/lib/seekdb
+    environment:
+      REPORTER: seekvec-seekdb
+    healthcheck:
+      # seekdb 兼容 MySQL 协议，镜像内含 /usr/bin/mysqladmin
+      test: ["CMD-SHELL", "mysqladmin ping -h127.0.0.1 -P2881 -uroot --connect-timeout=3 -s"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      # 首次启动初始化较慢，给足 60s 启动宽限期
+      start_period: 60s
+
+volumes:
+  # 显式固定卷名（不带 compose 项目前缀），与 README / 旧 docker run 命令保持一致，
+  # 避免因 compose 项目名变化导致数据"丢失"。
+  seekvec_seekdb-data:
+    name: seekvec_seekdb-data

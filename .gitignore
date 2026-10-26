@@ -23,3 +23,6 @@ web/public/models/
 # 本地托管的 ONNX Runtime wasm 资源（从 node_modules 复制，不入库）
 web/public/ort/
 .cache/
+
+# 基准测试临时文件（UI 兜底模式上传语料的副本）
+docs/benchmarks/**/_corpus-tmp/

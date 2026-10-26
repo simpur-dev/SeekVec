@@ -9,11 +9,23 @@
     "dev": "concurrently -n server,web -c blue,green \"npm run dev --prefix server\" \"npm run dev --prefix web\"",
     "dev:server": "npm run dev --prefix server",
     "dev:web": "npm run dev --prefix web",
+    "dev:docker": "node scripts/dev-docker.mjs",
+    "db:up": "docker compose up -d seekdb",
+    "db:down": "docker compose down",
+    "prepare:assets": "node scripts/fetch-ort.mjs && node scripts/fetch-models.mjs --dtype q8,fp16",
     "build": "npm run build --prefix web && npm run build --prefix server",
-    "bench": "npm run bench --prefix scripts",
+    "bench": "npm run bench --prefix scripts --",
+    "bench:browser": "node scripts/bench-browser.mjs",
+    "bench:matrix": "node scripts/bench-matrix.mjs",
+    "eval:quality": "npm run eval:quality --prefix scripts --",
+    "eval:quality:browser": "npm run eval:quality:browser --prefix scripts --",
+    "check:compliance": "node scripts/check-compliance.mjs",
+    "acceptance": "node scripts/acceptance.mjs",
+    "typecheck:scripts": "npm run typecheck --prefix scripts",
+    "test:scripts": "npm run test --prefix scripts",
     "start": "npm run start --prefix server",
     "probe": "node scripts/probe-seekdb.mjs",
-    "test": "npm run test --prefix server && npm run test --prefix web"
+    "test": "npm run test --prefix server && npm run test --prefix web && npm run test:scripts"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
@@ -22,3 +34,4 @@
     "node": ">=18.17.0"
   }
 }
+

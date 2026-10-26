@@ -4,14 +4,21 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "bench": "tsx bench.ts"
+    "bench": "tsx bench.ts",
+    "eval:quality": "tsx eval-quality.ts",
+    "eval:quality:browser": "tsx eval-quality-browser.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@huggingface/transformers": "^3.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.7.5",
+    "puppeteer-core": "^23.11.1",
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.9"
   }
 }
+

@@ -40,3 +40,15 @@ jobs:
 
       - name: Unit tests
         run: npm test
+
+      # scripts/ 单测（evalMetrics/stats/datasets；纯 Node，不需要模型/浏览器/数据库）
+      - name: Scripts unit tests
+        run: npm run test:scripts
+
+      # 交付/复现工具链自检（scripts/ 的 TS 类型检查；不需要模型/浏览器/数据库）
+      - name: Typecheck scripts
+        run: npm run typecheck:scripts
+
+      # 赛题约束：推理只在浏览器端，server 不得引入 onnx/transformers 等推理依赖
+      - name: Compliance checks
+        run: npm run check:compliance
