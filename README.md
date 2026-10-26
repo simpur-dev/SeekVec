@@ -20,9 +20,9 @@
 # ① 安装根 + server + web + scripts 依赖
 npm run install:all
 
-# ② 本地配置（均已被 gitignore；不复制则使用默认值）
+# ② 本地配置（均已被 gitignore；建议都复制）
 cp .env.example .env                              # PowerShell: Copy-Item .env.example .env
-cp web/.env.local.example web/.env.local          # 可选：镜像/本地模型/ORT 路径
+cp web/.env.local.example web/.env.local          # 默认启用本地模型 + 同源 ORT（需先执行 ④）
 
 # ③ 启动 seekdb（Docker，宿主机默认 2882）
 npm run db:up
@@ -39,7 +39,9 @@ npm run dev:docker
 - API：<http://localhost:3001/api/health>
 - 自检：`npm run acceptance`（PASS/FAIL 表，exit 0 表示环境可用）
 
-> 已有 seekdb server（如 Windows MSI 或其它容器）时，把 `.env` 的 `SEEKDB_PORT` 改为实际端口，然后 `npm run dev` 即可。
+> 已有 seekdb server（如 Windows MSI 或其它容器）时，把 `.env` 的 `SEEKDB_PORT` 改为实际端口，然后 `npm run dev` 即可（server 与脚本会自动读取根 `.env`；Docker 方式仍推荐 `dev:docker`）。
+>
+> `.env.local.example` 默认 `VITE_LOCAL_MODELS=1`，即浏览器使用 `web/public/models` 中的本地模型；若不复制该文件，模型会从 `VITE_HF_ENDPOINT`（默认 huggingface.co）在线加载。离线/受限网络环境请复制并先跑 `npm run prepare:assets`。
 
 ## 浏览器要求与演示
 

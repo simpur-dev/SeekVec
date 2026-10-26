@@ -15,6 +15,9 @@
  * Windows 必须用 server 模式（SEEKDB_PATH 不支持），且必须先装 seekdb 1.3.0+ MSI
  * 或用 Docker 启动 seekdb server。
  */
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { loadDotEnv } from './lib/env.mjs';
 
 // 优先按包名解析（在 server 工作区内运行）；否则回退到仓库内 server 的依赖路径
 let seekdbModule;
@@ -30,6 +33,10 @@ try {
 }
 const { SeekdbClient, SeekdbAdminClient, Schema, VectorIndexConfig, FulltextIndexConfig } =
   seekdbModule;
+
+// 让 `npm run probe` 自动读取根 .env（SEEKDB_* 等）
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+loadDotEnv(ROOT);
 
 // ── 配置 ───────────────────────────────────────────────────────────────────────
 const HOST = process.env.SEEKDB_HOST ?? '127.0.0.1';

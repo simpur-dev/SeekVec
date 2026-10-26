@@ -11,6 +11,14 @@
  *   "predev": "node scripts/check-seekdb.mjs"
  */
 import net from 'net';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { loadDotEnv } from './lib/env.mjs';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(HERE, '..');
+// 直接执行 npm run dev 时也能读取根 .env 中的 SEEKDB_HOST/PORT。
+loadDotEnv(ROOT);
 
 const HOST = process.env.SEEKDB_HOST ?? '127.0.0.1';
 const PORT = Number(process.env.SEEKDB_PORT ?? 2881);

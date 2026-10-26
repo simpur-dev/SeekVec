@@ -24,9 +24,12 @@ import net from 'node:net';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { loadDotEnv } from './lib/env.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
+// 让 `npm run acceptance` 在独立终端也能读到根 .env（Docker 端口/服务地址等）。
+loadDotEnv(ROOT);
 const LOCK_PATH = path.join(ROOT, 'models.lock.json');
 const MODELS_ROOT = path.join(ROOT, 'web', 'public', 'models');
 const REQUIRED_NODE = [18, 17, 0];

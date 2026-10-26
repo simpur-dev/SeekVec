@@ -6,6 +6,44 @@
  * - 嵌入式模式（仅 Linux/macOS）：设置 SEEKDB_PATH 启用。
  *   官方兼容性表明确标注嵌入式 "Not supported yet" on Windows，勿在 Windows 设置该变量
  */
+import fs from 'node:fs';
+import path from 'node:path';
+
+/**
+ * 读取仓库根目录 .env（若存在），让 `npm run dev` / `npm start` 也能使用 .env 配置。
+ * 已存在的系统环境变量优先；不覆盖。解析规则与 scripts/lib/env.mjs 保持一致。
+ */
+function loadRootDotEnv(): void {
+  const candidates = [
+    path.resolve(process.cwd(), '..', '.env'), // cwd=server 时
+    path.resolve(process.cwd(), '.env'), // cwd=仓库根时
+  ];
+  for (const file of candidates) {
+    if (!fs.existsSync(file)) continue;
+    try {
+      for (const rawLine of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
+        const line = rawLine.trim();
+        if (!line || line.startsWith('#')) continue;
+        const eq = line.indexOf('=');
+        if (eq <= 0) continue;
+        const key = line.slice(0, eq).trim();
+        let value = line.slice(eq + 1).trim();
+        if (
+          (value.startsWith('"') && value.endsWith('"')) ||
+          (value.startsWith("'") && value.endsWith("'"))
+        ) {
+          value = value.slice(1, -1);
+        }
+        if (process.env[key] === undefined) process.env[key] = value;
+      }
+    } catch {
+      // .env 不可读时保持默认配置，不阻塞服务启动
+    }
+    return;
+  }
+}
+
+loadRootDotEnv();
 
 /** CORS 白名单：逗号分隔，逐项 trim，过滤空项；未配置时回退本地 dev 源 */
 export function parseCorsOrigins(raw: string | undefined): string[] {
