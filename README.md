@@ -24,9 +24,9 @@ npm run install:all
 cp .env.example .env                              # PowerShell: Copy-Item .env.example .env
 cp web/.env.local.example web/.env.local          # 默认启用本地模型 + 同源 ORT（需先执行 ④）
 
-# ③ 启动 seekdb（Docker，宿主机默认 2882）
-npm run db:up
-docker compose ps                                 # STATUS=healthy 后继续
+# ③ 启动 seekdb 本地 server（Docker，宿主机默认 2882；脚本会自动启动并等待就绪）
+npm run db:start
+# 等价手动方式：npm run db:up && docker compose ps
 
 # ④ 准备浏览器静态资产（首次需要网络）：ORT wasm + q8/fp16 模型
 npm run prepare:assets
@@ -37,7 +37,21 @@ npm run dev:docker
 
 - Web UI：<http://localhost:5173>
 - API：<http://localhost:3001/api/health>
+- seekdb 连接状态：`npm run db:status`（展示 host/port/user/database 与是否就绪）
 - 自检：`npm run acceptance`（PASS/FAIL 表，exit 0 表示环境可用）
+
+### 4.1 本地启动与 seekdb 连接（明确说明）
+
+本项目交付的是**可本地启动的应用**（不依赖在线地址）：
+
+| 4.1 要求 | 本仓库对应 |
+|---|---|
+| 可本地启动的应用 | `npm run install:all` → `npm run dev:docker`（或 `npm run dev`），Web UI 默认 5173 |
+| 浏览器要求 | 最新版 **Chrome / Edge（Chromium 内核）**；WebGPU 需硬件支持且页面处于 `localhost`/HTTPS 安全上下文，不支持时自动降级 WASM |
+| 依赖安装与启动步骤 | 见上方「快速启动」；Node ≥ 18.17、npm、Docker（或本机 seekdb server / Linux 嵌入式） |
+| seekdb 本地 server 启动脚本 | `scripts/start-seekdb.mjs`（`npm run db:start`：读取 `.env` → 端口检查 → `docker compose up -d seekdb` → 等待就绪；`npm run db:status` 只检查） |
+| seekdb 连接配置 | 根目录 `.env`（模板 `.env.example`）：`SEEKDB_HOST/PORT/USER/PASSWORD/DATABASE`；`docker-compose.yml` 定义本地 server、数据卷 `/var/lib/seekdb` 与端口映射 |
+| 不使用 Docker 的备选 | Windows MSI（`SEEKDB_PORT=2881`）或 Linux/macOS 嵌入式（`SEEKDB_PATH`），见 [`docs/复现.md`](docs/复现.md) |
 
 > 已有 seekdb server（如 Windows MSI 或其它容器）时，把 `.env` 的 `SEEKDB_PORT` 改为实际端口，然后 `npm run dev` 即可（server 与脚本会自动读取根 `.env`；Docker 方式仍推荐 `dev:docker`）。
 >
@@ -45,7 +59,7 @@ npm run dev:docker
 
 ## 浏览器要求与演示
 
-- 支持 Chrome / Edge / Chromium 等现代浏览器（实测 Chrome 153 / Chromium 引擎）；WebGPU 需要硬件与安全上下文（`localhost`/HTTPS）
+- **最新版 Chrome / Edge**（Chromium 内核，建议 ≥113；WebGPU 需要硬件与安全上下文 `localhost`/HTTPS，不支持时自动降级 WASM）；实测 Chrome 153
 - 演示路径：文本检索页 → 拖入 `data/demo/` 示例文档 → 观察「读取/向量化/写入」进度与结果 → 输入查询检索；填「关键字」后检索会走 **seekdb 库内混合检索（RRF）**
 - 界面右上角徽标显示当前推理后端（WebGPU / WASM，含降级原因与模型加载耗时）
 - 强制后端/精度（用于验收降级路径）：`?backend=wasm`、`?backend=webgpu`、`?dtype=fp16|q8|fp32`（会记住后端选择；可用 `?backend=auto` 清除）
@@ -70,7 +84,9 @@ npm run dev:docker
 ```bash
 npm run dev            # 直接启动 server + web（需 SEEKDB_* 已设置）
 npm run dev:docker     # 读取根 .env 注入 seekdb 配置后启动
-npm run db:up/db:down  # docker compose 启动/停止 seekdb（保留数据卷）
+npm run db:start       # 本地 seekdb server：检查/启动 docker compose 并等待就绪
+npm run db:status      # 只检查 seekdb 连接与连接配置
+npm run db:up/db:down  # 手动 compose 启动/停止 seekdb（保留数据卷）
 npm run prepare:assets # 下载/校验模型 + 复制 ORT wasm（同源 /ort/）
 npm run probe          # seekdb 端到端探针（建库/集合/upsert/混合检索/清理）
 npm run bench          # 模型体积/压缩比 + q8/fp16 vs fp32 一致性（Node CPU，离线可用）
@@ -120,7 +136,7 @@ npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web
 | 可复现性 | ✅ | Docker compose + `dev:docker` + `prepare:assets` + `acceptance`；[复现.md](docs/复现.md) |
 | 性能与质量测试（3.2 六项） | ✅ | 分阶段/冷热/中位数/原始数据/双后端/标注集质量；[性能与质量报告](docs/性能与质量报告.md) |
 
-提交材料映射：4.1 可运行应用（本 README + `dev:docker`）；4.2 完整源码（本仓库 + 模型锁/数据/脚本）；4.3 一页技术说明（[`docs/技术说明.md`](docs/技术说明.md)）。
+提交材料映射：4.1 可运行应用（[本 README 的「快速启动 / 4.1 本地启动与 seekdb 连接」](#41-本地启动与-seekdb-连接明确说明) + `dev:docker` + `npm run db:start`）；4.2 完整源码（本仓库 + 模型锁/数据/脚本）；4.3 一页技术说明（[`docs/技术说明.md`](docs/技术说明.md)）。
 
 ## 目录结构（主要部分）
 

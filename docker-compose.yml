@@ -1,8 +1,10 @@
 # SeekVec — seekdb 数据库服务
 #
 # 用法（在仓库根目录）：
-#   docker compose up -d seekdb    # 或 npm run db:up
+#   npm run db:start               # 检查/启动 seekdb 并等待就绪（推荐，scripts/start-seekdb.mjs）
+#   npm run db:up                  # 仅 docker compose up -d seekdb（或 docker compose up -d seekdb）
 #   docker compose down            # 或 npm run db:down（不会删除数据卷）
+#   npm run db:status              # 只检查连接与端口
 #
 # 镜像固定说明（2026-10 本机实测，评测/复现同款）：
 #   quay.io/oceanbase/seekdb:latest

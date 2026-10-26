@@ -12,6 +12,8 @@
     "dev:docker": "node scripts/dev-docker.mjs",
     "db:up": "docker compose up -d seekdb",
     "db:down": "docker compose down",
+    "db:start": "node scripts/start-seekdb.mjs",
+    "db:status": "node scripts/start-seekdb.mjs --check",
     "prepare:assets": "node scripts/fetch-ort.mjs && node scripts/fetch-models.mjs --dtype q8,fp16",
     "build": "npm run build --prefix web && npm run build --prefix server",
     "bench": "npm run bench --prefix scripts --",
@@ -34,4 +36,5 @@
     "node": ">=18.17.0"
   }
 }
+
 

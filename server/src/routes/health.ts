@@ -10,7 +10,7 @@
  * 规则与 seekdb SDK 内部的 parseSemver / MIN_REFRESH_INDEX_VERSION 对齐。
  */
 import { Router } from 'express';
-import { getClient } from '../db/client.js';
+import { getClient, retryOnConnectionError } from '../db/client.js';
 import { asyncHandler } from './errors.js';
 import { isDeepProbe } from './validation.js';
 import { elapsedMs, nowMs } from '../util/timing.js';
@@ -97,9 +97,13 @@ export function extractVersionFromRows(rows: unknown): string | null {
 export async function probeSeekdb(): Promise<HealthResponse> {
   const startedAt = nowMs();
   try {
-    const client = await getClient();
-    await client.execute('SELECT 1');
-    const rows = await client.execute('SELECT VERSION() AS version');
+    // getClient 的 isConnected 仅是 SDK 内部状态；容器重建后可能仍是 stale client。
+    // 与业务路由一致：连接错误时重建连接并重试一次，避免重启后健康检查一直 degraded。
+    const rows = await retryOnConnectionError(async () => {
+      const client = await getClient();
+      await client.execute('SELECT 1');
+      return client.execute('SELECT VERSION() AS version');
+    });
     const version = extractVersionFromRows(rows);
     const seekdb: HealthSeekdbStatus = {
       reachable: true,
@@ -138,8 +142,14 @@ export function createHealthRouter(): Router {
         return;
       }
       const payload = await probeSeekdb();
-      cached = payload;
-      cachedAt = Date.now();
+      // 只缓存健康结果：seekdb 重启/恢复后不应被旧的 degraded 结果阻塞 5 秒。
+      if (payload.status === 'ok') {
+        cached = payload;
+        cachedAt = Date.now();
+      } else {
+        cached = null;
+        cachedAt = 0;
+      }
       res.json(payload);
     }),
   );
