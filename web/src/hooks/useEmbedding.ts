@@ -1,69 +1,55 @@
 /**
  * 加载 embedding 模型并对外提供 embed 接口
  *
- * 流程：
- *   1. 探测后端
- *   2. 调用 loadModelWithFallback（WebGPU 失败自动降级 WASM）
- *   3. 更新 backendStore（含模型加载耗时）
- *   4. 缓存 pipeline 实例
+ * 内部委托给 inference/runtime 单例：
+ * - useSearch / useIngest / 评测入口共享同一实例（不会重复下载/初始化）
+ * - 切换模型时通过 generation 丢弃过期加载结果
+ * - reload() 全局生效（所有订阅者都会重新初始化）
  */
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { loadModelWithFallback } from '../inference/pipeline';
-import type { Backend, ModelKey } from '../types';
-import { useBackendStore } from '../store/backendStore';
-import { detectBackend } from '../inference/backend';
-
-interface EmbeddingState {
-  loading: boolean;
-  ready: boolean;
-  error: string | null;
-}
+import { useCallback, useEffect } from 'react';
+import {
+  ensureRuntime,
+  isRuntimeSupersededError,
+  reloadRuntime,
+} from '../inference/runtime';
+import type { ModelKey } from '../types';
+import { useRuntimeState } from './useRuntime';
 
 export function useEmbedding(modelKey: ModelKey) {
-  const [state, setState] = useState<EmbeddingState>({
-    loading: false,
-    ready: false,
-    error: null,
-  });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const pipelineRef = useRef<any>(null);
-  const setBackend = useBackendStore((s) => s.setBackend);
-  const setModelLoadMs = useBackendStore((s) => s.setModelLoadMs);
+  const runtime = useRuntimeState();
 
-  const init = useCallback(async () => {
-    setState({ loading: true, ready: false, error: null });
-    const startedAt = performance.now();
-    try {
-      const preferred: Backend = (await detectBackend()) ?? 'wasm';
-      const { pipeline, backend } = await loadModelWithFallback(modelKey, preferred);
-      pipelineRef.current = pipeline;
-      setBackend(backend, backend === 'wasm' ? '未检测到 WebGPU 或初始化失败' : undefined);
-      setModelLoadMs(Math.round(performance.now() - startedAt));
-      setState({ loading: false, ready: true, error: null });
-    } catch (err) {
-      setModelLoadMs(null);
-      setState({
-        loading: false,
-        ready: false,
-        error: (err as Error).message,
-      });
-    }
-  }, [modelKey, setBackend, setModelLoadMs]);
-
+  // 模型切换 / 全局重载时确保运行时已开始加载
   useEffect(() => {
-    pipelineRef.current = null;
-    init();
-  }, [init]);
+    void ensureRuntime(modelKey).catch((err) => {
+      if (isRuntimeSupersededError(err)) return;
+      // 错误已通过运行时状态暴露给 UI，这里只做调试输出
+      console.debug('[embedding] 模型加载失败', err);
+    });
+  }, [modelKey, runtime.generation]);
 
   const embed = useCallback(
     async (texts: string[]): Promise<number[][]> => {
-      if (!pipelineRef.current || pipelineRef.current.kind !== 'text') {
-        throw new Error('embedding pipeline 未就绪');
+      const loaded = await ensureRuntime(modelKey);
+      if (loaded.pipeline.kind !== 'text') {
+        throw new Error('当前模型不是文本 embedding 管线');
       }
-      return pipelineRef.current.extract(texts);
+      return loaded.pipeline.extract(texts);
     },
-    [],
+    [modelKey, runtime.generation],
   );
 
-  return { ...state, embed, reload: init };
+  const loading = runtime.status === 'loading' && runtime.modelKey === modelKey;
+  const ready = runtime.status === 'ready' && runtime.modelKey === modelKey;
+  const error =
+    runtime.status === 'error' && runtime.modelKey === modelKey ? runtime.error : null;
+
+  return {
+    loading,
+    ready,
+    error,
+    embed,
+    reload: reloadRuntime,
+    backend: ready ? runtime.backend : runtime.preferredBackend,
+    dtype: runtime.dtype,
+  };
 }

@@ -3,12 +3,12 @@ import { isTextLike } from '../utils/fileReader';
 import { useIngestText } from '../hooks/useIngest';
 import { useKbStore } from '../store/kbStore';
 import { useModelStore } from '../store/modelStore';
+import { defaultCollectionName } from '../inference/models';
+import { getRuntimeConfig } from '../config/runtimeConfig';
+import type { IngestOutcome } from '../ingest/ingestText';
+import type { CollectionSummary } from '../types';
 
 const STEPS = ['拖入文件', '读取中', '向量化', '写入 DB', '完成'];
-
-function defaultCollectionName(modelKey: string): string {
-  return modelKey === 'text_en' ? 'kb_text_en' : 'kb_text_zh';
-}
 
 function StepIcon({ status }: { status: string }) {
   if (status === 'done') {
@@ -45,25 +45,47 @@ function statusStep(s: string): number {
   }
 }
 
+function formatMs(ms: number): string {
+  return ms >= 1000 ? `${(ms / 1000).toFixed(2)}s` : `${Math.round(ms)}ms`;
+}
+
 export function IngestPanel() {
   const modelKey = useModelStore((s) => s.modelKey);
   const dim = useModelStore((s) => s.dim);
+  const collections = useKbStore((s) => s.collections);
+  const activeCollection = useKbStore((s) => s.activeCollection);
   const [collectionName, setCollectionName] = useState<string>(defaultCollectionName(modelKey));
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);
   const { ingestFiles, ready, error: modelError, reload } = useIngestText();
   const ingestStatus = useKbStore((s) => s.ingestStatus);
   const progress = useKbStore((s) => s.ingestProgress);
+  const setActiveCollection = useKbStore((s) => s.setActiveCollection);
   const [error, setError] = useState<string | null>(null);
+  const [lastOutcome, setLastOutcome] = useState<IngestOutcome | null>(null);
+  const config = getRuntimeConfig();
 
   const isActive =
     ingestStatus === 'reading' || ingestStatus === 'embedding' || ingestStatus === 'writing';
+
+  // 当前模型对应的已有集合（下拉快速选择 / 覆盖导入）
+  const textCollections = Object.values(collections).filter(
+    (c: CollectionSummary) => c.modality === 'text' && c.modelKey === modelKey,
+  );
 
   // 切换模型时同步默认集合名，避免把新模型的向量写进旧集合（维度不匹配）
   useEffect(() => {
     setCollectionName(defaultCollectionName(modelKey));
     setError(null);
+    setLastOutcome(null);
   }, [modelKey]);
+
+  // 从检索面板切换集合后，导入面板跟随（导入成功也会设为 active）
+  useEffect(() => {
+    if (activeCollection && collections[activeCollection]?.modelKey === modelKey) {
+      setCollectionName(activeCollection);
+    }
+  }, [activeCollection, collections, modelKey]);
 
   const onFiles = useCallback(
     async (files: File[]) => {
@@ -74,13 +96,18 @@ export function IngestPanel() {
         return;
       }
       setError(null);
+      setLastOutcome(null);
+      const target = collectionName.trim() || defaultCollectionName(modelKey);
       try {
-        await ingestFiles(filtered, collectionName.trim() || defaultCollectionName(modelKey));
+        const outcome = await ingestFiles(filtered, target);
+        setLastOutcome(outcome);
+        setCollectionName(outcome.collectionName);
+        setActiveCollection(outcome.collectionName);
       } catch (e) {
         setError((e as Error).message);
       }
     },
-    [ingestFiles, collectionName, modelKey, isActive],
+    [ingestFiles, collectionName, modelKey, isActive, setActiveCollection],
   );
 
   const step = statusStep(ingestStatus);
@@ -109,16 +136,46 @@ export function IngestPanel() {
         </span>
       </div>
 
-      {/* Collection name */}
-      <div className="mb-5 flex items-center gap-3">
+      {/* Collection name + existing collections */}
+      <div className="mb-2 flex flex-wrap items-center gap-3">
         <label className="shrink-0 text-sm text-slate-500">集合名</label>
         <input
           value={collectionName}
           onChange={(e) => setCollectionName(e.target.value)}
           disabled={isActive}
-          className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100 disabled:text-slate-400"
+          className="min-w-[220px] flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 transition-colors focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100 disabled:text-slate-400"
           placeholder={defaultCollectionName(modelKey)}
         />
+        {textCollections.length > 0 && (
+          <select
+            value={textCollections.some((c) => c.name === collectionName) ? collectionName : ''}
+            onChange={(e) => { if (e.target.value) setCollectionName(e.target.value); }}
+            disabled={isActive}
+            className="w-48 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 font-mono text-sm text-slate-700 transition-colors focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100 disabled:text-slate-400"
+            title="选择已有集合（重复导入会按 chunk id upsert）"
+          >
+            <option value="">选择已有集合…</option>
+            {textCollections.map((c) => (
+              <option key={c.name} value={c.name}>{c.name}</option>
+            ))}
+          </select>
+        )}
+      </div>
+
+      {/* 运行时导入配置（?batch= / ?refresh=） */}
+      <div className="mb-5 flex flex-wrap items-center gap-2 text-xs text-slate-400">
+        <span className="rounded-lg bg-slate-100 px-2.5 py-1 font-mono text-slate-600">
+          batch={config.batch}
+        </span>
+        <span className="rounded-lg bg-slate-100 px-2.5 py-1 font-mono text-slate-600">
+          refresh={config.refresh === 'last' ? 'last（仅最后一批刷新索引）' : 'each（每批刷新索引）'}
+        </span>
+        {config.perf && (
+          <span className="rounded-lg bg-indigo-50 px-2.5 py-1 font-mono text-indigo-600">
+            perf=1（已开启观测）
+          </span>
+        )}
+        <span className="text-slate-400">· 可用 URL 参数覆盖</span>
       </div>
 
       {/* Drop zone */}
@@ -141,7 +198,10 @@ export function IngestPanel() {
         <p className="mb-2 text-base font-medium text-slate-700">
           {dragOver ? '放开以导入' : '拖拽 .txt / .md 文件到此处'}
         </p>
-        <p className="mb-5 text-sm text-slate-400">或</p>
+        <p className="mb-1 text-sm text-slate-400">或</p>
+        <p className="mb-5 text-sm text-slate-400">
+          可先用仓库 <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-slate-500">data/demo</code> 中的示例文档试用
+        </p>
         <button
           type="button"
           onClick={() => {
@@ -234,10 +294,36 @@ export function IngestPanel() {
             <span className="text-slate-600">
               {ingestStatus === 'reading' ? '正在读取文件…' :
                ingestStatus === 'embedding' ? '端侧向量化中…' :
-               ingestStatus === 'writing' ? '正在写入 SeekDB…' : '已完成'}
+               ingestStatus === 'writing' ? '正在写入 SeekDB（含索引刷新/陈旧分块清理）…' : '已完成'}
             </span>
             <span className="font-mono text-slate-500">{progress.done} / {progress.total}</span>
           </div>
+
+          {/* 导入结果：模式 + 分段耗时 */}
+          {lastOutcome && (
+            <div className="mt-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-600">
+                <span className="font-medium text-slate-800">{lastOutcome.collectionName}</span>
+                <span className={`rounded-md px-2 py-0.5 text-xs font-semibold ${lastOutcome.mode === 'insert' ? 'bg-emerald-50 text-emerald-700' : 'bg-indigo-50 text-indigo-700'}`}>
+                  mode={lastOutcome.mode}
+                </span>
+                <span className="text-slate-500">{lastOutcome.count} 条分块</span>
+                {lastOutcome.created && <span className="text-emerald-600">新建集合</span>}
+                {lastOutcome.refreshed && <span className="text-slate-500">索引已刷新</span>}
+                {lastOutcome.cleanupDeleted > 0 && (
+                  <span className="text-slate-500">清理陈旧 {lastOutcome.cleanupDeleted} 条</span>
+                )}
+              </div>
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-slate-500">
+                <span>读取 {formatMs(lastOutcome.times.readMs)}</span>
+                <span>分块 {formatMs(lastOutcome.times.chunkMs)}</span>
+                <span>向量化 {formatMs(lastOutcome.times.embedMs)}</span>
+                <span>写入 {formatMs(lastOutcome.times.writeMs)}</span>
+                <span>索引刷新 {formatMs(lastOutcome.times.refreshMs)}</span>
+                <span className="text-slate-700">总计 {formatMs(lastOutcome.times.totalMs)}</span>
+              </div>
+            </div>
+          )}
         </div>
       )}
 

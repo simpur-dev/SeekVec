@@ -21,7 +21,10 @@ export function ModelBadge() {
             <button
               key={k}
               disabled={k === 'image'}
-              onClick={() => !isActive && setModelKey(k)}
+              onClick={() => {
+                if (k === 'image') return; // v1.1 待启用
+                if (!isActive) setModelKey(k);
+              }}
               className={clsx(
                 'flex items-center gap-2 px-4 py-2 transition-all',
                 isActive

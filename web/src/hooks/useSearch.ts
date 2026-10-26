@@ -1,81 +1,106 @@
 /**
- * 双集合混合检索流程：
- *   - 文本集合：当前选中模型对应的 collection；按 query embedding + 可选 keyword 走 hybridSearch
- *   - 图片集合（v1.1，暂未启用）：按 IMAGE_PIPELINE_ENABLED 开关跳过
+ * 文本检索流程（图片管线 v1.1 预留）
+ *
+ * 集合选择（契约第 4 节）：
+ * - 只读 kbStore.activeCollection；不存在/维度不符时回退约定命名并提示（不再按命名盲猜）
+ * - 回退/失效提示通过 searchStore.collectionNotice 以警示条展示
+ *
+ * 耗时口径：
+ * - embeddingMs：端侧向量化
+ * - latencyMs / httpMs：/api/search HTTP 往返
+ * - dbMs：server timings.dbMs（SeekDB 库内）
+ * - e2eMs：从发起检索到结果渲染完成（双 rAF）
  *
  * 不在客户端做跨空间分数拼合——文本/图片结果分区展示。
- *
  * 分数语义由 server 决定：纯向量返回 distance（越小越相关），
  * 混合检索返回 RRF score（越大越相关），ResultCard 按 metric 分别展示。
  */
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { search } from '../db/api';
 import { detectBackend } from '../inference/backend';
 import { IMAGE_PIPELINE_ENABLED } from '../inference/models';
 import { useModelStore } from '../store/modelStore';
 import { useKbStore } from '../store/kbStore';
 import { useSearchStore } from '../store/searchStore';
+import { resolveSearchCollection } from '../store/collectionSelection';
+import { runTextSearch } from '../search/textSearch';
+import { afterNextPaint } from '../utils/perf';
+import { recordPerf } from '../perf/metrics';
 import { useEmbedding } from './useEmbedding';
-import { timed } from '../utils/perf';
 import type { CollectionSummary } from '../types';
 
 export function useSearch() {
   const modelKey = useModelStore((s) => s.modelKey);
-  const dim = useModelStore((s) => s.dim);
   const collections = useKbStore((s) => s.collections);
+  const activeCollection = useKbStore((s) => s.activeCollection);
+  const setActiveCollection = useKbStore((s) => s.setActiveCollection);
   const setSearching = useSearchStore((s) => s.setSearching);
   const setTextResults = useSearchStore((s) => s.setTextResults);
   const setImageResults = useSearchStore((s) => s.setImageResults);
   const setError = useSearchStore((s) => s.setError);
+  const setCollectionNotice = useSearchStore((s) => s.setCollectionNotice);
   const resetResults = useSearchStore((s) => s.reset);
 
-  // 当前文本模型的 pipeline
-  const { embed, ready, error: modelError, reload } = useEmbedding(modelKey);
+  const { embed, ready, error: modelError, reload, backend, dtype } = useEmbedding(modelKey);
+
+  // 当前模型对应的目标集合（activeCollection 失效时回退约定命名）
+  const resolution = useMemo(
+    () => resolveSearchCollection(collections, activeCollection, modelKey),
+    [collections, activeCollection, modelKey],
+  );
 
   // 切换模型时清空旧结果，避免展示上一模型的检索内容
   useEffect(() => {
     resetResults();
   }, [modelKey, resetResults]);
 
-  const runTextSearch = useCallback(
-    async (query: string, keyword: string, nResults: number) => {
-      // 优先用约定命名的集合；刷新后依赖 useCollections 回填的清单
-      const expectedName = modelKey === 'text_en' ? 'kb_text_en' : 'kb_text_zh';
-      const byName = collections[expectedName];
-      const textColl: CollectionSummary | undefined =
-        byName && byName.modality === 'text' && byName.dimension === dim
-          ? byName
-          : Object.values(collections).find(
-              (c) => c.modality === 'text' && c.modelKey === modelKey && c.dimension === dim,
-            );
+  // 集合提示：active 失效但存在可用回退集合时展示警示条；
+  // activeCollection 为空（首次启动）时自动选中回退集合
+  useEffect(() => {
+    setCollectionNotice(resolution.collection ? resolution.notice : null);
+    if (resolution.collection && activeCollection === null) {
+      setActiveCollection(resolution.collection.name);
+    }
+  }, [resolution, activeCollection, setActiveCollection, setCollectionNotice]);
 
-      if (!textColl) {
-        // 不再静默返回：把原因带到 UI
-        const notice =
-          byName && byName.dimension !== dim
-            ? `集合 ${expectedName} 的维度是 ${byName.dimension}d，与当前模型（${dim}d）不一致，请切换模型或重新导入`
-            : `未找到文本集合 ${expectedName}，请先在「导入文本」中导入文档`;
+  const runTextSearchTask = useCallback(
+    async (query: string, keyword: string, nResults: number) => {
+      if (!resolution.collection) {
         setTextResults({
-          collectionName: expectedName,
+          collectionName: resolution.name,
           hits: [],
           latencyMs: 0,
           metric: 'distance',
-          notice,
+          mode: 'vector',
+          notice: resolution.notice ?? '未找到可用的文本集合，请先在「导入文本」中导入文档',
         });
         return;
       }
 
-      // 端侧向量化耗时单独计量（赛题性能展示用）
-      const { value: vectors, ms: embeddingMs } = await timed('embed-query', () => embed([query]));
-      const result = await search({
-        collectionName: textColl.name,
-        queryEmbedding: vectors[0],
-        nResults,
+      const outcome = await runTextSearch({
+        collectionName: resolution.collection.name,
+        query,
         keyword: keyword || undefined,
+        nResults,
+        embed,
+        modelKey,
+        backend,
+        dtype,
       });
-      setTextResults({ ...result, embeddingMs });
+      const result = outcome.result;
+      // 先渲染结果，再计算「端到端 = 到结果渲染完成」并回填
+      setTextResults(result);
+      await afterNextPaint();
+      const e2eMs = Math.max(0, Math.round(performance.now() - outcome.startedAt));
+      recordPerf('query.e2e', e2eMs, {
+        modelKey,
+        backend: backend ?? undefined,
+        dtype: dtype ?? undefined,
+        meta: { mode: result.mode ?? null, hits: result.hits.length },
+      });
+      setTextResults({ ...result, e2eMs });
     },
-    [collections, modelKey, dim, embed, setTextResults],
+    [resolution, embed, modelKey, backend, dtype, setTextResults],
   );
 
   const runImageSearch = useCallback(
@@ -85,7 +110,9 @@ export function useSearch() {
         setImageResults(null);
         return;
       }
-      const imageColl = Object.values(collections).find((c) => c.modality === 'image');
+      const imageColl = Object.values(collections).find(
+        (c: CollectionSummary) => c.modality === 'image',
+      );
       if (!imageColl) {
         setImageResults(null);
         return;
@@ -93,8 +120,10 @@ export function useSearch() {
       try {
         const { loadModelWithFallback } = await import('../inference/pipeline');
         // 与文本管线一致：先探测实际可用后端，而不是硬编码 webgpu
-        const preferred = await detectBackend();
-        const { pipeline } = await loadModelWithFallback('image', preferred);
+        const probe = await detectBackend();
+        const { pipeline } = await loadModelWithFallback('image', probe.backend, {
+          allowFallback: !probe.forced,
+        });
         if (pipeline.kind !== 'image') throw new Error('CLIP pipeline 不可用');
         const vectors = await pipeline.textTower([query]);
         const result = await search({
@@ -122,7 +151,7 @@ export function useSearch() {
       setError(null);
       try {
         await Promise.all([
-          runTextSearch(query, keyword, nResults),
+          runTextSearchTask(query, keyword, nResults),
           runImageSearch(query, nResults),
         ]);
       } catch (err) {
@@ -132,8 +161,15 @@ export function useSearch() {
         setSearching(false);
       }
     },
-    [ready, runTextSearch, runImageSearch, setSearching, setError],
+    [ready, runTextSearchTask, runImageSearch, setSearching, setError],
   );
 
-  return { searchAll, ready, error: modelError, reload };
+  return {
+    searchAll,
+    ready,
+    error: modelError,
+    reload,
+    /** 当前检索目标集合（null=不可用） */
+    targetCollection: resolution.collection,
+  };
 }
