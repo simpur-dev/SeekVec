@@ -73,7 +73,7 @@ async function main() {
       const admin = new SeekdbAdminClient({ host: HOST, port: PORT, user: USER, password: PASSWORD });
       try {
         await admin.createDatabase(DB_NAME);
-        console.log('[probe] ✓ createDatabase(seekvec)');
+        console.log(`[probe] ✓ createDatabase(${DB_NAME})`);
       } catch (err) {
         const msg = err.message ?? String(err);
         if (msg.toLowerCase().includes('already exists')) {

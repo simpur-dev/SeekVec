@@ -23,6 +23,8 @@
 
 ## 3. 常用命令
 
+> 复现 fp32 基线或完整矩阵前，先补齐 fp32 权重：`node scripts/fetch-models.mjs --dtype all`（默认 `prepare:assets` 只有 q8/fp16）。
+
 ```bash
 # 前置：dev server（5173）与 seekdb 运行；data/perf 语料已生成；npm run prepare:assets 已执行
 npm run bench:browser -- --backend wasm --dtype q8 --batch 16 --refresh last --runs 5 --warmup 1

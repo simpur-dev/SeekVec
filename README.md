@@ -63,6 +63,8 @@ npm run dev:docker
 | 从零复现 | [`docs/复现.md`](docs/复现.md) |
 | 模型与量化说明 | [`docs/模型与量化.md`](docs/模型与量化.md) |
 
+> 默认 `prepare:assets` 只准备运行时需要的 q8/fp16（因此 `acceptance` 对缺失的 fp32 只给 WARN，属正常）。复现 fp32 基线、完整性能矩阵或浏览器质量评测前，先执行 `node scripts/fetch-models.mjs --dtype all` 补齐 fp32。
+
 ## 常用命令
 
 ```bash
