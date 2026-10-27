@@ -1,0 +1,17 @@
+{
+  "steps": [
+    {
+      "step": "cancelled",
+      "ok": false,
+      "error": "导入已取消"
+    },
+    {
+      "step": "reload_then_retry",
+      "ok": true,
+      "collectionListedAfterRetry": true,
+      "count": 1,
+      "hits": 1,
+      "modelDisabled": false
+    }
+  ]
+}
