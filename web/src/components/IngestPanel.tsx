@@ -6,6 +6,7 @@ import { useModelStore } from '../store/modelStore';
 import { defaultCollectionName } from '../inference/models';
 import { getRuntimeConfig } from '../config/runtimeConfig';
 import type { IngestOutcome } from '../ingest/ingestText';
+import { cancelIngest, isIngestCancelled } from '../ingest/ingestText';
 import type { CollectionSummary } from '../types';
 
 const STEPS = ['拖入文件', '读取中', '向量化', '写入 DB', '完成'];
@@ -104,6 +105,10 @@ export function IngestPanel() {
         setCollectionName(outcome.collectionName);
         setActiveCollection(outcome.collectionName);
       } catch (e) {
+        if (isIngestCancelled(e)) {
+          setError('导入已取消；已写入的数据已补偿刷新，可重新导入');
+          return;
+        }
         setError((e as Error).message);
       }
     },
@@ -296,7 +301,18 @@ export function IngestPanel() {
                ingestStatus === 'embedding' ? '端侧向量化中…' :
                ingestStatus === 'writing' ? '正在写入 SeekDB（含索引刷新/陈旧分块清理）…' : '已完成'}
             </span>
-            <span className="font-mono text-slate-500">{progress.done} / {progress.total}</span>
+            <span className="flex items-center gap-3">
+              <span className="font-mono text-slate-500">{progress.done} / {progress.total}</span>
+              {isActive && (
+                <button
+                  type="button"
+                  onClick={() => cancelIngest()}
+                  className="rounded-lg border border-amber-300 bg-white px-3 py-1 text-sm text-amber-700 hover:bg-amber-50"
+                >
+                  取消导入
+                </button>
+              )}
+            </span>
           </div>
 
           {/* 导入结果：模式 + 分段耗时 */}

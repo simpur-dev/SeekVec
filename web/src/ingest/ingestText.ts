@@ -80,6 +80,7 @@ interface ChunkRecord {
 const MAX_DELETE_IDS = 512;
 
 let busy = false;
+let activeController: AbortController | null = null;
 
 /**
  * 索引刷新脏标记（per collection）。
@@ -130,6 +131,27 @@ export function isIngestBusy(): boolean {
   return busy;
 }
 
+/** 用户主动取消导入（不强行中断已发出的 HTTP 请求，按阶段检查点退出并补偿刷新） */
+export function cancelIngest(): void {
+  activeController?.abort();
+}
+
+/** 导入取消错误（与网络/DB 失败区分） */
+export class IngestCancelledError extends Error {
+  constructor() {
+    super('导入已取消');
+    this.name = 'IngestCancelledError';
+  }
+}
+
+export function isIngestCancelled(err: unknown): boolean {
+  return err instanceof IngestCancelledError;
+}
+
+function throwIfCancelled(signal: AbortSignal): void {
+  if (signal.aborted) throw new IngestCancelledError();
+}
+
 function createTimes(): IngestTimes {
   return {
     readMs: 0,
@@ -153,6 +175,9 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
   if (busy) throw new Error('已有导入任务进行中，请等待完成');
 
   busy = true;
+  const controller = new AbortController();
+  activeController = controller;
+  const signal = controller.signal;
   const times = createTimes();
   const startedAt = performance.now();
   let wroteAnyBatch = false;
@@ -171,6 +196,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     const idsBySource = new Map<string, Set<string>>();
 
     for (let i = 0; i < files.length; i++) {
+      throwIfCancelled(signal);
       const file = files[i];
       const readStart = performance.now();
       const text = await readTextFile(file);
@@ -212,6 +238,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
 
     // ── 2) 确保集合存在 ─────────────────────────────────────────
     const ensured = await ensureCollection(collectionName, modelKey);
+    throwIfCancelled(signal);
     collectionReady = true;
     created = Boolean(ensured.created);
     // ensureCollection 返回 number，窄化为模型维度类型
@@ -277,6 +304,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     const vectorsById = new Map<string, number[]>();
     let embedded = 0;
     for (let b = 0; b < embedBatches.length; b++) {
+      throwIfCancelled(signal);
       const batchItems = embedBatches[b];
       const embedStart = performance.now();
       const batchVectors = await embed(batchItems.map((item) => item.chunk.text));
@@ -310,6 +338,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     onStatus?.('writing', { total: totalChunks, done: skippedUnchanged });
     let written = 0;
     for (let b = 0; b < writeBatches.length; b++) {
+      throwIfCancelled(signal);
       const batchItems = writeBatches[b];
       const shouldRefresh = refresh === 'each' || (b === writeBatches.length - 1 && !deferRefreshToCleanup);
       const writeStart = performance.now();
@@ -370,6 +399,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     onStatus?.('writing', { total: totalChunks, done: totalChunks });
     const cleanupStart = performance.now();
     if (!created) {
+      throwIfCancelled(signal);
       let allItems = existingItems;
       if (!allItems) {
         try {
@@ -425,6 +455,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       }
     }
     times.cleanupMs = performance.now() - cleanupStart;
+    throwIfCancelled(signal);
 
     // 有陈旧分块被删除时补一次索引刷新，保证删除在索引中生效（检索不再返回旧 id）。
     // 若写入末批因「预计有清理」而推迟刷新，但清理实际未删掉任何行（例如删除失败），
@@ -473,6 +504,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     // 上一次导入写入成功但刷新失败：即使本次内容完全相同（无写入/无清理），
     // 也必须补一次刷新，否则部分数据可能永久不可检索。
     if (refreshWasPending && !refreshed) {
+      throwIfCancelled(signal);
       try {
         const retryRefreshStart = performance.now();
         const retryRefresh = await refreshCollection(collectionName);
@@ -494,6 +526,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     markRefreshClean(collectionName);
 
     // ── 6) 收尾：计数 / 登记 / 设 active ────────────────────────
+    throwIfCancelled(signal);
     const total = await getCount(collectionName);
     times.totalMs = performance.now() - startedAt;
     useKbStore.getState().setCount(collectionName, total);
@@ -532,7 +565,11 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       cleanupDeleted,
     };
   } catch (err) {
-    if (collectionReady && !refreshed) markRefreshDirty(collectionName);
+    const cancelled = isIngestCancelled(err);
+    // 取消后若已写入部分数据，同样做补偿刷新，保证已提交的数据可检索。
+    if (collectionReady && !refreshed && (wroteAnyBatch || !cancelled)) {
+      markRefreshDirty(collectionName);
+    }
     // 失败补偿：已有写入时尝试刷新索引，让已写入的数据仍可被检索
     if (wroteAnyBatch) {
       try {
@@ -549,11 +586,17 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     recordPerf('ingest.total', performance.now() - startedAt, {
       batchSize,
       refreshPolicy: refresh,
-      meta: { failed: true, error: (err as Error).message, count: wroteCount },
+      meta: {
+        failed: !cancelled,
+        cancelled,
+        error: (err as Error).message,
+        count: wroteCount,
+      },
     });
-    onStatus?.('error');
+    onStatus?.(cancelled ? 'idle' : 'error');
     throw err;
   } finally {
+    if (activeController === controller) activeController = null;
     busy = false;
   }
 }
