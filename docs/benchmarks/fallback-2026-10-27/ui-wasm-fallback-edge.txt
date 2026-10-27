@@ -1,0 +1,10 @@
+{
+  "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+  "secure": true,
+  "gpu": "object",
+  "backendText": [
+    "WASM · 0.3s",
+    "· 未获取到 WebGPU 适配器，已降级 WASM"
+  ],
+  "bodySnippet": "SeekVec\n端侧向量化 · SeekDB 检索\n文本检索\n图片管线\nv1.1\nWASM · 0.3s\n· 未获取到 WebGPU 适配器，已降级 WASM\n模型\n英文\n384d\n中文\n512d\n图片\n512d\nXenova/bge-small-zh-v1.5\nXenova/bge-small-zh-v1.5\n512d\n1 集合\n4\n分块\n状态\n空闲\n导入文本\n\n浏览器本地向量化 · 512 维 · SeekDB 存储\n\n空闲\n集合名\n选择已有集合…\nkb_text_zh\nbatch=32\nrefresh=last（写入末批刷新；清理或失败时补偿刷新）\n· 可用 URL 参数覆盖\n\n拖拽 .txt / .md 文件到此处\n\n或\n\n可先用仓库 data/demo 中的示例文档试用\n\n选择文件\n\n支持 .txt、.md；其他格式自动过滤\n\n语义检索\n\n向量相似度 + 全文关键字 · RRF 融合\n\n检索\n集合\n（请选择集合）\nkb_text_zh\n关键字\ntop-K\n文本结果\n\n向量检索 · 相似度 = 1 - cosine 距离\n\n输入查询并点击检索\n\n图片结果\n\n图片管线 v1.1 "
+}

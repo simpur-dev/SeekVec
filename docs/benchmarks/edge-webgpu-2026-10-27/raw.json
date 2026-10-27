@@ -1,0 +1,4575 @@
+{
+  "schemaVersion": 1,
+  "tool": "scripts/bench-browser.mjs",
+  "runId": "browser-webgpu-fp16-20261027-222632",
+  "generatedAt": "2026-10-27T14:26:35.843Z",
+  "command": "node scripts/bench-browser.mjs --browser-path C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --backend webgpu --dtype fp16 --runs 1 --warmup 0 --out docs/benchmarks/edge-webgpu-2026-10-27 --collection bench_edge_webgpu",
+  "mode": "eval",
+  "config": {
+    "baseUrl": "http://localhost:5173",
+    "apiUrl": "http://localhost:5173",
+    "backend": "webgpu",
+    "dtype": "fp16",
+    "batch": null,
+    "refresh": null,
+    "models": null,
+    "runs": 1,
+    "warmup": 0,
+    "cold": false,
+    "out": "docs\\benchmarks\\edge-webgpu-2026-10-27",
+    "corpus": "data\\perf\\corpus",
+    "queries": "data\\perf\\queries.txt",
+    "collection": "bench_edge_webgpu",
+    "timeoutMs": 300000
+  },
+  "browser": {
+    "executablePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "source": "--browser-path / BROWSER_PATH",
+    "userDataDir": "E:\\2026ob_projects\\SeekVec\\scripts\\.cache\\bench-profile\\profile-msedge.exe",
+    "version": "Edg/156.0.4314.42"
+  },
+  "environment": {
+    "node": "v24.11.1",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 28,
+    "totalMemMB": 16160,
+    "hostname": "LAPTOP-B1VCC01U"
+  },
+  "page": {
+    "perfEnv": {
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "platform": "win32",
+      "hardwareConcurrency": 28,
+      "deviceMemory": 16,
+      "gpuAdapter": {
+        "vendor": "nvidia",
+        "architecture": "lovelace"
+      },
+      "backend": "webgpu",
+      "backendReason": null,
+      "model": {
+        "key": "text_zh",
+        "id": "Xenova/bge-small-zh-v1.5",
+        "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+        "dtype": "fp16"
+      }
+    }
+  },
+  "corpus": {
+    "count": 120,
+    "totalChars": 15856,
+    "names": [
+      "data/perf/corpus/perf-0001.md",
+      "data/perf/corpus/perf-0002.md",
+      "data/perf/corpus/perf-0003.md",
+      "data/perf/corpus/perf-0004.md",
+      "data/perf/corpus/perf-0005.md",
+      "data/perf/corpus/perf-0006.md",
+      "data/perf/corpus/perf-0007.md",
+      "data/perf/corpus/perf-0008.md",
+      "data/perf/corpus/perf-0009.md",
+      "data/perf/corpus/perf-0010.md",
+      "data/perf/corpus/perf-0011.md",
+      "data/perf/corpus/perf-0012.md",
+      "data/perf/corpus/perf-0013.md",
+      "data/perf/corpus/perf-0014.md",
+      "data/perf/corpus/perf-0015.md",
+      "data/perf/corpus/perf-0016.md",
+      "data/perf/corpus/perf-0017.md",
+      "data/perf/corpus/perf-0018.md",
+      "data/perf/corpus/perf-0019.md",
+      "data/perf/corpus/perf-0020.md",
+      "data/perf/corpus/perf-0021.md",
+      "data/perf/corpus/perf-0022.md",
+      "data/perf/corpus/perf-0023.md",
+      "data/perf/corpus/perf-0024.md",
+      "data/perf/corpus/perf-0025.md",
+      "data/perf/corpus/perf-0026.md",
+      "data/perf/corpus/perf-0027.md",
+      "data/perf/corpus/perf-0028.md",
+      "data/perf/corpus/perf-0029.md",
+      "data/perf/corpus/perf-0030.md",
+      "data/perf/corpus/perf-0031.md",
+      "data/perf/corpus/perf-0032.md",
+      "data/perf/corpus/perf-0033.md",
+      "data/perf/corpus/perf-0034.md",
+      "data/perf/corpus/perf-0035.md",
+      "data/perf/corpus/perf-0036.md",
+      "data/perf/corpus/perf-0037.md",
+      "data/perf/corpus/perf-0038.md",
+      "data/perf/corpus/perf-0039.md",
+      "data/perf/corpus/perf-0040.md",
+      "data/perf/corpus/perf-0041.md",
+      "data/perf/corpus/perf-0042.md",
+      "data/perf/corpus/perf-0043.md",
+      "data/perf/corpus/perf-0044.md",
+      "data/perf/corpus/perf-0045.md",
+      "data/perf/corpus/perf-0046.md",
+      "data/perf/corpus/perf-0047.md",
+      "data/perf/corpus/perf-0048.md",
+      "data/perf/corpus/perf-0049.md",
+      "data/perf/corpus/perf-0050.md",
+      "data/perf/corpus/perf-0051.md",
+      "data/perf/corpus/perf-0052.md",
+      "data/perf/corpus/perf-0053.md",
+      "data/perf/corpus/perf-0054.md",
+      "data/perf/corpus/perf-0055.md",
+      "data/perf/corpus/perf-0056.md",
+      "data/perf/corpus/perf-0057.md",
+      "data/perf/corpus/perf-0058.md",
+      "data/perf/corpus/perf-0059.md",
+      "data/perf/corpus/perf-0060.md",
+      "data/perf/corpus/perf-0061.md",
+      "data/perf/corpus/perf-0062.md",
+      "data/perf/corpus/perf-0063.md",
+      "data/perf/corpus/perf-0064.md",
+      "data/perf/corpus/perf-0065.md",
+      "data/perf/corpus/perf-0066.md",
+      "data/perf/corpus/perf-0067.md",
+      "data/perf/corpus/perf-0068.md",
+      "data/perf/corpus/perf-0069.md",
+      "data/perf/corpus/perf-0070.md",
+      "data/perf/corpus/perf-0071.md",
+      "data/perf/corpus/perf-0072.md",
+      "data/perf/corpus/perf-0073.md",
+      "data/perf/corpus/perf-0074.md",
+      "data/perf/corpus/perf-0075.md",
+      "data/perf/corpus/perf-0076.md",
+      "data/perf/corpus/perf-0077.md",
+      "data/perf/corpus/perf-0078.md",
+      "data/perf/corpus/perf-0079.md",
+      "data/perf/corpus/perf-0080.md",
+      "data/perf/corpus/perf-0081.md",
+      "data/perf/corpus/perf-0082.md",
+      "data/perf/corpus/perf-0083.md",
+      "data/perf/corpus/perf-0084.md",
+      "data/perf/corpus/perf-0085.md",
+      "data/perf/corpus/perf-0086.md",
+      "data/perf/corpus/perf-0087.md",
+      "data/perf/corpus/perf-0088.md",
+      "data/perf/corpus/perf-0089.md",
+      "data/perf/corpus/perf-0090.md",
+      "data/perf/corpus/perf-0091.md",
+      "data/perf/corpus/perf-0092.md",
+      "data/perf/corpus/perf-0093.md",
+      "data/perf/corpus/perf-0094.md",
+      "data/perf/corpus/perf-0095.md",
+      "data/perf/corpus/perf-0096.md",
+      "data/perf/corpus/perf-0097.md",
+      "data/perf/corpus/perf-0098.md",
+      "data/perf/corpus/perf-0099.md",
+      "data/perf/corpus/perf-0100.md",
+      "data/perf/corpus/perf-0101.md",
+      "data/perf/corpus/perf-0102.md",
+      "data/perf/corpus/perf-0103.md",
+      "data/perf/corpus/perf-0104.md",
+      "data/perf/corpus/perf-0105.md",
+      "data/perf/corpus/perf-0106.md",
+      "data/perf/corpus/perf-0107.md",
+      "data/perf/corpus/perf-0108.md",
+      "data/perf/corpus/perf-0109.md",
+      "data/perf/corpus/perf-0110.md",
+      "data/perf/corpus/perf-0111.md",
+      "data/perf/corpus/perf-0112.md",
+      "data/perf/corpus/perf-0113.md",
+      "data/perf/corpus/perf-0114.md",
+      "data/perf/corpus/perf-0115.md",
+      "data/perf/corpus/perf-0116.md",
+      "data/perf/corpus/perf-0117.md",
+      "data/perf/corpus/perf-0118.md",
+      "data/perf/corpus/perf-0119.md",
+      "data/perf/corpus/perf-0120.md"
+    ]
+  },
+  "queries": [
+    "向量索引参数如何影响检索延迟与召回率",
+    "混合检索如何把向量与全文两路结果融合排序",
+    "批量 embedding 的吞吐量如何随 batch size 变化",
+    "WebGPU 与 WASM 后端的推理速度差异",
+    "INT8 量化后模型体积与压缩比",
+    "端侧模型首次加载与预热后的耗时对比",
+    "索引刷新对文档导入总耗时的影响",
+    "中文分词器对全文检索结果的影响",
+    "量化前后 Recall@K 与 nDCG@K 的质量变化",
+    "seekdb 混合检索的端到端延迟"
+  ],
+  "runs": [
+    {
+      "index": 0,
+      "warm": true,
+      "cold": false,
+      "startedAt": "2026-10-27T14:26:33.065Z",
+      "wallMs": 2772,
+      "ingest": {
+        "count": 120,
+        "times": {
+          "readMs": 147.22500032186508,
+          "chunkMs": 1.2550000548362732,
+          "embedMs": 599.8999999761581,
+          "writeMs": 846.5600000023842,
+          "refreshMs": 603,
+          "cleanupMs": 0.004999995231628418,
+          "totalMs": 1703.425000011921
+        },
+        "wallMs": 2493
+      },
+      "queries": [
+        {
+          "query": "向量索引参数如何影响检索延迟与召回率",
+          "wallMs": 44,
+          "e2eMs": 40,
+          "mode": "vector",
+          "latencyMs": 9.48499995470047,
+          "embeddingMs": 22.894999980926514,
+          "httpMs": 9.48499995470047,
+          "dbMs": 4.44
+        },
+        {
+          "query": "混合检索如何把向量与全文两路结果融合排序",
+          "wallMs": 30,
+          "e2eMs": 28,
+          "mode": "vector",
+          "latencyMs": 10.4549999833107,
+          "embeddingMs": 9.744999945163727,
+          "httpMs": 10.4549999833107,
+          "dbMs": 2.98
+        },
+        {
+          "query": "批量 embedding 的吞吐量如何随 batch size 变化",
+          "wallMs": 30,
+          "e2eMs": 27,
+          "mode": "vector",
+          "latencyMs": 9.740000009536743,
+          "embeddingMs": 9.489999949932098,
+          "httpMs": 9.740000009536743,
+          "dbMs": 2.92
+        },
+        {
+          "query": "WebGPU 与 WASM 后端的推理速度差异",
+          "wallMs": 30,
+          "e2eMs": 27,
+          "mode": "vector",
+          "latencyMs": 9.9549999833107,
+          "embeddingMs": 10.189999997615814,
+          "httpMs": 9.9549999833107,
+          "dbMs": 3.92
+        },
+        {
+          "query": "INT8 量化后模型体积与压缩比",
+          "wallMs": 25,
+          "e2eMs": 23,
+          "mode": "vector",
+          "latencyMs": 7.620000004768372,
+          "embeddingMs": 8.964999973773956,
+          "httpMs": 7.620000004768372,
+          "dbMs": 2.69
+        },
+        {
+          "query": "端侧模型首次加载与预热后的耗时对比",
+          "wallMs": 25,
+          "e2eMs": 23,
+          "mode": "vector",
+          "latencyMs": 8.615000009536743,
+          "embeddingMs": 7.655000030994415,
+          "httpMs": 8.615000009536743,
+          "dbMs": 3.12
+        },
+        {
+          "query": "索引刷新对文档导入总耗时的影响",
+          "wallMs": 25,
+          "e2eMs": 23,
+          "mode": "vector",
+          "latencyMs": 7.3950000405311584,
+          "embeddingMs": 8.7049999833107,
+          "httpMs": 7.3950000405311584,
+          "dbMs": 2.36
+        },
+        {
+          "query": "中文分词器对全文检索结果的影响",
+          "wallMs": 25,
+          "e2eMs": 22,
+          "mode": "vector",
+          "latencyMs": 7.835000038146973,
+          "embeddingMs": 8.564999997615814,
+          "httpMs": 7.835000038146973,
+          "dbMs": 2.46
+        },
+        {
+          "query": "量化前后 Recall@K 与 nDCG@K 的质量变化",
+          "wallMs": 21,
+          "e2eMs": 18,
+          "mode": "vector",
+          "latencyMs": 8.819999992847443,
+          "embeddingMs": 6.660000026226044,
+          "httpMs": 8.819999992847443,
+          "dbMs": 2.75
+        },
+        {
+          "query": "seekdb 混合检索的端到端延迟",
+          "wallMs": 24,
+          "e2eMs": 22,
+          "mode": "vector",
+          "latencyMs": 8.055000007152557,
+          "embeddingMs": 9.215000033378601,
+          "httpMs": 8.055000007152557,
+          "dbMs": 2.52
+        }
+      ],
+      "perf": {
+        "summary": {
+          "model.download": {
+            "n": 1,
+            "p50": 108.64,
+            "p95": 108.64,
+            "mean": 108.64
+          },
+          "model.init": {
+            "n": 1,
+            "p50": 556.94,
+            "p95": 556.94,
+            "mean": 556.94
+          },
+          "model.total": {
+            "n": 1,
+            "p50": 665.58,
+            "p95": 665.58,
+            "mean": 665.58
+          },
+          "doc.read": {
+            "n": 120,
+            "p50": 0.728,
+            "p95": 3.302,
+            "mean": 1.227
+          },
+          "doc.chunk": {
+            "n": 120,
+            "p50": 0.005,
+            "p95": 0.02,
+            "mean": 0.01
+          },
+          "doc.embed": {
+            "n": 4,
+            "p50": 79.798,
+            "p95": 331.852,
+            "mean": 149.975
+          },
+          "doc.write": {
+            "n": 4,
+            "p50": 70.413,
+            "p95": 563.066,
+            "mean": 211.64
+          },
+          "index.refresh": {
+            "n": 1,
+            "p50": 603,
+            "p95": 603,
+            "mean": 603
+          },
+          "ingest.total": {
+            "n": 1,
+            "p50": 1703.425,
+            "p95": 1703.425,
+            "mean": 1703.425
+          },
+          "query.embed": {
+            "n": 10,
+            "p50": 9.09,
+            "p95": 17.178,
+            "mean": 10.208
+          },
+          "query.http": {
+            "n": 10,
+            "p50": 8.718,
+            "p95": 10.23,
+            "mean": 8.798
+          },
+          "db.search": {
+            "n": 10,
+            "p50": 2.835,
+            "p95": 4.206,
+            "mean": 3.016
+          },
+          "query.e2e": {
+            "n": 10,
+            "p50": 23,
+            "p95": 34.6,
+            "mean": 25.3
+          }
+        },
+        "summarySource": "api",
+        "summaryRaw": {
+          "schemaVersion": 1,
+          "runId": "run_mvqs3vfu_iflnb4",
+          "count": 293,
+          "phases": {
+            "model.download": {
+              "n": 1,
+              "p50": 108.64,
+              "p95": 108.64,
+              "mean": 108.64
+            },
+            "model.init": {
+              "n": 1,
+              "p50": 556.94,
+              "p95": 556.94,
+              "mean": 556.94
+            },
+            "model.total": {
+              "n": 1,
+              "p50": 665.58,
+              "p95": 665.58,
+              "mean": 665.58
+            },
+            "doc.read": {
+              "n": 120,
+              "p50": 0.728,
+              "p95": 3.302,
+              "mean": 1.227
+            },
+            "doc.chunk": {
+              "n": 120,
+              "p50": 0.005,
+              "p95": 0.02,
+              "mean": 0.01
+            },
+            "doc.embed": {
+              "n": 4,
+              "p50": 79.798,
+              "p95": 331.852,
+              "mean": 149.975
+            },
+            "doc.write": {
+              "n": 4,
+              "p50": 70.413,
+              "p95": 563.066,
+              "mean": 211.64
+            },
+            "index.refresh": {
+              "n": 1,
+              "p50": 603,
+              "p95": 603,
+              "mean": 603
+            },
+            "ingest.total": {
+              "n": 1,
+              "p50": 1703.425,
+              "p95": 1703.425,
+              "mean": 1703.425
+            },
+            "query.embed": {
+              "n": 10,
+              "p50": 9.09,
+              "p95": 17.178,
+              "mean": 10.208
+            },
+            "query.http": {
+              "n": 10,
+              "p50": 8.718,
+              "p95": 10.23,
+              "mean": 8.798
+            },
+            "db.search": {
+              "n": 10,
+              "p50": 2.835,
+              "p95": 4.206,
+              "mean": 3.016
+            },
+            "query.e2e": {
+              "n": 10,
+              "p50": 23,
+              "p95": 34.6,
+              "mean": 25.3
+            }
+          },
+          "generatedAt": 1793111195840
+        },
+        "snapshot": {
+          "schemaVersion": 1,
+          "runId": "run_mvqs3vfu_iflnb4",
+          "env": {
+            "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+            "hardwareConcurrency": 28,
+            "deviceMemory": 16,
+            "gpuAdapter": {
+              "vendor": "nvidia",
+              "architecture": "lovelace"
+            },
+            "backend": "webgpu",
+            "backendReason": null,
+            "model": {
+              "key": "text_zh",
+              "id": "Xenova/bge-small-zh-v1.5",
+              "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+              "dtype": "fp16"
+            },
+            "seekdb": {
+              "reachable": true,
+              "latencyMs": 5.52,
+              "version": "5.7.25-OceanBase seekdb-v1.4.0.0",
+              "refreshIndexSupported": true
+            }
+          },
+          "config": {
+            "backend": "webgpu",
+            "backendSource": "url",
+            "forcedBackend": "webgpu",
+            "dtype": "fp16",
+            "batch": 32,
+            "refresh": "last",
+            "threads": 8,
+            "crossOriginIsolated": true,
+            "models": "auto",
+            "perf": true,
+            "collection": "bench_edge_webgpu"
+          },
+          "events": [
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "model.download",
+              "ms": 108.64,
+              "ts": 1793111193852,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "warm": true,
+              "meta": {
+                "modelId": "Xenova/bge-small-zh-v1.5",
+                "fileCount": 4
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "model.init",
+              "ms": 556.94,
+              "ts": 1793111193852,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "warm": true,
+              "meta": {
+                "modelId": "Xenova/bge-small-zh-v1.5",
+                "fileCount": 4
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "model.total",
+              "ms": 665.58,
+              "ts": 1793111193852,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "warm": true,
+              "meta": {
+                "modelId": "Xenova/bge-small-zh-v1.5",
+                "fileCount": 4
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 9.765,
+              "ts": 1793111193865,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0001.md",
+                "bytes": 344
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.24,
+              "ts": 1793111193865,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0001.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.145,
+              "ts": 1793111193867,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0002.md",
+                "bytes": 311
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.025,
+              "ts": 1793111193867,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0002.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.365,
+              "ts": 1793111193868,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0003.md",
+                "bytes": 346
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.02,
+              "ts": 1793111193868,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0003.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.175,
+              "ts": 1793111193872,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0004.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193872,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0004.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.925,
+              "ts": 1793111193873,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0005.md",
+                "bytes": 326
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193873,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0005.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.04,
+              "ts": 1793111193874,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0006.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.02,
+              "ts": 1793111193874,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0006.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.91,
+              "ts": 1793111193875,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0007.md",
+                "bytes": 312
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.035,
+              "ts": 1793111193875,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0007.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.83,
+              "ts": 1793111193876,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0008.md",
+                "bytes": 317
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193876,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0008.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.74,
+              "ts": 1793111193877,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0009.md",
+                "bytes": 330
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193877,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0009.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.68,
+              "ts": 1793111193877,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0010.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193877,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0010.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.575,
+              "ts": 1793111193878,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0011.md",
+                "bytes": 332
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193878,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0011.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.56,
+              "ts": 1793111193879,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0012.md",
+                "bytes": 314
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193879,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0012.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.575,
+              "ts": 1793111193879,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0013.md",
+                "bytes": 341
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193879,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0013.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.53,
+              "ts": 1793111193880,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0014.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193880,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0014.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.525,
+              "ts": 1793111193880,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0015.md",
+                "bytes": 331
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193880,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0015.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.54,
+              "ts": 1793111193881,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0016.md",
+                "bytes": 302
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193881,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0016.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.59,
+              "ts": 1793111193882,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0017.md",
+                "bytes": 342
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193882,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0017.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.555,
+              "ts": 1793111193882,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0018.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193882,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0018.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.53,
+              "ts": 1793111193883,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0019.md",
+                "bytes": 339
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193883,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0019.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.58,
+              "ts": 1793111193883,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0020.md",
+                "bytes": 329
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193883,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0020.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.555,
+              "ts": 1793111193884,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0021.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193884,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0021.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.82,
+              "ts": 1793111193887,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0022.md",
+                "bytes": 291
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193887,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0022.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.405,
+              "ts": 1793111193890,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0023.md",
+                "bytes": 353
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193890,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0023.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.97,
+              "ts": 1793111193891,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0024.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193891,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0024.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.65,
+              "ts": 1793111193892,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0025.md",
+                "bytes": 323
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193892,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0025.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.615,
+              "ts": 1793111193893,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0026.md",
+                "bytes": 318
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193893,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0026.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.335,
+              "ts": 1793111193896,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0027.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.02,
+              "ts": 1793111193896,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0027.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.165,
+              "ts": 1793111193897,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0028.md",
+                "bytes": 338
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193897,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0028.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.645,
+              "ts": 1793111193898,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0029.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193898,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0029.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.645,
+              "ts": 1793111193901,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0030.md",
+                "bytes": 294
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193901,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0030.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.77,
+              "ts": 1793111193902,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0031.md",
+                "bytes": 344
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193902,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0031.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.58,
+              "ts": 1793111193902,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0032.md",
+                "bytes": 311
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193902,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0032.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.035,
+              "ts": 1793111193905,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0033.md",
+                "bytes": 346
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193905,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0033.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.92,
+              "ts": 1793111193906,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0034.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193906,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0034.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.705,
+              "ts": 1793111193907,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0035.md",
+                "bytes": 326
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193907,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0035.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.625,
+              "ts": 1793111193908,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0036.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193908,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0036.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.95,
+              "ts": 1793111193910,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0037.md",
+                "bytes": 312
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193910,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0037.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.84,
+              "ts": 1793111193911,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0038.md",
+                "bytes": 317
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193911,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0038.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.64,
+              "ts": 1793111193912,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0039.md",
+                "bytes": 330
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193912,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0039.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.965,
+              "ts": 1793111193913,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0040.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193913,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0040.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.36,
+              "ts": 1793111193915,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0041.md",
+                "bytes": 332
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.02,
+              "ts": 1793111193915,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0041.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.82,
+              "ts": 1793111193916,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0042.md",
+                "bytes": 314
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193916,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0042.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.71,
+              "ts": 1793111193917,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0043.md",
+                "bytes": 341
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193917,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0043.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.57,
+              "ts": 1793111193917,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0044.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193917,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0044.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.53,
+              "ts": 1793111193918,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0045.md",
+                "bytes": 331
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193918,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0045.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.39,
+              "ts": 1793111193921,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0046.md",
+                "bytes": 302
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.02,
+              "ts": 1793111193921,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0046.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.805,
+              "ts": 1793111193923,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0047.md",
+                "bytes": 342
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193923,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0047.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.725,
+              "ts": 1793111193926,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0048.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.025,
+              "ts": 1793111193926,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0048.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.07,
+              "ts": 1793111193927,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0049.md",
+                "bytes": 339
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193927,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0049.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.08,
+              "ts": 1793111193931,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0050.md",
+                "bytes": 329
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193931,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0050.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.905,
+              "ts": 1793111193932,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0051.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193932,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0051.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.89,
+              "ts": 1793111193933,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0052.md",
+                "bytes": 291
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193933,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0052.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.425,
+              "ts": 1793111193936,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0053.md",
+                "bytes": 353
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193936,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0053.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.005,
+              "ts": 1793111193937,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0054.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193937,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0054.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.35,
+              "ts": 1793111193941,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0055.md",
+                "bytes": 323
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193941,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0055.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.765,
+              "ts": 1793111193942,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0056.md",
+                "bytes": 318
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193942,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0056.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.765,
+              "ts": 1793111193943,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0057.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193943,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0057.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.74,
+              "ts": 1793111193945,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0058.md",
+                "bytes": 338
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193945,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0058.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.805,
+              "ts": 1793111193946,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0059.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193946,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0059.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.735,
+              "ts": 1793111193947,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0060.md",
+                "bytes": 294
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193947,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0060.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.56,
+              "ts": 1793111193948,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0061.md",
+                "bytes": 344
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193948,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0061.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.33,
+              "ts": 1793111193950,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0062.md",
+                "bytes": 311
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193950,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0062.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.805,
+              "ts": 1793111193951,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0063.md",
+                "bytes": 346
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193951,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0063.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.53,
+              "ts": 1793111193952,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0064.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193952,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0064.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.495,
+              "ts": 1793111193952,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0065.md",
+                "bytes": 326
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193952,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0065.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.49,
+              "ts": 1793111193953,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0066.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193953,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0066.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.475,
+              "ts": 1793111193953,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0067.md",
+                "bytes": 312
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193953,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0067.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.345,
+              "ts": 1793111193956,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0068.md",
+                "bytes": 317
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193956,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0068.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.865,
+              "ts": 1793111193957,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0069.md",
+                "bytes": 330
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193957,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0069.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.67,
+              "ts": 1793111193957,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0070.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193957,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0070.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.655,
+              "ts": 1793111193958,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0071.md",
+                "bytes": 332
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193958,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0071.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.215,
+              "ts": 1793111193960,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0072.md",
+                "bytes": 314
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193960,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0072.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.775,
+              "ts": 1793111193961,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0073.md",
+                "bytes": 341
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193961,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0073.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.53,
+              "ts": 1793111193962,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0074.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193962,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0074.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.515,
+              "ts": 1793111193962,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0075.md",
+                "bytes": 331
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193962,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0075.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.5,
+              "ts": 1793111193963,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0076.md",
+                "bytes": 302
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193963,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0076.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.52,
+              "ts": 1793111193963,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0077.md",
+                "bytes": 342
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193963,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0077.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.155,
+              "ts": 1793111193966,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0078.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193966,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0078.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.75,
+              "ts": 1793111193966,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0079.md",
+                "bytes": 339
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193966,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0079.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.585,
+              "ts": 1793111193967,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0080.md",
+                "bytes": 329
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193967,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0080.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.72,
+              "ts": 1793111193968,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0081.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193968,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0081.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 3.3,
+              "ts": 1793111193971,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0082.md",
+                "bytes": 291
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193971,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0082.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.83,
+              "ts": 1793111193972,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0083.md",
+                "bytes": 353
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193972,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0083.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.59,
+              "ts": 1793111193973,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0084.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193973,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0084.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.51,
+              "ts": 1793111193973,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0085.md",
+                "bytes": 323
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193973,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0085.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.845,
+              "ts": 1793111193975,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0086.md",
+                "bytes": 318
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193975,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0086.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 1.18,
+              "ts": 1793111193977,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0087.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193977,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0087.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.635,
+              "ts": 1793111193977,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0088.md",
+                "bytes": 338
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193977,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0088.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.505,
+              "ts": 1793111193978,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0089.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193978,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0089.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.475,
+              "ts": 1793111193980,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0090.md",
+                "bytes": 294
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193980,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0090.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.945,
+              "ts": 1793111193981,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0091.md",
+                "bytes": 344
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193981,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0091.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.55,
+              "ts": 1793111193982,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0092.md",
+                "bytes": 311
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193982,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0092.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.535,
+              "ts": 1793111193983,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0093.md",
+                "bytes": 346
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193983,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0093.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.715,
+              "ts": 1793111193983,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0094.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193983,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0094.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.605,
+              "ts": 1793111193986,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0095.md",
+                "bytes": 326
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.015,
+              "ts": 1793111193986,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0095.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.85,
+              "ts": 1793111193987,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0096.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193987,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0096.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.69,
+              "ts": 1793111193988,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0097.md",
+                "bytes": 312
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193988,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0097.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.55,
+              "ts": 1793111193991,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0098.md",
+                "bytes": 317
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.02,
+              "ts": 1793111193991,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0098.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.8,
+              "ts": 1793111193991,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0099.md",
+                "bytes": 330
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193991,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0099.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.585,
+              "ts": 1793111193992,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0100.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193992,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0100.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.495,
+              "ts": 1793111193993,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0101.md",
+                "bytes": 332
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193993,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0101.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.475,
+              "ts": 1793111193993,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0102.md",
+                "bytes": 314
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111193993,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0102.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.065,
+              "ts": 1793111193995,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0103.md",
+                "bytes": 341
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111193995,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0103.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.665,
+              "ts": 1793111193996,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0104.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193996,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0104.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.515,
+              "ts": 1793111193997,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0105.md",
+                "bytes": 331
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193997,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0105.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.46,
+              "ts": 1793111193997,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0106.md",
+                "bytes": 302
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193997,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0106.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.475,
+              "ts": 1793111193998,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0107.md",
+                "bytes": 342
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193998,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0107.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.47,
+              "ts": 1793111193998,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0108.md",
+                "bytes": 325
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111193998,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0108.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.765,
+              "ts": 1793111194001,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0109.md",
+                "bytes": 339
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111194001,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0109.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.72,
+              "ts": 1793111194002,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0110.md",
+                "bytes": 329
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111194002,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0110.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.53,
+              "ts": 1793111194002,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0111.md",
+                "bytes": 305
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111194002,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0111.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.56,
+              "ts": 1793111194003,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0112.md",
+                "bytes": 291
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111194003,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0112.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.855,
+              "ts": 1793111194006,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0113.md",
+                "bytes": 353
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111194006,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0113.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.72,
+              "ts": 1793111194007,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0114.md",
+                "bytes": 297
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111194007,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0114.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.52,
+              "ts": 1793111194007,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0115.md",
+                "bytes": 323
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111194007,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0115.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.465,
+              "ts": 1793111194008,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0116.md",
+                "bytes": 318
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111194008,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0116.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.44,
+              "ts": 1793111194008,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0117.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111194008,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0117.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 2.285,
+              "ts": 1793111194011,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0118.md",
+                "bytes": 338
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.01,
+              "ts": 1793111194011,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0118.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.66,
+              "ts": 1793111194011,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0119.md",
+                "bytes": 319
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0.005,
+              "ts": 1793111194011,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0119.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.read",
+              "ms": 0.49,
+              "ts": 1793111194012,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0120.md",
+                "bytes": 294
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.chunk",
+              "ms": 0,
+              "ts": 1793111194012,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "source": "data/perf/corpus/perf-0120.md",
+                "chunks": 1
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.embed",
+              "ms": 375.85,
+              "ts": 1793111194480,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 32,
+                "batchIndex": 0,
+                "batches": 4,
+                "skippedUnchanged": 0,
+                "lengthBucket": true,
+                "maxChars": 126
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.embed",
+              "ms": 82.53,
+              "ts": 1793111194562,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 32,
+                "batchIndex": 1,
+                "batches": 4,
+                "skippedUnchanged": 0,
+                "lengthBucket": true,
+                "maxChars": 130
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.embed",
+              "ms": 77.065,
+              "ts": 1793111194639,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 32,
+                "batchIndex": 2,
+                "batches": 4,
+                "skippedUnchanged": 0,
+                "lengthBucket": true,
+                "maxChars": 138
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.embed",
+              "ms": 64.455,
+              "ts": 1793111194704,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 24,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 24,
+                "batchIndex": 3,
+                "batches": 4,
+                "skippedUnchanged": 0,
+                "lengthBucket": true,
+                "maxChars": 156
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.write",
+              "ms": 72.595,
+              "ts": 1793111194777,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 32,
+                "batchIndex": 0,
+                "batches": 4,
+                "mode": "insert",
+                "skippedUnchanged": 0,
+                "refreshed": false,
+                "serverTiming": false,
+                "serverTotalMs": 50.32
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.write",
+              "ms": 68.23,
+              "ts": 1793111194845,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 32,
+                "batchIndex": 1,
+                "batches": 4,
+                "mode": "insert",
+                "skippedUnchanged": 0,
+                "refreshed": false,
+                "serverTiming": false,
+                "serverTotalMs": 37.28
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.write",
+              "ms": 56.115,
+              "ts": 1793111194901,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 32,
+                "batchIndex": 2,
+                "batches": 4,
+                "mode": "insert",
+                "skippedUnchanged": 0,
+                "refreshed": false,
+                "serverTiming": false,
+                "serverTotalMs": 44.76
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "index.refresh",
+              "ms": 603,
+              "ts": 1793111195551,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "refreshPolicy": "last",
+              "meta": {
+                "batchIndex": 3,
+                "mode": "insert",
+                "serverTiming": true
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "doc.write",
+              "ms": 649.62,
+              "ts": 1793111195551,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 24,
+              "refreshPolicy": "last",
+              "meta": {
+                "items": 24,
+                "batchIndex": 3,
+                "batches": 4,
+                "mode": "insert",
+                "skippedUnchanged": 0,
+                "refreshed": true,
+                "serverTiming": true,
+                "serverTotalMs": 637.3
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "ingest.total",
+              "ms": 1703.425,
+              "ts": 1793111195559,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "batchSize": 32,
+              "refreshPolicy": "last",
+              "meta": {
+                "files": 120,
+                "chunks": 120,
+                "count": 120,
+                "mode": "insert",
+                "created": true,
+                "refreshed": true,
+                "cleanupDeleted": 0,
+                "times": {
+                  "readMs": 147.22500032186508,
+                  "chunkMs": 1.2550000548362732,
+                  "embedMs": 599.8999999761581,
+                  "writeMs": 846.5600000023842,
+                  "refreshMs": 603,
+                  "cleanupMs": 0.004999995231628418,
+                  "totalMs": 1703.425000011921
+                }
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 22.895,
+              "ts": 1793111195586,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 18
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 9.485,
+              "ts": 1793111195596,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 4.44,
+              "ts": 1793111195596,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 40,
+              "ts": 1793111195604,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 9.745,
+              "ts": 1793111195615,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 20
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 10.455,
+              "ts": 1793111195626,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.98,
+              "ts": 1793111195626,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 28,
+              "ts": 1793111195633,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 9.49,
+              "ts": 1793111195646,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 34
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 9.74,
+              "ts": 1793111195656,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.92,
+              "ts": 1793111195656,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 27,
+              "ts": 1793111195663,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 10.19,
+              "ts": 1793111195676,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 23
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 9.955,
+              "ts": 1793111195686,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 3.92,
+              "ts": 1793111195686,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 27,
+              "ts": 1793111195693,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 8.965,
+              "ts": 1793111195705,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 16
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 7.62,
+              "ts": 1793111195713,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.69,
+              "ts": 1793111195713,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 23,
+              "ts": 1793111195719,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 7.655,
+              "ts": 1793111195728,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 17
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 8.615,
+              "ts": 1793111195737,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 3.12,
+              "ts": 1793111195737,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 23,
+              "ts": 1793111195743,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 8.705,
+              "ts": 1793111195754,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 15
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 7.395,
+              "ts": 1793111195762,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.36,
+              "ts": 1793111195762,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 23,
+              "ts": 1793111195769,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 8.565,
+              "ts": 1793111195780,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 15
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 7.835,
+              "ts": 1793111195788,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.46,
+              "ts": 1793111195788,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 22,
+              "ts": 1793111195794,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 6.66,
+              "ts": 1793111195803,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 28
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 8.82,
+              "ts": 1793111195812,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.75,
+              "ts": 1793111195812,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 18,
+              "ts": 1793111195814,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.embed",
+              "ms": 9.215,
+              "ts": 1793111195826,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "queryLength": 17
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.http",
+              "ms": 8.055,
+              "ts": 1793111195834,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "db.search",
+              "ms": 2.52,
+              "ts": 1793111195834,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "hits": 5
+              }
+            },
+            {
+              "runId": "run_mvqs3vfu_iflnb4",
+              "phase": "query.e2e",
+              "ms": 22,
+              "ts": 1793111195838,
+              "backend": "webgpu",
+              "modelKey": "text_zh",
+              "dtype": "fp16",
+              "meta": {
+                "mode": "vector",
+                "via": "eval"
+              }
+            }
+          ]
+        }
+      },
+      "errors": [],
+      "durationMs": 2778
+    }
+  ],
+  "aggregate": {
+    "runs": 1,
+    "summarySource": "api",
+    "phases": [
+      {
+        "phase": "db.search",
+        "runs": 1,
+        "n": 10,
+        "p50": 2.84,
+        "p50Iqr": 0,
+        "p95": 4.21,
+        "mean": 3.02
+      },
+      {
+        "phase": "doc.chunk",
+        "runs": 1,
+        "n": 120,
+        "p50": 0.01,
+        "p50Iqr": 0,
+        "p95": 0.02,
+        "mean": 0.01
+      },
+      {
+        "phase": "doc.embed",
+        "runs": 1,
+        "n": 4,
+        "p50": 79.8,
+        "p50Iqr": 0,
+        "p95": 331.85,
+        "mean": 149.98
+      },
+      {
+        "phase": "doc.read",
+        "runs": 1,
+        "n": 120,
+        "p50": 0.73,
+        "p50Iqr": 0,
+        "p95": 3.3,
+        "mean": 1.23
+      },
+      {
+        "phase": "doc.write",
+        "runs": 1,
+        "n": 4,
+        "p50": 70.41,
+        "p50Iqr": 0,
+        "p95": 563.07,
+        "mean": 211.64
+      },
+      {
+        "phase": "index.refresh",
+        "runs": 1,
+        "n": 1,
+        "p50": 603,
+        "p50Iqr": 0,
+        "p95": 603,
+        "mean": 603
+      },
+      {
+        "phase": "ingest.total",
+        "runs": 1,
+        "n": 1,
+        "p50": 1703.43,
+        "p50Iqr": 0,
+        "p95": 1703.43,
+        "mean": 1703.43
+      },
+      {
+        "phase": "model.download",
+        "runs": 1,
+        "n": 1,
+        "p50": 108.64,
+        "p50Iqr": 0,
+        "p95": 108.64,
+        "mean": 108.64
+      },
+      {
+        "phase": "model.init",
+        "runs": 1,
+        "n": 1,
+        "p50": 556.94,
+        "p50Iqr": 0,
+        "p95": 556.94,
+        "mean": 556.94
+      },
+      {
+        "phase": "model.total",
+        "runs": 1,
+        "n": 1,
+        "p50": 665.58,
+        "p50Iqr": 0,
+        "p95": 665.58,
+        "mean": 665.58
+      },
+      {
+        "phase": "query.e2e",
+        "runs": 1,
+        "n": 10,
+        "p50": 23,
+        "p50Iqr": 0,
+        "p95": 34.6,
+        "mean": 25.3
+      },
+      {
+        "phase": "query.embed",
+        "runs": 1,
+        "n": 10,
+        "p50": 9.09,
+        "p50Iqr": 0,
+        "p95": 17.18,
+        "mean": 10.21
+      },
+      {
+        "phase": "query.http",
+        "runs": 1,
+        "n": 10,
+        "p50": 8.72,
+        "p50Iqr": 0,
+        "p95": 10.23,
+        "mean": 8.8
+      }
+    ],
+    "ingest": {
+      "rows": [
+        {
+          "index": 0,
+          "count": 120,
+          "upsertMs": 846.56,
+          "readMs": 147.23,
+          "chunkMs": 1.26,
+          "embedMs": 599.9,
+          "writeMs": 846.56,
+          "refreshMs": 603,
+          "cleanupMs": 0,
+          "totalMs": 1703.43,
+          "wallMs": 2493
+        }
+      ],
+      "wallP50": 2493,
+      "wallP50Iqr": 0
+    },
+    "query": {
+      "rows": [
+        {
+          "index": 0,
+          "count": 10,
+          "e2eP50": 23,
+          "e2eP95": 34.6,
+          "wallMean": 27.9
+        }
+      ],
+      "e2eP50": 23,
+      "e2eP95": 34.6,
+      "e2eCount": 10
+    }
+  },
+  "diagnostics": {
+    "consoleErrors": [
+      "[console.error] Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "[console.error] \u001b[0;93m2026-10-27 22:26:33.738419 [W:onnxruntime:, session_state.cc:1280 VerifyEachNodeIsAssignedToAnEp] Some nodes were not assigned to the preferred execution providers which may or may not have an negative impact on performance. e.g. ORT explicitly assigns shape related ops to CPU to improve perf.\u001b[m",
+      "[console.error] \u001b[0;93m2026-10-27 22:26:33.743354 [W:onnxruntime:, session_state.cc:1282 VerifyEachNodeIsAssignedToAnEp] Rerunning with verbose output on a non-minimal build will show node assignments.\u001b[m"
+    ],
+    "pageErrors": [],
+    "requestFailures": []
+  }
+}

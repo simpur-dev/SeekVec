@@ -45,6 +45,7 @@ const HELP = `SeekVec · 浏览器基准测试（puppeteer-core）
   --runs <n>             计入统计的正式轮数（默认 5）
   --warmup <n>           预热轮数，不计入统计（默认 1）
   --cold                 每轮开始前清空浏览器缓存/CacheStorage 并重新加载页面（冷启动口径）
+  --no-webgpu            模拟 WebGPU 不可用（禁用 GPU/WebGPU），用于验证 auto→WASM 降级路径
   --out <dir>            输出目录（默认 docs/benchmarks/browser-<时间戳>）
   --corpus <path>        语料目录或文件（默认 data/perf/corpus；支持 .md/.txt/.jsonl）
   --queries <file>       查询文件，每行一条（默认 data/perf/queries.txt）
@@ -81,6 +82,7 @@ function parseArgs(argv) {
     runs: 5,
     warmup: 1,
     cold: false,
+    noWebgpu: false,
     out: null,
     corpus: DEFAULT_CORPUS,
     queries: DEFAULT_QUERIES,
@@ -125,6 +127,7 @@ function parseArgs(argv) {
     else if (arg === '--runs') opts.runs = nextInt(arg);
     else if (arg === '--warmup') opts.warmup = nextInt(arg);
     else if (arg === '--cold') opts.cold = true;
+    else if (arg === '--no-webgpu') opts.noWebgpu = true;
     else if (arg === '--out') opts.out = next(arg);
     else if (arg === '--corpus') opts.corpus = path.resolve(next(arg));
     else if (arg === '--queries') opts.queries = path.resolve(next(arg));
@@ -328,6 +331,8 @@ async function launchWithFallback(puppeteer, candidates, opts) {
       '--disable-dev-shm-usage',
       '--mute-audio',
       // 注意：不要加 --disable-gpu —— WebGPU 后端需要真实 GPU 进程。
+      // --no-webgpu 用于验收「WebGPU 不可用」路径，与正常基准互斥。
+      ...(opts.noWebgpu ? ['--disable-gpu', '--disable-features=WebGPU,Vulkan'] : []),
       `--disk-cache-dir=${path.join(userDataDir, 'disk-cache')}`,
     ];
     try {

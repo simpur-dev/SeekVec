@@ -10,6 +10,8 @@
 | `matrix.json` | 最终性能主矩阵定义（FP32/INT8/FP16/冷启动；batch=32、WASM threads=8；ABBA + 5 轮 + 1 预热） |
 | `matrix-2026-10-27/` | **最终主矩阵**：4 配置 × ABBA × 5 轮；`matrix-summary.md`、`matrix-raw.json`、`phase-aggregate.{md,json}`、`NN-<config>/` |
 | `matrix-2026-10-26/` | 优化前基线（历史数据，用于 before/after 对比） |
+| `fallback-2026-10-27/` | **WebGPU 不可用验证**：Edge 156 禁用 GPU/WebGPU 后 auto→WASM；raw/summary + 徽标截图/UI 文本 |
+| `edge-webgpu-2026-10-27/` | Edge 156 WebGPU/fp16 兼容冒烟：raw/summary + 徽标截图 |
 | `optimization-2026-10-27/` | 深度优化证据：batch/threads 消融、增量导入（reimport-result.json）、length bucketing 等 |
 | `eval-quality/` | Node 质量回归（fp32/q8/fp16；60 文档/73 chunks/60 查询/229 qrels）：`raw.json`、`summary.md` |
 | `quality-browser/` | 浏览器实际链路质量（fp32+WASM / q8+WASM / fp16+WebGPU）：三组 `raw.json`+`summary.md`、汇总 `raw.json`+`summary.md` |
@@ -31,6 +33,7 @@
 # 前置：dev server（5173）与 seekdb 运行；data/perf 语料已生成；npm run prepare:assets 已执行
 npm run bench:browser -- --backend wasm --dtype q8 --batch 32 --threads 8 --refresh last --runs 5 --warmup 1
 npm run bench:browser -- --backend webgpu --dtype fp16 --batch 32 --cold
+npm run bench:browser -- --backend auto --no-webgpu   # 模拟 WebGPU 不可用，验证 auto→WASM 降级与界面提示
 npm run bench:browser -- --check          # 环境自检：浏览器/页面/语料，不跑基准
 npm run bench:browser -- --smoke          # 冒烟：1 次导入 + 1 条查询
 
