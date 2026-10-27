@@ -34,7 +34,7 @@ describe('parseRuntimeConfig 默认值', () => {
       backendSource: 'default',
       forcedBackend: null,
       dtype: null,
-      batch: 16,
+      batch: 32,
       refresh: 'last',
       threads: 1,
       models: 'auto',
@@ -44,9 +44,9 @@ describe('parseRuntimeConfig 默认值', () => {
     });
   });
 
-  it('crossOriginIsolated=true 时 wasm 线程数默认 4', () => {
+  it('crossOriginIsolated=true 时 wasm 线程数默认 8', () => {
     const config = parseRuntimeConfig('', { storage: memoryStorage(), crossOriginIsolated: true });
-    expect(config.threads).toBe(4);
+    expect(config.threads).toBe(8);
     expect(config.crossOriginIsolated).toBe(true);
   });
 });
@@ -54,11 +54,11 @@ describe('parseRuntimeConfig 默认值', () => {
 describe('parseRuntimeConfig 夹紧与非法回退', () => {
   const base = () => ({ storage: memoryStorage(), crossOriginIsolated: false });
 
-  it('batch 越界夹紧到 1..64，非数字回退 16', () => {
+  it('batch 越界夹紧到 1..64，非数字回退 32', () => {
     expect(parseRuntimeConfig('?batch=0', base()).batch).toBe(1);
     expect(parseRuntimeConfig('?batch=-3', base()).batch).toBe(1);
     expect(parseRuntimeConfig('?batch=100', base()).batch).toBe(64);
-    expect(parseRuntimeConfig('?batch=abc', base()).batch).toBe(16);
+    expect(parseRuntimeConfig('?batch=abc', base()).batch).toBe(32);
     expect(parseRuntimeConfig('?batch=32', base()).batch).toBe(32);
   });
 
@@ -70,7 +70,7 @@ describe('parseRuntimeConfig 夹紧与非法回退', () => {
       storage: memoryStorage(),
       crossOriginIsolated: true,
     });
-    expect(isolated.threads).toBe(4);
+    expect(isolated.threads).toBe(8);
     expect(parseRuntimeConfig('?threads=2', base()).threads).toBe(2);
   });
 

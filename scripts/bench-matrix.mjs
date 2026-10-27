@@ -208,6 +208,7 @@ function runBench(cfg, seqIndex, leg, opts, matrix, outDir, collection) {
   const args = [BENCH_SCRIPT, '--backend', cfg.backend ?? 'auto'];
   if (cfg.dtype) args.push('--dtype', cfg.dtype);
   if (cfg.batch != null) args.push('--batch', String(cfg.batch));
+  if (cfg.threads != null) args.push('--threads', String(cfg.threads));
   if (cfg.refresh) args.push('--refresh', cfg.refresh);
   if (cfg.models) args.push('--models', cfg.models);
   if (cfg.cold) args.push('--cold');

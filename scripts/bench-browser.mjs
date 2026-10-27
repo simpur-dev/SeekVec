@@ -39,6 +39,7 @@ const HELP = `SeekVec · 浏览器基准测试（puppeteer-core）
   --backend <auto|webgpu|wasm>  推理后端（默认 auto，由页面自行探测）
   --dtype <q8|fp16|fp32> 量化精度（默认不传，页面按后端选默认）
   --batch <1..64>        推理批大小（默认不传，页面默认 16）
+  --threads <1..8>       WASM 线程数（默认不传，页面按 crossOriginIsolated=4/1）
   --refresh <last|each>  索引刷新策略（默认不传，页面默认 last）
   --models <auto|remote|local>  模型来源（默认不传）
   --runs <n>             计入统计的正式轮数（默认 5）
@@ -74,6 +75,7 @@ function parseArgs(argv) {
     backend: 'auto',
     dtype: null,
     batch: null,
+    threads: null,
     refresh: null,
     models: null,
     runs: 5,
@@ -117,6 +119,7 @@ function parseArgs(argv) {
     else if (arg === '--backend') opts.backend = next(arg);
     else if (arg === '--dtype') opts.dtype = next(arg);
     else if (arg === '--batch') opts.batch = nextInt(arg);
+    else if (arg === '--threads') opts.threads = nextInt(arg);
     else if (arg === '--refresh') opts.refresh = next(arg);
     else if (arg === '--models') opts.models = next(arg);
     else if (arg === '--runs') opts.runs = nextInt(arg);
@@ -571,6 +574,7 @@ function buildPageUrl(opts) {
   if (opts.backend) params.set('backend', opts.backend);
   if (opts.dtype) params.set('dtype', opts.dtype);
   if (opts.batch != null) params.set('batch', String(opts.batch));
+  if (opts.threads != null) params.set('threads', String(opts.threads));
   if (opts.refresh) params.set('refresh', opts.refresh);
   if (opts.models) params.set('models', opts.models);
   params.set('collection', opts.collection);

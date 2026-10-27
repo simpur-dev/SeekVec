@@ -24,6 +24,7 @@ import {
   ingestDocuments,
   getCount,
   listDocumentIds,
+  listDocumentItems,
   deleteDocuments,
   refreshCollection,
 } from '../db/api';
@@ -177,44 +178,81 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       count: created ? 0 : (kb.counts[collectionName] ?? null),
     });
 
-    // ── 3) 端侧向量化 ──────────────────────────────────────────
-    onStatus?.('embedding', { total: totalChunks, done: 0 });
-    const batches = chunkArray(uniqueChunks, batchSize);
-    const vectors: number[][] = [];
+    // ── 2.5) 增量识别：复用集合时一次取回 id+source ──────────────
+    // 优化（增量导入）：chunk id 由内容确定，id 已存在说明内容未变；
+    // 只对「新增/变化」的 chunk 做 embedding 与写入，重复导入不再重算全量。
+    let existingItems: Array<{ id: string; source?: string }> | null = created ? [] : null;
+    if (!created && existingItems === null) {
+      try {
+        const listed = await listDocumentItems(collectionName);
+        if (Array.isArray(listed.items)) existingItems = listed.items;
+      } catch {
+        // 旧 server 不支持 withSource：退化为全量 embedding/写入 + 逐 source 清理
+      }
+    }
+    const existingIdSet = new Set((existingItems ?? []).map((item) => item.id));
+    const chunksToWrite = existingItems
+      ? uniqueChunks.filter((chunk) => !existingIdSet.has(chunk.id))
+      : uniqueChunks;
+    const skippedUnchanged = totalChunks - chunksToWrite.length;
+
+    // ── 3) 端侧向量化（仅新增/变化 chunk）──────────────────────
+    onStatus?.('embedding', { total: totalChunks, done: skippedUnchanged });
+    // 写入仍按原始文件顺序分批；embedding 按文本长度分桶后再组 batch，
+    // 减少同一 batch 内最长文本导致的 padding 浪费（length bucketing）。
+    const writeBatches = chunkArray(chunksToWrite, batchSize);
+    const embedItems = chunksToWrite
+      .map((chunk) => ({ chunk, order: chunk.text.length }))
+      .sort((a, b) => a.order - b.order);
+    const embedBatches = chunkArray(embedItems, batchSize);
+    const vectorsById = new Map<string, number[]>();
     let embedded = 0;
-    for (let b = 0; b < batches.length; b++) {
-      const batchItems = batches[b];
+    for (let b = 0; b < embedBatches.length; b++) {
+      const batchItems = embedBatches[b];
       const embedStart = performance.now();
-      const batchVectors = await embed(batchItems.map((chunk) => chunk.text));
+      const batchVectors = await embed(batchItems.map((item) => item.chunk.text));
       const embedMs = performance.now() - embedStart;
       times.embedMs += embedMs;
+      if (batchVectors.length !== batchItems.length) {
+        throw new Error(
+          `embedding 返回数量（${batchVectors.length}）与批内分块数量（${batchItems.length}）不一致`,
+        );
+      }
+      batchItems.forEach((item, index) => {
+        vectorsById.set(item.chunk.id, batchVectors[index]);
+      });
+      embedded += batchItems.length;
       recordPerf('doc.embed', embedMs, {
         batchSize: batchItems.length,
         refreshPolicy: refresh,
-        meta: { items: batchItems.length, batchIndex: b, batches: batches.length },
+        meta: {
+          items: batchItems.length,
+          batchIndex: b,
+          batches: embedBatches.length,
+          skippedUnchanged,
+          lengthBucket: true,
+          maxChars: batchItems[batchItems.length - 1]?.chunk.text.length ?? 0,
+        },
       });
-      vectors.push(...batchVectors);
-      embedded += batchItems.length;
-      onStatus?.('embedding', { total: totalChunks, done: embedded });
-    }
-    if (vectors.length !== uniqueChunks.length) {
-      throw new Error(
-        `embedding 返回数量（${vectors.length}）与分块数量（${uniqueChunks.length}）不一致`,
-      );
+      onStatus?.('embedding', { total: totalChunks, done: skippedUnchanged + embedded });
     }
 
     // ── 4) 写入 SeekDB（索引刷新策略：last / each） ─────────────
-    onStatus?.('writing', { total: totalChunks, done: 0 });
+    onStatus?.('writing', { total: totalChunks, done: skippedUnchanged });
     let written = 0;
-    for (let b = 0; b < batches.length; b++) {
-      const batchItems = batches[b];
-      const shouldRefresh = refresh === 'each' || b === batches.length - 1;
+    for (let b = 0; b < writeBatches.length; b++) {
+      const batchItems = writeBatches[b];
+      const shouldRefresh = refresh === 'each' || b === writeBatches.length - 1;
       const writeStart = performance.now();
       const response = await ingestDocuments({
         collectionName,
         ids: batchItems.map((chunk) => chunk.id),
         documents: batchItems.map((chunk) => chunk.text),
-        embeddings: batchItems.map((chunk, index) => vectors[written + index]),
+        embeddings: batchItems.map((chunk) => {
+          const vector = vectorsById.get(chunk.id);
+          if (!vector) throw new Error(`缺少分块 ${chunk.id} 的 embedding 结果`);
+          return vector;
+        }),
         metadatas: batchItems.map((chunk) => ({
           source: chunk.source,
           chunkIndex: chunk.chunkIndex,
@@ -238,8 +276,9 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
         meta: {
           items: batchItems.length,
           batchIndex: b,
-          batches: batches.length,
+          batches: writeBatches.length,
           mode,
+          skippedUnchanged,
           refreshed: shouldRefresh,
           serverTiming: typeof refreshMs === 'number',
           serverTotalMs: response.timings?.totalMs,
@@ -249,23 +288,66 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       refreshed = refreshed || shouldRefresh;
       wroteCount += response.count ?? batchItems.length;
       written += batchItems.length;
-      onStatus?.('writing', { total: totalChunks, done: written });
+      onStatus?.('writing', { total: totalChunks, done: skippedUnchanged + written });
     }
 
     // ── 5) 按 source 清理陈旧 chunk（旧版本遗留的 id）────────────
+    // 优化：
+    //   - 新建空集合（created=true）不可能有陈旧块，直接跳过；
+    //   - 复用旧集合时用 withSource=1 一次拿全量 id+source 在内存对比，
+    //     避免逐文件 list（120 文件曾产生 120 次 HTTP 往返，占导入耗时 ~1.4s）；
+    //   - 一次批量删除 + 最多一次刷新；无删除则不刷新。
     onStatus?.('writing', { total: totalChunks, done: totalChunks });
     const cleanupStart = performance.now();
-    for (const [source, newIds] of idsBySource) {
-      try {
-        const existing = await listDocumentIds(collectionName, source);
-        const staleIds = existing.ids.filter((id) => !newIds.has(id));
-        for (const idsBatch of chunkArray(staleIds, MAX_DELETE_IDS)) {
-          const result = await deleteDocuments(collectionName, { ids: idsBatch });
-          cleanupDeleted += result.deleted ?? idsBatch.length;
+    if (!created) {
+      let allItems = existingItems;
+      if (!allItems) {
+        try {
+          const listed = await listDocumentItems(collectionName);
+          if (Array.isArray(listed.items)) allItems = listed.items;
+        } catch {
+          // 旧 server 不支持 withSource：回退逐 source 清理
         }
-      } catch (err) {
-        // 老 server 可能还没有 /api/documents 查询/删除接口：降级为警告，不中断导入
-        console.warn(`[ingest] 清理 source=${source} 的陈旧分块失败`, err);
+      }
+
+      if (allItems) {
+        // 只清理本次导入涉及的 source；未涉及的文件/集合内容保持不动
+        const existingBySource = new Map<string, string[]>();
+        for (const item of allItems) {
+          if (!item.source) continue;
+          const list = existingBySource.get(item.source);
+          if (list) list.push(item.id);
+          else existingBySource.set(item.source, [item.id]);
+        }
+        const staleIds: string[] = [];
+        for (const [source, newIds] of idsBySource) {
+          for (const existingId of existingBySource.get(source) ?? []) {
+            if (!newIds.has(existingId)) staleIds.push(existingId);
+          }
+        }
+        try {
+          for (const idsBatch of chunkArray(staleIds, MAX_DELETE_IDS)) {
+            const result = await deleteDocuments(collectionName, { ids: idsBatch });
+            cleanupDeleted += result.deleted ?? idsBatch.length;
+          }
+        } catch (err) {
+          console.warn('[ingest] 批量清理陈旧分块失败', err);
+        }
+      } else {
+        // 兼容路径：旧 server / 旧接口
+        for (const [source, newIds] of idsBySource) {
+          try {
+            const existing = await listDocumentIds(collectionName, source);
+            const staleIds = existing.ids.filter((id) => !newIds.has(id));
+            for (const idsBatch of chunkArray(staleIds, MAX_DELETE_IDS)) {
+              const result = await deleteDocuments(collectionName, { ids: idsBatch });
+              cleanupDeleted += result.deleted ?? idsBatch.length;
+            }
+          } catch (err) {
+            // 老 server 可能还没有 /api/documents 查询/删除接口：降级为警告，不中断导入
+            console.warn(`[ingest] 清理 source=${source} 的陈旧分块失败`, err);
+          }
+        }
       }
     }
     times.cleanupMs = performance.now() - cleanupStart;

@@ -65,13 +65,13 @@ export interface BuildEnv {
 
 export const STORAGE_BACKEND_KEY = 'seekvec:backend';
 
-export const BATCH_DEFAULT = 16;
+export const BATCH_DEFAULT = 32;
 export const BATCH_MIN = 1;
 export const BATCH_MAX = 64;
 export const THREADS_MIN = 1;
 export const THREADS_MAX = 8;
-/** 跨源隔离（COOP/COEP）下 wasm 才可以用多线程 */
-export const THREADS_DEFAULT_ISOLATED = 4;
+/** 跨源隔离（COOP/COEP）下 wasm 才可以用多线程；实测 8 线程明显优于 4（本机 28 核） */
+export const THREADS_DEFAULT_ISOLATED = 8;
 export const THREADS_DEFAULT_PLAIN = 1;
 /** 构建期未设置 VITE_ORT_WASM_PATH 时，默认从同源 /ort/ 加载 ORT wasm 资源 */
 export const ORT_WASM_PATH_DEFAULT = '/ort/';

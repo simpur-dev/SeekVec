@@ -85,6 +85,8 @@ export interface DeleteCollectionResponse {
 export interface DocumentIdsResponse {
   ids: string[];
   count: number;
+  /** GET ?withSource=1：一次返回全部 id + source，供导入后批量清理 */
+  items?: Array<{ id: string; source?: string }>;
 }
 
 export interface DeleteDocumentsResponse {
@@ -215,6 +217,17 @@ export async function listDocumentIds(
   source: string,
 ): Promise<DocumentIdsResponse> {
   const params = new URLSearchParams({ collectionName, source });
+  return request<DocumentIdsResponse>(`/api/documents?${params.toString()}`);
+}
+
+/**
+ * GET /api/documents?collectionName=&withSource=1
+ * 一次请求返回集合全部 id + source；导入后用它按 source 批量清理陈旧块，
+ * 避免「每文件一次 list」造成 120 次往返（导入耗时主要短板）。
+ * 旧 server 不支持 items 时由调用方回退到 listDocumentIds 逐 source 清理。
+ */
+export async function listDocumentItems(collectionName: string): Promise<DocumentIdsResponse> {
+  const params = new URLSearchParams({ collectionName, withSource: '1' });
   return request<DocumentIdsResponse>(`/api/documents?${params.toString()}`);
 }
 

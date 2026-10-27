@@ -159,9 +159,16 @@ export interface DeleteCollectionResponse {
   deleted: true;
 }
 
+export interface ListDocumentItem {
+  id: string;
+  source?: string;
+}
+
 export interface ListDocumentIdsResponse {
   ids: string[];
   count: number;
+  /** ?withSource=1 时返回，按 metadata.source 分组清理用；旧客户端忽略该字段 */
+  items?: ListDocumentItem[];
 }
 
 export interface DeleteDocumentsRequest {

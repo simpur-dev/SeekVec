@@ -78,12 +78,33 @@ export async function ensureCollection(
     name,
     schema: buildSchema({ modality: expectedModality, dimension, ikMode }),
   });
+  collectionHandleCache.delete(name);
   return { created: true, name, dimension };
 }
 
 export async function getCollection(name: string) {
   const client = await getClient();
-  return client.getCollection({ name, embeddingFunction: null });
+  const now = Date.now();
+  const cached = collectionHandleCache.get(name);
+  // 缓存 key 带 client 引用：seekdb 重启/重连后 client 会更换，旧句柄自动失效。
+  if (cached && cached.client === client && now - cached.cachedAt < COLLECTION_HANDLE_TTL_MS) {
+    return cached.collection;
+  }
+  const collection = await client.getCollection({ name, embeddingFunction: null });
+  collectionHandleCache.set(name, { client, collection, cachedAt: now });
+  return collection;
+}
+
+/** 集合句柄缓存（每请求 getCollection 会做元数据往返；命中后省 ~3–4ms） */
+const COLLECTION_HANDLE_TTL_MS = 30_000;
+const collectionHandleCache = new Map<
+  string,
+  { client: Awaited<ReturnType<typeof getClient>>; collection: Awaited<ReturnType<Awaited<ReturnType<typeof getClient>>['getCollection']>>; cachedAt: number }
+>();
+
+/** 删除/重建集合时主动失效（避免读到旧 schema/旧句柄） */
+export function invalidateCollectionHandle(name: string): void {
+  collectionHandleCache.delete(name);
 }
 
 /**
@@ -95,8 +116,12 @@ export async function getCollection(name: string) {
 export async function deleteCollection(name: string): Promise<boolean> {
   const client = await getClient();
   const exists = await client.hasCollection(name);
-  if (!exists) return false;
+  if (!exists) {
+    collectionHandleCache.delete(name);
+    return false;
+  }
   await client.deleteCollection(name);
+  collectionHandleCache.delete(name);
   return true;
 }
 

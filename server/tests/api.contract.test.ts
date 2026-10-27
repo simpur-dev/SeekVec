@@ -610,6 +610,29 @@ describe('GET /api/documents?collectionName=&source=', () => {
     expect(getArgs.include).toEqual([]);
   });
 
+  it('?withSource=1 返回 items（一次请求拿全部 source，供批量清理）', async () => {
+    const collection = makeCollection({
+      get: vi.fn(async () => ({
+        ids: ['a', 'b', 'c'],
+        metadatas: [{ source: 'docs/a.md' }, null, { source: 'docs/b.md' }],
+      })),
+    });
+    mocks.getCollection.mockResolvedValue(collection);
+
+    const res = await request(makeApp())
+      .get('/api/documents')
+      .query({ collectionName: COLLECTION, withSource: '1' })
+      .expect(200);
+
+    expect(res.body.ids).toEqual(['a', 'b', 'c']);
+    expect(res.body.items).toEqual([
+      { id: 'a', source: 'docs/a.md' },
+      { id: 'b' },
+      { id: 'c', source: 'docs/b.md' },
+    ]);
+    expect(collection.get.mock.calls[0][0].include).toEqual(['metadatas']);
+  });
+
   it('collectionName 缺失 → 400 INVALID_COLLECTION_NAME', async () => {
     const res = await request(makeApp()).get('/api/documents?source=a.md').expect(400);
 

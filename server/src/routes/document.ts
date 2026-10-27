@@ -161,7 +161,11 @@ documentsRouter.post(
   }),
 );
 
-/** 按 metadata.source 过滤列出文档 id（web 用于「每文件导入后清理陈旧 id」） */
+/**
+ * 按 metadata.source 过滤列出文档 id（web 用于「每文件导入后清理陈旧 id」）。
+ * `?withSource=1` 额外返回 items[{id,source}]，让 web 一次请求完成多文件清理对比，
+ * 避免逐文件 list（120 文件 = 120 次往返，是导入耗时的主要短板之一）。
+ */
 documentsRouter.get(
   '/',
   asyncHandler(async (req, res) => {
@@ -170,17 +174,31 @@ documentsRouter.get(
       'collectionName',
     );
     const source = validateSource(readQueryString(req, 'source'), 'source');
+    const withSource = ['1', 'true', 'yes'].includes(
+      (readQueryString(req, 'withSource') ?? '').toLowerCase(),
+    );
 
-    const ids = await retryOnConnectionError(async () => {
+    const result = await retryOnConnectionError(async () => {
       const collection = await getCollection(collectionName);
-      const result = await collection.get({
-        include: [],
+      return collection.get({
+        include: withSource ? ['metadatas'] : [],
         ...(source === undefined ? {} : { where: { source } }),
       });
-      return [...result.ids];
     });
+    const ids = [...result.ids];
 
     const body: ListDocumentIdsResponse = { ids, count: ids.length };
+    if (withSource) {
+      const metadatas = result.metadatas ?? [];
+      body.items = ids.map((id, index) => {
+        const meta = metadatas[index] as Record<string, unknown> | null | undefined;
+        const rawSource = meta && typeof meta === 'object' ? meta.source : undefined;
+        return {
+          id,
+          ...(typeof rawSource === 'string' && rawSource ? { source: rawSource } : {}),
+        };
+      });
+    }
     res.json(body);
   }),
 );
