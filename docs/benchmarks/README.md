@@ -12,7 +12,7 @@
 | `matrix-2026-10-26/` | 优化前基线（历史数据，用于 before/after 对比） |
 | `fallback-2026-10-27/` | **WebGPU 不可用验证**：Edge 156 禁用 GPU/WebGPU 后 auto→WASM；raw/summary + 徽标截图/UI 文本 |
 | `edge-webgpu-2026-10-27/` | Edge 156 WebGPU/fp16 兼容冒烟：raw/summary + 徽标截图 |
-| `optimization-2026-10-27/` | 深度优化证据：batch/threads 严格消融、增量导入（reimport-result.json）、陈旧块刷新合并 e2e、token-padding 模拟与 UTF-8 字节排序 A/B、WASM threads 8/12/14/16 严格消融、写入/embedding 流水线 A/B、查询指令 A/B、模型/集合切换 e2e、外部删除集合 store 同步 e2e、刷新失败请求拦截 + 跨 reload 补刷新、seekdb 停机→503→重启恢复故障注入 |
+| `scale-2026-10-27/` | 规模边界：600/1200 文档导入、批次、refresh、查询原始数据（非质量口径） |\n| `optimization-2026-10-27/` | 深度优化证据：batch/threads 严格消融、增量导入（reimport-result.json）、陈旧块刷新合并 e2e、token-padding 模拟与 UTF-8 字节排序 A/B、WASM threads 8/12/14/16 严格消融、写入/embedding 流水线 A/B、查询指令 A/B、模型/集合切换 e2e、外部删除集合 store 同步 e2e、刷新失败请求拦截 + 跨 reload 补刷新、seekdb 停机→503→重启恢复故障注入 |
 | `eval-quality/` | Node 质量回归（fp32/q8/fp16；60 文档/73 chunks/60 查询/229 qrels）：`raw.json`、`summary.md` |
 | `quality-browser/` | 浏览器实际链路质量（fp32+WASM / q8+WASM / fp16+WebGPU）：三组 `raw.json`+`summary.md`、汇总 `raw.json`+`summary.md` |
 
@@ -90,6 +90,7 @@ npm run eval:quality:browser -- --out docs/benchmarks/quality-browser
 - 每次基准自动 `DELETE /api/collections/<collection>` 清理；`--keep` 保留现场。
 - 原始数据提交入库；模型权重、浏览器 profile、`scripts/.cache/` 不入库。
 - 2026-10-26 矩阵环境/口径/全部数字见[性能与质量报告](../性能与质量报告.md)。
+
 
 
 
