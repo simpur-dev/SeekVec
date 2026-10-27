@@ -1,0 +1,22 @@
+{
+  "steps": [
+    {
+      "step": "files_uploaded",
+      "ok": true
+    },
+    {
+      "step": "ingest_done_ui",
+      "ok": true
+    },
+    {
+      "step": "ui_search_result",
+      "hasResult": true,
+      "selected": "bench_ui_flow",
+      "activeMatches": true,
+      "bodyResults": [
+        "UI-FLOW-UNIQUE 端侧知识库 UI 全链路测试文档 A。",
+        "UI-FLOW-B 第二份文档，用于多文件导入。"
+      ]
+    }
+  ]
+}

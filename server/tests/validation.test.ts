@@ -306,10 +306,11 @@ describe('timing 工具', () => {
     expect(roundMs(Number.NaN)).toBe(0);
   });
 
-  it('elapsedMs 为单调递增的毫秒差', () => {
+  it('elapsedMs 保留 2 位小数（避开浮点 .5 边界）', () => {
     const start = nowMs();
-    const elapsed = elapsedMs(start, start + 12.345);
-    expect(elapsed).toBe(12.35);
+    // 用 12.341 而非 12.345：后者在二进制浮点中可能落在 x.5 边界，Math.round 结果不稳定
+    const elapsed = elapsedMs(start, start + 12.341);
+    expect(elapsed).toBe(12.34);
   });
 });
 
