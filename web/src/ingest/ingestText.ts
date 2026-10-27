@@ -81,6 +81,51 @@ const MAX_DELETE_IDS = 512;
 
 let busy = false;
 
+/**
+ * 索引刷新脏标记（per collection）。
+ * 场景：写入已成功但 refresh 失败时，下一次“内容完全相同”的幂等导入会走
+ * “无变化 → 不写/不刷新”路径，导致数据永远检不到。这里记录失败集合，
+ * 下一次导入即使无变化也强制补一次 refresh。
+ */
+const pendingRefresh = new Set<string>();
+const PENDING_REFRESH_STORAGE_KEY = 'seekvec:pendingRefresh';
+
+function loadPendingRefresh(): Set<string> {
+  try {
+    const raw = globalThis.localStorage?.getItem(PENDING_REFRESH_STORAGE_KEY);
+    const parsed: unknown = raw ? JSON.parse(raw) : null;
+    if (Array.isArray(parsed)) return new Set(parsed.filter((x): x is string => typeof x === 'string'));
+  } catch {
+    // localStorage 不可用/损坏时退化为内存态
+  }
+  return new Set<string>();
+}
+
+function persistPendingRefresh(): void {
+  try {
+    globalThis.localStorage?.setItem(PENDING_REFRESH_STORAGE_KEY, JSON.stringify([...pendingRefresh]));
+  } catch {
+    // 隐私模式等场景不阻断导入
+  }
+}
+
+for (const name of loadPendingRefresh()) pendingRefresh.add(name);
+
+function markRefreshDirty(name: string): void {
+  pendingRefresh.add(name);
+  persistPendingRefresh();
+}
+
+function markRefreshClean(name: string): void {
+  if (!pendingRefresh.delete(name)) return;
+  persistPendingRefresh();
+}
+
+/** 供测试/诊断：某集合是否有未完成的刷新 */
+export function hasPendingRefresh(name: string): boolean {
+  return pendingRefresh.has(name);
+}
+
 export function isIngestBusy(): boolean {
   return busy;
 }
@@ -116,6 +161,8 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
   let mode: 'upsert' | 'insert' = 'upsert';
   let wroteCount = 0;
   let cleanupDeleted = 0;
+  let collectionReady = false;
+  const refreshWasPending = pendingRefresh.has(collectionName);
 
   try {
     // ── 1) 读取 + 分块 ─────────────────────────────────────────
@@ -165,6 +212,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
 
     // ── 2) 确保集合存在 ─────────────────────────────────────────
     const ensured = await ensureCollection(collectionName, modelKey);
+    collectionReady = true;
     created = Boolean(ensured.created);
     // ensureCollection 返回 number，窄化为模型维度类型
     const dimension: 384 | 512 = ensured.dimension === 384 ? 384 : 512;
@@ -284,6 +332,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       const writeMs = performance.now() - writeStart;
       times.writeMs += writeMs;
       const refreshMs = response.timings?.refreshMs;
+      if (shouldRefresh) markRefreshClean(collectionName);
       if (shouldRefresh && typeof refreshMs === 'number') {
         times.refreshMs += refreshMs;
         recordPerf('index.refresh', refreshMs, {
@@ -391,6 +440,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
             cleanupRefresh.timings?.refreshMs ?? performance.now() - cleanupRefreshStart;
           times.refreshMs += refreshMs;
           refreshed = true;
+          markRefreshClean(collectionName);
           cleanupRefreshError = null;
           recordPerf('index.refresh', refreshMs, {
             refreshPolicy: refresh,
@@ -405,6 +455,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
           break;
         } catch (err) {
           cleanupRefreshError = err;
+          markRefreshDirty(collectionName);
           console.warn(
             `[ingest] 清理陈旧分块后的索引刷新失败（attempt ${attempt + 1}/2），` +
               '数据可能尚不可检索',
@@ -418,6 +469,29 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
         '清理后索引刷新失败，无法保证本轮新增/删除数据可检索；请重试导入或检查 seekdb 后手动刷新。',
       );
     }
+
+    // 上一次导入写入成功但刷新失败：即使本次内容完全相同（无写入/无清理），
+    // 也必须补一次刷新，否则部分数据可能永久不可检索。
+    if (refreshWasPending && !refreshed) {
+      try {
+        const retryRefreshStart = performance.now();
+        const retryRefresh = await refreshCollection(collectionName);
+        const refreshMs = retryRefresh.timings?.refreshMs ?? performance.now() - retryRefreshStart;
+        times.refreshMs += refreshMs;
+        refreshed = true;
+        markRefreshClean(collectionName);
+        recordPerf('index.refresh', refreshMs, {
+          refreshPolicy: refresh,
+          meta: { op: 'retry-pending-refresh', serverTiming: true },
+        });
+      } catch (err) {
+        markRefreshDirty(collectionName);
+        throw new Error(
+          `补刷新失败，集合 ${collectionName} 仍有未建索引的数据；请检查 seekdb 后重试。`,
+        );
+      }
+    }
+    markRefreshClean(collectionName);
 
     // ── 6) 收尾：计数 / 登记 / 设 active ────────────────────────
     const total = await getCount(collectionName);
@@ -458,14 +532,17 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       cleanupDeleted,
     };
   } catch (err) {
+    if (collectionReady && !refreshed) markRefreshDirty(collectionName);
     // 失败补偿：已有写入时尝试刷新索引，让已写入的数据仍可被检索
     if (wroteAnyBatch) {
       try {
         const compensation = await refreshCollection(collectionName);
+        markRefreshClean(collectionName);
         recordPerf('index.refresh', compensation.timings?.refreshMs ?? 0, {
           meta: { op: 'compensate-on-failure', collectionName },
         });
       } catch (refreshErr) {
+        markRefreshDirty(collectionName);
         console.warn('[ingest] 失败后补偿刷新索引也失败', refreshErr);
       }
     }

@@ -1,0 +1,57 @@
+{
+  "steps": [
+    {
+      "step": "initial_ingest",
+      "ok": true,
+      "first": {
+        "times": {
+          "readMs": 30.834999978542328,
+          "chunkMs": 0.23500001430511475,
+          "embedMs": 101.0799999833107,
+          "writeMs": 964.8499999642372,
+          "refreshMs": 804.33,
+          "cleanupMs": 0,
+          "totalMs": 1223.6299999952316
+        },
+        "count": 2
+      }
+    },
+    {
+      "step": "ingest_with_refresh_blocked",
+      "ok": true,
+      "error": "清理后索引刷新失败，无法保证本轮新增/删除数据可检索；请重试导入或检查 seekdb 后手动刷新。",
+      "blockedRequests": 3
+    },
+    {
+      "step": "search_after_failed_refresh",
+      "hits": 1
+    },
+    {
+      "step": "retry_while_blocked",
+      "ok": true,
+      "error": "补刷新失败，集合 bench_refresh_failure_test 仍有未建索引的数据；请检查 seekdb 后重试。",
+      "busy": false
+    },
+    {
+      "step": "reloaded_after_failed_refresh",
+      "ok": true
+    },
+    {
+      "step": "retry_after_unblock",
+      "ok": true,
+      "recovered": {
+        "times": {
+          "readMs": 5.560000002384186,
+          "chunkMs": 0.029999971389770508,
+          "embedMs": 0,
+          "writeMs": 0,
+          "refreshMs": 102.26,
+          "cleanupMs": 0.004999995231628418,
+          "totalMs": 153.6050000190735
+        },
+        "count": 0,
+        "hits": 1
+      }
+    }
+  ]
+}
