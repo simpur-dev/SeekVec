@@ -1,7 +1,7 @@
 # SeekVec 检索质量评测（Node CPU · fp32 vs q8/fp16）
 
-- runId：`eval-quality-2026-10-26T03-34-41-701Z`
-- 生成时间：2026-10-26T03:34:41.702Z
+- runId：`eval-quality-2026-10-27T17-16-44-871Z`
+- 生成时间：2026-10-27T17:16:44.872Z
 - 评测集：`data/eval` · 60 篇文档（zh 40 / en 20）· 73 chunks · 60 条查询（semantic/keyword/paraphrase = 20/20/20）
 - 协议：chunk 级 qrels（0-3 级）· 相关性阈值 rel ≥ 1 · nDCG gain = 2^rel − 1 · macro 平均 · 平局按 chunk id 升序
 - 分块：浏览器默认参数 maxLength=256 / overlap=32 / minLength=10（复用 web/src/inference/chunk.ts）

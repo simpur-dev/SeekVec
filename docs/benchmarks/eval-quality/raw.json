@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "runId": "eval-quality-2026-10-26T03-34-41-701Z",
-  "generatedAt": "2026-10-26T03:34:41.702Z",
-  "command": "npx tsx scripts/eval-quality.ts --out docs/benchmarks/eval-quality",
+  "runId": "eval-quality-2026-10-27T17-16-44-871Z",
+  "generatedAt": "2026-10-27T17:16:44.872Z",
+  "command": "npx tsx scripts/eval-quality.ts --out D:\\SeekVec-tools\\tmp\\quality-round25-all",
   "script": "scripts/eval-quality.ts",
   "data": {
     "dataDir": "data\\eval",
@@ -398,8 +398,8 @@
             "sha256Match": true
           },
           "embedMs": {
-            "corpus": 337.7,
-            "queries": 83.7
+            "corpus": 463.6,
+            "queries": 148.7
           },
           "metrics": {
             "recallAt1": 0.2324,
@@ -5045,8 +5045,8 @@
             "sha256Match": true
           },
           "embedMs": {
-            "corpus": 269.8,
-            "queries": 69.9
+            "corpus": 321.1,
+            "queries": 89.6
           },
           "metrics": {
             "recallAt1": 0.236,
@@ -9692,8 +9692,8 @@
             "sha256Match": true
           },
           "embedMs": {
-            "corpus": 563.7,
-            "queries": 180.4
+            "corpus": 762.7,
+            "queries": 203.4
           },
           "metrics": {
             "recallAt1": 0.2324,
@@ -14348,8 +14348,8 @@
             "sha256Match": true
           },
           "embedMs": {
-            "corpus": 253.6,
-            "queries": 80.7
+            "corpus": 382.7,
+            "queries": 130
           },
           "metrics": {
             "recallAt1": 0.1671,
@@ -18995,8 +18995,8 @@
             "sha256Match": true
           },
           "embedMs": {
-            "corpus": 143.9,
-            "queries": 54.3
+            "corpus": 268.8,
+            "queries": 85.5
           },
           "metrics": {
             "recallAt1": 0.1796,
@@ -23642,8 +23642,8 @@
             "sha256Match": true
           },
           "embedMs": {
-            "corpus": 620.9,
-            "queries": 344.4
+            "corpus": 685.1,
+            "queries": 230
           },
           "metrics": {
             "recallAt1": 0.1671,
