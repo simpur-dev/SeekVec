@@ -1,0 +1,21 @@
+{
+  "before": {
+    "status": 200,
+    "resolveMs": 0.01,
+    "hits": 5,
+    "dbMs": 2.49
+  },
+  "down": {
+    "status": 503,
+    "body": "\r\n{\r\n  \"error\": \"seekdb \\u8FDE\\u63A5\\u4E0D\\u53EF\\u7528\\uFF0C\\u8BF7\\u7A0D\\u540E\\u91CD\\u8BD5\",\r\n  \"code\": \"SEEKDB_UNAVAILABLE\",\r\n  \"requestId\": \"e235153a-4663-48a9-ac2c-b980c3f14087\"\r\n}"
+  },
+  "healthyAfterRestart": true,
+  "recovered": true,
+  "after": {
+    "status": 200,
+    "resolveMs": 41.6,
+    "hits": 5,
+    "attempt": 1,
+    "dbMs": 28.56
+  }
+}
