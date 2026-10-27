@@ -1,0 +1,19 @@
+{
+  "steps": [
+    {
+      "step": "writing_seen",
+      "writingSeen": true
+    },
+    {
+      "step": "reloaded_without_catch",
+      "ok": true
+    },
+    {
+      "step": "retry_after_reload",
+      "ok": true,
+      "count": 88,
+      "refreshMs": 516.29,
+      "hits": 5
+    }
+  ]
+}

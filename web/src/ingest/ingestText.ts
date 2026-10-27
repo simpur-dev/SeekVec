@@ -336,6 +336,9 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
 
     // ── 4) 写入 SeekDB（索引刷新策略：last / each） ─────────────
     onStatus?.('writing', { total: totalChunks, done: skippedUnchanged });
+    // 在第一次写入前就持久化 dirty：如果浏览器在写入后、refresh 前崩溃/关闭，
+    // catch 不会执行；下次重试同一批文件必须能强制补刷新，而不是走“无变化”路径。
+    if (writeBatches.length > 0) markRefreshDirty(collectionName);
     let written = 0;
     for (let b = 0; b < writeBatches.length; b++) {
       throwIfCancelled(signal);
@@ -399,6 +402,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     onStatus?.('writing', { total: totalChunks, done: totalChunks });
     const cleanupStart = performance.now();
     if (!created) {
+      if (staleIdsToDelete.length > 0) markRefreshDirty(collectionName);
       throwIfCancelled(signal);
       let allItems = existingItems;
       if (!allItems) {
