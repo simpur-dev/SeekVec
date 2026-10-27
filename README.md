@@ -73,6 +73,7 @@ npm run dev:docker
 | 浏览器端质量（真实应用链路） | `npm run eval:quality:browser` → [`docs/benchmarks/quality-browser/`](docs/benchmarks/quality-browser/) |
 | 分阶段性能 + 冷/热 + 后端对比 | `npm run bench:matrix`（或 `npm run bench:browser -- ...`）→ [`docs/benchmarks/`](docs/benchmarks/) |
 | 综合报告（官方 3.2 表格） | [`docs/性能与质量报告.md`](docs/性能与质量报告.md) |
+| 瓶颈定位 / 深度优化 | [`docs/性能优化分析.md`](docs/性能优化分析.md) |
 | 验收自检（3.1/3.2/4.1–4.3） | [`docs/验收自检.md`](docs/验收自检.md) |
 | 从零复现 | [`docs/复现.md`](docs/复现.md) |
 | 模型与量化说明 | [`docs/模型与量化.md`](docs/模型与量化.md) |
@@ -93,7 +94,7 @@ npm run bench          # 模型体积/压缩比 + q8/fp16 vs fp32 一致性（No
 npm run eval:quality   # 标注集检索质量（fp32/q8/fp16）
 npm run bench:browser  # 单组浏览器基准（分阶段计时；--check/--smoke/--headful 等）
 npm run bench:matrix   # ABBA 矩阵：后端/精度/batch/refresh/cold 对比
-npm test               # server + web + scripts 单测（224 项，无外部依赖）
+npm test               # server + web + scripts 单测（225 项，无外部依赖）
 npm run build          # 构建 server + web
 npm run acceptance     # 环境/API/模型/合规自检
 npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web 端侧推理）
@@ -180,7 +181,7 @@ SeekVec/
 
 ## 测试与 CI
 
-- `npm test`：224 项（server 113 / web 69 / scripts 42），纯 Node，无需 seekdb/浏览器/网络
+- `npm test`：225 项（server 114 / web 69 / scripts 42），纯 Node，无需 seekdb/浏览器/网络
 - `npm run check:compliance`：6 项合规检查（server 无推理依赖/代码字样、web 端侧推理等）
 - GitHub Actions（`.github/workflows/ci.yml`）：install → build → 单测 → scripts 类型 → 合规；**不**依赖 seekdb/浏览器（基准与集成手工执行，步骤见复现文档）
 
@@ -190,3 +191,6 @@ SeekVec/
 - **v1.1（stretch）**：图片管线（CLIP）。Schema/接口/模型注册已预留；CLIP 文本塔需 `AutoProcessor + CLIPTextModelWithProjection`，当前 `IMAGE_PIPELINE_ENABLED=false`
 
 详细架构见 [`docs/架构.md`](docs/架构.md)，技术说明见 [`docs/技术说明.md`](docs/技术说明.md)，复现见 [`docs/复现.md`](docs/复现.md)。
+
+
+

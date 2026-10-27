@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "SeekVec 浏览器性能矩阵：bench-matrix.mjs 按 configs 顺序执行，默认再逆序执行一遍（ABBA）以抵消热漂移。无 WebGPU 的机器请删除 fp16-webgpu 条目或用 --only 过滤。",
+  "description": "SeekVec 最终主矩阵（2026-10-27 优化后）：默认 batch=32 / WASM threads=8；ABBA × 5 正式轮 + 1 预热。官方 3.2 表：量化前基线 FP32+WASM；INT8(q8)+WASM；FP16+WebGPU；另含冷启动。消融实验（batch/threads/refresh 与增量导入）见 docs/性能优化分析.md 与 docs/benchmarks/optimization-2026-10-27/。",
   "abba": true,
   "runs": 5,
   "warmup": 1,
@@ -8,11 +8,9 @@
   "corpus": "data/perf/corpus",
   "queries": "data/perf/queries.txt",
   "configs": [
-    { "id": "fp32-wasm", "backend": "wasm", "dtype": "fp32", "batch": 16, "refresh": "last", "cold": false },
-    { "id": "q8-wasm", "backend": "wasm", "dtype": "q8", "batch": 16, "refresh": "last", "cold": false },
-    { "id": "fp16-webgpu", "backend": "webgpu", "dtype": "fp16", "batch": 16, "refresh": "last", "cold": false },
-    { "id": "q8-wasm-batch1", "backend": "wasm", "dtype": "q8", "batch": 1, "refresh": "last", "cold": false },
-    { "id": "q8-wasm-refresh-each", "backend": "wasm", "dtype": "q8", "batch": 16, "refresh": "each", "cold": false },
-    { "id": "cold-q8-wasm", "backend": "wasm", "dtype": "q8", "batch": 16, "refresh": "last", "cold": true }
+    { "id": "fp32-wasm", "backend": "wasm", "dtype": "fp32", "batch": 32, "threads": 8, "refresh": "last", "cold": false },
+    { "id": "q8-wasm", "backend": "wasm", "dtype": "q8", "batch": 32, "threads": 8, "refresh": "last", "cold": false },
+    { "id": "fp16-webgpu", "backend": "webgpu", "dtype": "fp16", "batch": 32, "refresh": "last", "cold": false },
+    { "id": "cold-q8-wasm", "backend": "wasm", "dtype": "q8", "batch": 32, "threads": 8, "refresh": "last", "cold": true }
   ]
 }

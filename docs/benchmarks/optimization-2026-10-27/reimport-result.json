@@ -1,0 +1,34 @@
+{
+  "first": {
+    "readMs": 236.52499955892563,
+    "chunkMs": 1.5650001168251038,
+    "embedMs": 1633.504999935627,
+    "writeMs": 719.2399999499321,
+    "refreshMs": 502.86,
+    "cleanupMs": 0,
+    "totalMs": 2696.9599999785423
+  },
+  "second": {
+    "readMs": 74.86000007390976,
+    "chunkMs": 0.4650001525878906,
+    "embedMs": 0,
+    "writeMs": 0,
+    "refreshMs": 0,
+    "cleanupMs": 0.07499998807907104,
+    "totalMs": 101.05000001192093
+  },
+  "firstWallMs": 3025,
+  "secondWallMs": 114,
+  "metricsBefore": {
+    "TaskDuration": 0.25143,
+    "ScriptDuration": 0.074533,
+    "JSHeapUsedSize": 12653008,
+    "LayoutDuration": 0.035199
+  },
+  "metricsAfter": {
+    "TaskDuration": 2.699466,
+    "ScriptDuration": 0.226834,
+    "JSHeapUsedSize": 16601444,
+    "LayoutDuration": 0.077184
+  }
+}

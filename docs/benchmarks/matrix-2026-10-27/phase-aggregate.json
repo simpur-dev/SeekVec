@@ -1,0 +1,906 @@
+{
+  "generatedAt": "2026-10-27T11:54:45.293Z",
+  "source": [
+    "01-fp32-wasm",
+    "02-q8-wasm",
+    "03-fp16-webgpu",
+    "04-cold-q8-wasm",
+    "05-cold-q8-wasm",
+    "06-fp16-webgpu",
+    "07-q8-wasm",
+    "08-fp32-wasm"
+  ],
+  "configs": [
+    {
+      "id": "fp32-wasm",
+      "config": {
+        "baseUrl": "http://localhost:5173",
+        "apiUrl": "http://localhost:5173",
+        "backend": "wasm",
+        "dtype": "fp32",
+        "batch": 32,
+        "refresh": "last",
+        "models": null,
+        "runs": 5,
+        "warmup": 1,
+        "cold": false,
+        "out": "docs\\benchmarks\\matrix-2026-10-27\\01-fp32-wasm",
+        "corpus": "data\\perf\\corpus",
+        "queries": "data\\perf\\queries.txt",
+        "collection": "bench_matrix_20261027_195144_fp32_wasm_1",
+        "timeoutMs": 300000
+      },
+      "browser": {
+        "executablePath": "C:\\Users\\34928\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+        "source": "上次成功（缓存）",
+        "userDataDir": "E:\\2026ob_projects\\SeekVec\\scripts\\.cache\\bench-profile\\profile-chrome.exe",
+        "version": "Chrome/153.0.8010.12"
+      },
+      "page": {
+        "perfEnv": {
+          "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+          "platform": "win32",
+          "hardwareConcurrency": 28,
+          "deviceMemory": 16,
+          "gpuAdapter": null,
+          "backend": "wasm",
+          "backendReason": null,
+          "model": {
+            "key": "text_zh",
+            "id": "Xenova/bge-small-zh-v1.5",
+            "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+            "dtype": "fp32"
+          }
+        }
+      },
+      "runs": 12,
+      "phases": {
+        "model.download": {
+          "n": 2,
+          "median": 500.49,
+          "iqr": 203.3,
+          "min": 297.19,
+          "max": 703.78
+        },
+        "model.init": {
+          "n": 2,
+          "median": 708.4,
+          "iqr": 84.87,
+          "min": 623.53,
+          "max": 793.27
+        },
+        "model.total": {
+          "n": 2,
+          "median": 1208.89,
+          "iqr": 118.43,
+          "min": 1090.46,
+          "max": 1327.32
+        },
+        "doc.read": {
+          "n": 12,
+          "median": 0.5,
+          "iqr": 0.1,
+          "min": 0.39,
+          "max": 0.81
+        },
+        "doc.embed": {
+          "n": 12,
+          "median": 555.03,
+          "iqr": 25.25,
+          "min": 522.08,
+          "max": 580.59
+        },
+        "doc.write": {
+          "n": 12,
+          "median": 76.55,
+          "iqr": 10.58,
+          "min": 61.8,
+          "max": 84.34
+        },
+        "index.refresh": {
+          "n": 12,
+          "median": 503.06,
+          "iqr": 100.2,
+          "min": 402.54,
+          "max": 603.37
+        },
+        "ingest.total": {
+          "n": 12,
+          "median": 3058.31,
+          "iqr": 185.59,
+          "min": 2854.41,
+          "max": 3489.8
+        },
+        "query.embed": {
+          "n": 12,
+          "median": 5.26,
+          "iqr": 0.31,
+          "min": 4.79,
+          "max": 5.94
+        },
+        "query.http": {
+          "n": 12,
+          "median": 9.04,
+          "iqr": 0.67,
+          "min": 8.22,
+          "max": 9.95
+        },
+        "db.search": {
+          "n": 12,
+          "median": 2.74,
+          "iqr": 0.46,
+          "min": 2.56,
+          "max": 3.31
+        },
+        "query.e2e": {
+          "n": 12,
+          "median": 23,
+          "iqr": 0.5,
+          "min": 19.5,
+          "max": 23
+        }
+      },
+      "ingest": {
+        "readMs": {
+          "n": 12,
+          "median": 92.75,
+          "iqr": 18.29,
+          "min": 69.26,
+          "max": 245.53
+        },
+        "chunkMs": {
+          "n": 12,
+          "median": 0.67,
+          "iqr": 0.41,
+          "min": 0.31,
+          "max": 1.34
+        },
+        "embedMs": {
+          "n": 12,
+          "median": 2143.69,
+          "iqr": 109.18,
+          "min": 1993.76,
+          "max": 2376.08
+        },
+        "writeMs": {
+          "n": 12,
+          "median": 728.44,
+          "iqr": 102.83,
+          "min": 626.7,
+          "max": 854.97
+        },
+        "refreshMs": {
+          "n": 12,
+          "median": 503.06,
+          "iqr": 100.2,
+          "min": 402.54,
+          "max": 603.37
+        },
+        "cleanupMs": {
+          "n": 12,
+          "median": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0
+        },
+        "totalMs": {
+          "n": 12,
+          "median": 3058.31,
+          "iqr": 185.59,
+          "min": 2854.41,
+          "max": 3489.8
+        },
+        "wallMs": {
+          "n": 12,
+          "median": 3076,
+          "iqr": 209.75,
+          "min": 2870,
+          "max": 4776
+        }
+      },
+      "queries": {
+        "e2eMs": {
+          "n": 120,
+          "median": 23,
+          "iqr": 1,
+          "min": 17,
+          "max": 36
+        },
+        "embedMs": {
+          "n": 120,
+          "median": 5.27,
+          "iqr": 0.81,
+          "min": 3.73,
+          "max": 10.86
+        },
+        "httpMs": {
+          "n": 120,
+          "median": 9.15,
+          "iqr": 1.22,
+          "min": 7.21,
+          "max": 21.27
+        },
+        "dbMs": {
+          "n": 120,
+          "median": 2.78,
+          "iqr": 0.62,
+          "min": 2,
+          "max": 14.79
+        }
+      },
+      "throughput": {
+        "docsPerSec": 39.24,
+        "chunksPerSec": 55.98
+      }
+    },
+    {
+      "id": "q8-wasm",
+      "config": {
+        "baseUrl": "http://localhost:5173",
+        "apiUrl": "http://localhost:5173",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 32,
+        "refresh": "last",
+        "models": null,
+        "runs": 5,
+        "warmup": 1,
+        "cold": false,
+        "out": "docs\\benchmarks\\matrix-2026-10-27\\02-q8-wasm",
+        "corpus": "data\\perf\\corpus",
+        "queries": "data\\perf\\queries.txt",
+        "collection": "bench_matrix_20261027_195144_q8_wasm_2",
+        "timeoutMs": 300000
+      },
+      "browser": {
+        "executablePath": "C:\\Users\\34928\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+        "source": "上次成功（缓存）",
+        "userDataDir": "E:\\2026ob_projects\\SeekVec\\scripts\\.cache\\bench-profile\\profile-chrome.exe",
+        "version": "Chrome/153.0.8010.12"
+      },
+      "page": {
+        "perfEnv": {
+          "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+          "platform": "win32",
+          "hardwareConcurrency": 28,
+          "deviceMemory": 16,
+          "gpuAdapter": null,
+          "backend": "wasm",
+          "backendReason": null,
+          "model": {
+            "key": "text_zh",
+            "id": "Xenova/bge-small-zh-v1.5",
+            "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+            "dtype": "q8"
+          }
+        }
+      },
+      "runs": 12,
+      "phases": {
+        "model.download": {
+          "n": 2,
+          "median": 87.2,
+          "iqr": 3.52,
+          "min": 83.68,
+          "max": 90.72
+        },
+        "model.init": {
+          "n": 2,
+          "median": 388.25,
+          "iqr": 122.83,
+          "min": 265.43,
+          "max": 511.07
+        },
+        "model.total": {
+          "n": 2,
+          "median": 475.45,
+          "iqr": 119.3,
+          "min": 356.15,
+          "max": 594.75
+        },
+        "doc.read": {
+          "n": 12,
+          "median": 0.48,
+          "iqr": 0.11,
+          "min": 0.4,
+          "max": 0.8
+        },
+        "doc.embed": {
+          "n": 12,
+          "median": 411.98,
+          "iqr": 29.32,
+          "min": 388.29,
+          "max": 439.83
+        },
+        "doc.write": {
+          "n": 12,
+          "median": 69.07,
+          "iqr": 15.73,
+          "min": 62.3,
+          "max": 88.14
+        },
+        "index.refresh": {
+          "n": 12,
+          "median": 503.46,
+          "iqr": 125.11,
+          "min": 302.41,
+          "max": 603.38
+        },
+        "ingest.total": {
+          "n": 12,
+          "median": 2531.31,
+          "iqr": 94.25,
+          "min": 2410.87,
+          "max": 2717.07
+        },
+        "query.embed": {
+          "n": 12,
+          "median": 4.06,
+          "iqr": 0.42,
+          "min": 3.63,
+          "max": 5.45
+        },
+        "query.http": {
+          "n": 12,
+          "median": 8.18,
+          "iqr": 0.24,
+          "min": 7.94,
+          "max": 11.14
+        },
+        "db.search": {
+          "n": 12,
+          "median": 2.76,
+          "iqr": 0.09,
+          "min": 2.66,
+          "max": 3.19
+        },
+        "query.e2e": {
+          "n": 12,
+          "median": 18,
+          "iqr": 0,
+          "min": 18,
+          "max": 22.5
+        }
+      },
+      "ingest": {
+        "readMs": {
+          "n": 12,
+          "median": 89.37,
+          "iqr": 25.1,
+          "min": 70.24,
+          "max": 226.78
+        },
+        "chunkMs": {
+          "n": 12,
+          "median": 0.54,
+          "iqr": 0.31,
+          "min": 0.35,
+          "max": 1.24
+        },
+        "embedMs": {
+          "n": 12,
+          "median": 1588.36,
+          "iqr": 105.98,
+          "min": 1481.98,
+          "max": 1782.5
+        },
+        "writeMs": {
+          "n": 12,
+          "median": 763.91,
+          "iqr": 125.55,
+          "min": 558.84,
+          "max": 870.56
+        },
+        "refreshMs": {
+          "n": 12,
+          "median": 503.46,
+          "iqr": 125.11,
+          "min": 302.41,
+          "max": 603.38
+        },
+        "cleanupMs": {
+          "n": 12,
+          "median": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0
+        },
+        "totalMs": {
+          "n": 12,
+          "median": 2531.31,
+          "iqr": 94.25,
+          "min": 2410.87,
+          "max": 2717.07
+        },
+        "wallMs": {
+          "n": 12,
+          "median": 2547.5,
+          "iqr": 104.75,
+          "min": 2429,
+          "max": 3209
+        }
+      },
+      "queries": {
+        "e2eMs": {
+          "n": 120,
+          "median": 18,
+          "iqr": 4,
+          "min": 17,
+          "max": 32
+        },
+        "embedMs": {
+          "n": 120,
+          "median": 4.05,
+          "iqr": 0.98,
+          "min": 2.58,
+          "max": 5.89
+        },
+        "httpMs": {
+          "n": 120,
+          "median": 8.21,
+          "iqr": 1.18,
+          "min": 7.27,
+          "max": 18.82
+        },
+        "dbMs": {
+          "n": 120,
+          "median": 2.75,
+          "iqr": 0.33,
+          "min": 2.23,
+          "max": 7.56
+        }
+      },
+      "throughput": {
+        "docsPerSec": 47.41,
+        "chunksPerSec": 75.55
+      }
+    },
+    {
+      "id": "fp16-webgpu",
+      "config": {
+        "baseUrl": "http://localhost:5173",
+        "apiUrl": "http://localhost:5173",
+        "backend": "webgpu",
+        "dtype": "fp16",
+        "batch": 32,
+        "refresh": "last",
+        "models": null,
+        "runs": 5,
+        "warmup": 1,
+        "cold": false,
+        "out": "docs\\benchmarks\\matrix-2026-10-27\\03-fp16-webgpu",
+        "corpus": "data\\perf\\corpus",
+        "queries": "data\\perf\\queries.txt",
+        "collection": "bench_matrix_20261027_195144_fp16_webgpu_3",
+        "timeoutMs": 300000
+      },
+      "browser": {
+        "executablePath": "C:\\Users\\34928\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+        "source": "上次成功（缓存）",
+        "userDataDir": "E:\\2026ob_projects\\SeekVec\\scripts\\.cache\\bench-profile\\profile-chrome.exe",
+        "version": "Chrome/153.0.8010.12"
+      },
+      "page": {
+        "perfEnv": {
+          "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+          "platform": "win32",
+          "hardwareConcurrency": 28,
+          "deviceMemory": 16,
+          "gpuAdapter": {
+            "vendor": "nvidia",
+            "architecture": "lovelace"
+          },
+          "backend": "webgpu",
+          "backendReason": null,
+          "model": {
+            "key": "text_zh",
+            "id": "Xenova/bge-small-zh-v1.5",
+            "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+            "dtype": "fp16"
+          }
+        }
+      },
+      "runs": 12,
+      "phases": {
+        "model.download": {
+          "n": 2,
+          "median": 221.86,
+          "iqr": 125.1,
+          "min": 96.76,
+          "max": 346.96
+        },
+        "model.init": {
+          "n": 2,
+          "median": 503.03,
+          "iqr": 2.24,
+          "min": 500.79,
+          "max": 505.27
+        },
+        "model.total": {
+          "n": 2,
+          "median": 724.89,
+          "iqr": 127.35,
+          "min": 597.54,
+          "max": 852.24
+        },
+        "doc.read": {
+          "n": 12,
+          "median": 0.45,
+          "iqr": 0.06,
+          "min": 0.41,
+          "max": 0.84
+        },
+        "doc.embed": {
+          "n": 12,
+          "median": 64.51,
+          "iqr": 10.37,
+          "min": 53.73,
+          "max": 84.44
+        },
+        "doc.write": {
+          "n": 12,
+          "median": 69.06,
+          "iqr": 11.47,
+          "min": 55.04,
+          "max": 104.08
+        },
+        "index.refresh": {
+          "n": 12,
+          "median": 553.21,
+          "iqr": 100.26,
+          "min": 403.28,
+          "max": 803.14
+        },
+        "ingest.total": {
+          "n": 12,
+          "median": 1250.72,
+          "iqr": 186.98,
+          "min": 1094.07,
+          "max": 1887.22
+        },
+        "query.embed": {
+          "n": 12,
+          "median": 7.32,
+          "iqr": 1.16,
+          "min": 6.61,
+          "max": 9
+        },
+        "query.http": {
+          "n": 12,
+          "median": 7.33,
+          "iqr": 0.42,
+          "min": 6.68,
+          "max": 8.19
+        },
+        "db.search": {
+          "n": 12,
+          "median": 2.23,
+          "iqr": 0.25,
+          "min": 2.04,
+          "max": 2.71
+        },
+        "query.e2e": {
+          "n": 12,
+          "median": 23,
+          "iqr": 0,
+          "min": 21,
+          "max": 23
+        }
+      },
+      "ingest": {
+        "readMs": {
+          "n": 12,
+          "median": 89.21,
+          "iqr": 13.86,
+          "min": 70.96,
+          "max": 184.67
+        },
+        "chunkMs": {
+          "n": 12,
+          "median": 0.46,
+          "iqr": 0.18,
+          "min": 0.32,
+          "max": 1.31
+        },
+        "embedMs": {
+          "n": 12,
+          "median": 247.38,
+          "iqr": 46.66,
+          "min": 212.99,
+          "max": 755.99
+        },
+        "writeMs": {
+          "n": 12,
+          "median": 812.95,
+          "iqr": 132.86,
+          "min": 672.56,
+          "max": 1026.2
+        },
+        "refreshMs": {
+          "n": 12,
+          "median": 553.21,
+          "iqr": 100.26,
+          "min": 403.28,
+          "max": 803.14
+        },
+        "cleanupMs": {
+          "n": 12,
+          "median": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0.01
+        },
+        "totalMs": {
+          "n": 12,
+          "median": 1250.72,
+          "iqr": 186.98,
+          "min": 1094.07,
+          "max": 1887.22
+        },
+        "wallMs": {
+          "n": 12,
+          "median": 1266,
+          "iqr": 213,
+          "min": 1111,
+          "max": 2834
+        }
+      },
+      "queries": {
+        "e2eMs": {
+          "n": 120,
+          "median": 23,
+          "iqr": 4,
+          "min": 13,
+          "max": 106
+        },
+        "embedMs": {
+          "n": 120,
+          "median": 7.6,
+          "iqr": 2.46,
+          "min": 4.59,
+          "max": 87.33
+        },
+        "httpMs": {
+          "n": 120,
+          "median": 7.32,
+          "iqr": 1.5,
+          "min": 5.71,
+          "max": 15.2
+        },
+        "dbMs": {
+          "n": 120,
+          "median": 2.25,
+          "iqr": 0.61,
+          "min": 1.71,
+          "max": 10.72
+        }
+      },
+      "throughput": {
+        "docsPerSec": 95.94,
+        "chunksPerSec": 485.08
+      }
+    },
+    {
+      "id": "cold-q8-wasm",
+      "config": {
+        "baseUrl": "http://localhost:5173",
+        "apiUrl": "http://localhost:5173",
+        "backend": "wasm",
+        "dtype": "q8",
+        "batch": 32,
+        "refresh": "last",
+        "models": null,
+        "runs": 5,
+        "warmup": 1,
+        "cold": true,
+        "out": "docs\\benchmarks\\matrix-2026-10-27\\04-cold-q8-wasm",
+        "corpus": "data\\perf\\corpus",
+        "queries": "data\\perf\\queries.txt",
+        "collection": "bench_matrix_20261027_195144_cold_q8_wasm_4",
+        "timeoutMs": 300000
+      },
+      "browser": {
+        "executablePath": "C:\\Users\\34928\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
+        "source": "上次成功（缓存）",
+        "userDataDir": "E:\\2026ob_projects\\SeekVec\\scripts\\.cache\\bench-profile\\profile-chrome.exe",
+        "version": "Chrome/153.0.8010.12"
+      },
+      "page": {
+        "perfEnv": {
+          "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+          "platform": "win32",
+          "hardwareConcurrency": 28,
+          "deviceMemory": 16,
+          "gpuAdapter": null,
+          "backend": "wasm",
+          "backendReason": null,
+          "model": {
+            "key": "text_zh",
+            "id": "Xenova/bge-small-zh-v1.5",
+            "revision": "75c43b069aac4d136ba6bc1122f995fedcfd2781",
+            "dtype": "q8"
+          }
+        }
+      },
+      "runs": 12,
+      "phases": {
+        "model.download": {
+          "n": 12,
+          "median": 235.61,
+          "iqr": 20.83,
+          "min": 217.61,
+          "max": 265.75
+        },
+        "model.init": {
+          "n": 12,
+          "median": 212.52,
+          "iqr": 19.32,
+          "min": 194.6,
+          "max": 573.67
+        },
+        "model.total": {
+          "n": 12,
+          "median": 453.07,
+          "iqr": 38.67,
+          "min": 412.21,
+          "max": 797.21
+        },
+        "doc.read": {
+          "n": 12,
+          "median": 0.58,
+          "iqr": 0.08,
+          "min": 0.52,
+          "max": 0.76
+        },
+        "doc.embed": {
+          "n": 12,
+          "median": 428.79,
+          "iqr": 17.19,
+          "min": 396.28,
+          "max": 449.05
+        },
+        "doc.write": {
+          "n": 12,
+          "median": 67.35,
+          "iqr": 18.29,
+          "min": 52.65,
+          "max": 86.94
+        },
+        "index.refresh": {
+          "n": 12,
+          "median": 552.69,
+          "iqr": 124.81,
+          "min": 302.72,
+          "max": 803.49
+        },
+        "ingest.total": {
+          "n": 12,
+          "median": 2673.65,
+          "iqr": 206.55,
+          "min": 2417.37,
+          "max": 3018.79
+        },
+        "query.embed": {
+          "n": 12,
+          "median": 4.23,
+          "iqr": 0.33,
+          "min": 3.89,
+          "max": 5.13
+        },
+        "query.http": {
+          "n": 12,
+          "median": 9.03,
+          "iqr": 1,
+          "min": 7.72,
+          "max": 10.56
+        },
+        "db.search": {
+          "n": 12,
+          "median": 2.87,
+          "iqr": 0.27,
+          "min": 2.66,
+          "max": 3.26
+        },
+        "query.e2e": {
+          "n": 12,
+          "median": 21,
+          "iqr": 4.5,
+          "min": 18,
+          "max": 23
+        }
+      },
+      "ingest": {
+        "readMs": {
+          "n": 12,
+          "median": 113.21,
+          "iqr": 13.31,
+          "min": 97,
+          "max": 220.47
+        },
+        "chunkMs": {
+          "n": 12,
+          "median": 0.73,
+          "iqr": 0.08,
+          "min": 0.61,
+          "max": 1.14
+        },
+        "embedMs": {
+          "n": 12,
+          "median": 1656.79,
+          "iqr": 69.93,
+          "min": 1522.21,
+          "max": 1763.11
+        },
+        "writeMs": {
+          "n": 12,
+          "median": 796.17,
+          "iqr": 147.8,
+          "min": 550.73,
+          "max": 1036.4
+        },
+        "refreshMs": {
+          "n": 12,
+          "median": 552.69,
+          "iqr": 124.81,
+          "min": 302.72,
+          "max": 803.49
+        },
+        "cleanupMs": {
+          "n": 12,
+          "median": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0
+        },
+        "totalMs": {
+          "n": 12,
+          "median": 2673.65,
+          "iqr": 206.55,
+          "min": 2417.37,
+          "max": 3018.79
+        },
+        "wallMs": {
+          "n": 12,
+          "median": 3108.5,
+          "iqr": 169.75,
+          "min": 2858,
+          "max": 3566
+        }
+      },
+      "queries": {
+        "e2eMs": {
+          "n": 120,
+          "median": 21,
+          "iqr": 5,
+          "min": 13,
+          "max": 31
+        },
+        "embedMs": {
+          "n": 120,
+          "median": 4.3,
+          "iqr": 0.95,
+          "min": 2.96,
+          "max": 8.59
+        },
+        "httpMs": {
+          "n": 120,
+          "median": 9,
+          "iqr": 1.94,
+          "min": 7.1,
+          "max": 15.23
+        },
+        "dbMs": {
+          "n": 120,
+          "median": 2.84,
+          "iqr": 0.42,
+          "min": 2.09,
+          "max": 6.42
+        }
+      },
+      "throughput": {
+        "docsPerSec": 44.88,
+        "chunksPerSec": 72.43
+      }
+    }
+  ]
+}

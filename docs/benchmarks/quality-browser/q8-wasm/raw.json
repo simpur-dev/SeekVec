@@ -5,7 +5,7 @@
     "dtype": "q8",
     "baseline": false
   },
-  "collection": "qeval_q8_wasm_20261026_113711",
+  "collection": "qeval_q8_wasm_20261027_195456",
   "ok": true,
   "assertions": [
     {
@@ -46,7 +46,7 @@
   ],
   "pageErrors": [],
   "consoleErrors": [],
-  "startedAt": "2026-10-26T03:37:11.236Z",
+  "startedAt": "2026-10-27T11:54:56.862Z",
   "actual": {
     "backend": "wasm",
     "dtype": "q8",
@@ -64,69 +64,69 @@
   "ingest": {
     "count": 73,
     "times": {
-      "readMs": 178.8400000333786,
-      "chunkMs": 0.8599998950958252,
-      "embedMs": 2133.9950000047684,
-      "writeMs": 819.7000000476837,
-      "refreshMs": 508.35,
-      "cleanupMs": 678.5749999880791,
-      "totalMs": 3924.0050000548363
+      "readMs": 54.63500016927719,
+      "chunkMs": 0.3250000476837158,
+      "embedMs": 696.8349999189377,
+      "writeMs": 633.2399999499321,
+      "refreshMs": 503.07,
+      "cleanupMs": 0,
+      "totalMs": 1482.0799999833107
     }
   },
   "phases": {
     "model.download": {
       "n": 1,
-      "p50": 311.67,
-      "p95": 311.67,
-      "mean": 311.67
+      "p50": 71.84,
+      "p95": 71.84,
+      "mean": 71.84
     },
     "model.init": {
       "n": 1,
-      "p50": 318.86,
-      "p95": 318.86,
-      "mean": 318.86
+      "p50": 147.92,
+      "p95": 147.92,
+      "mean": 147.92
     },
     "model.total": {
       "n": 1,
-      "p50": 630.53,
-      "p95": 630.53,
-      "mean": 630.53
+      "p50": 219.76,
+      "p95": 219.76,
+      "mean": 219.76
     },
     "doc.read": {
       "n": 60,
-      "p50": 2.748,
-      "p95": 6.135,
-      "mean": 2.981
+      "p50": 0.535,
+      "p95": 1.945,
+      "mean": 0.911
     },
     "doc.chunk": {
       "n": 60,
-      "p50": 0.01,
-      "p95": 0.03,
-      "mean": 0.014
+      "p50": 0.005,
+      "p95": 0.01,
+      "mean": 0.005
     },
     "doc.embed": {
-      "n": 5,
-      "p50": 447.405,
-      "p95": 609.936,
-      "mean": 426.799
+      "n": 3,
+      "p50": 298.51,
+      "p95": 301.867,
+      "mean": 232.278
     },
     "doc.write": {
-      "n": 5,
-      "p50": 61.775,
-      "p95": 461.803,
-      "mean": 163.94
+      "n": 3,
+      "p50": 57.905,
+      "p95": 478.227,
+      "mean": 211.08
     },
     "index.refresh": {
       "n": 1,
-      "p50": 508.35,
-      "p95": 508.35,
-      "mean": 508.35
+      "p50": 503.07,
+      "p95": 503.07,
+      "mean": 503.07
     },
     "ingest.total": {
       "n": 1,
-      "p50": 3924.005,
-      "p95": 3924.005,
-      "mean": 3924.005
+      "p50": 1482.08,
+      "p95": 1482.08,
+      "mean": 1482.08
     }
   },
   "perfEnv": {
@@ -144,7 +144,7 @@
     },
     "seekdb": {
       "reachable": true,
-      "latencyMs": 4.99,
+      "latencyMs": 4.22,
       "version": "5.7.25-OceanBase seekdb-v1.4.0.0",
       "refreshIndexSupported": true
     }
@@ -159,64 +159,64 @@
       "vector": 40,
       "hybrid": 20
     },
-    "hitsInQrels": 154
+    "hitsInQrels": 155
   },
   "metrics": {
     "queries": 60,
-    "recallAt1": 0.2365,
-    "recallAt3": 0.4544,
-    "recallAt5": 0.5592,
-    "ndcgAt5": 0.7267,
-    "ndcgAt10": 0.7619,
-    "mrr": 0.8992
+    "recallAt1": 0.2332,
+    "recallAt3": 0.4628,
+    "recallAt5": 0.5744,
+    "ndcgAt5": 0.7299,
+    "ndcgAt10": 0.7659,
+    "mrr": 0.8894
   },
   "metricsByCategory": {
     "keyword": {
       "queries": 20,
       "recallAt1": 0.2642,
-      "recallAt3": 0.5017,
-      "recallAt5": 0.5642,
-      "ndcgAt5": 0.7968,
-      "ndcgAt10": 0.8298,
+      "recallAt3": 0.5183,
+      "recallAt5": 0.5767,
+      "ndcgAt5": 0.7945,
+      "ndcgAt10": 0.8333,
       "mrr": 0.95
     },
     "paraphrase": {
       "queries": 20,
       "recallAt1": 0.2375,
-      "recallAt3": 0.4625,
-      "recallAt5": 0.575,
-      "ndcgAt5": 0.7346,
-      "ndcgAt10": 0.7655,
-      "mrr": 0.86
+      "recallAt3": 0.4708,
+      "recallAt5": 0.5958,
+      "ndcgAt5": 0.7332,
+      "ndcgAt10": 0.7654,
+      "mrr": 0.8558
     },
     "semantic": {
       "queries": 20,
-      "recallAt1": 0.2079,
+      "recallAt1": 0.1979,
       "recallAt3": 0.3992,
-      "recallAt5": 0.5383,
-      "ndcgAt5": 0.6487,
-      "ndcgAt10": 0.6904,
-      "mrr": 0.8875
+      "recallAt5": 0.5508,
+      "ndcgAt5": 0.6621,
+      "ndcgAt10": 0.699,
+      "mrr": 0.8625
     }
   },
   "metricsByLang": {
     "en": {
       "queries": 20,
-      "recallAt1": 0.1763,
-      "recallAt3": 0.3133,
-      "recallAt5": 0.3942,
-      "ndcgAt5": 0.6679,
-      "ndcgAt10": 0.7147,
-      "mrr": 0.9017
+      "recallAt1": 0.1662,
+      "recallAt3": 0.3217,
+      "recallAt5": 0.4275,
+      "ndcgAt5": 0.6813,
+      "ndcgAt10": 0.7199,
+      "mrr": 0.8767
     },
     "zh": {
       "queries": 40,
       "recallAt1": 0.2667,
-      "recallAt3": 0.525,
-      "recallAt5": 0.6417,
-      "ndcgAt5": 0.7561,
-      "ndcgAt10": 0.7855,
-      "mrr": 0.8979
+      "recallAt3": 0.5333,
+      "recallAt5": 0.6479,
+      "ndcgAt5": 0.7542,
+      "ndcgAt10": 0.7889,
+      "mrr": 0.8958
     }
   },
   "queryRows": [
@@ -234,11 +234,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.97000002861023,
-      "embeddingMs": 10.264999985694885,
-      "httpMs": 17.97000002861023,
-      "dbMs": 4.58,
-      "e2eMs": 36,
+      "latencyMs": 9.59500002861023,
+      "embeddingMs": 4.615000009536743,
+      "httpMs": 9.59500002861023,
+      "dbMs": 4.21,
+      "e2eMs": 23,
       "recallAt1": 0.25,
       "recallAt3": 0.75,
       "recallAt5": 1,
@@ -249,61 +249,61 @@
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.27209308480106775,
+          "distance": 0.27587483052168205,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.3441265391926246,
+          "distance": 0.3304378592446018,
           "score": null
         },
         {
           "key": "zh-02.md#0",
           "id": "chunk_d03087",
-          "distance": 0.3586134865379048,
+          "distance": 0.3589396094643734,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.36017655846299557,
+          "distance": 0.36615085014983595,
           "score": null
         },
         {
           "key": "zh-37.md#0",
           "id": "chunk_wol916",
-          "distance": 0.39977080824723144,
+          "distance": 0.40261124481423327,
           "score": null
         },
         {
           "key": "en-01.md#0",
           "id": "chunk_c9iaju",
-          "distance": 0.41281930131797084,
+          "distance": 0.41750240325927324,
           "score": null
         },
         {
           "key": "zh-08.md#0",
           "id": "chunk_khipt1",
-          "distance": 0.42650617045090555,
+          "distance": 0.4246171541397852,
           "score": null
         },
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
-          "distance": 0.4412275552749594,
+          "distance": 0.44010008809563994,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.4487377940103605,
+          "distance": 0.44768224725655414,
           "score": null
         },
         {
           "key": "en-04.md#0",
           "id": "chunk_88nq5v",
-          "distance": 0.4578760589435056,
+          "distance": 0.45471266721856485,
           "score": null
         }
       ],
@@ -328,76 +328,76 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 14.389999985694885,
-      "embeddingMs": 6.6700000166893005,
-      "httpMs": 14.389999985694885,
-      "dbMs": 2.13,
-      "e2eMs": 28,
+      "latencyMs": 7.629999995231628,
+      "embeddingMs": 3.8949999809265137,
+      "httpMs": 7.629999995231628,
+      "dbMs": 2.69,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.6666666666666666,
       "ndcgAt5": 0.7852134991855584,
-      "ndcgAt10": 0.8814340589326981,
+      "ndcgAt10": 0.8762761202602143,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
-          "distance": 0.4344344476201967,
+          "distance": 0.4291284084319703,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.469637271122592,
+          "distance": 0.46812811683840194,
           "score": null
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
-          "distance": 0.4843320576550115,
+          "distance": 0.48129019029675746,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.48649981698390443,
+          "distance": 0.48453694397650016,
           "score": null
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
-          "distance": 0.4885519133271923,
+          "distance": 0.48673568310204385,
           "score": null
         },
         {
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
-          "distance": 0.49096934255135105,
-          "score": null
-        },
-        {
-          "key": "zh-05.md#0",
-          "id": "chunk_13piie2",
-          "distance": 0.4960391221069542,
+          "distance": 0.4911893585179671,
           "score": null
         },
         {
           "key": "en-02.md#1",
           "id": "chunk_phni2r",
-          "distance": 0.5004115700721421,
+          "distance": 0.49168982953246543,
           "score": null
         },
         {
-          "key": "en-01.md#0",
-          "id": "chunk_c9iaju",
-          "distance": 0.5036525434826313,
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
+          "distance": 0.495827850695471,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.5057701930979392,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.5058449506759328,
+          "distance": 0.5091373627863525,
           "score": null
         }
       ],
@@ -422,76 +422,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 14.240000009536743,
-      "embeddingMs": 11.0450000166893,
-      "httpMs": 14.240000009536743,
-      "dbMs": 2.06,
-      "e2eMs": 32,
+      "latencyMs": 7.075000047683716,
+      "embeddingMs": 4.120000004768372,
+      "httpMs": 7.075000047683716,
+      "dbMs": 2.43,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.25,
-      "recallAt5": 0.25,
-      "ndcgAt5": 0.6467429303328278,
-      "ndcgAt10": 0.7454748503310519,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.7539690666864055,
+      "ndcgAt10": 0.7539690666864055,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-09.md#0",
           "id": "chunk_1sm3p7r",
-          "distance": 0.4088780175302049,
+          "distance": 0.4105138075964222,
           "score": null
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.4641202368807924,
+          "distance": 0.4625395856774014,
           "score": null
         },
         {
           "key": "zh-17.md#0",
           "id": "chunk_65zrja",
-          "distance": 0.47020301755610416,
+          "distance": 0.4686957597732506,
           "score": null
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
-          "distance": 0.49548031295425066,
-          "score": null
-        },
-        {
-          "key": "zh-06.md#0",
-          "id": "chunk_ek9ow",
-          "distance": 0.5090788288571326,
+          "distance": 0.4949099108308207,
           "score": null
         },
         {
           "key": "zh-11.md#0",
           "id": "chunk_1afivyq",
-          "distance": 0.5113579597001963,
+          "distance": 0.50549328392664,
+          "score": null
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": 0.5115282223786903,
           "score": null
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
-          "distance": 0.5179545283317532,
-          "score": null
-        },
-        {
-          "key": "zh-04.md#0",
-          "id": "chunk_5bgxvj",
-          "distance": 0.5185058977891175,
+          "distance": 0.5167842383361216,
           "score": null
         },
         {
           "key": "zh-26.md#0",
           "id": "chunk_cgql4w",
-          "distance": 0.5291513519973361,
+          "distance": 0.519403549361652,
           "score": null
         },
         {
-          "key": "zh-36.md#0",
-          "id": "chunk_lvix92",
-          "distance": 0.5304885750135139,
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": 0.523182928562161,
+          "score": null
+        },
+        {
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": 0.5273954553964387,
           "score": null
         }
       ],
@@ -516,76 +516,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.805000007152557,
-      "embeddingMs": 11.394999980926514,
-      "httpMs": 17.805000007152557,
-      "dbMs": 2.24,
-      "e2eMs": 38,
+      "latencyMs": 7.480000019073486,
+      "embeddingMs": 3.7299999594688416,
+      "httpMs": 7.480000019073486,
+      "dbMs": 2.67,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.75,
       "recallAt5": 0.75,
-      "ndcgAt5": 0.668044114658964,
-      "ndcgAt10": 0.668044114658964,
+      "ndcgAt5": 0.833953368652663,
+      "ndcgAt10": 0.833953368652663,
       "mrr": 1,
       "topHits": [
         {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": 0.3015971391916752,
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.3035036144552151,
           "score": null
         },
         {
-          "key": "zh-14.md#0",
-          "id": "chunk_fsgpph",
-          "distance": 0.3095599412917649,
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.304436880614511,
           "score": null
         },
         {
           "key": "zh-15.md#0",
           "id": "chunk_1s3i9ls",
-          "distance": 0.38405047464965425,
-          "score": null
-        },
-        {
-          "key": "zh-08.md#0",
-          "id": "chunk_khipt1",
-          "distance": 0.4086748579323588,
+          "distance": 0.3759293480045669,
           "score": null
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
-          "distance": 0.410366496952411,
+          "distance": 0.4061826709617259,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.40936147486909813,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.4271829730104907,
-          "score": null
-        },
-        {
-          "key": "zh-37.md#0",
-          "id": "chunk_wol916",
-          "distance": 0.42818846030510016,
+          "distance": 0.41956697352522154,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.4314273583894058,
+          "distance": 0.425668018897048,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.4258484321379715,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.43208544490175005,
+          "distance": 0.42974012203808865,
           "score": null
         },
         {
-          "key": "zh-29.md#0",
-          "id": "chunk_o6grkb",
-          "distance": 0.4323767407752751,
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.4351754160983604,
           "score": null
         }
       ],
@@ -610,76 +610,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.705000042915344,
-      "embeddingMs": 10.870000004768372,
-      "httpMs": 16.705000042915344,
-      "dbMs": 2.77,
-      "e2eMs": 37,
+      "latencyMs": 7.2700000405311584,
+      "embeddingMs": 4.214999973773956,
+      "httpMs": 7.2700000405311584,
+      "dbMs": 2.54,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
-      "recallAt5": 0.75,
-      "ndcgAt5": 0.7209669446813779,
-      "ndcgAt10": 0.7209669446813779,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.6852248992301853,
+      "ndcgAt10": 0.7181355392295933,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.38133028856931284,
+          "distance": 0.37240641610507563,
           "score": null
         },
         {
           "key": "zh-17.md#0",
           "id": "chunk_65zrja",
-          "distance": 0.400042116629437,
+          "distance": 0.3960055236809822,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.4393725873909541,
-          "score": null
-        },
-        {
-          "key": "zh-01.md#0",
-          "id": "chunk_1v84v4l",
-          "distance": 0.43939144141776065,
-          "score": null
-        },
-        {
-          "key": "zh-20.md#0",
-          "id": "chunk_1e53zjm",
-          "distance": 0.4424262516420241,
+          "distance": 0.43770552424126574,
           "score": null
         },
         {
           "key": "zh-08.md#0",
           "id": "chunk_khipt1",
-          "distance": 0.4478228750440031,
+          "distance": 0.4381688665797906,
+          "score": null
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": 0.44377069360890287,
+          "score": null
+        },
+        {
+          "key": "zh-20.md#0",
+          "id": "chunk_1e53zjm",
+          "distance": 0.4457484943424094,
           "score": null
         },
         {
           "key": "zh-35.md#0",
           "id": "chunk_1qlx32d",
-          "distance": 0.4639615054061482,
-          "score": null
-        },
-        {
-          "key": "en-17.md#0",
-          "id": "chunk_1ugub7s",
-          "distance": 0.47417375907174986,
+          "distance": 0.46173758683051,
           "score": null
         },
         {
           "key": "zh-09.md#0",
           "id": "chunk_1sm3p7r",
-          "distance": 0.47671139240264526,
+          "distance": 0.4730198979377709,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.4803018546464122,
+          "distance": 0.47722062332752246,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.47784200706922786,
           "score": null
         }
       ],
@@ -704,11 +704,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.719999969005585,
-      "embeddingMs": 8.219999969005585,
-      "httpMs": 12.719999969005585,
-      "dbMs": 2.25,
-      "e2eMs": 27,
+      "latencyMs": 7.335000038146973,
+      "embeddingMs": 4.149999976158142,
+      "httpMs": 7.335000038146973,
+      "dbMs": 2.52,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
       "recallAt5": 0.75,
@@ -719,61 +719,61 @@
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
-          "distance": 0.2893368350668949,
+          "distance": 0.2888109339700814,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.31247919611446795,
+          "distance": 0.3112388517740211,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.38231173859167666,
+          "distance": 0.38489387125408436,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.401208650921727,
+          "distance": 0.3935062054689903,
           "score": null
         },
         {
           "key": "zh-25.md#0",
           "id": "chunk_1km16vm",
-          "distance": 0.4020577306609413,
+          "distance": 0.40558574332850594,
           "score": null
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
-          "distance": 0.43594418884982067,
+          "distance": 0.4352580645526519,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.4494905264096266,
-          "score": null
-        },
-        {
-          "key": "zh-26.md#0",
-          "id": "chunk_cgql4w",
-          "distance": 0.4568745766207314,
+          "distance": 0.4535485831768078,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.4573900103568992,
+          "distance": 0.4551554700453987,
           "score": null
         },
         {
           "key": "zh-02.md#0",
           "id": "chunk_d03087",
-          "distance": 0.4595376575268625,
+          "distance": 0.455886266688036,
+          "score": null
+        },
+        {
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4586609552694506,
           "score": null
         }
       ],
@@ -798,76 +798,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.149999976158142,
-      "embeddingMs": 8.689999997615814,
-      "httpMs": 12.149999976158142,
-      "dbMs": 2.01,
-      "e2eMs": 23,
+      "latencyMs": 8.040000021457672,
+      "embeddingMs": 4.7200000286102295,
+      "httpMs": 8.040000021457672,
+      "dbMs": 2.6,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
       "recallAt5": 0.5,
       "ndcgAt5": 0.26727014332996396,
-      "ndcgAt10": 0.4828511201075732,
+      "ndcgAt10": 0.4976446233258201,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-25.md#0",
           "id": "chunk_1km16vm",
-          "distance": 0.4336506782259869,
+          "distance": 0.4374145604720484,
           "score": null
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
-          "distance": 0.4503267107446687,
-          "score": null
-        },
-        {
-          "key": "zh-33.md#0",
-          "id": "chunk_if0ern",
-          "distance": 0.4723943852202852,
+          "distance": 0.44982429153050096,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.4827476205536255,
+          "distance": 0.47092146721310224,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.47129499912255957,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.49339843111113013,
-          "score": null
-        },
-        {
-          "key": "en-04.md#1",
-          "id": "chunk_p6qq06",
-          "distance": 0.511956124785135,
+          "distance": 0.4871618778319504,
           "score": null
         },
         {
           "key": "zh-27.md#0",
           "id": "chunk_1cjq5k3",
-          "distance": 0.5131282484897907,
+          "distance": 0.5031522212533386,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.5158847802166059,
-          "score": null
-        },
-        {
-          "key": "zh-22.md#0",
-          "id": "chunk_glwmjs",
-          "distance": 0.5238353269394436,
+          "distance": 0.5131790292814831,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.5248004481314932,
+          "distance": 0.5185576588832574,
+          "score": null
+        },
+        {
+          "key": "en-04.md#1",
+          "id": "chunk_p6qq06",
+          "distance": 0.5190223123391094,
+          "score": null
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.5235225502198679,
           "score": null
         }
       ],
@@ -892,11 +892,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.6700000166893,
-      "embeddingMs": 9.125,
-      "httpMs": 12.6700000166893,
-      "dbMs": 2.16,
-      "e2eMs": 28,
+      "latencyMs": 8,
+      "embeddingMs": 3.9549999833106995,
+      "httpMs": 8,
+      "dbMs": 2.56,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
       "recallAt5": 0.75,
@@ -907,61 +907,61 @@
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.3755923061856459,
+          "distance": 0.3750388622283758,
           "score": null
         },
         {
           "key": "zh-31.md#0",
           "id": "chunk_7mxvrm",
-          "distance": 0.40811454823022575,
+          "distance": 0.41711084058543224,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.46046767539794164,
+          "distance": 0.4616112204524333,
           "score": null
         },
         {
           "key": "zh-30.md#0",
           "id": "chunk_zo78zc",
-          "distance": 0.47771513196409954,
-          "score": null
-        },
-        {
-          "key": "zh-23.md#0",
-          "id": "chunk_1gk2brc",
-          "distance": 0.48036185024009725,
+          "distance": 0.47230332759658056,
           "score": null
         },
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
-          "distance": 0.48107161779492125,
+          "distance": 0.47479149849463165,
           "score": null
         },
         {
-          "key": "zh-12.md#0",
-          "id": "chunk_1yam2yy",
-          "distance": 0.4892344144685302,
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.4772404432296604,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.4916990672645164,
+          "distance": 0.48154413260081597,
           "score": null
         },
         {
-          "key": "zh-38.md#0",
-          "id": "chunk_1q2byct",
-          "distance": 0.4937115900172663,
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.4893899851673751,
           "score": null
         },
         {
           "key": "zh-05.md#0",
           "id": "chunk_13piie2",
-          "distance": 0.4979358315467691,
+          "distance": 0.4923046478837958,
+          "score": null
+        },
+        {
+          "key": "zh-38.md#0",
+          "id": "chunk_1q2byct",
+          "distance": 0.4956282081825385,
           "score": null
         }
       ],
@@ -986,11 +986,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.775000035762787,
-      "embeddingMs": 9.509999990463257,
-      "httpMs": 11.775000035762787,
-      "dbMs": 1.98,
-      "e2eMs": 27,
+      "latencyMs": 7.629999995231628,
+      "embeddingMs": 3.5799999833106995,
+      "httpMs": 7.629999995231628,
+      "dbMs": 2.48,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0,
       "recallAt5": 0,
@@ -1001,61 +1001,61 @@
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.3904551369765549,
+          "distance": 0.3864419731039891,
           "score": null
         },
         {
           "key": "zh-10.md#0",
           "id": "chunk_10djblf",
-          "distance": 0.4656572978905046,
+          "distance": 0.45655163345663274,
           "score": null
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
-          "distance": 0.47330443163281566,
-          "score": null
-        },
-        {
-          "key": "zh-31.md#0",
-          "id": "chunk_7mxvrm",
-          "distance": 0.4849090115644623,
+          "distance": 0.4776191062018976,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.4893424536365236,
+          "distance": 0.4814700793343726,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.48834472755726543,
           "score": null
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
-          "distance": 0.49069735463277286,
+          "distance": 0.4905448533403379,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.49601674174861865,
-          "score": null
-        },
-        {
-          "key": "zh-29.md#0",
-          "id": "chunk_o6grkb",
-          "distance": 0.5028526776188047,
+          "distance": 0.4950559735298157,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.5057484500708008,
+          "distance": 0.5033034976358977,
+          "score": null
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.5056722753438586,
           "score": null
         },
         {
           "key": "zh-36.md#0",
           "id": "chunk_lvix92",
-          "distance": 0.5098677850084679,
+          "distance": 0.5057278576927091,
           "score": null
         }
       ],
@@ -1080,76 +1080,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.649999976158142,
-      "embeddingMs": 9.425000011920929,
-      "httpMs": 11.649999976158142,
-      "dbMs": 1.89,
-      "e2eMs": 23,
+      "latencyMs": 8.104999959468842,
+      "embeddingMs": 3.5550000071525574,
+      "httpMs": 8.104999959468842,
+      "dbMs": 2.87,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.25,
-      "recallAt5": 0.25,
-      "ndcgAt5": 0.7125794632086186,
-      "ndcgAt10": 0.7488403098058309,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.7519599440257524,
+      "ndcgAt10": 0.7519599440257524,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-37.md#0",
           "id": "chunk_wol916",
-          "distance": 0.353682195262381,
+          "distance": 0.3503395767030443,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.4327996275426057,
+          "distance": 0.43606572268434585,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.4474612599703607,
+          "distance": 0.4454617429833283,
           "score": null
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
-          "distance": 0.4629097669339698,
-          "score": null
-        },
-        {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": 0.46553696794694865,
+          "distance": 0.4614701546114307,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.4731675796405629,
+          "distance": 0.46645805839453236,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4692655485430225,
           "score": null
         },
         {
           "key": "zh-13.md#0",
           "id": "chunk_1n1vobz",
-          "distance": 0.4789279203758582,
+          "distance": 0.4763320456945751,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.48267834043396574,
           "score": null
         },
         {
           "key": "zh-36.md#0",
           "id": "chunk_lvix92",
-          "distance": 0.482402302216522,
+          "distance": 0.4828619977400158,
           "score": null
         },
         {
-          "key": "zh-04.md#0",
-          "id": "chunk_5bgxvj",
-          "distance": 0.48746201919113696,
-          "score": null
-        },
-        {
-          "key": "zh-18.md#0",
-          "id": "chunk_1mdst8",
-          "distance": 0.48868295752710045,
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.4848450765475394,
           "score": null
         }
       ],
@@ -1174,11 +1174,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.740000009536743,
-      "embeddingMs": 10.879999995231628,
-      "httpMs": 11.740000009536743,
-      "dbMs": 2.26,
-      "e2eMs": 28,
+      "latencyMs": 6.959999978542328,
+      "embeddingMs": 4.4200000166893005,
+      "httpMs": 6.959999978542328,
+      "dbMs": 2.37,
+      "e2eMs": 13,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -1189,61 +1189,61 @@
         {
           "key": "zh-37.md#0",
           "id": "chunk_wol916",
-          "distance": 0.3180370709940086,
+          "distance": 0.31583729232607516,
           "score": null
         },
         {
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
-          "distance": 0.36163199706935545,
+          "distance": 0.36480232830102666,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.37051886320110106,
+          "distance": 0.37041630568598727,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.387539065626862,
+          "distance": 0.3835115522464807,
           "score": null
         },
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
-          "distance": 0.4171905864959098,
+          "distance": 0.41269457340236726,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.4250808864928185,
+          "distance": 0.42175093759585724,
           "score": null
         },
         {
           "key": "zh-05.md#0",
           "id": "chunk_13piie2",
-          "distance": 0.43538155766613107,
-          "score": null
-        },
-        {
-          "key": "zh-22.md#0",
-          "id": "chunk_glwmjs",
-          "distance": 0.44755344332538294,
+          "distance": 0.43393833680507155,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.449297827231107,
+          "distance": 0.4385386224206147,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.4498622417449599,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.4523204891490168,
+          "distance": 0.45763823137508797,
           "score": null
         }
       ],
@@ -1268,11 +1268,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.064999997615814,
-      "embeddingMs": 8.014999985694885,
-      "httpMs": 11.064999997615814,
-      "dbMs": 1.68,
-      "e2eMs": 28,
+      "latencyMs": 7.560000002384186,
+      "embeddingMs": 4.115000009536743,
+      "httpMs": 7.560000002384186,
+      "dbMs": 2.51,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0,
       "recallAt5": 0.3333333333333333,
@@ -1283,61 +1283,61 @@
         {
           "key": "zh-09.md#0",
           "id": "chunk_1sm3p7r",
-          "distance": 0.30693777716899606,
+          "distance": 0.31054171198107283,
           "score": null
         },
         {
           "key": "zh-08.md#0",
           "id": "chunk_khipt1",
-          "distance": 0.3162395796204567,
+          "distance": 0.31581694044316866,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.34458223509337516,
+          "distance": 0.341666140159092,
           "score": null
         },
         {
           "key": "zh-12.md#0",
           "id": "chunk_1yam2yy",
-          "distance": 0.3770459890365202,
+          "distance": 0.3816659732661267,
           "score": null
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
-          "distance": 0.38523309494856295,
-          "score": null
-        },
-        {
-          "key": "zh-15.md#0",
-          "id": "chunk_1s3i9ls",
-          "distance": 0.39964609141892415,
+          "distance": 0.38496138036709704,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.40195274353023525,
+          "distance": 0.3989071012194425,
+          "score": null
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.40186654295922586,
           "score": null
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
-          "distance": 0.4085457501248474,
+          "distance": 0.41360666832958537,
           "score": null
         },
         {
           "key": "zh-19.md#0",
           "id": "chunk_1ugvv68",
-          "distance": 0.41283766611210115,
+          "distance": 0.41421005217669526,
           "score": null
         },
         {
           "key": "zh-10.md#0",
           "id": "chunk_10djblf",
-          "distance": 0.4317768121430827,
+          "distance": 0.42943590879436655,
           "score": null
         }
       ],
@@ -1362,76 +1362,76 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.459999978542328,
-      "embeddingMs": 8.72000002861023,
-      "httpMs": 11.459999978542328,
-      "dbMs": 1.83,
-      "e2eMs": 23,
+      "latencyMs": 7.5,
+      "embeddingMs": 3.6200000047683716,
+      "httpMs": 7.5,
+      "dbMs": 2.18,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
-      "ndcgAt5": 0.7984848580994974,
-      "ndcgAt10": 0.7984848580994974,
+      "ndcgAt5": 0.8124242481930318,
+      "ndcgAt10": 0.8124242481930318,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-24.md#0",
           "id": "chunk_ts00v9",
-          "distance": 0.38369058662224265,
-          "score": null
-        },
-        {
-          "key": "zh-29.md#0",
-          "id": "chunk_o6grkb",
-          "distance": 0.44072538107170556,
+          "distance": 0.3765042199787686,
           "score": null
         },
         {
           "key": "zh-26.md#0",
           "id": "chunk_cgql4w",
-          "distance": 0.4491976888422242,
+          "distance": 0.4429841705579396,
           "score": null
         },
         {
-          "key": "zh-23.md#0",
-          "id": "chunk_1gk2brc",
-          "distance": 0.45351185077004996,
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": 0.4445765481661107,
           "score": null
         },
         {
           "key": "zh-31.md#0",
           "id": "chunk_7mxvrm",
-          "distance": 0.45474432813424936,
+          "distance": 0.4504256576045712,
+          "score": null
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": 0.45488326105974186,
           "score": null
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.4603314172628882,
+          "distance": 0.46062944512681714,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.46133916202937664,
+          "distance": 0.4627648680770674,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.471825182437863,
-          "score": null
-        },
-        {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": 0.4736784853434731,
+          "distance": 0.46963332370321265,
           "score": null
         },
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
-          "distance": 0.47445319168732425,
+          "distance": 0.47367931353593584,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.4753670379737778,
           "score": null
         }
       ],
@@ -1456,11 +1456,11 @@
       "relevantCount": 8,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.759999990463257,
-      "embeddingMs": 11.054999947547913,
-      "httpMs": 11.759999990463257,
-      "dbMs": 2.01,
-      "e2eMs": 28,
+      "latencyMs": 7.034999966621399,
+      "embeddingMs": 4.555000007152557,
+      "httpMs": 7.034999966621399,
+      "dbMs": 2.18,
+      "e2eMs": 19,
       "recallAt1": 0.125,
       "recallAt3": 0.25,
       "recallAt5": 0.25,
@@ -1471,61 +1471,61 @@
         {
           "key": "en-04.md#0",
           "id": "chunk_88nq5v",
-          "distance": 0.20734219726135794,
+          "distance": 0.21310147203219532,
           "score": null
         },
         {
           "key": "en-01.md#0",
           "id": "chunk_c9iaju",
-          "distance": 0.22707151819978377,
+          "distance": 0.23031283328318353,
           "score": null
         },
         {
           "key": "en-17.md#0",
           "id": "chunk_1ugub7s",
-          "distance": 0.27576819369409145,
+          "distance": 0.28205756957881456,
           "score": null
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
-          "distance": 0.2917017688395248,
+          "distance": 0.2892776304052229,
           "score": null
         },
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
-          "distance": 0.30637752045780664,
+          "distance": 0.305430319514427,
           "score": null
         },
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
-          "distance": 0.3096057957175248,
+          "distance": 0.3148133313210606,
           "score": null
         },
         {
           "key": "en-03.md#0",
           "id": "chunk_k9ue02",
-          "distance": 0.31933609477707503,
+          "distance": 0.3197102522331625,
           "score": null
         },
         {
           "key": "en-15.md#0",
           "id": "chunk_112x50k",
-          "distance": 0.3236607102942881,
+          "distance": 0.32470929468437315,
           "score": null
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
-          "distance": 0.3328065870308544,
+          "distance": 0.3306752030105561,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.33664935886547465,
+          "distance": 0.3376922607421122,
           "score": null
         }
       ],
@@ -1550,76 +1550,76 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13.524999976158142,
-      "embeddingMs": 7.564999997615814,
-      "httpMs": 13.524999976158142,
-      "dbMs": 2.43,
-      "e2eMs": 23,
+      "latencyMs": 7.060000002384186,
+      "embeddingMs": 4.129999995231628,
+      "httpMs": 7.060000002384186,
+      "dbMs": 2.4,
+      "e2eMs": 18,
       "recallAt1": 0.16666666666666666,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.5,
-      "ndcgAt5": 0.292555651392097,
-      "ndcgAt10": 0.2835459947900571,
+      "ndcgAt5": 0.3623096226914298,
+      "ndcgAt10": 0.35115179590349516,
       "mrr": 1,
       "topHits": [
         {
-          "key": "en-01.md#0",
-          "id": "chunk_c9iaju",
-          "distance": 0.29335611024947295,
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.2956705228076446,
           "score": null
         },
         {
-          "key": "en-04.md#0",
-          "id": "chunk_88nq5v",
-          "distance": 0.29546253789362387,
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.2956959672517522,
           "score": null
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
-          "distance": 0.30873645231611746,
-          "score": null
-        },
-        {
-          "key": "en-12.md#0",
-          "id": "chunk_1tsmbbh",
-          "distance": 0.31036321869771455,
+          "distance": 0.3126236684104383,
           "score": null
         },
         {
           "key": "en-01.md#1",
           "id": "chunk_k30s82",
-          "distance": 0.3115771168778655,
+          "distance": 0.31335873126074854,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.3160248272315377,
           "score": null
         },
         {
           "key": "en-03.md#0",
           "id": "chunk_k9ue02",
-          "distance": 0.31999457359507544,
-          "score": null
-        },
-        {
-          "key": "en-17.md#0",
-          "id": "chunk_1ugub7s",
-          "distance": 0.3375656589630822,
+          "distance": 0.3207864997427058,
           "score": null
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
-          "distance": 0.3400445175117407,
+          "distance": 0.3356721205319322,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.34021284039346344,
           "score": null
         },
         {
           "key": "en-16.md#0",
           "id": "chunk_1fcuiwf",
-          "distance": 0.34300561284751274,
+          "distance": 0.3406064713361787,
           "score": null
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
-          "distance": 0.3446729142643473,
+          "distance": 0.3425605655953897,
           "score": null
         }
       ],
@@ -1644,76 +1644,76 @@
       "relevantCount": 5,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.0799999833107,
-      "embeddingMs": 11.134999990463257,
-      "httpMs": 12.0799999833107,
-      "dbMs": 2.43,
-      "e2eMs": 28,
-      "recallAt1": 0.2,
+      "latencyMs": 6.944999992847443,
+      "embeddingMs": 4.350000023841858,
+      "httpMs": 6.944999992847443,
+      "dbMs": 2.33,
+      "e2eMs": 18,
+      "recallAt1": 0,
       "recallAt3": 0.4,
       "recallAt5": 0.6,
-      "ndcgAt5": 0.6088807730827119,
-      "ndcgAt10": 0.6088807730827119,
-      "mrr": 1,
+      "ndcgAt5": 0.4318734035570123,
+      "ndcgAt10": 0.4318734035570123,
+      "mrr": 0.5,
       "topHits": [
-        {
-          "key": "en-05.md#0",
-          "id": "chunk_1v9i2qy",
-          "distance": 0.26180998910605846,
-          "score": null
-        },
         {
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
-          "distance": 0.266383334017792,
+          "distance": 0.260837148078645,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.2644308243824547,
           "score": null
         },
         {
           "key": "en-06.md#0",
           "id": "chunk_1grx4xo",
-          "distance": 0.27518942051310125,
+          "distance": 0.27742576599120583,
           "score": null
         },
         {
           "key": "en-17.md#0",
           "id": "chunk_1ugub7s",
-          "distance": 0.3144332204282474,
+          "distance": 0.3155036176591006,
           "score": null
         },
         {
           "key": "en-08.md#0",
           "id": "chunk_k44xa4",
-          "distance": 0.31899581181951153,
+          "distance": 0.31881797573244886,
           "score": null
         },
         {
           "key": "en-13.md#0",
           "id": "chunk_11r6h36",
-          "distance": 0.3251780450768147,
+          "distance": 0.32339886794682193,
           "score": null
         },
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
-          "distance": 0.32981566671951135,
+          "distance": 0.3310816686700768,
           "score": null
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
-          "distance": 0.3350824111405144,
+          "distance": 0.3330829143524122,
           "score": null
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
-          "distance": 0.34430642595694627,
+          "distance": 0.34136666902103974,
           "score": null
         },
         {
           "key": "en-11.md#1",
           "id": "chunk_ngbktf",
-          "distance": 0.3558779358863785,
+          "distance": 0.3467276875105276,
           "score": null
         }
       ],
@@ -1738,11 +1738,11 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 14.8299999833107,
-      "embeddingMs": 11.995000004768372,
-      "httpMs": 14.8299999833107,
-      "dbMs": 2.38,
-      "e2eMs": 33,
+      "latencyMs": 6.4799999594688416,
+      "embeddingMs": 3.200000047683716,
+      "httpMs": 6.4799999594688416,
+      "dbMs": 2.12,
+      "e2eMs": 18,
       "recallAt1": 0.16666666666666666,
       "recallAt3": 0.16666666666666666,
       "recallAt5": 0.5,
@@ -1753,61 +1753,61 @@
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
-          "distance": 0.2681791622531796,
+          "distance": 0.2684689440168001,
           "score": null
         },
         {
           "key": "en-12.md#0",
           "id": "chunk_1tsmbbh",
-          "distance": 0.2746512457520499,
+          "distance": 0.27157345156984025,
           "score": null
         },
         {
           "key": "en-03.md#0",
           "id": "chunk_k9ue02",
-          "distance": 0.2808793019724193,
+          "distance": 0.2795076370239207,
           "score": null
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
-          "distance": 0.29315138581665257,
+          "distance": 0.2943955590240154,
           "score": null
         },
         {
           "key": "en-10.md#1",
           "id": "chunk_g2y1ma",
-          "distance": 0.30648473578509516,
+          "distance": 0.3074448475175914,
           "score": null
         },
         {
           "key": "en-04.md#0",
           "id": "chunk_88nq5v",
-          "distance": 0.3102763480112748,
+          "distance": 0.3081753666296272,
           "score": null
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
-          "distance": 0.31957280389776177,
+          "distance": 0.3145213247328259,
           "score": null
         },
         {
           "key": "en-11.md#1",
           "id": "chunk_ngbktf",
-          "distance": 0.32605067802079657,
+          "distance": 0.31809306144713867,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.3515465871882365,
+          "distance": 0.35134966631237996,
           "score": null
         },
         {
           "key": "en-07.md#0",
           "id": "chunk_6eg25u",
-          "distance": 0.35344712179268856,
+          "distance": 0.3520300950949926,
           "score": null
         }
       ],
@@ -1832,76 +1832,76 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.060000002384186,
-      "embeddingMs": 11.610000014305115,
-      "httpMs": 12.060000002384186,
-      "dbMs": 1.78,
-      "e2eMs": 32,
+      "latencyMs": 6.419999957084656,
+      "embeddingMs": 4.375,
+      "httpMs": 6.419999957084656,
+      "dbMs": 2.03,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0.16666666666666666,
       "recallAt5": 0.3333333333333333,
-      "ndcgAt5": 0.42533768052056226,
-      "ndcgAt10": 0.47850164965672576,
+      "ndcgAt5": 0.4463557033327497,
+      "ndcgAt10": 0.4961226165594737,
       "mrr": 0.3333333333333333,
       "topHits": [
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
-          "distance": 0.2936177887810485,
+          "distance": 0.2924111384364424,
           "score": null
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
-          "distance": 0.3312388867192618,
+          "distance": 0.333910584140096,
           "score": null
         },
         {
           "key": "en-13.md#0",
           "id": "chunk_11r6h36",
-          "distance": 0.34947375360273725,
-          "score": null
-        },
-        {
-          "key": "en-10.md#1",
-          "id": "chunk_g2y1ma",
-          "distance": 0.35754187180338515,
+          "distance": 0.3451874820384522,
           "score": null
         },
         {
           "key": "en-15.md#0",
           "id": "chunk_112x50k",
-          "distance": 0.3603291581491488,
+          "distance": 0.3540724230702256,
+          "score": null
+        },
+        {
+          "key": "en-10.md#1",
+          "id": "chunk_g2y1ma",
+          "distance": 0.35471613564600823,
           "score": null
         },
         {
           "key": "en-07.md#0",
           "id": "chunk_6eg25u",
-          "distance": 0.362139653521824,
+          "distance": 0.36040576672209834,
           "score": null
         },
         {
           "key": "en-05.md#0",
           "id": "chunk_1v9i2qy",
-          "distance": 0.38511131342240923,
-          "score": null
-        },
-        {
-          "key": "en-14.md#0",
-          "id": "chunk_10flwza",
-          "distance": 0.3866887458151008,
+          "distance": 0.38201919901243286,
           "score": null
         },
         {
           "key": "en-08.md#0",
           "id": "chunk_k44xa4",
-          "distance": 0.3892489571721348,
+          "distance": 0.3852350663017736,
+          "score": null
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": 0.39172684102165745,
           "score": null
         },
         {
           "key": "en-06.md#0",
           "id": "chunk_1grx4xo",
-          "distance": 0.39703420595072014,
+          "distance": 0.3958807003853092,
           "score": null
         }
       ],
@@ -1926,11 +1926,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.310000002384186,
-      "embeddingMs": 9.7049999833107,
-      "httpMs": 12.310000002384186,
-      "dbMs": 2.03,
-      "e2eMs": 27,
+      "latencyMs": 6.560000002384186,
+      "embeddingMs": 4.575000047683716,
+      "httpMs": 6.560000002384186,
+      "dbMs": 2.02,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.25,
       "recallAt5": 0.25,
@@ -1941,61 +1941,61 @@
         {
           "key": "en-20.md#0",
           "id": "chunk_tdb8s7",
-          "distance": 0.32511337843137544,
+          "distance": 0.3228538247520699,
           "score": null
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
-          "distance": 0.32958134194310096,
-          "score": null
-        },
-        {
-          "key": "en-02.md#0",
-          "id": "chunk_88418y",
-          "distance": 0.3300314956772036,
+          "distance": 0.32577165057992785,
           "score": null
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
-          "distance": 0.33190536550091077,
+          "distance": 0.33088855050683774,
           "score": null
         },
         {
           "key": "en-05.md#1",
           "id": "chunk_1jyd5gf",
-          "distance": 0.3334763844381511,
+          "distance": 0.33204404486128836,
           "score": null
         },
         {
-          "key": "en-12.md#0",
-          "id": "chunk_1tsmbbh",
-          "distance": 0.34041968812471224,
+          "key": "en-02.md#0",
+          "id": "chunk_88418y",
+          "distance": 0.3320442242516747,
           "score": null
         },
         {
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
-          "distance": 0.34371057898744173,
+          "distance": 0.3391439085340998,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.34055457211243956,
           "score": null
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
-          "distance": 0.3467245030092867,
-          "score": null
-        },
-        {
-          "key": "en-05.md#0",
-          "id": "chunk_1v9i2qy",
-          "distance": 0.3514673467952194,
+          "distance": 0.3472350810941619,
           "score": null
         },
         {
           "key": "en-07.md#0",
           "id": "chunk_6eg25u",
-          "distance": 0.353085573955941,
+          "distance": 0.3486966020123472,
+          "score": null
+        },
+        {
+          "key": "en-08.md#0",
+          "id": "chunk_k44xa4",
+          "distance": 0.3524656227353923,
           "score": null
         }
       ],
@@ -2020,76 +2020,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13.844999969005585,
-      "embeddingMs": 12.544999957084656,
-      "httpMs": 13.844999969005585,
-      "dbMs": 3.61,
-      "e2eMs": 33,
+      "latencyMs": 6.98499995470047,
+      "embeddingMs": 4.0450000166893005,
+      "httpMs": 6.98499995470047,
+      "dbMs": 2.33,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.75,
       "recallAt5": 1,
-      "ndcgAt5": 0.9363759000898353,
-      "ndcgAt10": 0.9363759000898353,
+      "ndcgAt5": 1,
+      "ndcgAt10": 1,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-20.md#0",
           "id": "chunk_tdb8s7",
-          "distance": 0.2825153055732146,
-          "score": null
-        },
-        {
-          "key": "en-16.md#0",
-          "id": "chunk_1fcuiwf",
-          "distance": 0.2862909688580787,
+          "distance": 0.2796731091129554,
           "score": null
         },
         {
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
-          "distance": 0.2880569433995934,
+          "distance": 0.2815744818854736,
+          "score": null
+        },
+        {
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.2863503694533034,
           "score": null
         },
         {
           "key": "en-16.md#1",
           "id": "chunk_e3c20p",
-          "distance": 0.3066900698232269,
+          "distance": 0.3151504054217018,
           "score": null
         },
         {
           "key": "en-08.md#0",
           "id": "chunk_k44xa4",
-          "distance": 0.3161779265190865,
-          "score": null
-        },
-        {
-          "key": "en-05.md#0",
-          "id": "chunk_1v9i2qy",
-          "distance": 0.32090189430058136,
+          "distance": 0.31587873630813734,
           "score": null
         },
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
-          "distance": 0.3227305065486352,
+          "distance": 0.3241310345735743,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.3249922990797751,
           "score": null
         },
         {
           "key": "en-07.md#0",
           "id": "chunk_6eg25u",
-          "distance": 0.33469972975256246,
-          "score": null
-        },
-        {
-          "key": "en-13.md#0",
-          "id": "chunk_11r6h36",
-          "distance": 0.3399349451063891,
+          "distance": 0.33043152249552477,
           "score": null
         },
         {
           "key": "en-05.md#1",
           "id": "chunk_1jyd5gf",
-          "distance": 0.3422967163455122,
+          "distance": 0.3352805577634751,
+          "score": null
+        },
+        {
+          "key": "en-13.md#0",
+          "id": "chunk_11r6h36",
+          "distance": 0.33570279628273114,
           "score": null
         }
       ],
@@ -2114,11 +2114,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 20.709999978542328,
-      "embeddingMs": 12.235000014305115,
-      "httpMs": 20.709999978542328,
-      "dbMs": 9.36,
-      "e2eMs": 43,
+      "latencyMs": 13.219999969005585,
+      "embeddingMs": 3.7850000262260437,
+      "httpMs": 13.219999969005585,
+      "dbMs": 8.73,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 1,
       "recallAt5": 1,
@@ -2130,13 +2130,13 @@
           "key": "zh-15.md#0",
           "id": "chunk_1s3i9ls",
           "distance": null,
-          "score": 2.030220282694497
+          "score": 2.029262322694497
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
           "distance": null,
-          "score": 1.9081289172276399
+          "score": 1.9105376072276399
         },
         {
           "key": "zh-13.md#0",
@@ -2172,19 +2172,19 @@
           "key": "zh-24.md#0",
           "id": "chunk_ts00v9",
           "distance": null,
-          "score": 0.80969179
+          "score": 0.80907018
         },
         {
           "key": "zh-25.md#0",
           "id": "chunk_1km16vm",
           "distance": null,
-          "score": 0.80953351
+          "score": 0.80809394
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
           "distance": null,
-          "score": 0.80572339
+          "score": 0.80544661
         }
       ],
       "assertions": {
@@ -2208,11 +2208,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.519999980926514,
-      "embeddingMs": 7.365000009536743,
-      "httpMs": 16.519999980926514,
-      "dbMs": 5.54,
-      "e2eMs": 27,
+      "latencyMs": 10.464999973773956,
+      "embeddingMs": 3.1100000143051147,
+      "httpMs": 10.464999973773956,
+      "dbMs": 5.66,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -2224,7 +2224,7 @@
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
           "distance": null,
-          "score": 2.639085504804194
+          "score": 2.6437231848041938
         },
         {
           "key": "en-18.md#0",
@@ -2236,49 +2236,49 @@
           "key": "zh-19.md#0",
           "id": "chunk_1ugvv68",
           "distance": null,
-          "score": 0.81784976
+          "score": 0.81605218
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
           "distance": null,
-          "score": 0.81463439
+          "score": 0.80956662
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
           "distance": null,
-          "score": 0.79779762
+          "score": 0.79771466
         },
         {
           "key": "zh-35.md#0",
           "id": "chunk_1qlx32d",
           "distance": null,
-          "score": 0.79018032
+          "score": 0.79033299
         },
         {
           "key": "zh-36.md#0",
           "id": "chunk_lvix92",
           "distance": null,
-          "score": 0.78499264
+          "score": 0.7839981
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
           "distance": null,
-          "score": 0.78228029
+          "score": 0.78227564
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
           "distance": null,
-          "score": 0.77910324
+          "score": 0.77711578
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
           "distance": null,
-          "score": 0.77526298
+          "score": 0.77540708
         }
       ],
       "assertions": {
@@ -2302,11 +2302,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 21,
-      "embeddingMs": 10.2049999833107,
-      "httpMs": 21,
-      "dbMs": 6.26,
-      "e2eMs": 38,
+      "latencyMs": 11.965000033378601,
+      "embeddingMs": 3.0799999833106995,
+      "httpMs": 11.965000033378601,
+      "dbMs": 7.3,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -2318,61 +2318,61 @@
           "key": "zh-19.md#0",
           "id": "chunk_1ugvv68",
           "distance": null,
-          "score": 2.877402742589092
+          "score": 2.872878972589092
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
           "distance": null,
-          "score": 0.79845366
+          "score": 0.79520427
         },
         {
           "key": "zh-17.md#0",
           "id": "chunk_65zrja",
           "distance": null,
-          "score": 0.79399147
-        },
-        {
-          "key": "zh-35.md#0",
-          "id": "chunk_1qlx32d",
-          "distance": null,
-          "score": 0.78544731
+          "score": 0.79427927
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
           "distance": null,
-          "score": 0.78533723
+          "score": 0.78561127
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
           "distance": null,
-          "score": 0.78441376
+          "score": 0.78499041
         },
         {
-          "key": "zh-06.md#0",
-          "id": "chunk_ek9ow",
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
           "distance": null,
-          "score": 0.77756813
+          "score": 0.78425975
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
           "distance": null,
-          "score": 0.77751374
+          "score": 0.78007395
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
           "distance": null,
-          "score": 0.77391268
+          "score": 0.77465017
+        },
+        {
+          "key": "zh-06.md#0",
+          "id": "chunk_ek9ow",
+          "distance": null,
+          "score": 0.77459292
         },
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
           "distance": null,
-          "score": 0.77263217
+          "score": 0.77274774
         }
       ],
       "assertions": {
@@ -2396,11 +2396,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.62999999523163,
-      "embeddingMs": 7.365000009536743,
-      "httpMs": 17.62999999523163,
-      "dbMs": 6.63,
-      "e2eMs": 27,
+      "latencyMs": 11.080000042915344,
+      "embeddingMs": 3.509999990463257,
+      "httpMs": 11.080000042915344,
+      "dbMs": 6.4,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 1,
       "recallAt5": 1,
@@ -2412,19 +2412,19 @@
           "key": "zh-27.md#0",
           "id": "chunk_1cjq5k3",
           "distance": null,
-          "score": 2.1702267715372914
+          "score": 2.1677813615372914
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
           "distance": null,
-          "score": 2.081569781537291
+          "score": 2.083341451537291
         },
         {
           "key": "zh-25.md#0",
           "id": "chunk_1km16vm",
           "distance": null,
-          "score": 2.022245881566786
+          "score": 2.023653881566786
         },
         {
           "key": "en-12.md#0",
@@ -2448,25 +2448,25 @@
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
           "distance": null,
-          "score": 0.79798556
-        },
-        {
-          "key": "zh-24.md#0",
-          "id": "chunk_ts00v9",
-          "distance": null,
-          "score": 0.79759296
-        },
-        {
-          "key": "zh-03.md#0",
-          "id": "chunk_1rn5b8x",
-          "distance": null,
-          "score": 0.79621537
+          "score": 0.79842312
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
           "distance": null,
-          "score": 0.79567599
+          "score": 0.79768183
+        },
+        {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": null,
+          "score": 0.79531624
+        },
+        {
+          "key": "zh-24.md#0",
+          "id": "chunk_ts00v9",
+          "distance": null,
+          "score": 0.79515722
         }
       ],
       "assertions": {
@@ -2490,11 +2490,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.040000021457672,
-      "embeddingMs": 7.865000009536743,
-      "httpMs": 17.040000021457672,
-      "dbMs": 6.81,
-      "e2eMs": 27,
+      "latencyMs": 10.5,
+      "embeddingMs": 3.1949999928474426,
+      "httpMs": 10.5,
+      "dbMs": 5.99,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -2506,7 +2506,7 @@
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
           "distance": null,
-          "score": 2.415320424918809
+          "score": 2.413803594918809
         },
         {
           "key": "en-13.md#0",
@@ -2518,49 +2518,49 @@
           "key": "zh-31.md#0",
           "id": "chunk_7mxvrm",
           "distance": null,
-          "score": 0.85955133
+          "score": 0.85619748
         },
         {
           "key": "zh-10.md#0",
           "id": "chunk_10djblf",
           "distance": null,
-          "score": 0.79654106
+          "score": 0.80008697
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
           "distance": null,
-          "score": 0.79550104
+          "score": 0.79485883
         },
         {
           "key": "zh-30.md#0",
           "id": "chunk_zo78zc",
           "distance": null,
-          "score": 0.77535214
+          "score": 0.77532326
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
           "distance": null,
-          "score": 0.76487647
+          "score": 0.76720512
         },
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
           "distance": null,
-          "score": 0.75862753
+          "score": 0.76144042
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
           "distance": null,
-          "score": 0.75582326
+          "score": 0.75740408
         },
         {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
+          "key": "zh-21.md#0",
+          "id": "chunk_4ickfy",
           "distance": null,
-          "score": 0.75084348
+          "score": 0.75251923
         }
       ],
       "assertions": {
@@ -2584,23 +2584,23 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.094999969005585,
-      "embeddingMs": 8.64000004529953,
-      "httpMs": 16.094999969005585,
-      "dbMs": 5.79,
-      "e2eMs": 27,
+      "latencyMs": 10.490000009536743,
+      "embeddingMs": 3.560000002384186,
+      "httpMs": 10.490000009536743,
+      "dbMs": 5.72,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.6666666666666666,
       "ndcgAt5": 0.882808018370203,
-      "ndcgAt10": 0.9148570708197291,
+      "ndcgAt10": 0.913583203280069,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-30.md#0",
           "id": "chunk_zo78zc",
           "distance": null,
-          "score": 2.4220513493988713
+          "score": 2.4226334493988713
         },
         {
           "key": "en-14.md#0",
@@ -2612,49 +2612,49 @@
           "key": "zh-36.md#0",
           "id": "chunk_lvix92",
           "distance": null,
-          "score": 0.79337888
+          "score": 0.792596
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
           "distance": null,
-          "score": 0.78059166
+          "score": 0.78038522
         },
         {
           "key": "zh-12.md#0",
           "id": "chunk_1yam2yy",
           "distance": null,
-          "score": 0.77976157
-        },
-        {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": null,
-          "score": 0.77495287
-        },
-        {
-          "key": "zh-35.md#0",
-          "id": "chunk_1qlx32d",
-          "distance": null,
-          "score": 0.7688427
+          "score": 0.77927835
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
           "distance": null,
-          "score": 0.76833683
+          "score": 0.77349454
         },
         {
-          "key": "zh-29.md#0",
-          "id": "chunk_o6grkb",
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
           "distance": null,
-          "score": 0.76667219
+          "score": 0.77133906
         },
         {
           "key": "zh-15.md#0",
           "id": "chunk_1s3i9ls",
           "distance": null,
-          "score": 0.76495962
+          "score": 0.76705921
+        },
+        {
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": null,
+          "score": 0.76665429
+        },
+        {
+          "key": "zh-29.md#0",
+          "id": "chunk_o6grkb",
+          "distance": null,
+          "score": 0.76599601
         }
       ],
       "assertions": {
@@ -2678,23 +2678,23 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.50499999523163,
-      "embeddingMs": 8.235000014305115,
-      "httpMs": 17.50499999523163,
-      "dbMs": 6.35,
-      "e2eMs": 27,
+      "latencyMs": 10.435000002384186,
+      "embeddingMs": 3.2799999713897705,
+      "httpMs": 10.435000002384186,
+      "dbMs": 5.83,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
-      "recallAt3": 0.3333333333333333,
+      "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
-      "ndcgAt5": 0.882808018370203,
-      "ndcgAt10": 0.9207314910704657,
+      "ndcgAt5": 0.7984848580994974,
+      "ndcgAt10": 0.9122552762002856,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
           "distance": null,
-          "score": 2.686440174576229
+          "score": 2.686406374576229
         },
         {
           "key": "en-02.md#0",
@@ -2703,52 +2703,52 @@
           "score": 1.5630285549188088
         },
         {
+          "key": "zh-07.md#0",
+          "id": "chunk_ewzhqk",
+          "distance": null,
+          "score": 0.7873816
+        },
+        {
           "key": "zh-37.md#0",
           "id": "chunk_wol916",
           "distance": null,
-          "score": 0.78556349
-        },
-        {
-          "key": "zh-05.md#0",
-          "id": "chunk_13piie2",
-          "distance": null,
-          "score": 0.78441871
+          "score": 0.78682068
         },
         {
           "key": "zh-02.md#0",
           "id": "chunk_d03087",
           "distance": null,
-          "score": 0.7840306
+          "score": 0.78538476
         },
         {
-          "key": "zh-07.md#0",
-          "id": "chunk_ewzhqk",
+          "key": "zh-05.md#0",
+          "id": "chunk_13piie2",
           "distance": null,
-          "score": 0.78294628
+          "score": 0.78372519
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
           "distance": null,
-          "score": 0.76787116
+          "score": 0.76780744
         },
         {
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
           "distance": null,
-          "score": 0.76528934
-        },
-        {
-          "key": "zh-03.md#0",
-          "id": "chunk_1rn5b8x",
-          "distance": null,
-          "score": 0.76314546
+          "score": 0.76665127
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
           "distance": null,
-          "score": 0.762529
+          "score": 0.76358585
+        },
+        {
+          "key": "zh-28.md#0",
+          "id": "chunk_skoayh",
+          "distance": null,
+          "score": 0.76198922
         }
       ],
       "assertions": {
@@ -2772,11 +2772,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 15.9549999833107,
-      "embeddingMs": 9.370000004768372,
-      "httpMs": 15.9549999833107,
-      "dbMs": 5.94,
-      "e2eMs": 28,
+      "latencyMs": 10.380000054836273,
+      "embeddingMs": 4.2299999594688416,
+      "httpMs": 10.380000054836273,
+      "dbMs": 5.57,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 1,
@@ -2788,13 +2788,13 @@
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
           "distance": null,
-          "score": 2.5297255870101445
+          "score": 2.5290469970101443
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
           "distance": null,
-          "score": 2.3052830266865136
+          "score": 2.3051541266865136
         },
         {
           "key": "zh-02.md#0",
@@ -2812,37 +2812,37 @@
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
           "distance": null,
-          "score": 0.83522788
+          "score": 0.83892026
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
           "distance": null,
-          "score": 0.8221359
+          "score": 0.82334769
         },
         {
           "key": "zh-09.md#0",
           "id": "chunk_1sm3p7r",
           "distance": null,
-          "score": 0.81976712
-        },
-        {
-          "key": "zh-08.md#0",
-          "id": "chunk_khipt1",
-          "distance": null,
-          "score": 0.80863419
+          "score": 0.8203871
         },
         {
           "key": "zh-13.md#0",
           "id": "chunk_1n1vobz",
           "distance": null,
-          "score": 0.80826528
+          "score": 0.80846865
         },
         {
-          "key": "zh-26.md#0",
-          "id": "chunk_cgql4w",
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
           "distance": null,
-          "score": 0.7972955
+          "score": 0.80726828
+        },
+        {
+          "key": "zh-17.md#0",
+          "id": "chunk_65zrja",
+          "distance": null,
+          "score": 0.80027836
         }
       ],
       "assertions": {
@@ -2866,11 +2866,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.10499995946884,
-      "embeddingMs": 8.270000040531158,
-      "httpMs": 17.10499995946884,
-      "dbMs": 6.29,
-      "e2eMs": 28,
+      "latencyMs": 10.105000019073486,
+      "embeddingMs": 3.740000009536743,
+      "httpMs": 10.105000019073486,
+      "dbMs": 5.52,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -2882,61 +2882,61 @@
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
           "distance": null,
-          "score": 4.9707523412733705
+          "score": 4.97178137127337
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
           "distance": null,
-          "score": 3.6197245106381746
+          "score": 3.620084060638175
         },
         {
           "key": "zh-36.md#0",
           "id": "chunk_lvix92",
           "distance": null,
-          "score": 2.200848219872631
+          "score": 2.199496489872631
         },
         {
           "key": "zh-08.md#0",
           "id": "chunk_khipt1",
           "distance": null,
-          "score": 0.77699184
+          "score": 0.77468823
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
           "distance": null,
-          "score": 0.77037789
+          "score": 0.77033296
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
           "distance": null,
-          "score": 0.77001065
+          "score": 0.76903339
         },
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
           "distance": null,
-          "score": 0.76822813
+          "score": 0.76594797
         },
         {
           "key": "zh-05.md#0",
           "id": "chunk_13piie2",
           "distance": null,
-          "score": 0.76556782
+          "score": 0.76339171
         },
         {
           "key": "zh-13.md#0",
           "id": "chunk_1n1vobz",
           "distance": null,
-          "score": 0.76446151
+          "score": 0.76297237
         },
         {
           "key": "zh-02.md#0",
           "id": "chunk_d03087",
           "distance": null,
-          "score": 0.76046376
+          "score": 0.7621948
         }
       ],
       "assertions": {
@@ -2960,29 +2960,29 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 19.724999964237213,
-      "embeddingMs": 7.6450000405311584,
-      "httpMs": 19.724999964237213,
-      "dbMs": 8.15,
-      "e2eMs": 33,
+      "latencyMs": 10.435000002384186,
+      "embeddingMs": 2.5550000071525574,
+      "httpMs": 10.435000002384186,
+      "dbMs": 5.74,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.3333333333333333,
       "ndcgAt5": 0.47020199776783905,
-      "ndcgAt10": 0.5022510502173653,
+      "ndcgAt10": 0.500977182677705,
       "mrr": 0.5,
       "topHits": [
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
           "distance": null,
-          "score": 2.28331960568696
+          "score": 2.28501724568696
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
           "distance": null,
-          "score": 2.2074223625276046
+          "score": 2.2060330525276046
         },
         {
           "key": "en-16.md#0",
@@ -2997,40 +2997,40 @@
           "score": 1.228969098519967
         },
         {
+          "key": "zh-04.md#0",
+          "id": "chunk_5bgxvj",
+          "distance": null,
+          "score": 0.78663153
+        },
+        {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
           "distance": null,
-          "score": 0.78846426
+          "score": 0.78636298
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
           "distance": null,
-          "score": 0.78218677
-        },
-        {
-          "key": "zh-01.md#0",
-          "id": "chunk_1v84v4l",
-          "distance": null,
-          "score": 0.78156231
-        },
-        {
-          "key": "zh-04.md#0",
-          "id": "chunk_5bgxvj",
-          "distance": null,
-          "score": 0.78122743
-        },
-        {
-          "key": "zh-36.md#0",
-          "id": "chunk_lvix92",
-          "distance": null,
-          "score": 0.77836217
+          "score": 0.78304418
         },
         {
           "key": "zh-35.md#0",
           "id": "chunk_1qlx32d",
           "distance": null,
-          "score": 0.77687109
+          "score": 0.77863589
+        },
+        {
+          "key": "zh-01.md#0",
+          "id": "chunk_1v84v4l",
+          "distance": null,
+          "score": 0.77817931
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 0.77814452
         }
       ],
       "assertions": {
@@ -3054,11 +3054,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 18.4099999666214,
-      "embeddingMs": 12.924999952316284,
-      "httpMs": 18.4099999666214,
-      "dbMs": 6.89,
-      "e2eMs": 38,
+      "latencyMs": 10.214999973773956,
+      "embeddingMs": 3.440000057220459,
+      "httpMs": 10.214999973773956,
+      "dbMs": 5.72,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.3333333333333333,
@@ -3070,7 +3070,7 @@
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
           "distance": null,
-          "score": 2.1904511525276047
+          "score": 2.198004302527605
         },
         {
           "key": "zh-32.md#0",
@@ -3094,37 +3094,37 @@
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
           "distance": null,
-          "score": 0.80266386
-        },
-        {
-          "key": "zh-19.md#0",
-          "id": "chunk_1ugvv68",
-          "distance": null,
-          "score": 0.79590916
+          "score": 0.80491762
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
           "distance": null,
-          "score": 0.7920334
+          "score": 0.79416606
         },
         {
-          "key": "zh-23.md#0",
-          "id": "chunk_1gk2brc",
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
           "distance": null,
-          "score": 0.78078786
-        },
-        {
-          "key": "zh-36.md#0",
-          "id": "chunk_lvix92",
-          "distance": null,
-          "score": 0.78036376
+          "score": 0.79191324
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
           "distance": null,
-          "score": 0.77947737
+          "score": 0.78240436
+        },
+        {
+          "key": "zh-23.md#0",
+          "id": "chunk_1gk2brc",
+          "distance": null,
+          "score": 0.78216167
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": null,
+          "score": 0.77729241
         }
       ],
       "assertions": {
@@ -3148,11 +3148,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.22000002861023,
-      "embeddingMs": 7.730000019073486,
-      "httpMs": 16.22000002861023,
-      "dbMs": 5.82,
-      "e2eMs": 32,
+      "latencyMs": 9.935000002384186,
+      "embeddingMs": 2.935000002384186,
+      "httpMs": 9.935000002384186,
+      "dbMs": 5.64,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.3333333333333333,
@@ -3164,61 +3164,61 @@
           "key": "zh-20.md#0",
           "id": "chunk_1e53zjm",
           "distance": null,
-          "score": 2.550621628535958
+          "score": 2.552717888535958
         },
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
           "distance": null,
-          "score": 2.401651220047748
+          "score": 2.401529150047748
         },
         {
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
           "distance": null,
-          "score": 0.77622288
+          "score": 0.77809508
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
           "distance": null,
-          "score": 0.76892835
+          "score": 0.77051974
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
           "distance": null,
-          "score": 0.7653186
-        },
-        {
-          "key": "zh-22.md#0",
-          "id": "chunk_glwmjs",
-          "distance": null,
-          "score": 0.7606682
+          "score": 0.76832975
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
           "distance": null,
-          "score": 0.75568751
+          "score": 0.75950059
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": null,
+          "score": 0.75944672
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
           "distance": null,
-          "score": 0.75323845
+          "score": 0.7575728
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
           "distance": null,
-          "score": 0.751858
+          "score": 0.75500214
         },
         {
-          "key": "en-15.md#0",
-          "id": "chunk_112x50k",
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
           "distance": null,
-          "score": 0.7507959
+          "score": 0.751724
         }
       ],
       "assertions": {
@@ -3242,11 +3242,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 18.67500001192093,
-      "embeddingMs": 11.634999990463257,
-      "httpMs": 18.67500001192093,
-      "dbMs": 7.39,
-      "e2eMs": 37,
+      "latencyMs": 10.230000019073486,
+      "embeddingMs": 2.935000002384186,
+      "httpMs": 10.230000019073486,
+      "dbMs": 5.7,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -3258,7 +3258,7 @@
           "key": "zh-24.md#0",
           "id": "chunk_ts00v9",
           "distance": null,
-          "score": 3.908554325713454
+          "score": 3.907496205713454
         },
         {
           "key": "en-11.md#0",
@@ -3288,31 +3288,31 @@
           "key": "zh-26.md#0",
           "id": "chunk_cgql4w",
           "distance": null,
-          "score": 0.80349032
+          "score": 0.80513563
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
           "distance": null,
-          "score": 0.78545271
+          "score": 0.78629749
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
           "distance": null,
-          "score": 0.77837263
+          "score": 0.77674585
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
           "distance": null,
-          "score": 0.76712402
+          "score": 0.76876247
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
           "distance": null,
-          "score": 0.76637381
+          "score": 0.7635583
         }
       ],
       "assertions": {
@@ -3336,11 +3336,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 17.669999957084656,
-      "embeddingMs": 6.080000042915344,
-      "httpMs": 17.669999957084656,
-      "dbMs": 6.34,
-      "e2eMs": 32,
+      "latencyMs": 10.910000026226044,
+      "embeddingMs": 2.990000009536743,
+      "httpMs": 10.910000026226044,
+      "dbMs": 5.79,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0.5,
       "recallAt5": 0.75,
@@ -3352,25 +3352,25 @@
           "key": "zh-15.md#0",
           "id": "chunk_1s3i9ls",
           "distance": null,
-          "score": 1.9781051826944969
+          "score": 1.9801708026944969
         },
         {
           "key": "en-05.md#0",
           "id": "chunk_1v9i2qy",
           "distance": null,
-          "score": 1.8243955014268185
+          "score": 1.8208600314268184
         },
         {
           "key": "en-07.md#0",
           "id": "chunk_6eg25u",
           "distance": null,
-          "score": 1.802631406547834
+          "score": 1.803812716547834
         },
         {
           "key": "en-06.md#0",
           "id": "chunk_1grx4xo",
           "distance": null,
-          "score": 1.7879299765478338
+          "score": 1.787199526547834
         },
         {
           "key": "zh-13.md#0",
@@ -3394,19 +3394,19 @@
           "key": "en-01.md#0",
           "id": "chunk_c9iaju",
           "distance": null,
-          "score": 0.83665917
+          "score": 0.83633605
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
           "distance": null,
-          "score": 0.83483949
+          "score": 0.83530579
         },
         {
           "key": "en-17.md#0",
           "id": "chunk_1ugub7s",
           "distance": null,
-          "score": 0.83141336
+          "score": 0.83036142
         }
       ],
       "assertions": {
@@ -3430,11 +3430,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.514999985694885,
-      "embeddingMs": 10.634999990463257,
-      "httpMs": 16.514999985694885,
-      "dbMs": 6.49,
-      "e2eMs": 33,
+      "latencyMs": 10.344999969005585,
+      "embeddingMs": 3.3550000190734863,
+      "httpMs": 10.344999969005585,
+      "dbMs": 5.55,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.25,
       "recallAt5": 0.25,
@@ -3446,61 +3446,61 @@
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
           "distance": null,
-          "score": 0.87827148
+          "score": 0.87916506
         },
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
           "distance": null,
-          "score": 0.83249368
-        },
-        {
-          "key": "en-10.md#0",
-          "id": "chunk_4wihzq",
-          "distance": null,
-          "score": 0.83078623
+          "score": 0.83229937
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
           "distance": null,
-          "score": 0.83032839
+          "score": 0.83194741
         },
         {
           "key": "en-03.md#1",
           "id": "chunk_1gvejal",
           "distance": null,
-          "score": 0.83031275
+          "score": 0.83157714
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": null,
+          "score": 0.83143097
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
           "distance": null,
-          "score": 0.82461182
+          "score": 0.82579468
         },
         {
           "key": "en-16.md#1",
           "id": "chunk_e3c20p",
           "distance": null,
-          "score": 0.82293229
-        },
-        {
-          "key": "en-09.md#1",
-          "id": "chunk_1icnqkr",
-          "distance": null,
-          "score": 0.82237627
+          "score": 0.82321994
         },
         {
           "key": "en-01.md#1",
           "id": "chunk_k30s82",
           "distance": null,
-          "score": 0.8188716
+          "score": 0.81956009
         },
         {
-          "key": "en-08.md#0",
-          "id": "chunk_k44xa4",
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
           "distance": null,
-          "score": 0.81408896
+          "score": 0.81885048
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 0.81361546
         }
       ],
       "assertions": {
@@ -3524,23 +3524,23 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.414999961853027,
-      "embeddingMs": 10.979999959468842,
-      "httpMs": 16.414999961853027,
-      "dbMs": 5.99,
-      "e2eMs": 33,
+      "latencyMs": 11,
+      "embeddingMs": 3.4799999594688416,
+      "httpMs": 11,
+      "dbMs": 6.08,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.25,
-      "recallAt5": 0.25,
-      "ndcgAt5": 0.7125794632086186,
-      "ndcgAt10": 0.8506373759784908,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.7519599440257524,
+      "ndcgAt10": 0.8607424838173895,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-20.md#0",
           "id": "chunk_tdb8s7",
           "distance": null,
-          "score": 2.3126676575785123
+          "score": 2.3141022775785123
         },
         {
           "key": "zh-35.md#0",
@@ -3552,49 +3552,49 @@
           "key": "en-09.md#1",
           "id": "chunk_1icnqkr",
           "distance": null,
-          "score": 0.83492098
+          "score": 0.82982542
         },
         {
           "key": "en-10.md#1",
           "id": "chunk_g2y1ma",
           "distance": null,
-          "score": 0.82958394
-        },
-        {
-          "key": "en-12.md#0",
-          "id": "chunk_1tsmbbh",
-          "distance": null,
-          "score": 0.82693444
+          "score": 0.82866839
         },
         {
           "key": "en-16.md#0",
           "id": "chunk_1fcuiwf",
           "distance": null,
-          "score": 0.82687875
+          "score": 0.82734587
         },
         {
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
           "distance": null,
-          "score": 0.82490645
+          "score": 0.82578163
+        },
+        {
+          "key": "en-11.md#1",
+          "id": "chunk_ngbktf",
+          "distance": null,
+          "score": 0.82545131
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 0.82523303
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
           "distance": null,
-          "score": 0.82272346
-        },
-        {
-          "key": "en-14.md#0",
-          "id": "chunk_10flwza",
-          "distance": null,
-          "score": 0.82120486
+          "score": 0.82253169
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
           "distance": null,
-          "score": 0.82063539
+          "score": 0.82069433
         }
       ],
       "assertions": {
@@ -3618,29 +3618,29 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.269999980926514,
-      "embeddingMs": 7.580000042915344,
-      "httpMs": 16.269999980926514,
-      "dbMs": 5.9,
-      "e2eMs": 27,
+      "latencyMs": 10.659999966621399,
+      "embeddingMs": 2.7549999952316284,
+      "httpMs": 10.659999966621399,
+      "dbMs": 5.91,
+      "e2eMs": 19,
       "recallAt1": 0.16666666666666666,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.3333333333333333,
       "ndcgAt5": 0.7932681984677673,
-      "ndcgAt10": 0.7976572000188858,
+      "ndcgAt10": 0.794864370245171,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-12.md#0",
           "id": "chunk_1tsmbbh",
           "distance": null,
-          "score": 2.5169765046543304
+          "score": 2.5158809446543304
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
           "distance": null,
-          "score": 1.8570304988274882
+          "score": 1.856610938827488
         },
         {
           "key": "zh-22.md#0",
@@ -3667,28 +3667,28 @@
           "score": 1.231750221566786
         },
         {
-          "key": "en-09.md#0",
-          "id": "chunk_wqrsjs",
-          "distance": null,
-          "score": 0.81160715
-        },
-        {
           "key": "en-11.md#1",
           "id": "chunk_ngbktf",
           "distance": null,
-          "score": 0.80906933
+          "score": 0.81560589
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
           "distance": null,
-          "score": 0.8080658
+          "score": 0.81115343
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": null,
+          "score": 0.80950797
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
           "distance": null,
-          "score": 0.80264034
+          "score": 0.80406222
         }
       ],
       "assertions": {
@@ -3708,27 +3708,27 @@
       "mode": "hybrid",
       "metric": "score",
       "hits": 10,
-      "hitsInQrels": 3,
+      "hitsInQrels": 4,
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 16.810000002384186,
-      "embeddingMs": 8.365000009536743,
-      "httpMs": 16.810000002384186,
-      "dbMs": 6.5,
-      "e2eMs": 28,
+      "latencyMs": 10.939999997615814,
+      "embeddingMs": 3.2700000405311584,
+      "httpMs": 10.939999997615814,
+      "dbMs": 6.18,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
       "recallAt5": 0.5,
       "ndcgAt5": 0.7274395989643642,
-      "ndcgAt10": 0.801655081787207,
+      "ndcgAt10": 0.8826486030070964,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-13.md#0",
           "id": "chunk_11r6h36",
           "distance": null,
-          "score": 2.2723091120535353
+          "score": 2.2729792920535354
         },
         {
           "key": "zh-29.md#0",
@@ -3740,49 +3740,49 @@
           "key": "en-14.md#0",
           "id": "chunk_10flwza",
           "distance": null,
-          "score": 0.85947842
+          "score": 0.85761874
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
           "distance": null,
-          "score": 0.84014265
+          "score": 0.83919843
         },
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
           "distance": null,
-          "score": 0.8281008
+          "score": 0.82982157
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
           "distance": null,
-          "score": 0.82564312
+          "score": 0.82883297
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
           "distance": null,
-          "score": 0.82563928
-        },
-        {
-          "key": "en-05.md#0",
-          "id": "chunk_1v9i2qy",
-          "distance": null,
-          "score": 0.8191693
-        },
-        {
-          "key": "en-12.md#0",
-          "id": "chunk_1tsmbbh",
-          "distance": null,
-          "score": 0.81802531
+          "score": 0.82880324
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
           "distance": null,
-          "score": 0.81633453
+          "score": 0.81966116
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": null,
+          "score": 0.81771981
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": null,
+          "score": 0.81734836
         }
       ],
       "assertions": {
@@ -3806,11 +3806,11 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 15.375,
-      "embeddingMs": 9.129999995231628,
-      "httpMs": 15.375,
-      "dbMs": 5.62,
-      "e2eMs": 28,
+      "latencyMs": 11.335000038146973,
+      "embeddingMs": 3.634999990463257,
+      "httpMs": 11.335000038146973,
+      "dbMs": 6.29,
+      "e2eMs": 19,
       "recallAt1": 0.16666666666666666,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.3333333333333333,
@@ -3822,7 +3822,7 @@
           "key": "en-02.md#0",
           "id": "chunk_88418y",
           "distance": null,
-          "score": 2.450857164918809
+          "score": 2.450701964918809
         },
         {
           "key": "zh-06.md#0",
@@ -3834,49 +3834,49 @@
           "key": "en-02.md#1",
           "id": "chunk_phni2r",
           "distance": null,
-          "score": 0.85493734
+          "score": 0.85735109
         },
         {
           "key": "en-16.md#0",
           "id": "chunk_1fcuiwf",
           "distance": null,
-          "score": 0.8498261
+          "score": 0.85039229
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
           "distance": null,
-          "score": 0.84424078
+          "score": 0.84677369
         },
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
           "distance": null,
-          "score": 0.84300971
+          "score": 0.8430783
         },
         {
           "key": "en-20.md#0",
           "id": "chunk_tdb8s7",
           "distance": null,
-          "score": 0.84115833
+          "score": 0.84157425
         },
         {
           "key": "en-01.md#1",
           "id": "chunk_k30s82",
           "distance": null,
-          "score": 0.83713763
-        },
-        {
-          "key": "en-19.md#0",
-          "id": "chunk_c1hkkf",
-          "distance": null,
-          "score": 0.83611973
+          "score": 0.83929924
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
           "distance": null,
-          "score": 0.83535665
+          "score": 0.83816364
+        },
+        {
+          "key": "en-19.md#0",
+          "id": "chunk_c1hkkf",
+          "distance": null,
+          "score": 0.83722701
         }
       ],
       "assertions": {
@@ -3900,23 +3900,23 @@
       "relevantCount": 5,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 15.465000033378601,
-      "embeddingMs": 6.789999961853027,
-      "httpMs": 15.465000033378601,
-      "dbMs": 5.78,
-      "e2eMs": 28,
+      "latencyMs": 10.410000026226044,
+      "embeddingMs": 3.0350000262260437,
+      "httpMs": 10.410000026226044,
+      "dbMs": 6.06,
+      "e2eMs": 18,
       "recallAt1": 0.2,
       "recallAt3": 0.2,
       "recallAt5": 0.2,
       "ndcgAt5": 0.6244247138302588,
-      "ndcgAt10": 0.7466024683330346,
+      "ndcgAt10": 0.740481182791268,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
           "distance": null,
-          "score": 2.4874397400477477
+          "score": 2.4859468100477478
         },
         {
           "key": "zh-18.md#0",
@@ -3928,49 +3928,49 @@
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
           "distance": null,
-          "score": 0.8617378
+          "score": 0.8622949
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
           "distance": null,
-          "score": 0.83885367
+          "score": 0.83962119
         },
         {
           "key": "en-01.md#0",
           "id": "chunk_c9iaju",
           "distance": null,
-          "score": 0.83555394
-        },
-        {
-          "key": "en-17.md#0",
-          "id": "chunk_1ugub7s",
-          "distance": null,
-          "score": 0.82657885
+          "score": 0.83353593
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
           "distance": null,
-          "score": 0.8262176
+          "score": 0.8276741
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": null,
+          "score": 0.82624791
         },
         {
           "key": "en-01.md#1",
           "id": "chunk_k30s82",
           "distance": null,
-          "score": 0.82599467
+          "score": 0.82501867
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
           "distance": null,
-          "score": 0.82219192
+          "score": 0.82468503
         },
         {
           "key": "en-12.md#0",
           "id": "chunk_1tsmbbh",
           "distance": null,
-          "score": 0.82130558
+          "score": 0.82241241
         }
       ],
       "assertions": {
@@ -3994,11 +3994,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13.0450000166893,
-      "embeddingMs": 11.129999995231628,
-      "httpMs": 13.0450000166893,
-      "dbMs": 2.02,
-      "e2eMs": 27,
+      "latencyMs": 7.269999980926514,
+      "embeddingMs": 4.205000042915344,
+      "httpMs": 7.269999980926514,
+      "dbMs": 2.64,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 1,
       "recallAt5": 1,
@@ -4009,61 +4009,61 @@
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.3093594724321078,
+          "distance": 0.30664940516048,
           "score": null
         },
         {
           "key": "zh-30.md#0",
           "id": "chunk_zo78zc",
-          "distance": 0.4123268268692686,
+          "distance": 0.4096036689764767,
           "score": null
         },
         {
           "key": "zh-31.md#0",
           "id": "chunk_7mxvrm",
-          "distance": 0.4307813905785215,
+          "distance": 0.43557913171623,
           "score": null
         },
         {
           "key": "zh-12.md#0",
           "id": "chunk_1yam2yy",
-          "distance": 0.4658543941453913,
+          "distance": 0.4671480020460933,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.4677250466965177,
-          "score": null
-        },
-        {
-          "key": "zh-34.md#0",
-          "id": "chunk_fjy6km",
-          "distance": 0.47202518082114464,
-          "score": null
-        },
-        {
-          "key": "zh-19.md#0",
-          "id": "chunk_1ugvv68",
-          "distance": 0.4731977017881627,
+          "distance": 0.4692123289323885,
           "score": null
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
-          "distance": 0.475959922544934,
+          "distance": 0.47359824180599663,
+          "score": null
+        },
+        {
+          "key": "zh-34.md#0",
+          "id": "chunk_fjy6km",
+          "distance": 0.47546880852432083,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.48050159215923804,
+          "distance": 0.47709092361274563,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.48366981160753186,
+          "distance": 0.484552175727312,
+          "score": null
+        },
+        {
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.4880590438842446,
           "score": null
         }
       ],
@@ -4088,11 +4088,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.504999995231628,
-      "embeddingMs": 11.260000050067902,
-      "httpMs": 12.504999995231628,
-      "dbMs": 1.97,
-      "e2eMs": 28,
+      "latencyMs": 7.415000021457672,
+      "embeddingMs": 3.2649999856948853,
+      "httpMs": 7.415000021457672,
+      "dbMs": 2.3,
+      "e2eMs": 19,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.3333333333333333,
@@ -4103,61 +4103,61 @@
         {
           "key": "zh-13.md#0",
           "id": "chunk_1n1vobz",
-          "distance": 0.2767147624320436,
+          "distance": 0.27971507077543534,
           "score": null
         },
         {
           "key": "zh-09.md#0",
           "id": "chunk_1sm3p7r",
-          "distance": 0.42139846086501664,
+          "distance": 0.41671419143676347,
           "score": null
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
-          "distance": 0.447611103738335,
+          "distance": 0.44428046541458266,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.45698444337115507,
+          "distance": 0.4507617413089584,
           "score": null
         },
         {
           "key": "zh-11.md#0",
           "id": "chunk_1afivyq",
-          "distance": 0.4617868523294707,
+          "distance": 0.4610444307327233,
           "score": null
         },
         {
           "key": "zh-17.md#0",
           "id": "chunk_65zrja",
-          "distance": 0.4795195819379062,
+          "distance": 0.47099274742689756,
           "score": null
         },
         {
           "key": "zh-10.md#0",
           "id": "chunk_10djblf",
-          "distance": 0.4873037658982686,
+          "distance": 0.4796146726148782,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.4915684451542287,
+          "distance": 0.48210081351403444,
           "score": null
         },
         {
           "key": "zh-08.md#0",
           "id": "chunk_khipt1",
-          "distance": 0.4984666706959402,
+          "distance": 0.5023849458213079,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.5066310755454212,
+          "distance": 0.5040476012087978,
           "score": null
         }
       ],
@@ -4182,11 +4182,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.169999957084656,
-      "embeddingMs": 12.740000009536743,
-      "httpMs": 12.169999957084656,
-      "dbMs": 1.77,
-      "e2eMs": 28,
+      "latencyMs": 7.189999997615814,
+      "embeddingMs": 4.310000002384186,
+      "httpMs": 7.189999997615814,
+      "dbMs": 2.75,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -4197,61 +4197,61 @@
         {
           "key": "zh-24.md#0",
           "id": "chunk_ts00v9",
-          "distance": 0.3182003389593707,
+          "distance": 0.3193649914906709,
           "score": null
         },
         {
           "key": "zh-26.md#0",
           "id": "chunk_cgql4w",
-          "distance": 0.3924938485061946,
+          "distance": 0.38935801361654254,
           "score": null
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
-          "distance": 0.4104739678765831,
-          "score": null
-        },
-        {
-          "key": "zh-31.md#0",
-          "id": "chunk_7mxvrm",
-          "distance": 0.4115891457492079,
+          "distance": 0.4093540635032754,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.41565908078981884,
+          "distance": 0.414339007611918,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.41936820552232423,
+          "distance": 0.4171072837538411,
+          "score": null
+        },
+        {
+          "key": "zh-31.md#0",
+          "id": "chunk_7mxvrm",
+          "distance": 0.4187082439858647,
           "score": null
         },
         {
           "key": "zh-04.md#0",
           "id": "chunk_5bgxvj",
-          "distance": 0.4267839208259877,
+          "distance": 0.42002525208716557,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.44094013651706154,
+          "distance": 0.4405479331212244,
           "score": null
         },
         {
           "key": "zh-08.md#0",
           "id": "chunk_khipt1",
-          "distance": 0.45193672351209635,
+          "distance": 0.44979814748248925,
           "score": null
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
-          "distance": 0.4563350665755841,
+          "distance": 0.45092151565342864,
           "score": null
         }
       ],
@@ -4276,11 +4276,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.75,
-      "embeddingMs": 9.759999990463257,
-      "httpMs": 11.75,
-      "dbMs": 2.35,
-      "e2eMs": 28,
+      "latencyMs": 7.084999978542328,
+      "embeddingMs": 4.139999985694885,
+      "httpMs": 7.084999978542328,
+      "dbMs": 2.24,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0,
       "recallAt5": 0.3333333333333333,
@@ -4291,61 +4291,61 @@
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
-          "distance": 0.3951094371471604,
+          "distance": 0.38895462619710486,
           "score": null
         },
         {
           "key": "zh-24.md#0",
           "id": "chunk_ts00v9",
-          "distance": 0.4235454271868888,
+          "distance": 0.42506289335728287,
           "score": null
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
-          "distance": 0.42747122868035536,
+          "distance": 0.43129324093970045,
           "score": null
         },
         {
           "key": "zh-25.md#0",
           "id": "chunk_1km16vm",
-          "distance": 0.4315971732138578,
+          "distance": 0.43176325882113,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.43375887282346437,
+          "distance": 0.43270565856195375,
           "score": null
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
-          "distance": 0.44774393981547156,
+          "distance": 0.4481371887261585,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.45042544468281354,
+          "distance": 0.45389065421267605,
           "score": null
         },
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
-          "distance": 0.46707257432170435,
+          "distance": 0.4642139034525624,
+          "score": null
+        },
+        {
+          "key": "zh-39.md#0",
+          "id": "chunk_17c5enw",
+          "distance": 0.46722267886017677,
           "score": null
         },
         {
           "key": "zh-02.md#0",
           "id": "chunk_d03087",
-          "distance": 0.4691980128045835,
-          "score": null
-        },
-        {
-          "key": "zh-26.md#0",
-          "id": "chunk_cgql4w",
-          "distance": 0.4700485676671531,
+          "distance": 0.46843154901389483,
           "score": null
         }
       ],
@@ -4370,11 +4370,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.939999997615814,
-      "embeddingMs": 12.064999997615814,
-      "httpMs": 12.939999997615814,
-      "dbMs": 2.66,
-      "e2eMs": 27,
+      "latencyMs": 6.939999997615814,
+      "embeddingMs": 3.699999988079071,
+      "httpMs": 6.939999997615814,
+      "dbMs": 2.18,
+      "e2eMs": 13,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -4385,61 +4385,61 @@
         {
           "key": "zh-19.md#0",
           "id": "chunk_1ugvv68",
-          "distance": 0.27611328194493634,
+          "distance": 0.28085170502351275,
           "score": null
         },
         {
           "key": "zh-17.md#0",
           "id": "chunk_65zrja",
-          "distance": 0.32192983365891015,
+          "distance": 0.3265854314914495,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.353289323653022,
+          "distance": 0.3541814511038557,
           "score": null
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
-          "distance": 0.38749061673767327,
+          "distance": 0.3897232514124951,
           "score": null
         },
         {
           "key": "zh-07.md#0",
           "id": "chunk_ewzhqk",
-          "distance": 0.39117523379177277,
+          "distance": 0.3938394116424284,
           "score": null
         },
         {
           "key": "zh-16.md#0",
           "id": "chunk_nyoxig",
-          "distance": 0.4039952944504511,
-          "score": null
-        },
-        {
-          "key": "zh-33.md#0",
-          "id": "chunk_if0ern",
-          "distance": 0.4164576778684569,
-          "score": null
-        },
-        {
-          "key": "zh-35.md#0",
-          "id": "chunk_1qlx32d",
-          "distance": 0.4169631899463576,
+          "distance": 0.4051262397025447,
           "score": null
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
-          "distance": 0.41767161103148176,
+          "distance": 0.415519868402463,
           "score": null
         },
         {
-          "key": "zh-06.md#0",
-          "id": "chunk_ek9ow",
-          "distance": 0.4239078254809219,
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.41814540300148373,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.4197169255197932,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.424042564402238,
           "score": null
         }
       ],
@@ -4464,11 +4464,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.810000002384186,
-      "embeddingMs": 9.725000023841858,
-      "httpMs": 12.810000002384186,
-      "dbMs": 2.52,
-      "e2eMs": 28,
+      "latencyMs": 7.620000004768372,
+      "embeddingMs": 4.25,
+      "httpMs": 7.620000004768372,
+      "dbMs": 2.88,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -4479,61 +4479,61 @@
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
-          "distance": 0.30566195811849994,
+          "distance": 0.3060016632079634,
           "score": null
         },
         {
           "key": "zh-05.md#0",
           "id": "chunk_13piie2",
-          "distance": 0.45058211389671,
+          "distance": 0.452917899788273,
           "score": null
         },
         {
           "key": "zh-31.md#0",
           "id": "chunk_7mxvrm",
-          "distance": 0.4606334908515616,
+          "distance": 0.45855362968254876,
           "score": null
         },
         {
           "key": "zh-37.md#0",
           "id": "chunk_wol916",
-          "distance": 0.46114509834587214,
-          "score": null
-        },
-        {
-          "key": "zh-33.md#0",
-          "id": "chunk_if0ern",
-          "distance": 0.4755496353566063,
+          "distance": 0.4605189004962148,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.47604975247082004,
+          "distance": 0.4711768873650146,
+          "score": null
+        },
+        {
+          "key": "zh-33.md#0",
+          "id": "chunk_if0ern",
+          "distance": 0.47603406502237555,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.48561301913179333,
+          "distance": 0.4893091016595793,
           "score": null
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.4919277713169562,
+          "distance": 0.4909698659759454,
           "score": null
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
-          "distance": 0.5005954204924424,
+          "distance": 0.5013894439571542,
           "score": null
         },
         {
-          "key": "zh-27.md#0",
-          "id": "chunk_1cjq5k3",
-          "distance": 0.5043265829864902,
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.5019912427637696,
           "score": null
         }
       ],
@@ -4558,11 +4558,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.65499997138977,
-      "embeddingMs": 8.810000002384186,
-      "httpMs": 12.65499997138977,
-      "dbMs": 2.05,
-      "e2eMs": 28,
+      "latencyMs": 7.139999985694885,
+      "embeddingMs": 4.305000007152557,
+      "httpMs": 7.139999985694885,
+      "dbMs": 2.58,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -4573,61 +4573,61 @@
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.3507813602219636,
+          "distance": 0.3422310368235668,
           "score": null
         },
         {
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
-          "distance": 0.3656178799438725,
+          "distance": 0.3647511278989575,
           "score": null
         },
         {
           "key": "zh-37.md#0",
           "id": "chunk_wol916",
-          "distance": 0.39115242852595844,
+          "distance": 0.3886153265695653,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.4057576656341173,
+          "distance": 0.40666540900856063,
           "score": null
         },
         {
           "key": "zh-06.md#0",
           "id": "chunk_ek9ow",
-          "distance": 0.43559614207762676,
+          "distance": 0.4388014674186348,
           "score": null
         },
         {
           "key": "zh-38.md#0",
           "id": "chunk_1q2byct",
-          "distance": 0.4442571599943239,
+          "distance": 0.4420029520988108,
           "score": null
         },
         {
           "key": "zh-05.md#0",
           "id": "chunk_13piie2",
-          "distance": 0.4509214431596419,
+          "distance": 0.44631304477190636,
+          "score": null
+        },
+        {
+          "key": "zh-14.md#0",
+          "id": "chunk_fsgpph",
+          "distance": 0.45027591296312497,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.4533940823908851,
-          "score": null
-        },
-        {
-          "key": "zh-27.md#0",
-          "id": "chunk_1cjq5k3",
-          "distance": 0.45889865372148453,
+          "distance": 0.45621302462891455,
           "score": null
         },
         {
           "key": "zh-26.md#0",
           "id": "chunk_cgql4w",
-          "distance": 0.4619538417971958,
+          "distance": 0.45836733779128114,
           "score": null
         }
       ],
@@ -4652,11 +4652,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.230000019073486,
-      "embeddingMs": 14.780000030994415,
-      "httpMs": 12.230000019073486,
-      "dbMs": 1.88,
-      "e2eMs": 36,
+      "latencyMs": 7.110000014305115,
+      "embeddingMs": 4.444999992847443,
+      "httpMs": 7.110000014305115,
+      "dbMs": 2.04,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 1,
@@ -4667,61 +4667,61 @@
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.2307800833975997,
+          "distance": 0.2320781669523463,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.3453026218802515,
+          "distance": 0.3535488771621015,
           "score": null
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
-          "distance": 0.3798171115575233,
+          "distance": 0.37549437576598965,
           "score": null
         },
         {
           "key": "zh-22.md#0",
           "id": "chunk_glwmjs",
-          "distance": 0.40765651510098566,
+          "distance": 0.4084145888540789,
           "score": null
         },
         {
           "key": "zh-39.md#0",
           "id": "chunk_17c5enw",
-          "distance": 0.41481287015791335,
+          "distance": 0.4119107372707558,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.4420054693208847,
+          "distance": 0.43820881843566895,
           "score": null
         },
         {
           "key": "zh-27.md#0",
           "id": "chunk_1cjq5k3",
-          "distance": 0.44331469794003253,
+          "distance": 0.4445607265044469,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.44723142451489195,
+          "distance": 0.45379466369215293,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.45813078187336753,
+          "distance": 0.4548829847713688,
           "score": null
         },
         {
-          "key": "en-09.md#0",
-          "id": "chunk_wqrsjs",
-          "distance": 0.46992737413318086,
+          "key": "zh-26.md#0",
+          "id": "chunk_cgql4w",
+          "distance": 0.4632599629914729,
           "score": null
         }
       ],
@@ -4746,11 +4746,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13.870000004768372,
-      "embeddingMs": 12.10999995470047,
-      "httpMs": 13.870000004768372,
-      "dbMs": 1.97,
-      "e2eMs": 28,
+      "latencyMs": 7.824999988079071,
+      "embeddingMs": 4.134999990463257,
+      "httpMs": 7.824999988079071,
+      "dbMs": 2.75,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.3333333333333333,
       "recallAt5": 0.6666666666666666,
@@ -4761,61 +4761,61 @@
         {
           "key": "zh-19.md#0",
           "id": "chunk_1ugvv68",
-          "distance": 0.22040906901242585,
+          "distance": 0.2254173159598809,
           "score": null
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
-          "distance": 0.35547268786537,
+          "distance": 0.3649807250453725,
           "score": null
         },
         {
           "key": "zh-35.md#0",
           "id": "chunk_1qlx32d",
-          "distance": 0.37564490017380014,
+          "distance": 0.37446577853365237,
           "score": null
         },
         {
           "key": "zh-17.md#0",
           "id": "chunk_65zrja",
-          "distance": 0.3843400249277995,
+          "distance": 0.38159482259686894,
           "score": null
         },
         {
           "key": "zh-10.md#0",
           "id": "chunk_10djblf",
-          "distance": 0.4494604140198233,
-          "score": null
-        },
-        {
-          "key": "zh-09.md#0",
-          "id": "chunk_1sm3p7r",
-          "distance": 0.45787321516828516,
+          "distance": 0.4439884819943244,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.4603738047029273,
+          "distance": 0.4523255384938524,
           "score": null
         },
         {
           "key": "zh-24.md#0",
           "id": "chunk_ts00v9",
-          "distance": 0.4608037699706057,
+          "distance": 0.4543909592601526,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.46305170875474855,
+          "distance": 0.45977326508281535,
           "score": null
         },
         {
-          "key": "zh-31.md#0",
-          "id": "chunk_7mxvrm",
-          "distance": 0.4697941311641666,
+          "key": "zh-09.md#0",
+          "id": "chunk_1sm3p7r",
+          "distance": 0.4634432705505501,
+          "score": null
+        },
+        {
+          "key": "zh-16.md#0",
+          "id": "chunk_nyoxig",
+          "distance": 0.47192474028308196,
           "score": null
         }
       ],
@@ -4840,11 +4840,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.84500002861023,
-      "embeddingMs": 9.669999957084656,
-      "httpMs": 11.84500002861023,
-      "dbMs": 1.77,
-      "e2eMs": 27,
+      "latencyMs": 7.180000007152557,
+      "embeddingMs": 4.200000047683716,
+      "httpMs": 7.180000007152557,
+      "dbMs": 2.53,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 1,
@@ -4855,61 +4855,61 @@
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
-          "distance": 0.3328560990098913,
+          "distance": 0.34371745215022775,
           "score": null
         },
         {
           "key": "zh-35.md#0",
           "id": "chunk_1qlx32d",
-          "distance": 0.3580591634404775,
+          "distance": 0.3581867040252372,
           "score": null
         },
         {
           "key": "zh-19.md#0",
           "id": "chunk_1ugvv68",
-          "distance": 0.36308554667075654,
+          "distance": 0.36582740197930796,
           "score": null
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.40006448027776254,
+          "distance": 0.39020547200145106,
           "score": null
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
-          "distance": 0.40538941364789327,
-          "score": null
-        },
-        {
-          "key": "zh-36.md#0",
-          "id": "chunk_lvix92",
-          "distance": 0.4157531515786157,
-          "score": null
-        },
-        {
-          "key": "zh-15.md#0",
-          "id": "chunk_1s3i9ls",
-          "distance": 0.42774618533284503,
+          "distance": 0.40546404025588845,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.42901207709014355,
+          "distance": 0.4185544793144583,
+          "score": null
+        },
+        {
+          "key": "zh-15.md#0",
+          "id": "chunk_1s3i9ls",
+          "distance": 0.41858196675332693,
+          "score": null
+        },
+        {
+          "key": "zh-36.md#0",
+          "id": "chunk_lvix92",
+          "distance": 0.42016991847630636,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.4325649899088353,
+          "distance": 0.4256380389917741,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.43356610719994715,
+          "distance": 0.43251676007203677,
           "score": null
         }
       ],
@@ -4934,76 +4934,76 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.060000002384186,
-      "embeddingMs": 8.405000030994415,
-      "httpMs": 12.060000002384186,
-      "dbMs": 2.04,
-      "e2eMs": 23,
+      "latencyMs": 7.25,
+      "embeddingMs": 3.9549999833106995,
+      "httpMs": 7.25,
+      "dbMs": 2.41,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
-      "recallAt5": 0.6666666666666666,
-      "ndcgAt5": 0.9467676761267002,
-      "ndcgAt10": 0.984691148826963,
+      "recallAt5": 1,
+      "ndcgAt5": 0.9879538239787089,
+      "ndcgAt10": 0.9879538239787089,
       "mrr": 1,
       "topHits": [
         {
           "key": "zh-02.md#0",
           "id": "chunk_d03087",
-          "distance": 0.33057053916805035,
+          "distance": 0.32474819716789205,
           "score": null
         },
         {
           "key": "zh-03.md#0",
           "id": "chunk_1rn5b8x",
-          "distance": 0.34598513293443056,
+          "distance": 0.34811343573171205,
           "score": null
         },
         {
           "key": "en-03.md#0",
           "id": "chunk_k9ue02",
-          "distance": 0.3987730862172697,
+          "distance": 0.394037282822293,
           "score": null
         },
         {
           "key": "zh-25.md#0",
           "id": "chunk_1km16vm",
-          "distance": 0.4170543500618824,
-          "score": null
-        },
-        {
-          "key": "zh-22.md#0",
-          "id": "chunk_glwmjs",
-          "distance": 0.42242940797980966,
+          "distance": 0.4129355096105558,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.4230103836649417,
+          "distance": 0.4202897738719361,
+          "score": null
+        },
+        {
+          "key": "zh-22.md#0",
+          "id": "chunk_glwmjs",
+          "distance": 0.4226397116232342,
           "score": null
         },
         {
           "key": "zh-21.md#0",
           "id": "chunk_4ickfy",
-          "distance": 0.42497508004233453,
+          "distance": 0.42627271666306765,
           "score": null
         },
         {
           "key": "zh-26.md#0",
           "id": "chunk_cgql4w",
-          "distance": 0.4301130771636963,
-          "score": null
-        },
-        {
-          "key": "zh-27.md#0",
-          "id": "chunk_1cjq5k3",
-          "distance": 0.43882700436276123,
+          "distance": 0.4265684739690099,
           "score": null
         },
         {
           "key": "zh-28.md#0",
           "id": "chunk_skoayh",
-          "distance": 0.4422106353482955,
+          "distance": 0.43837124843939757,
+          "score": null
+        },
+        {
+          "key": "zh-27.md#0",
+          "id": "chunk_1cjq5k3",
+          "distance": 0.4398089837686301,
           "score": null
         }
       ],
@@ -5028,76 +5028,76 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13.275000035762787,
-      "embeddingMs": 12.514999985694885,
-      "httpMs": 13.275000035762787,
-      "dbMs": 3.32,
-      "e2eMs": 28,
+      "latencyMs": 7.600000023841858,
+      "embeddingMs": 3.4800000190734863,
+      "httpMs": 7.600000023841858,
+      "dbMs": 2.35,
+      "e2eMs": 18,
       "recallAt1": 0,
       "recallAt3": 0,
-      "recallAt5": 0.3333333333333333,
-      "ndcgAt5": 0.3209627963360124,
-      "ndcgAt10": 0.3209627963360124,
-      "mrr": 0.25,
+      "recallAt5": 0,
+      "ndcgAt5": 0,
+      "ndcgAt10": 0.26546430890183886,
+      "mrr": 0.16666666666666666,
       "topHits": [
         {
           "key": "zh-36.md#0",
           "id": "chunk_lvix92",
-          "distance": 0.4627456389220701,
+          "distance": 0.45875297993492214,
           "score": null
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.4771300811404051,
+          "distance": 0.47055253210974557,
           "score": null
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
-          "distance": 0.4823588707874712,
-          "score": null
-        },
-        {
-          "key": "zh-37.md#0",
-          "id": "chunk_wol916",
-          "distance": 0.5067176230809098,
-          "score": null
-        },
-        {
-          "key": "zh-03.md#0",
-          "id": "chunk_1rn5b8x",
-          "distance": 0.50713172597476,
+          "distance": 0.48087295091811666,
           "score": null
         },
         {
           "key": "zh-32.md#0",
           "id": "chunk_3q1hqq",
-          "distance": 0.5086042613759976,
+          "distance": 0.5012415348743043,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.5097363327990768,
+          "distance": 0.5016575758628765,
+          "score": null
+        },
+        {
+          "key": "zh-37.md#0",
+          "id": "chunk_wol916",
+          "distance": 0.5022334769110606,
           "score": null
         },
         {
           "key": "zh-40.md#0",
           "id": "chunk_gb9zrw",
-          "distance": 0.510605781638235,
+          "distance": 0.5038957602791279,
+          "score": null
+        },
+        {
+          "key": "zh-03.md#0",
+          "id": "chunk_1rn5b8x",
+          "distance": 0.5094424193764957,
           "score": null
         },
         {
           "key": "zh-01.md#0",
           "id": "chunk_1v84v4l",
-          "distance": 0.514094950448851,
+          "distance": 0.5135442904505133,
           "score": null
         },
         {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": 0.5185289592688842,
+          "key": "zh-13.md#0",
+          "id": "chunk_1n1vobz",
+          "distance": 0.5140591570173976,
           "score": null
         }
       ],
@@ -5122,11 +5122,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.394999980926514,
-      "embeddingMs": 8.649999976158142,
-      "httpMs": 12.394999980926514,
-      "dbMs": 1.95,
-      "e2eMs": 23,
+      "latencyMs": 7.464999973773956,
+      "embeddingMs": 3.564999997615814,
+      "httpMs": 7.464999973773956,
+      "dbMs": 2.61,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 1,
@@ -5137,61 +5137,61 @@
         {
           "key": "zh-30.md#0",
           "id": "chunk_zo78zc",
-          "distance": 0.31931209564208984,
+          "distance": 0.3178369998931885,
           "score": null
         },
         {
           "key": "zh-29.md#0",
           "id": "chunk_o6grkb",
-          "distance": 0.4293716122217941,
+          "distance": 0.4241013021348313,
           "score": null
         },
         {
           "key": "zh-34.md#0",
           "id": "chunk_fjy6km",
-          "distance": 0.46477431058883667,
+          "distance": 0.4676615874565584,
           "score": null
         },
         {
           "key": "zh-31.md#0",
           "id": "chunk_7mxvrm",
-          "distance": 0.47454274963224463,
+          "distance": 0.47920101633083645,
           "score": null
         },
         {
           "key": "zh-12.md#0",
           "id": "chunk_1yam2yy",
-          "distance": 0.4968638712520289,
+          "distance": 0.4926637713513502,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.506701172596418,
+          "distance": 0.5002604127240637,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.5155751379295859,
+          "distance": 0.5101840185899678,
           "score": null
         },
         {
           "key": "zh-05.md#0",
           "id": "chunk_13piie2",
-          "distance": 0.5181324460348518,
+          "distance": 0.5174750481411379,
           "score": null
         },
         {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": 0.5239893680795032,
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.5268769200141485,
           "score": null
         },
         {
-          "key": "zh-19.md#0",
-          "id": "chunk_1ugvv68",
-          "distance": 0.5269694545955881,
+          "key": "en-06.md#0",
+          "id": "chunk_1grx4xo",
+          "distance": 0.5296522396595613,
           "score": null
         }
       ],
@@ -5216,11 +5216,11 @@
       "relevantCount": 3,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13,
-      "embeddingMs": 10.784999966621399,
-      "httpMs": 13,
-      "dbMs": 1.84,
-      "e2eMs": 28,
+      "latencyMs": 7.379999995231628,
+      "embeddingMs": 3.814999997615814,
+      "httpMs": 7.379999995231628,
+      "dbMs": 2.79,
+      "e2eMs": 18,
       "recallAt1": 0.3333333333333333,
       "recallAt3": 0.6666666666666666,
       "recallAt5": 0.6666666666666666,
@@ -5231,61 +5231,61 @@
         {
           "key": "zh-15.md#0",
           "id": "chunk_1s3i9ls",
-          "distance": 0.37496145068218745,
+          "distance": 0.368970058498981,
           "score": null
         },
         {
           "key": "zh-18.md#0",
           "id": "chunk_1mdst8",
-          "distance": 0.4034804942298219,
+          "distance": 0.4024204967963304,
           "score": null
         },
         {
           "key": "zh-14.md#0",
           "id": "chunk_fsgpph",
-          "distance": 0.43275217598728155,
-          "score": null
-        },
-        {
-          "key": "zh-35.md#0",
-          "id": "chunk_1qlx32d",
-          "distance": 0.44130398073910204,
+          "distance": 0.4285942486395078,
           "score": null
         },
         {
           "key": "zh-33.md#0",
           "id": "chunk_if0ern",
-          "distance": 0.44640445709228127,
+          "distance": 0.4463482041204495,
           "score": null
         },
         {
-          "key": "zh-19.md#0",
-          "id": "chunk_1ugvv68",
-          "distance": 0.46635676232411727,
-          "score": null
-        },
-        {
-          "key": "zh-12.md#0",
-          "id": "chunk_1yam2yy",
-          "distance": 0.46897893404458,
+          "key": "zh-35.md#0",
+          "id": "chunk_1qlx32d",
+          "distance": 0.4485212687202891,
           "score": null
         },
         {
           "key": "zh-23.md#0",
           "id": "chunk_1gk2brc",
-          "distance": 0.4734563263110576,
+          "distance": 0.4680109341137959,
           "score": null
         },
         {
-          "key": "zh-34.md#0",
-          "id": "chunk_fjy6km",
-          "distance": 0.4793121504373631,
+          "key": "zh-12.md#0",
+          "id": "chunk_1yam2yy",
+          "distance": 0.47476363182067494,
           "score": null
         },
         {
-          "key": "zh-16.md#0",
-          "id": "chunk_nyoxig",
-          "distance": 0.4829284066110485,
+          "key": "zh-19.md#0",
+          "id": "chunk_1ugvv68",
+          "distance": 0.47573966077091867,
+          "score": null
+        },
+        {
+          "key": "zh-32.md#0",
+          "id": "chunk_3q1hqq",
+          "distance": 0.4808258746577495,
+          "score": null
+        },
+        {
+          "key": "zh-08.md#0",
+          "id": "chunk_khipt1",
+          "distance": 0.4849501080736677,
           "score": null
         }
       ],
@@ -5310,76 +5310,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 13.060000002384186,
-      "embeddingMs": 12.959999978542328,
-      "httpMs": 13.060000002384186,
-      "dbMs": 1.96,
-      "e2eMs": 28,
+      "latencyMs": 7.519999980926514,
+      "embeddingMs": 3.2850000262260437,
+      "httpMs": 7.519999980926514,
+      "dbMs": 2.68,
+      "e2eMs": 19,
       "recallAt1": 0,
       "recallAt3": 0,
       "recallAt5": 0.25,
       "ndcgAt5": 0.10722613635357772,
-      "ndcgAt10": 0.3376006163494339,
+      "ndcgAt10": 0.322807113131187,
       "mrr": 0.2,
       "topHits": [
         {
           "key": "en-01.md#0",
           "id": "chunk_c9iaju",
-          "distance": 0.22149415144289308,
+          "distance": 0.22137578980634087,
           "score": null
         },
         {
           "key": "en-17.md#0",
           "id": "chunk_1ugub7s",
-          "distance": 0.2416297649365683,
+          "distance": 0.24510400698518786,
           "score": null
         },
         {
           "key": "en-04.md#0",
           "id": "chunk_88nq5v",
-          "distance": 0.2585337912162404,
+          "distance": 0.2617353640952371,
           "score": null
         },
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
-          "distance": 0.28027830837497103,
+          "distance": 0.27783247496692576,
           "score": null
         },
         {
           "key": "en-08.md#0",
           "id": "chunk_k44xa4",
-          "distance": 0.2976279968328418,
-          "score": null
-        },
-        {
-          "key": "en-05.md#0",
-          "id": "chunk_1v9i2qy",
-          "distance": 0.3139807769048665,
+          "distance": 0.2963270368381008,
           "score": null
         },
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
-          "distance": 0.3156504599423027,
+          "distance": 0.31304034979352746,
+          "score": null
+        },
+        {
+          "key": "en-05.md#0",
+          "id": "chunk_1v9i2qy",
+          "distance": 0.3204110218564157,
           "score": null
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
-          "distance": 0.3247527301900598,
+          "distance": 0.3252591878484712,
+          "score": null
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": 0.3321107029914808,
           "score": null
         },
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
-          "distance": 0.332331975420459,
-          "score": null
-        },
-        {
-          "key": "en-03.md#0",
-          "id": "chunk_k9ue02",
-          "distance": 0.3376963533343952,
+          "distance": 0.3344326218624474,
           "score": null
         }
       ],
@@ -5404,76 +5404,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 14.069999992847443,
-      "embeddingMs": 13.629999995231628,
-      "httpMs": 14.069999992847443,
-      "dbMs": 2.09,
-      "e2eMs": 37,
+      "latencyMs": 6.955000042915344,
+      "embeddingMs": 4.745000004768372,
+      "httpMs": 6.955000042915344,
+      "dbMs": 2.24,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.25,
-      "recallAt5": 0.25,
-      "ndcgAt5": 0.7125794632086186,
-      "ndcgAt10": 0.8143765293812784,
+      "recallAt5": 0.5,
+      "ndcgAt5": 0.8307209056600201,
+      "ndcgAt10": 0.8307209056600201,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-14.md#0",
           "id": "chunk_10flwza",
-          "distance": 0.24141232515787292,
+          "distance": 0.24527628691647796,
           "score": null
         },
         {
           "key": "en-16.md#0",
           "id": "chunk_1fcuiwf",
-          "distance": 0.30407572838935537,
+          "distance": 0.3064754557267043,
           "score": null
         },
         {
           "key": "en-10.md#0",
           "id": "chunk_4wihzq",
-          "distance": 0.32482481307095534,
+          "distance": 0.32223343849180197,
           "score": null
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
-          "distance": 0.33282826365244245,
-          "score": null
-        },
-        {
-          "key": "en-12.md#0",
-          "id": "chunk_1tsmbbh",
-          "distance": 0.33413734029085873,
-          "score": null
-        },
-        {
-          "key": "en-09.md#0",
-          "id": "chunk_wqrsjs",
-          "distance": 0.3361182603554105,
+          "distance": 0.33139232806011987,
           "score": null
         },
         {
           "key": "en-13.md#0",
           "id": "chunk_11r6h36",
-          "distance": 0.33662098704946,
+          "distance": 0.3332175215119717,
+          "score": null
+        },
+        {
+          "key": "en-12.md#0",
+          "id": "chunk_1tsmbbh",
+          "distance": 0.33489330563148567,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.3384488408419952,
           "score": null
         },
         {
           "key": "en-09.md#1",
           "id": "chunk_1icnqkr",
-          "distance": 0.34098060971379984,
-          "score": null
-        },
-        {
-          "key": "en-04.md#0",
-          "id": "chunk_88nq5v",
-          "distance": 0.35736824782272747,
+          "distance": 0.34816247224805885,
           "score": null
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
-          "distance": 0.35822463035581675,
+          "distance": 0.35351392114487,
+          "score": null
+        },
+        {
+          "key": "en-04.md#0",
+          "id": "chunk_88nq5v",
+          "distance": 0.35357276116066905,
           "score": null
         }
       ],
@@ -5498,11 +5498,11 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.840000033378601,
-      "embeddingMs": 10.319999992847443,
-      "httpMs": 11.840000033378601,
-      "dbMs": 1.8,
-      "e2eMs": 27,
+      "latencyMs": 6.850000023841858,
+      "embeddingMs": 3.439999997615814,
+      "httpMs": 6.850000023841858,
+      "dbMs": 2.4,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
       "recallAt5": 0.5,
@@ -5513,61 +5513,61 @@
         {
           "key": "en-20.md#0",
           "id": "chunk_tdb8s7",
-          "distance": 0.19834575672796284,
+          "distance": 0.19983024596154875,
           "score": null
         },
         {
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
-          "distance": 0.269603176736641,
+          "distance": 0.26704091612774383,
           "score": null
         },
         {
           "key": "en-09.md#1",
           "id": "chunk_1icnqkr",
-          "distance": 0.28445151858941886,
+          "distance": 0.2896745377584903,
           "score": null
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
-          "distance": 0.29830504716452255,
+          "distance": 0.3020888566970775,
           "score": null
         },
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
-          "distance": 0.30551342832721495,
+          "distance": 0.3036175189246214,
           "score": null
         },
         {
           "key": "en-16.md#0",
           "id": "chunk_1fcuiwf",
-          "distance": 0.31238057840448163,
+          "distance": 0.31269116704248967,
           "score": null
         },
         {
           "key": "en-14.md#0",
           "id": "chunk_10flwza",
-          "distance": 0.3210601976060904,
+          "distance": 0.3243101029765537,
           "score": null
         },
         {
           "key": "en-12.md#0",
           "id": "chunk_1tsmbbh",
-          "distance": 0.32219378219879846,
+          "distance": 0.3266261037287417,
           "score": null
         },
         {
-          "key": "en-06.md#0",
-          "id": "chunk_1grx4xo",
-          "distance": 0.33471280287044436,
+          "key": "en-12.md#1",
+          "id": "chunk_q4ncis",
+          "distance": 0.33091926531537164,
           "score": null
         },
         {
           "key": "en-18.md#1",
           "id": "chunk_2ia2n9",
-          "distance": 0.33573709024725296,
+          "distance": 0.3321253258176393,
           "score": null
         }
       ],
@@ -5592,76 +5592,76 @@
       "relevantCount": 4,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 12.194999992847443,
-      "embeddingMs": 12.810000002384186,
-      "httpMs": 12.194999992847443,
-      "dbMs": 2,
-      "e2eMs": 28,
+      "latencyMs": 7.199999988079071,
+      "embeddingMs": 4.004999995231628,
+      "httpMs": 7.199999988079071,
+      "dbMs": 2.47,
+      "e2eMs": 18,
       "recallAt1": 0.25,
       "recallAt3": 0.5,
       "recallAt5": 0.5,
       "ndcgAt5": 0.9052598568324595,
-      "ndcgAt10": 0.93468580808533,
+      "ndcgAt10": 0.9359038272210213,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-19.md#0",
           "id": "chunk_c1hkkf",
-          "distance": 0.2239974203115671,
+          "distance": 0.2187812216393763,
           "score": null
         },
         {
           "key": "en-20.md#0",
           "id": "chunk_tdb8s7",
-          "distance": 0.2928799710035297,
+          "distance": 0.2929870733037647,
           "score": null
         },
         {
           "key": "en-08.md#0",
           "id": "chunk_k44xa4",
-          "distance": 0.30503295033967703,
-          "score": null
-        },
-        {
-          "key": "en-09.md#1",
-          "id": "chunk_1icnqkr",
-          "distance": 0.31178448726025265,
-          "score": null
-        },
-        {
-          "key": "en-14.md#0",
-          "id": "chunk_10flwza",
-          "distance": 0.314407307768205,
+          "distance": 0.30327857615521314,
           "score": null
         },
         {
           "key": "en-18.md#0",
           "id": "chunk_1cpt6em",
-          "distance": 0.3219886634362904,
+          "distance": 0.316682577133101,
+          "score": null
+        },
+        {
+          "key": "en-09.md#1",
+          "id": "chunk_1icnqkr",
+          "distance": 0.31722827944414067,
+          "score": null
+        },
+        {
+          "key": "en-14.md#0",
+          "id": "chunk_10flwza",
+          "distance": 0.3185655284782336,
           "score": null
         },
         {
           "key": "en-13.md#0",
           "id": "chunk_11r6h36",
-          "distance": 0.3262538508327141,
+          "distance": 0.32575206074829344,
           "score": null
         },
         {
           "key": "en-13.md#1",
           "id": "chunk_1enha5i",
-          "distance": 0.32932520056061243,
-          "score": null
-        },
-        {
-          "key": "en-18.md#1",
-          "id": "chunk_2ia2n9",
-          "distance": 0.33101705661756164,
+          "distance": 0.3274688546489476,
           "score": null
         },
         {
           "key": "en-16.md#0",
           "id": "chunk_1fcuiwf",
-          "distance": 0.33827324472749487,
+          "distance": 0.3409733379466383,
+          "score": null
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.34134836896077125,
           "score": null
         }
       ],
@@ -5686,11 +5686,11 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.375,
-      "embeddingMs": 7.705000042915344,
-      "httpMs": 11.375,
-      "dbMs": 1.72,
-      "e2eMs": 23,
+      "latencyMs": 7.339999973773956,
+      "embeddingMs": 3.4700000286102295,
+      "httpMs": 7.339999973773956,
+      "dbMs": 2.49,
+      "e2eMs": 18,
       "recallAt1": 0.16666666666666666,
       "recallAt3": 0.16666666666666666,
       "recallAt5": 0.16666666666666666,
@@ -5701,61 +5701,61 @@
         {
           "key": "en-09.md#0",
           "id": "chunk_wqrsjs",
-          "distance": 0.24538065465570047,
+          "distance": 0.2425626516341679,
           "score": null
         },
         {
           "key": "en-04.md#0",
           "id": "chunk_88nq5v",
-          "distance": 0.28460156046178875,
+          "distance": 0.2831422855342478,
           "score": null
         },
         {
           "key": "en-01.md#0",
           "id": "chunk_c9iaju",
-          "distance": 0.3152604070771359,
+          "distance": 0.3144459282030839,
           "score": null
         },
         {
           "key": "en-03.md#0",
           "id": "chunk_k9ue02",
-          "distance": 0.32350238105665907,
+          "distance": 0.32356355471174636,
           "score": null
         },
         {
           "key": "en-11.md#0",
           "id": "chunk_ue5zgf",
-          "distance": 0.34022430784234525,
-          "score": null
-        },
-        {
-          "key": "en-17.md#0",
-          "id": "chunk_1ugub7s",
-          "distance": 0.34246798410817947,
-          "score": null
-        },
-        {
-          "key": "en-15.md#0",
-          "id": "chunk_112x50k",
-          "distance": 0.3427263106540335,
+          "distance": 0.3374105713781693,
           "score": null
         },
         {
           "key": "en-07.md#0",
           "id": "chunk_6eg25u",
-          "distance": 0.3435798510503367,
+          "distance": 0.33880583412606713,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.3429780423893348,
           "score": null
         },
         {
           "key": "en-11.md#1",
           "id": "chunk_ngbktf",
-          "distance": 0.3458005418301874,
+          "distance": 0.3435076884636321,
           "score": null
         },
         {
           "key": "en-06.md#0",
           "id": "chunk_1grx4xo",
-          "distance": 0.34619327232910446,
+          "distance": 0.3449905741192233,
+          "score": null
+        },
+        {
+          "key": "en-15.md#0",
+          "id": "chunk_112x50k",
+          "distance": 0.3466521318736048,
           "score": null
         }
       ],
@@ -5780,76 +5780,76 @@
       "relevantCount": 6,
       "invalidHits": 0,
       "notice": null,
-      "latencyMs": 11.495000004768372,
-      "embeddingMs": 8.615000009536743,
-      "httpMs": 11.495000004768372,
-      "dbMs": 1.77,
-      "e2eMs": 22,
+      "latencyMs": 6.799999952316284,
+      "embeddingMs": 3.5700000524520874,
+      "httpMs": 6.799999952316284,
+      "dbMs": 2.24,
+      "e2eMs": 18,
       "recallAt1": 0.16666666666666666,
-      "recallAt3": 0.16666666666666666,
-      "recallAt5": 0.16666666666666666,
-      "ndcgAt5": 0.6244247138302588,
-      "ndcgAt10": 0.6870165474698057,
+      "recallAt3": 0.3333333333333333,
+      "recallAt5": 0.3333333333333333,
+      "ndcgAt5": 0.7582300096510285,
+      "ndcgAt10": 0.734879266023925,
       "mrr": 1,
       "topHits": [
         {
           "key": "en-02.md#0",
           "id": "chunk_88418y",
-          "distance": 0.28262325732428695,
+          "distance": 0.28257878318898455,
           "score": null
         },
         {
           "key": "en-01.md#1",
           "id": "chunk_k30s82",
-          "distance": 0.28566073942872205,
-          "score": null
-        },
-        {
-          "key": "en-16.md#0",
-          "id": "chunk_1fcuiwf",
-          "distance": 0.28710342280204304,
-          "score": null
-        },
-        {
-          "key": "en-09.md#0",
-          "id": "chunk_wqrsjs",
-          "distance": 0.28941653433938475,
-          "score": null
-        },
-        {
-          "key": "en-17.md#0",
-          "id": "chunk_1ugub7s",
-          "distance": 0.2964731874183788,
-          "score": null
-        },
-        {
-          "key": "en-01.md#0",
-          "id": "chunk_c9iaju",
-          "distance": 0.297369557462307,
-          "score": null
-        },
-        {
-          "key": "en-12.md#0",
-          "id": "chunk_1tsmbbh",
-          "distance": 0.29845603099203166,
+          "distance": 0.2849551865485085,
           "score": null
         },
         {
           "key": "en-02.md#1",
           "id": "chunk_phni2r",
-          "distance": 0.3005751013070025,
+          "distance": 0.28588666235724935,
           "score": null
         },
         {
-          "key": "en-20.md#0",
-          "id": "chunk_tdb8s7",
-          "distance": 0.30127012729644276,
+          "key": "en-16.md#0",
+          "id": "chunk_1fcuiwf",
+          "distance": 0.2882992464181864,
+          "score": null
+        },
+        {
+          "key": "en-09.md#0",
+          "id": "chunk_wqrsjs",
+          "distance": 0.29502739965587044,
+          "score": null
+        },
+        {
+          "key": "en-17.md#0",
+          "id": "chunk_1ugub7s",
+          "distance": 0.2968067494160008,
           "score": null
         },
         {
           "key": "en-17.md#1",
           "id": "chunk_zgect6",
-          "distance": 0.3031161300858696,
+          "distance": 0.2990202068114527,
+          "score": null
+        },
+        {
+          "key": "en-01.md#0",
+          "id": "chunk_c9iaju",
+          "distance": 0.2997193693780147,
+          "score": null
+        },
+        {
+          "key": "en-16.md#1",
+          "id": "chunk_e3c20p",
+          "distance": 0.30072589520966253,
+          "score": null
+        },
+        {
+          "key": "en-10.md#0",
+          "id": "chunk_4wihzq",
+          "distance": 0.30181145104374485,
           "score": null
         }
       ],
@@ -5866,17 +5866,17 @@
       "run": 0,
       "metrics": {
         "queries": 60,
-        "recallAt1": 0.2365,
-        "recallAt3": 0.4544,
-        "recallAt5": 0.5592,
-        "ndcgAt5": 0.7267,
-        "ndcgAt10": 0.7619,
-        "mrr": 0.8992
+        "recallAt1": 0.2332,
+        "recallAt3": 0.4628,
+        "recallAt5": 0.5744,
+        "ndcgAt5": 0.7299,
+        "ndcgAt10": 0.7659,
+        "mrr": 0.8894
       }
     }
   ],
-  "durationMs": 6728,
-  "actualDurationMs": 6728,
+  "durationMs": 3072,
+  "actualDurationMs": 3072,
   "cleanup": {
     "ok": true,
     "status": 200
