@@ -1,0 +1,51 @@
+{
+  "first": {
+    "times": {
+      "readMs": 38.40000003576279,
+      "chunkMs": 0.45500004291534424,
+      "embedMs": 147.6700000166893,
+      "writeMs": 658.5750000476837,
+      "refreshMs": 605.99,
+      "cleanupMs": 0,
+      "totalMs": 976.8049999475479
+    },
+    "count": 3,
+    "refreshEvents": 0
+  },
+  "second": {
+    "times": {
+      "readMs": 6.285000026226044,
+      "chunkMs": 0.05500006675720215,
+      "embedMs": 6.664999961853027,
+      "writeMs": 26.030000030994415,
+      "refreshMs": 502.82,
+      "cleanupMs": 21.205000042915344,
+      "totalMs": 736.0100000500679
+    },
+    "count": 1,
+    "refreshEvents": [],
+    "writes": []
+  },
+  "third": {
+    "times": {
+      "readMs": 2.4600000381469727,
+      "chunkMs": 0.050000011920928955,
+      "embedMs": 0,
+      "writeMs": 0,
+      "refreshMs": 0,
+      "cleanupMs": 0.004999995231628418,
+      "totalMs": 38.035000026226044
+    },
+    "count": 0,
+    "refreshEvents": 0
+  },
+  "search": {
+    "hits": 2,
+    "e2eMs": 29,
+    "top": {
+      "source": "alpha.md",
+      "chunkIndex": 0
+    }
+  },
+  "count": 2
+}

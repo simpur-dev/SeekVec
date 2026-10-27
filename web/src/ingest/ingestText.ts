@@ -196,6 +196,25 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       : uniqueChunks;
     const skippedUnchanged = totalChunks - chunksToWrite.length;
 
+    // 提前计算陈旧块：若本次会删除旧 chunk，则把索引刷新推迟到清理之后，
+    // 避免「写末批刷新 + 清理后刷新」两次全量刷新（旧实现最坏 +0.5–0.8s）。
+    let staleIdsToDelete: string[] = [];
+    if (!created && existingItems) {
+      const existingBySource = new Map<string, string[]>();
+      for (const item of existingItems) {
+        if (!item.source) continue;
+        const list = existingBySource.get(item.source);
+        if (list) list.push(item.id);
+        else existingBySource.set(item.source, [item.id]);
+      }
+      for (const [source, newIds] of idsBySource) {
+        for (const existingId of existingBySource.get(source) ?? []) {
+          if (!newIds.has(existingId)) staleIdsToDelete.push(existingId);
+        }
+      }
+    }
+    const deferRefreshToCleanup = staleIdsToDelete.length > 0 && refresh !== 'each';
+
     // ── 3) 端侧向量化（仅新增/变化 chunk）──────────────────────
     onStatus?.('embedding', { total: totalChunks, done: skippedUnchanged });
     // 写入仍按原始文件顺序分批；embedding 按文本长度分桶后再组 batch，
@@ -242,7 +261,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     let written = 0;
     for (let b = 0; b < writeBatches.length; b++) {
       const batchItems = writeBatches[b];
-      const shouldRefresh = refresh === 'each' || b === writeBatches.length - 1;
+      const shouldRefresh = refresh === 'each' || (b === writeBatches.length - 1 && !deferRefreshToCleanup);
       const writeStart = performance.now();
       const response = await ingestDocuments({
         collectionName,
@@ -311,18 +330,22 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
       }
 
       if (allItems) {
-        // 只清理本次导入涉及的 source；未涉及的文件/集合内容保持不动
-        const existingBySource = new Map<string, string[]>();
-        for (const item of allItems) {
-          if (!item.source) continue;
-          const list = existingBySource.get(item.source);
-          if (list) list.push(item.id);
-          else existingBySource.set(item.source, [item.id]);
-        }
-        const staleIds: string[] = [];
-        for (const [source, newIds] of idsBySource) {
-          for (const existingId of existingBySource.get(source) ?? []) {
-            if (!newIds.has(existingId)) staleIds.push(existingId);
+        // 只清理本次导入涉及的 source；未涉及的文件/集合内容保持不动。
+        // existingItems 路径已在写入前算好 stale，复用避免重复比较。
+        let staleIds: string[] = staleIdsToDelete;
+        if (!existingItems) {
+          const existingBySource = new Map<string, string[]>();
+          for (const item of allItems) {
+            if (!item.source) continue;
+            const list = existingBySource.get(item.source);
+            if (list) list.push(item.id);
+            else existingBySource.set(item.source, [item.id]);
+          }
+          staleIds = [];
+          for (const [source, newIds] of idsBySource) {
+            for (const existingId of existingBySource.get(source) ?? []) {
+              if (!newIds.has(existingId)) staleIds.push(existingId);
+            }
           }
         }
         try {
@@ -352,8 +375,10 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     }
     times.cleanupMs = performance.now() - cleanupStart;
 
-    // 有陈旧分块被删除时补一次索引刷新，保证删除在索引中生效（检索不再返回旧 id）
-    if (cleanupDeleted > 0) {
+    // 有陈旧分块被删除时补一次索引刷新，保证删除在索引中生效（检索不再返回旧 id）。
+    // 若写入末批因「预计有清理」而推迟刷新，但清理实际未删掉任何行（例如删除失败），
+    // 这里兜底刷新一次，保证已写入的新数据可检索。
+    if (cleanupDeleted > 0 || (deferRefreshToCleanup && wroteAnyBatch && !refreshed)) {
       try {
         const cleanupRefreshStart = performance.now();
         const cleanupRefresh = await refreshCollection(collectionName);
@@ -366,6 +391,7 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
           meta: {
             op: 'after-cleanup',
             deleted: cleanupDeleted,
+            deferredWriteRefresh: deferRefreshToCleanup,
             serverTiming: typeof cleanupRefresh.timings?.refreshMs === 'number',
           },
         });

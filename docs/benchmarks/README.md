@@ -12,7 +12,7 @@
 | `matrix-2026-10-26/` | 优化前基线（历史数据，用于 before/after 对比） |
 | `fallback-2026-10-27/` | **WebGPU 不可用验证**：Edge 156 禁用 GPU/WebGPU 后 auto→WASM；raw/summary + 徽标截图/UI 文本 |
 | `edge-webgpu-2026-10-27/` | Edge 156 WebGPU/fp16 兼容冒烟：raw/summary + 徽标截图 |
-| `optimization-2026-10-27/` | 深度优化证据：batch/threads 消融、增量导入（reimport-result.json）、length bucketing 等 |
+| `optimization-2026-10-27/` | 深度优化证据：batch/threads 消融、增量导入（reimport-result.json）、陈旧块刷新合并 e2e、写入/embedding 流水线 A/B、查询指令 A/B |
 | `eval-quality/` | Node 质量回归（fp32/q8/fp16；60 文档/73 chunks/60 查询/229 qrels）：`raw.json`、`summary.md` |
 | `quality-browser/` | 浏览器实际链路质量（fp32+WASM / q8+WASM / fp16+WebGPU）：三组 `raw.json`+`summary.md`、汇总 `raw.json`+`summary.md` |
 
