@@ -1,0 +1,30 @@
+{
+  "steps": [
+    {
+      "step": "forced_webgpu_without_adapter",
+      "bodyHasModelError": true,
+      "bodyMentionsWasm": false,
+      "bodyMentionsWebGPU": true,
+      "searchDisabled": true,
+      "tail": [
+        "模型加载失败",
+        "强制 WebGPU 不可用：未获取到 GPU 适配器",
+        "模型",
+        "模型加载失败，点此重试",
+        "embedding 模型加载失败：强制 WebGPU 不可用：未获取到 GPU 适配器",
+        "embedding 模型加载失败：强制 WebGPU 不可用：未获取到 GPU 适配器"
+      ]
+    },
+    {
+      "step": "auto_without_adapter",
+      "bodyMentionsWasm": true,
+      "bodyMentionsDowngrade": true,
+      "searchDisabled": false,
+      "tail": [
+        "WASM · 1.2s",
+        "· 未获取到 WebGPU 适配器，已降级 WASM",
+        "模型"
+      ]
+    }
+  ]
+}
