@@ -16,13 +16,13 @@
  * 混合检索返回 RRF score（越大越相关），ResultCard 按 metric 分别展示。
  */
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { isAbortError, search } from '../db/api';
+import { isAbortError, listCollections, search } from '../db/api';
 import { detectBackend } from '../inference/backend';
 import { IMAGE_PIPELINE_ENABLED } from '../inference/models';
 import { useModelStore } from '../store/modelStore';
 import { useKbStore } from '../store/kbStore';
 import { useSearchStore } from '../store/searchStore';
-import { resolveSearchCollection } from '../store/collectionSelection';
+import { pickActiveCollection, resolveSearchCollection } from '../store/collectionSelection';
 import { runTextSearch } from '../search/textSearch';
 import { shouldAcceptSearchResult } from '../search/searchGuard';
 import { afterNextPaint } from '../utils/perf';
@@ -35,6 +35,7 @@ export function useSearch() {
   const collections = useKbStore((s) => s.collections);
   const activeCollection = useKbStore((s) => s.activeCollection);
   const setActiveCollection = useKbStore((s) => s.setActiveCollection);
+  const syncCollections = useKbStore((s) => s.syncCollections);
   const setSearching = useSearchStore((s) => s.setSearching);
   const setTextResults = useSearchStore((s) => s.setTextResults);
   const setImageResults = useSearchStore((s) => s.setImageResults);
@@ -46,6 +47,29 @@ export function useSearch() {
   // 丢弃“旧模型/旧集合”的在途检索响应，避免切换后旧结果覆盖新状态。
   const searchRequestId = useRef(0);
   const searchAbortRef = useRef<AbortController | null>(null);
+
+  /**
+   * 检索遇到 404（集合已被外部删除）时：同步 server 集合、回退 activeCollection，
+   * 让 UI 不继续指向幽灵集合。返回 true 表示已恢复列表，调用方提示用户重试。
+   */
+  const recoverMissingCollection = useCallback(
+    async (err: unknown): Promise<boolean> => {
+      const message = err instanceof Error ? err.message : String(err);
+      if (!/HTTP 404|COLLECTION_NOT_FOUND|Collection not found/i.test(message)) return false;
+      try {
+        const list = await listCollections();
+        syncCollections(list);
+        const state = useKbStore.getState();
+        const nextActive = pickActiveCollection(state.collections, state.activeCollection, modelKey);
+        setActiveCollection(nextActive);
+        resetResults();
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    [modelKey, resetResults, setActiveCollection, syncCollections],
+  );
 
   // 当前模型对应的目标集合（activeCollection 失效时回退约定命名）
   const resolution = useMemo(
@@ -191,6 +215,10 @@ export function useSearch() {
       } catch (err) {
         // 旧查询被新查询/切换中止属于正常路径，不显示错误
         if (isAbortError(err)) return;
+        if (await recoverMissingCollection(err)) {
+          setError('集合已不存在，已刷新集合列表；请重新选择集合后再检索');
+          return;
+        }
         // 检索失败时给出明确错误，而不是界面毫无反应
         setError((err as Error).message || '检索失败');
       } finally {
@@ -200,7 +228,7 @@ export function useSearch() {
         }
       }
     },
-    [ready, runTextSearchTask, runImageSearch, setSearching, setError],
+    [ready, runTextSearchTask, runImageSearch, setSearching, setError, recoverMissingCollection],
   );
 
   return {

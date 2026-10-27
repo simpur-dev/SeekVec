@@ -1,0 +1,23 @@
+{
+  "steps": [
+    {
+      "step": "before_external_delete",
+      "hasCollection": true,
+      "selected": "bench_lost_collection"
+    },
+    {
+      "step": "search_after_external_delete",
+      "hasCollection": false,
+      "errorShown": true,
+      "body": [
+        "2 集合",
+        "集合名",
+        "选择已有集合…",
+        "refresh=last（写入末批刷新；清理或失败时补偿刷新）",
+        "集合",
+        "（请选择集合）",
+        "集合已不存在，已刷新集合列表；请重新选择集合后再检索"
+      ]
+    }
+  ]
+}
