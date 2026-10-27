@@ -97,13 +97,31 @@ export async function resetClientConnection(): Promise<void> {
   }
 }
 
-/** seekdb 重启/连接中断时 SDK 抛出的典型错误 */
+/** seekdb 重启/连接中断时 SDK 抛出的典型错误（含 ECONNREFUSED 等底层 cause） */
 const CONNECTION_ERROR_RE =
-  /closed state|connection (?:is )?(?:lost|closed)|ECONNRESET|PROTOCOL_CONNECTION_LOST|EPIPE/i;
+  /closed state|connection (?:is )?(?:lost|closed|refused)|ECONNREFUSED|ECONNRESET|EPIPE|ENOTFOUND|ETIMEDOUT|EHOSTUNREACH|PROTOCOL_CONNECTION_LOST|failed to connect|SeekdbConnectionError/i;
 
-export function isConnectionError(err: unknown): boolean {
-  const msg = err instanceof Error ? err.message : String(err);
-  return CONNECTION_ERROR_RE.test(msg);
+/**
+ * 判断是否连接类错误。
+ *
+ * SDK 外层通常是 `SeekdbConnectionError: Failed to connect to host:port`，
+ * 真正的 `ECONNREFUSED` 在 `error.cause.code` 里；不能只看外层 message，
+ * 否则 seekdb 停机时会误判为 500 且不触发重连。
+ */
+export function isConnectionError(err: unknown, depth = 0): boolean {
+  if (!err || depth > 4) return false;
+  if (typeof err === 'string') return CONNECTION_ERROR_RE.test(err);
+  const anyErr = err as {
+    message?: unknown;
+    name?: unknown;
+    code?: unknown;
+    cause?: unknown;
+  };
+  const parts = [anyErr.message, anyErr.name, anyErr.code].filter(
+    (x): x is string => typeof x === 'string',
+  );
+  if (parts.some((p) => CONNECTION_ERROR_RE.test(p))) return true;
+  return isConnectionError(anyErr.cause, depth + 1);
 }
 
 /**

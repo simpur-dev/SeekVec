@@ -1,0 +1,53 @@
+{
+  "steps": [
+    {
+      "step": "health_before",
+      "ok": true
+    },
+    {
+      "step": "stopped_seekdb",
+      "ok": true
+    },
+    {
+      "step": "ingest_while_down",
+      "ok": true,
+      "error": "HTTP 503: {\"error\":\"seekdb 连接不可用，请稍后重试\",\"code\":\"SEEKDB_UNAVAILABLE\",\"requestId\":\"3649d7c3-5953-43ee-a96a-0902451580a0\"}"
+    },
+    {
+      "step": "immediate_retry_while_down",
+      "ok": true,
+      "error": "HTTP 503: {\"error\":\"seekdb 连接不可用，请稍后重试\",\"code\":\"SEEKDB_UNAVAILABLE\",\"requestId\":\"23639acb-9c02-4148-97e6-6d2205fb68e1\"}"
+    },
+    {
+      "step": "restarted_seekdb",
+      "ok": true
+    },
+    {
+      "step": "retry_after_restart",
+      "ok": true,
+      "search": {
+        "hits": 1,
+        "e2eMs": 30
+      }
+    }
+  ],
+  "retryResult": {
+    "ok": true,
+    "result": {
+      "count": 1,
+      "times": {
+        "readMs": 6.884999990463257,
+        "chunkMs": 0.020000040531158447,
+        "embedMs": 81.98500001430511,
+        "writeMs": 1852.7350000143051,
+        "refreshMs": 1725.07,
+        "cleanupMs": 0,
+        "totalMs": 2137.110000014305
+      }
+    },
+    "search": {
+      "hits": 1,
+      "e2eMs": 30
+    }
+  }
+}

@@ -380,26 +380,43 @@ export async function ingestTextFiles(options: IngestTextOptions): Promise<Inges
     // 有陈旧分块被删除时补一次索引刷新，保证删除在索引中生效（检索不再返回旧 id）。
     // 若写入末批因「预计有清理」而推迟刷新，但清理实际未删掉任何行（例如删除失败），
     // 这里兜底刷新一次，保证已写入的新数据可检索。
+    // 关键：刷新失败不能吞掉——否则会向调用方返回“导入成功”，但新写入/删除可能不可检索。
+    let cleanupRefreshError: unknown = null;
     if (cleanupDeleted > 0 || (deferRefreshToCleanup && wroteAnyBatch && !refreshed)) {
-      try {
-        const cleanupRefreshStart = performance.now();
-        const cleanupRefresh = await refreshCollection(collectionName);
-        const refreshMs =
-          cleanupRefresh.timings?.refreshMs ?? performance.now() - cleanupRefreshStart;
-        times.refreshMs += refreshMs;
-        refreshed = true;
-        recordPerf('index.refresh', refreshMs, {
-          refreshPolicy: refresh,
-          meta: {
-            op: 'after-cleanup',
-            deleted: cleanupDeleted,
-            deferredWriteRefresh: deferRefreshToCleanup,
-            serverTiming: typeof cleanupRefresh.timings?.refreshMs === 'number',
-          },
-        });
-      } catch (err) {
-        console.warn('[ingest] 清理陈旧分块后的索引刷新失败', err);
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const cleanupRefreshStart = performance.now();
+          const cleanupRefresh = await refreshCollection(collectionName);
+          const refreshMs =
+            cleanupRefresh.timings?.refreshMs ?? performance.now() - cleanupRefreshStart;
+          times.refreshMs += refreshMs;
+          refreshed = true;
+          cleanupRefreshError = null;
+          recordPerf('index.refresh', refreshMs, {
+            refreshPolicy: refresh,
+            meta: {
+              op: 'after-cleanup',
+              deleted: cleanupDeleted,
+              deferredWriteRefresh: deferRefreshToCleanup,
+              attempt,
+              serverTiming: typeof cleanupRefresh.timings?.refreshMs === 'number',
+            },
+          });
+          break;
+        } catch (err) {
+          cleanupRefreshError = err;
+          console.warn(
+            `[ingest] 清理陈旧分块后的索引刷新失败（attempt ${attempt + 1}/2），` +
+              '数据可能尚不可检索',
+            err,
+          );
+        }
       }
+    }
+    if (cleanupRefreshError) {
+      throw new Error(
+        '清理后索引刷新失败，无法保证本轮新增/删除数据可检索；请重试导入或检查 seekdb 后手动刷新。',
+      );
     }
 
     // ── 6) 收尾：计数 / 登记 / 设 active ────────────────────────
