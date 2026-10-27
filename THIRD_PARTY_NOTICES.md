@@ -30,7 +30,7 @@ SeekVec 参赛项目（2026 OceanBase 数据库大赛 ·「seekdb × 阶跃星�
 | 资产 | 许可 | 说明 |
 |---|---|---|
 | OceanBase seekdb（server） | **Apache-2.0** | 本项目的向量/全文/Fusion 数据层。源码：<https://github.com/oceanbase/seekdb> |
-| `quay.io/oceanbase/seekdb` 容器镜像 | Apache-2.0（镜像内基础组件另有其许可） | 实测版本 seekdb 1.4.0，digest `sha256:4db4961869d554313520d6081fca29265ba6da6db7313311bd8acbed771a956b`；`docker-compose.yml` 使用 `latest` 并支持 `SEEKDB_IMAGE` pin |
+| `quay.io/oceanbase/seekdb` 容器镜像 | Apache-2.0（镜像内基础组件另有其许可） | 实测版本 seekdb 1.4.0，digest `sha256:4db4961869d554313520d6081fca29265ba6da6db7313311bd8acbed771a956b`；`docker-compose.yml` 与 `.env.example` 默认固定该 digest，可用 `SEEKDB_IMAGE` 显式覆盖 |
 | `seekdb` npm 客户端（seekdb-js） | Apache-2.0 | 版本 `1.3.0`，server 端唯一数据库依赖 |
 
 ## 3. 端侧推理运行时（浏览器）

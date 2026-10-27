@@ -59,7 +59,7 @@ npm run dev:docker
 
 ## 浏览器要求与演示
 
-- **最新版 Chrome / Edge**（Chromium 内核，建议 ≥113；WebGPU 需要硬件与安全上下文 `localhost`/HTTPS，不支持时自动降级 WASM）；实测 Chrome 153
+- **最新版 Chrome / Edge**（Chromium 内核，建议 ≥113；WebGPU 需要硬件与安全上下文 `localhost`/HTTPS，不支持时自动降级 WASM）；实测 Chrome 153 与 Edge 156 的 WebGPU/fp16 链路
 - 演示路径：文本检索页 → 拖入 `data/demo/` 示例文档 → 观察「读取/向量化/写入」进度与结果 → 输入查询检索；填「关键字」后检索会走 **seekdb 库内混合检索（RRF）**
 - 界面右上角徽标显示当前推理后端（WebGPU / WASM，含降级原因与模型加载耗时）
 - 强制后端/精度（用于验收降级路径）：`?backend=wasm`、`?backend=webgpu`、`?dtype=fp16|q8|fp32`（会记住后端选择；可用 `?backend=auto` 清除）
@@ -111,7 +111,7 @@ npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web
 | `SEEKDB_PATH` | 空 | 嵌入式模式（仅 Linux/macOS）|
 | `SEEKDB_QUERY_TIMEOUT_MS` | `30000` | SQL 查询超时 |
 | `PORT` / `CORS_ORIGINS` | `3001` / `http://localhost:5173` | server 端口与 CORS |
-| `SEEKDB_IMAGE` | `quay.io/oceanbase/seekdb:latest` | compose 镜像（可 pin digest）|
+| `SEEKDB_IMAGE` | `quay.io/oceanbase/seekdb@sha256:4db49618…` | compose 镜像（默认固定 seekdb 1.4.0 digest，可显式覆盖）|
 | `SEEKVEC_CACHE_DIR` / `HF_ENDPOINT` | `./scripts/.cache` / 官方 HF | Node 脚本缓存与模型源 |
 | `BROWSER_PATH` / `SEEKVEC_BASE_URL` | 自动探测 / `http://localhost:5173` | 浏览器基准 |
 

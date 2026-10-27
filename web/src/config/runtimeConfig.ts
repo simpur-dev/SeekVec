@@ -29,7 +29,7 @@ export interface RuntimeConfig {
   dtype: Dtype | null;
   /** 批量大小（1..64，默认 16） */
   batch: number;
-  /** 索引刷新策略（last=仅最后一批、each=每批） */
+  /** 索引刷新策略（last=写入末批刷新，清理或失败时补偿；each=每批） */
   refresh: RefreshPolicy;
   /** onnxruntime-web wasm 线程数（1..8；crossOriginIsolated 时默认 4，否则 1） */
   threads: number;

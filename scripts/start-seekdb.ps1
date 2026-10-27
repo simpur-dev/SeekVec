@@ -44,7 +44,7 @@ if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administra
 if (-not $BinDir -or -not (Test-Exists $SeekdbExe)) {
     Write-Err "未找到 seekdb.exe。已尝试：参数 -BinDir / 环境变量 SEEKDB_BIN / C:\Program Files\seekdb\bin / D:\seekdb\app\bin / PATH"
     Write-Err "请确认已安装 seekdb，或改用 Docker（见 README）："
-    Write-Err '  docker run -d --name seekvec-seekdb -p 2882:2881 -v seekvec_seekdb-data:/var/lib/seekdb quay.io/oceanbase/seekdb:latest'
+    Write-Err '  docker run -d --name seekvec-seekdb -p 2882:2881 -v seekvec_seekdb-data:/var/lib/seekdb quay.io/oceanbase/seekdb@sha256:4db4961869d554313520d6081fca29265ba6da6db7313311bd8acbed771a956b'
     exit 1
 }
 

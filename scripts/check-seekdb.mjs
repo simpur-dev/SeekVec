@@ -32,7 +32,7 @@ const INSTALL_GUIDE = `
   docker volume create seekvec_seekdb-data
   docker run -d --name seekvec-seekdb -p 2882:2881 ^
     -v seekvec_seekdb-data:/var/lib/seekdb ^
-    -e REPORTER=seekvec-seekdb quay.io/oceanbase/seekdb:latest
+    -e REPORTER=seekvec-seekdb quay.io/oceanbase/seekdb@sha256:4db4961869d554313520d6081fca29265ba6da6db7313311bd8acbed771a956b
   # 注意：卷必须挂到容器内 /var/lib/seekdb，否则数据不持久
   # 然后设置端口后启动：
   $env:SEEKDB_PORT="2882"; npm run dev

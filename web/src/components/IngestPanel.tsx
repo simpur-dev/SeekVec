@@ -129,7 +129,7 @@ export function IngestPanel() {
       <div className="mb-6 flex items-start justify-between">
         <div>
           <h2 className="text-lg font-semibold text-slate-900">导入文本</h2>
-          <p className="mt-1 text-sm text-slate-500">int8 量化 · {dim}d · SeekDB 存储</p>
+          <p className="mt-1 text-sm text-slate-500">浏览器本地向量化 · {dim} 维 · SeekDB 存储</p>
         </div>
         <span className={`rounded-full px-3 py-1.5 text-sm font-medium ${cfg.cls}`}>
           {cfg.label}
@@ -168,7 +168,7 @@ export function IngestPanel() {
           batch={config.batch}
         </span>
         <span className="rounded-lg bg-slate-100 px-2.5 py-1 font-mono text-slate-600">
-          refresh={config.refresh === 'last' ? 'last（仅最后一批刷新索引）' : 'each（每批刷新索引）'}
+          refresh={config.refresh === 'last' ? 'last（写入末批刷新；清理或失败时补偿刷新）' : 'each（每批刷新索引）'}
         </span>
         {config.perf && (
           <span className="rounded-lg bg-indigo-50 px-2.5 py-1 font-mono text-indigo-600">
