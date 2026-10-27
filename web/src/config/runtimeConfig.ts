@@ -31,7 +31,7 @@ export interface RuntimeConfig {
   batch: number;
   /** 索引刷新策略（last=写入末批刷新，清理或失败时补偿；each=每批） */
   refresh: RefreshPolicy;
-  /** onnxruntime-web wasm 线程数（1..8；crossOriginIsolated 时默认 4，否则 1） */
+  /** onnxruntime-web wasm 线程数（1..16；crossOriginIsolated 时按硬件自适应，否则 1） */
   threads: number;
   crossOriginIsolated: boolean;
   /** 模型来源模式（auto=按构建期 VITE_LOCAL_MODELS 决定） */
@@ -54,6 +54,8 @@ export interface ParseRuntimeConfigOptions {
   storage?: StorageLike | null;
   /** 覆盖 crossOriginIsolated（测试用） */
   crossOriginIsolated?: boolean;
+  /** 覆盖 hardwareConcurrency（测试用）；缺省读 navigator.hardwareConcurrency */
+  hardwareConcurrency?: number;
 }
 
 export interface BuildEnv {
@@ -69,10 +71,35 @@ export const BATCH_DEFAULT = 32;
 export const BATCH_MIN = 1;
 export const BATCH_MAX = 64;
 export const THREADS_MIN = 1;
-export const THREADS_MAX = 8;
-/** 跨源隔离（COOP/COEP）下 wasm 才可以用多线程；实测 8 线程明显优于 4（本机 28 核） */
+export const THREADS_MAX = 16;
+/** 跨源隔离（COOP/COEP）下 wasm 才可以用多线程；按硬件自适应，避免低核机器被 16 线程拖慢 */
 export const THREADS_DEFAULT_ISOLATED = 8;
 export const THREADS_DEFAULT_PLAIN = 1;
+
+/** 读取硬件并发数（浏览器/测试注入） */
+export function readHardwareConcurrency(explicit?: number): number | null {
+  const value =
+    explicit ??
+    (typeof navigator !== 'undefined' && typeof navigator.hardwareConcurrency === 'number'
+      ? navigator.hardwareConcurrency
+      : undefined);
+  if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) return null;
+  return Math.floor(value);
+}
+
+/**
+ * WASM 线程默认值：低核用满（≤8），高核用约 60%（cap 16）。
+ * 实测 28 核 t16 的 embedding p50 ≈348ms，t8 ≈464ms；但 4/8 核机器不能盲目 16。
+ */
+export function defaultThreads(isolated: boolean, hardwareConcurrency?: number): number {
+  if (!isolated) return THREADS_DEFAULT_PLAIN;
+  const cores = readHardwareConcurrency(hardwareConcurrency);
+  if (cores === null) return THREADS_DEFAULT_ISOLATED;
+  return Math.max(
+    THREADS_MIN,
+    Math.min(cores, THREADS_MAX, Math.max(8, Math.ceil(cores * 0.6))),
+  );
+}
 /** 构建期未设置 VITE_ORT_WASM_PATH 时，默认从同源 /ort/ 加载 ORT wasm 资源 */
 export const ORT_WASM_PATH_DEFAULT = '/ort/';
 /** 本地模型目录默认前缀（web/public/models） */
@@ -235,7 +262,7 @@ export function parseRuntimeConfig(
 
   // ── batch / threads / refresh / models / perf / collection ────────
   const batch = readIntParam(params, 'batch', BATCH_DEFAULT, BATCH_MIN, BATCH_MAX);
-  const threadsDefault = isolated ? THREADS_DEFAULT_ISOLATED : THREADS_DEFAULT_PLAIN;
+  const threadsDefault = defaultThreads(isolated, options.hardwareConcurrency);
   const threads = readIntParam(params, 'threads', threadsDefault, THREADS_MIN, THREADS_MAX);
   const refresh = readEnumParam(params, 'refresh', 'last', isRefreshPolicy);
   const models = readEnumParam(params, 'models', 'auto', isModelSource);

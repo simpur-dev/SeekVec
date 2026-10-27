@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   ORT_WASM_PATH_DEFAULT,
   STORAGE_BACKEND_KEY,
+  defaultThreads,
   parseRuntimeConfig,
   resolveDtype,
   resolveModelSource,
@@ -44,10 +45,29 @@ describe('parseRuntimeConfig 默认值', () => {
     });
   });
 
-  it('crossOriginIsolated=true 时 wasm 线程数默认 8', () => {
-    const config = parseRuntimeConfig('', { storage: memoryStorage(), crossOriginIsolated: true });
+  it('crossOriginIsolated=true 且硬件为 8 核时默认 8 线程', () => {
+    const config = parseRuntimeConfig('', {
+      storage: memoryStorage(),
+      crossOriginIsolated: true,
+      hardwareConcurrency: 8,
+    });
     expect(config.threads).toBe(8);
     expect(config.crossOriginIsolated).toBe(true);
+  });
+
+  it('线程默认值按 hardwareConcurrency 自适应', () => {
+    expect(defaultThreads(false, 28)).toBe(1);
+    expect(defaultThreads(true, 28)).toBe(16);
+    expect(defaultThreads(true, 16)).toBe(10);
+    expect(defaultThreads(true, 8)).toBe(8);
+    expect(defaultThreads(true, 4)).toBe(4);
+    expect(defaultThreads(true, 2)).toBe(2);
+    const config = parseRuntimeConfig('', {
+      storage: memoryStorage(),
+      crossOriginIsolated: true,
+      hardwareConcurrency: 28,
+    });
+    expect(config.threads).toBe(16);
   });
 });
 
@@ -62,13 +82,14 @@ describe('parseRuntimeConfig 夹紧与非法回退', () => {
     expect(parseRuntimeConfig('?batch=32', base()).batch).toBe(32);
   });
 
-  it('threads 越界夹紧到 1..8，非数字回退默认值', () => {
+  it('threads 越界夹紧到 1..16，非数字回退默认值', () => {
     expect(parseRuntimeConfig('?threads=0', base()).threads).toBe(1);
-    expect(parseRuntimeConfig('?threads=99', base()).threads).toBe(8);
+    expect(parseRuntimeConfig('?threads=99', base()).threads).toBe(16);
     expect(parseRuntimeConfig('?threads=x', base()).threads).toBe(1);
     const isolated = parseRuntimeConfig('?threads=x', {
       storage: memoryStorage(),
       crossOriginIsolated: true,
+      hardwareConcurrency: 8,
     });
     expect(isolated.threads).toBe(8);
     expect(parseRuntimeConfig('?threads=2', base()).threads).toBe(2);

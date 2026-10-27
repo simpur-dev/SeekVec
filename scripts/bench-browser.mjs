@@ -39,7 +39,7 @@ const HELP = `SeekVec · 浏览器基准测试（puppeteer-core）
   --backend <auto|webgpu|wasm>  推理后端（默认 auto，由页面自行探测）
   --dtype <q8|fp16|fp32> 量化精度（默认不传，页面按后端选默认）
   --batch <1..64>        推理批大小（默认不传，页面默认 16）
-  --threads <1..8>       WASM 线程数（默认不传，页面按 crossOriginIsolated=4/1）
+  --threads <1..16>      WASM 线程数（默认不传，页面按 crossOriginIsolated + hardwareConcurrency 自适应）
   --refresh <last|each>  索引刷新策略（默认不传，页面默认 last）
   --models <auto|remote|local>  模型来源（默认不传）
   --runs <n>             计入统计的正式轮数（默认 5）
@@ -914,7 +914,7 @@ function buildSummaryMarkdown({ opts, browserInfo, env, corpus, queries, runs, a
   lines.push(`- 页面：${opts.baseUrl}（?perf=1）`);
   lines.push(`- 驱动模式：${mode === 'eval' ? '`window.__seekvecEval`（契约 perf API）' : 'UI 兜底（perf API 未实现）'}`);
   lines.push(`- 浏览器：${browserInfo.browserVersion ?? '未知'}（${browserInfo.executablePath}）`);
-  lines.push(`- 后端：${opts.backend}${opts.dtype ? ` · dtype=${opts.dtype}` : ' · dtype=页面默认'}${opts.batch != null ? ` · batch=${opts.batch}` : ''}${opts.refresh ? ` · refresh=${opts.refresh}` : ''}`);
+  lines.push(`- 后端：${opts.backend}${opts.dtype ? ` · dtype=${opts.dtype}` : ' · dtype=页面默认'}${opts.batch != null ? ` · batch=${opts.batch}` : ''}${opts.threads != null ? ` · threads=${opts.threads}` : ''}${opts.refresh ? ` · refresh=${opts.refresh}` : ''}`);
   lines.push(`- 冷/热：${opts.cold ? 'cold（每轮清缓存重载）' : 'warm start'}；计入统计 ${runs.measured.length} 轮（预热 ${runs.warmup.length} 轮已丢弃）`);
   lines.push(`- 语料：${corpus.length} 篇；查询：${queries.length} 条；collection：\`${opts.collection}\``);
   if (env) {
@@ -922,6 +922,7 @@ function buildSummaryMarkdown({ opts, browserInfo, env, corpus, queries, runs, a
       `- 环境：${env.platform ?? '?'} · ${env.hardwareConcurrency ?? '?'} 核 · deviceMemory=${env.deviceMemory ?? '?'}GB · GPU=${env.gpuAdapter ?? '未知'} · 实测后端=${env.backend ?? '?'}${env.backendReason ? `（${env.backendReason}）` : ''}`,
     );
     if (env.model) lines.push(`- 模型：${env.model.id ?? '?'} @ ${String(env.model.revision ?? '').slice(0, 12)} · dtype=${env.model.dtype ?? '?'} · key=${env.model.key ?? '?'}`);
+    if (env.effectiveConfig) lines.push(`- 生效配置：batch=${env.effectiveConfig.batch ?? '?'} · threads=${env.effectiveConfig.threads ?? '?'} · refresh=${env.effectiveConfig.refresh ?? '?'}`);
   }
   lines.push('');
   if (mode === 'eval') {
@@ -1134,6 +1135,7 @@ async function main() {
           backend: env.backend,
           backendReason: env.backendReason,
           model: env.model,
+          effectiveConfig: firstSnapshot?.config ?? null,
         }
       : null;
 
@@ -1172,6 +1174,15 @@ async function main() {
         hostname: os.hostname(),
       },
       page: { perfEnv },
+      config: {
+        backend: opts.backend,
+        dtype: opts.dtype,
+        batch: opts.batch,
+        threads: opts.threads,
+        refresh: opts.refresh,
+        cold: opts.cold,
+        noWebgpu: opts.noWebgpu,
+      },
       corpus: { count: corpus.length, totalChars: corpus.reduce((sum, d) => sum + d.content.length, 0), names: corpus.map((d) => d.name) },
       queries,
       runs,
@@ -1227,4 +1238,5 @@ main().catch((err) => {
   console.error('\n[bench-browser] ✗ 基准失败：', err?.stack ?? err);
   process.exit(1);
 });
+
 
