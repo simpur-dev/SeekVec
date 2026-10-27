@@ -69,7 +69,7 @@ npm run dev:docker
 
 | 内容 | 命令 / 证据 |
 |---|---|
-| 量化前后质量（标注集 Recall/nDCG/MRR） | `npm run eval:quality` → [`docs/技术说明.md`](docs/技术说明.md)；原始数据 [`docs/benchmarks/eval-quality/`](docs/benchmarks/eval-quality/) |
+| 量化前后质量（标注集 Recall/nDCG/MRR） | `npm run eval:quality` → [`技术说明.md`](技术说明.md)；原始数据 [`docs/benchmarks/eval-quality/`](docs/benchmarks/eval-quality/) |
 | 浏览器端质量（真实应用链路） | `npm run eval:quality:browser` → [`docs/benchmarks/quality-browser/`](docs/benchmarks/quality-browser/) |
 | 分阶段性能 + 冷/热 + 后端对比 | `npm run bench:matrix`（或 `npm run bench:browser -- ...`）→ [`docs/benchmarks/`](docs/benchmarks/) |
 | 综合报告（官方 3.2 表格） | [`docs/性能与质量报告.md`](docs/性能与质量报告.md) |
@@ -137,7 +137,7 @@ npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web
 | 可复现性 | ✅ | Docker compose + `dev:docker` + `prepare:assets` + `acceptance`；[复现.md](docs/复现.md) |
 | 性能与质量测试（3.2 六项） | ✅ | 分阶段/冷热/中位数/原始数据/双后端/标注集质量；[性能与质量报告](docs/性能与质量报告.md) |
 
-提交材料映射：4.1 可运行应用（[本 README 的「快速启动 / 4.1 本地启动与 seekdb 连接」](#41-本地启动与-seekdb-连接明确说明) + `dev:docker` + `npm run db:start`）；4.2 完整源码（本仓库 + 模型锁/数据/脚本）；4.3 一页技术说明（[`docs/技术说明.md`](docs/技术说明.md)）。
+提交材料映射：4.1 可运行应用（[本 README 的「快速启动 / 4.1 本地启动与 seekdb 连接」](#41-本地启动与-seekdb-连接明确说明) + `dev:docker` + `npm run db:start`）；4.2 完整源码（本仓库 + 模型锁/数据/脚本）；4.3 一页技术说明（[`技术说明.md`](技术说明.md)）。
 
 ## 提交方式（测评平台）
 
@@ -156,13 +156,14 @@ npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web
 
 ```
 SeekVec/
+├── 技术说明.md               # 一页技术说明（官方 4.3，一级目录）
 ├── docker-compose.yml        # seekdb 服务（数据卷 /var/lib/seekdb）
 ├── models.lock.json          # 模型 revision/文件/sha256 锁
 ├── data/
 │   ├── demo/                 # UI 演示语料
 │   ├── eval/                 # 标注评测集（60 文档/73 chunks/60 查询/229 qrels）
 │   └── perf/                 # 性能语料与查询（确定性生成）
-├── docs/                     # 赛题/架构/技术说明/模型与量化/性能报告/复现/验收自检
+├── docs/                     # 赛题/架构/模型与量化/性能报告/复现/验收自检
 │   └── benchmarks/           # 原始数据 + 汇总（eval-quality、browser、matrix、quality-browser）
 ├── scripts/                  # fetch/bench/eval/acceptance/compliance/dev-docker
 ├── server/src/
@@ -190,7 +191,8 @@ SeekVec/
 - **v1（首版提交）**：文本知识库、中英模型切换、INT8/FP16/FP32、WebGPU→WASM、幂等导入与索引刷新、可观测与评测链路
 - **v1.1（stretch）**：图片管线（CLIP）。Schema/接口/模型注册已预留；CLIP 文本塔需 `AutoProcessor + CLIPTextModelWithProjection`，当前 `IMAGE_PIPELINE_ENABLED=false`
 
-详细架构见 [`docs/架构.md`](docs/架构.md)，技术说明见 [`docs/技术说明.md`](docs/技术说明.md)，复现见 [`docs/复现.md`](docs/复现.md)。
+详细架构见 [`docs/架构.md`](docs/架构.md)，技术说明见 [`技术说明.md`](技术说明.md)，复现见 [`docs/复现.md`](docs/复现.md)。
+
 
 
 
