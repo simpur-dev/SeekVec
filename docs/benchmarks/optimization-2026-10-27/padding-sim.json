@@ -1,0 +1,27 @@
+{
+  "source": "data/perf/corpus",
+  "chunks": 120,
+  "note": "token padding simulation; each corpus file is one chunk in this corpus",
+  "batch16": {
+    "tokenMin": 88,
+    "tokenMax": 119,
+    "rawPaddingPct": 10.48,
+    "charSortPaddingPct": 8.97,
+    "byteSortPaddingPct": 3.83,
+    "tokenSortPaddingPct": 1.44,
+    "charSortReductionPct": 1.36,
+    "byteSortReductionPct": 6.02,
+    "tokenSortReductionPct": 8.18
+  },
+  "batch32": {
+    "tokenMin": 88,
+    "tokenMax": 119,
+    "rawPaddingPct": 11.98,
+    "charSortPaddingPct": 10.35,
+    "byteSortPaddingPct": 4.71,
+    "tokenSortPaddingPct": 3.45,
+    "charSortReductionPct": 1.46,
+    "byteSortReductionPct": 6.5,
+    "tokenSortReductionPct": 7.62
+  }
+}
