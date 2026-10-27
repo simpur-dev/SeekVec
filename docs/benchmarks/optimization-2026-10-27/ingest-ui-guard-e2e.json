@@ -1,0 +1,19 @@
+{
+  "steps": [
+    {
+      "step": "during_long_import",
+      "modelDisabled": true,
+      "collectionDisabled": true,
+      "searchDisabled": true
+    },
+    {
+      "step": "after_import",
+      "modelDisabled": false,
+      "collectionDisabled": false,
+      "result": {
+        "ok": true,
+        "count": 120
+      }
+    }
+  ]
+}

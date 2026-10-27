@@ -20,6 +20,9 @@ export function SearchPanel() {
   const modelKey = useModelStore((s) => s.modelKey);
   const collections = useKbStore((s) => s.collections);
   const activeCollection = useKbStore((s) => s.activeCollection);
+  const ingestStatus = useKbStore((s) => s.ingestStatus);
+  const ingestBusy =
+    ingestStatus === 'reading' || ingestStatus === 'embedding' || ingestStatus === 'writing';
   const setActiveCollection = useKbStore((s) => s.setActiveCollection);
   const [topK, setTopK] = useState(10);
   const { searchAll, ready, error: modelError, reload } = useSearch();
@@ -34,7 +37,8 @@ export function SearchPanel() {
       ? activeCollection
       : '';
 
-  const canSearch = ready && !isSearching && query.trim().length > 0;
+  const canSearch =
+    ready && !isSearching && !ingestBusy && query.trim().length > 0;
   const runSearch = () => {
     if (canSearch) searchAll(query, keyword, topK);
   };
@@ -119,9 +123,9 @@ export function SearchPanel() {
           <select
             value={selectedValue}
             onChange={(e) => setActiveCollection(e.target.value || null)}
-            disabled={isSearching}
+            disabled={isSearching || ingestBusy}
             className="w-44 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 font-mono text-sm transition-colors focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100 disabled:text-slate-400"
-            title="当前模型对应的文本集合"
+            title={ingestBusy ? '导入进行中，暂不可切换集合' : '当前模型对应的文本集合'}
           >
             <option value="">
               {textCollections.length > 0 ? '（请选择集合）' : '（暂无可用集合）'}
