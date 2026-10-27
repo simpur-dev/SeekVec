@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "step": "writing_phase_reached",
+      "writingSeen": true
+    },
+    {
+      "step": "cancel_during_writing",
+      "writingSeen": true,
+      "submit": {
+        "clicked": true
+      },
+      "cancelled": {
+        "ok": false,
+        "error": "导入已取消"
+      },
+      "modelDisabled": false,
+      "cancelStill": false,
+      "serverCount": {
+        "error": "接口不存在: GET /api/collections/bench_cancel_writing/count",
+        "code": "NOT_FOUND",
+        "requestId": "e734cdae-6539-4069-9a68-302b382a5d11"
+      }
+    },
+    {
+      "step": "retry_after_writing_cancel",
+      "ok": true,
+      "count": 1,
+      "hits": 5
+    }
+  ]
+}
