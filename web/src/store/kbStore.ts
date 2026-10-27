@@ -22,6 +22,8 @@ interface KbState {
     progress?: { total: number; done: number },
   ) => void;
   registerCollection: (summary: CollectionSummary) => void;
+  /** 以 server 返回的完整列表为准替换集合清单（删除的集合不能残留） */
+  syncCollections: (list: CollectionSummary[]) => void;
   setCount: (name: string, count: number | null) => void;
   setActiveCollection: (name: string | null) => void;
 }
@@ -43,6 +45,16 @@ export const useKbStore = create<KbState>()(
         set((s) => ({
           collections: { ...s.collections, [summary.name]: summary },
         })),
+      syncCollections: (list) =>
+        set(() => {
+          const collections: Record<string, CollectionSummary> = {};
+          const counts: Record<string, number | null> = {};
+          for (const collection of list) {
+            collections[collection.name] = collection;
+            counts[collection.name] = collection.count ?? null;
+          }
+          return { collections, counts };
+        }),
       setCount: (name, count) =>
         set((s) => ({ counts: { ...s.counts, [name]: count } })),
       setActiveCollection: (activeCollection) => set({ activeCollection }),

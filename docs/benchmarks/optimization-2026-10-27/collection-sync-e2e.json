@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "step": "before_external_delete",
+      "options": [
+        "bench_ab_old_webgpu",
+        "kb_text_zh",
+        "bench_sync_delete_a",
+        "bench_sync_delete_b"
+      ],
+      "hasA": true
+    },
+    {
+      "step": "after_external_delete_and_sync",
+      "options": [
+        "bench_sync_delete_b",
+        "bench_ab_old_webgpu",
+        "kb_text_zh"
+      ],
+      "hasA": false,
+      "hasB": true,
+      "selected": "kb_text_zh",
+      "ok": true
+    },
+    {
+      "step": "search_after_sync",
+      "ok": true,
+      "collectionName": "kb_text_zh",
+      "hits": 4
+    }
+  ]
+}

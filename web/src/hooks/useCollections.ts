@@ -17,8 +17,7 @@ import { useModelStore } from '../store/modelStore';
 import { pickActiveCollection } from '../store/collectionSelection';
 
 export function useCollections() {
-  const registerCollection = useKbStore((s) => s.registerCollection);
-  const setCount = useKbStore((s) => s.setCount);
+  const syncCollections = useKbStore((s) => s.syncCollections);
   const setActiveCollection = useKbStore((s) => s.setActiveCollection);
   const modelKey = useModelStore((s) => s.modelKey);
 
@@ -27,10 +26,8 @@ export function useCollections() {
     listCollections()
       .then((collections) => {
         if (cancelled) return;
-        for (const collection of collections) {
-          registerCollection(collection);
-          setCount(collection.name, collection.count ?? null);
-        }
+        // server 是集合事实源：整体替换，删除的集合不能残留在 store
+        syncCollections(collections);
         const state = useKbStore.getState();
         const pinned = getRuntimeConfig().collection;
         // URL 指定的集合可能是评测脚本稍后创建的：保持选择，不覆盖
@@ -48,5 +45,5 @@ export function useCollections() {
     return () => {
       cancelled = true;
     };
-  }, [registerCollection, setCount, setActiveCollection, modelKey]);
+  }, [syncCollections, setActiveCollection, modelKey]);
 }
