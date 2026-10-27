@@ -1,6 +1,6 @@
 # 浏览器端检索质量评测（量化前后对比）
 
-- 时间：2026-10-27T11:55:03.328Z
+- 时间：2026-10-27T17:07:49.750Z
 - 页面：http://localhost:5173（真实应用链路：端侧推理 → 前端分块写入 → server → seekdb 检索）
 - 浏览器：Chrome/153.0.8010.12（C:\Users\34928\AppData\Local\ms-playwright\chromium-1243\chrome-win64\chrome.exe）
 - 评测集：60 篇 / 73 chunks / 60 查询 / 229 条 qrels（data/eval）
@@ -10,16 +10,16 @@
 
 | 组 | 请求 backend/dtype | 实际 backend/dtype | 模型 | ingest chunks | 耗时 (s) | 状态 |
 |---|---|---|---|---|---|---|
-| fp32-wasm | wasm/fp32 | wasm/fp32 | Xenova/bge-small-zh-v1.5 @75c43b06 | 73 | 4.8 | PASS |
-| q8-wasm | wasm/q8 | wasm/q8 | Xenova/bge-small-zh-v1.5 @75c43b06 | 73 | 3.1 | PASS |
-| fp16-webgpu | webgpu/fp16 | webgpu/fp16 | Xenova/bge-small-zh-v1.5 @75c43b06 | 73 | 2.9 | PASS |
+| fp32-wasm | wasm/fp32 | wasm/fp32 | Xenova/bge-small-zh-v1.5 @75c43b06 | 73 | 5.5 | PASS |
+| q8-wasm | wasm/q8 | wasm/q8 | Xenova/bge-small-zh-v1.5 @75c43b06 | 73 | 3.6 | PASS |
+| fp16-webgpu | webgpu/fp16 | webgpu/fp16 | Xenova/bge-small-zh-v1.5 @75c43b06 | 73 | 3.7 | PASS |
 
 ## 指标对比（macro 平均，60 条查询）
 
 | 组 | backend/dtype | Recall@1 | Recall@3 | Recall@5 | nDCG@5 | nDCG@10 | MRR |
 |---|---|---|---|---|---|---|---|
 | fp32-wasm | wasm/fp32 | 0.2324 | 0.4656 | 0.5642 | 0.7265 | 0.7651 | 0.8868 |
-| q8-wasm | wasm/q8 | 0.2332 | 0.4628 | 0.5744 | 0.7299 | 0.7659 | 0.8894 |
+| q8-wasm | wasm/q8 | 0.2365 | 0.4628 | 0.5772 | 0.7354 | 0.7659 | 0.8979 |
 | fp16-webgpu | webgpu/fp16 | 0.2324 | 0.4656 | 0.5642 | 0.7265 | 0.7652 | 0.8868 |
 
 ## 相对 baseline 的变化与质量门
@@ -29,7 +29,7 @@
 | 组 | ΔRecall@5 (pp) | ΔnDCG@10 | Recall@5 gate | nDCG@10 gate | 结论 |
 |---|---|---|---|---|---|
 | fp32-wasm | — | — | — | — | baseline |
-| q8-wasm | 1.02 | 0.0008 | PASS | PASS | PASS |
+| q8-wasm | 1.30 | 0.0008 | PASS | PASS | PASS |
 | fp16-webgpu | 0.00 | 0.0001 | PASS | PASS | PASS |
 
 ## 分组指标（分类别 / 语言）
@@ -48,11 +48,11 @@
 
 | 维度 | 组 | queries | Recall@5 | nDCG@10 | MRR |
 |---|---|---|---|---|---|
-| category | keyword | 20 | 0.5767 | 0.8333 | 0.9500 |
-| category | paraphrase | 20 | 0.5958 | 0.7654 | 0.8558 |
-| category | semantic | 20 | 0.5508 | 0.6990 | 0.8625 |
-| lang | en | 20 | 0.4275 | 0.7199 | 0.8767 |
-| lang | zh | 40 | 0.6479 | 0.7889 | 0.8958 |
+| category | keyword | 20 | 0.5933 | 0.8287 | 0.9500 |
+| category | paraphrase | 20 | 0.5958 | 0.7661 | 0.8575 |
+| category | semantic | 20 | 0.5425 | 0.7029 | 0.8863 |
+| lang | en | 20 | 0.4192 | 0.7240 | 0.9017 |
+| lang | zh | 40 | 0.6563 | 0.7868 | 0.8961 |
 
 ### fp16-webgpu
 

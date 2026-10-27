@@ -1,13 +1,13 @@
 # 浏览器质量评测 · fp32-wasm
 
-- 时间：2026-10-27T11:54:52.031Z
-- collection：`qeval_fp32_wasm_20261027_195452`（已自动清理）
+- 时间：2026-10-27T17:07:36.247Z
+- collection：`qeval_fp32_wasm_20261028_010736`（已自动清理）
 - 请求：backend=`wasm`、dtype=`fp32`
 - 实际：backend=`wasm`、dtype=`fp32`
 - 模型：Xenova/bge-small-zh-v1.5 @ 75c43b069aac · text_zh
 - 数据：60 篇文档 / 73 chunks / 60 查询（分块与 qrels 来自 data/eval）
-- ingest：count=73，times.totalMs=1975.2
-- 耗时：4.75s
+- ingest：count=73，times.totalMs=2160.2
+- 耗时：5.52s
 
 ## 指标（macro 平均，60 条查询）
 
@@ -27,80 +27,80 @@
 
 | 阶段 | n | p50 | p95 | mean |
 |---|---|---|---|---|
-| model.download | 1 | 251.5 | 251.5 | 251.5 |
-| model.init | 1 | 664.1 | 664.1 | 664.1 |
-| model.total | 1 | 915.6 | 915.6 | 915.6 |
-| doc.read | 60 | 0.9 | 3.5 | 2.7 |
+| model.download | 1 | 233.9 | 233.9 | 233.9 |
+| model.init | 1 | 868.3 | 868.3 | 868.3 |
+| model.total | 1 | 1102.2 | 1102.2 | 1102.2 |
+| doc.read | 60 | 1.1 | 4.3 | 3.0 |
 | doc.chunk | 60 | 0.0 | 0.0 | 0.0 |
-| doc.embed | 3 | 417.5 | 427.4 | 323.5 |
-| doc.write | 3 | 72.4 | 572.5 | 255.1 |
-| index.refresh | 1 | 602.6 | 602.6 | 602.6 |
-| ingest.total | 1 | 1975.2 | 1975.2 | 1975.2 |
+| doc.embed | 3 | 431.2 | 433.1 | 331.0 |
+| doc.write | 3 | 232.3 | 513.7 | 278.9 |
+| index.refresh | 1 | 515.4 | 515.4 | 515.4 |
+| ingest.total | 1 | 2160.2 | 2160.2 | 2160.2 |
 
 ## 逐查询
 
 | qid | category | mode | hits | hits∈qrels | R@5 | nDCG@10 | MRR | e2eMs |
 |---|---|---|---|---|---|---|---|---|
-| sem-01 | semantic | vector | 10 | 4 | 1.000 | 1.000 | 1.000 | 23.0 |
-| sem-02 | semantic | vector | 10 | 3 | 0.333 | 0.861 | 1.000 | 21.0 |
-| sem-03 | semantic | vector | 10 | 2 | 0.500 | 0.754 | 1.000 | 22.0 |
-| sem-04 | semantic | vector | 10 | 3 | 0.750 | 0.834 | 1.000 | 22.0 |
-| sem-05 | semantic | vector | 10 | 3 | 0.750 | 0.731 | 1.000 | 23.0 |
-| sem-06 | semantic | vector | 10 | 3 | 0.750 | 0.894 | 1.000 | 23.0 |
+| sem-01 | semantic | vector | 10 | 4 | 1.000 | 1.000 | 1.000 | 32.0 |
+| sem-02 | semantic | vector | 10 | 3 | 0.333 | 0.861 | 1.000 | 25.0 |
+| sem-03 | semantic | vector | 10 | 2 | 0.500 | 0.754 | 1.000 | 26.0 |
+| sem-04 | semantic | vector | 10 | 3 | 0.750 | 0.834 | 1.000 | 27.0 |
+| sem-05 | semantic | vector | 10 | 3 | 0.750 | 0.731 | 1.000 | 27.0 |
+| sem-06 | semantic | vector | 10 | 3 | 0.750 | 0.894 | 1.000 | 27.0 |
 | sem-07 | semantic | vector | 10 | 3 | 0.500 | 0.483 | 1.000 | 27.0 |
 | sem-08 | semantic | vector | 10 | 3 | 0.750 | 0.892 | 1.000 | 22.0 |
-| sem-09 | semantic | vector | 10 | 2 | 0.000 | 0.228 | 0.143 | 22.0 |
-| sem-10 | semantic | vector | 10 | 2 | 0.500 | 0.756 | 1.000 | 22.0 |
-| sem-11 | semantic | vector | 10 | 2 | 0.667 | 0.790 | 1.000 | 22.0 |
-| sem-12 | semantic | vector | 10 | 2 | 0.333 | 0.408 | 0.250 | 22.0 |
-| sem-13 | semantic | vector | 10 | 3 | 0.667 | 0.909 | 1.000 | 18.0 |
-| sem-14 | semantic | vector | 10 | 4 | 0.250 | 0.783 | 1.000 | 23.0 |
-| sem-15 | semantic | vector | 10 | 3 | 0.500 | 0.357 | 1.000 | 17.0 |
+| sem-09 | semantic | vector | 10 | 2 | 0.000 | 0.228 | 0.143 | 28.0 |
+| sem-10 | semantic | vector | 10 | 2 | 0.500 | 0.756 | 1.000 | 20.0 |
+| sem-11 | semantic | vector | 10 | 2 | 0.667 | 0.790 | 1.000 | 21.0 |
+| sem-12 | semantic | vector | 10 | 2 | 0.333 | 0.408 | 0.250 | 21.0 |
+| sem-13 | semantic | vector | 10 | 3 | 0.667 | 0.909 | 1.000 | 21.0 |
+| sem-14 | semantic | vector | 10 | 4 | 0.250 | 0.783 | 1.000 | 22.0 |
+| sem-15 | semantic | vector | 10 | 3 | 0.500 | 0.357 | 1.000 | 21.0 |
 | sem-16 | semantic | vector | 10 | 3 | 0.400 | 0.605 | 1.000 | 21.0 |
-| sem-17 | semantic | vector | 10 | 5 | 0.500 | 0.806 | 1.000 | 17.0 |
-| sem-18 | semantic | vector | 10 | 3 | 0.167 | 0.464 | 0.333 | 18.0 |
-| sem-19 | semantic | vector | 10 | 1 | 0.250 | 0.250 | 0.200 | 17.0 |
-| sem-20 | semantic | vector | 10 | 4 | 1.000 | 1.000 | 1.000 | 73.0 |
-| kw-01 | keyword | hybrid | 10 | 3 | 1.000 | 1.000 | 1.000 | 72.0 |
-| kw-02 | keyword | hybrid | 10 | 2 | 0.667 | 0.791 | 1.000 | 23.0 |
-| kw-03 | keyword | hybrid | 10 | 2 | 0.667 | 0.905 | 1.000 | 23.0 |
-| kw-04 | keyword | hybrid | 10 | 3 | 1.000 | 1.000 | 1.000 | 22.0 |
-| kw-05 | keyword | hybrid | 10 | 3 | 0.667 | 0.943 | 1.000 | 23.0 |
-| kw-06 | keyword | hybrid | 10 | 3 | 0.667 | 0.916 | 1.000 | 18.0 |
-| kw-07 | keyword | hybrid | 10 | 3 | 1.000 | 0.946 | 1.000 | 23.0 |
-| kw-08 | keyword | hybrid | 10 | 3 | 1.000 | 0.967 | 1.000 | 22.0 |
-| kw-09 | keyword | hybrid | 10 | 2 | 0.667 | 0.856 | 1.000 | 23.0 |
-| kw-10 | keyword | hybrid | 10 | 2 | 0.333 | 0.504 | 0.500 | 22.0 |
-| kw-11 | keyword | hybrid | 10 | 1 | 0.333 | 0.674 | 1.000 | 23.0 |
-| kw-12 | keyword | hybrid | 10 | 2 | 0.333 | 0.781 | 1.000 | 18.0 |
-| kw-13 | keyword | hybrid | 10 | 3 | 0.667 | 0.905 | 1.000 | 23.0 |
-| kw-14 | keyword | hybrid | 10 | 3 | 0.750 | 0.618 | 0.500 | 23.0 |
-| kw-15 | keyword | hybrid | 10 | 3 | 0.250 | 0.893 | 1.000 | 23.0 |
-| kw-16 | keyword | hybrid | 10 | 3 | 0.250 | 0.837 | 1.000 | 33.0 |
-| kw-17 | keyword | hybrid | 10 | 4 | 0.333 | 0.820 | 1.000 | 21.0 |
-| kw-18 | keyword | hybrid | 10 | 4 | 0.500 | 0.886 | 1.000 | 23.0 |
-| kw-19 | keyword | hybrid | 10 | 3 | 0.333 | 0.762 | 1.000 | 22.0 |
-| kw-20 | keyword | hybrid | 10 | 3 | 0.200 | 0.746 | 1.000 | 23.0 |
-| pp-01 | paraphrase | vector | 10 | 3 | 1.000 | 0.972 | 1.000 | 17.0 |
-| pp-02 | paraphrase | vector | 10 | 2 | 0.333 | 0.846 | 1.000 | 18.0 |
-| pp-03 | paraphrase | vector | 10 | 2 | 0.667 | 0.812 | 1.000 | 18.0 |
-| pp-04 | paraphrase | vector | 10 | 1 | 0.333 | 0.053 | 0.333 | 18.0 |
-| pp-05 | paraphrase | vector | 10 | 2 | 0.667 | 0.790 | 1.000 | 18.0 |
-| pp-06 | paraphrase | vector | 10 | 2 | 0.667 | 0.947 | 1.000 | 18.0 |
-| pp-07 | paraphrase | vector | 10 | 3 | 0.667 | 0.668 | 0.500 | 18.0 |
-| pp-08 | paraphrase | vector | 10 | 3 | 1.000 | 0.993 | 1.000 | 17.0 |
-| pp-09 | paraphrase | vector | 10 | 2 | 0.667 | 0.883 | 1.000 | 18.0 |
-| pp-10 | paraphrase | vector | 10 | 3 | 1.000 | 0.936 | 1.000 | 18.0 |
+| sem-17 | semantic | vector | 10 | 5 | 0.500 | 0.806 | 1.000 | 21.0 |
+| sem-18 | semantic | vector | 10 | 3 | 0.167 | 0.464 | 0.333 | 21.0 |
+| sem-19 | semantic | vector | 10 | 1 | 0.250 | 0.250 | 0.200 | 21.0 |
+| sem-20 | semantic | vector | 10 | 4 | 1.000 | 1.000 | 1.000 | 22.0 |
+| kw-01 | keyword | hybrid | 10 | 3 | 1.000 | 1.000 | 1.000 | 112.0 |
+| kw-02 | keyword | hybrid | 10 | 2 | 0.667 | 0.791 | 1.000 | 31.0 |
+| kw-03 | keyword | hybrid | 10 | 2 | 0.667 | 0.905 | 1.000 | 26.0 |
+| kw-04 | keyword | hybrid | 10 | 3 | 1.000 | 1.000 | 1.000 | 28.0 |
+| kw-05 | keyword | hybrid | 10 | 3 | 0.667 | 0.943 | 1.000 | 28.0 |
+| kw-06 | keyword | hybrid | 10 | 3 | 0.667 | 0.916 | 1.000 | 28.0 |
+| kw-07 | keyword | hybrid | 10 | 3 | 1.000 | 0.946 | 1.000 | 28.0 |
+| kw-08 | keyword | hybrid | 10 | 3 | 1.000 | 0.967 | 1.000 | 33.0 |
+| kw-09 | keyword | hybrid | 10 | 2 | 0.667 | 0.856 | 1.000 | 33.0 |
+| kw-10 | keyword | hybrid | 10 | 2 | 0.333 | 0.504 | 0.500 | 27.0 |
+| kw-11 | keyword | hybrid | 10 | 1 | 0.333 | 0.674 | 1.000 | 28.0 |
+| kw-12 | keyword | hybrid | 10 | 2 | 0.333 | 0.781 | 1.000 | 27.0 |
+| kw-13 | keyword | hybrid | 10 | 3 | 0.667 | 0.905 | 1.000 | 28.0 |
+| kw-14 | keyword | hybrid | 10 | 3 | 0.750 | 0.618 | 0.500 | 27.0 |
+| kw-15 | keyword | hybrid | 10 | 3 | 0.250 | 0.893 | 1.000 | 27.0 |
+| kw-16 | keyword | hybrid | 10 | 3 | 0.250 | 0.837 | 1.000 | 27.0 |
+| kw-17 | keyword | hybrid | 10 | 4 | 0.333 | 0.820 | 1.000 | 28.0 |
+| kw-18 | keyword | hybrid | 10 | 4 | 0.500 | 0.886 | 1.000 | 27.0 |
+| kw-19 | keyword | hybrid | 10 | 3 | 0.333 | 0.762 | 1.000 | 28.0 |
+| kw-20 | keyword | hybrid | 10 | 3 | 0.200 | 0.746 | 1.000 | 29.0 |
+| pp-01 | paraphrase | vector | 10 | 3 | 1.000 | 0.972 | 1.000 | 21.0 |
+| pp-02 | paraphrase | vector | 10 | 2 | 0.333 | 0.846 | 1.000 | 20.0 |
+| pp-03 | paraphrase | vector | 10 | 2 | 0.667 | 0.812 | 1.000 | 21.0 |
+| pp-04 | paraphrase | vector | 10 | 1 | 0.333 | 0.053 | 0.333 | 22.0 |
+| pp-05 | paraphrase | vector | 10 | 2 | 0.667 | 0.790 | 1.000 | 22.0 |
+| pp-06 | paraphrase | vector | 10 | 2 | 0.667 | 0.947 | 1.000 | 46.0 |
+| pp-07 | paraphrase | vector | 10 | 3 | 0.667 | 0.668 | 0.500 | 20.0 |
+| pp-08 | paraphrase | vector | 10 | 3 | 1.000 | 0.993 | 1.000 | 21.0 |
+| pp-09 | paraphrase | vector | 10 | 2 | 0.667 | 0.883 | 1.000 | 21.0 |
+| pp-10 | paraphrase | vector | 10 | 3 | 1.000 | 0.936 | 1.000 | 20.0 |
 | pp-11 | paraphrase | vector | 10 | 3 | 0.667 | 0.982 | 1.000 | 29.0 |
-| pp-12 | paraphrase | vector | 10 | 1 | 0.333 | 0.321 | 0.250 | 21.0 |
-| pp-13 | paraphrase | vector | 10 | 3 | 1.000 | 0.993 | 1.000 | 17.0 |
-| pp-14 | paraphrase | vector | 10 | 2 | 0.667 | 0.798 | 1.000 | 18.0 |
-| pp-15 | paraphrase | vector | 10 | 2 | 0.250 | 0.323 | 0.200 | 18.0 |
-| pp-16 | paraphrase | vector | 10 | 2 | 0.250 | 0.814 | 1.000 | 18.0 |
-| pp-17 | paraphrase | vector | 10 | 3 | 0.500 | 0.942 | 1.000 | 18.0 |
-| pp-18 | paraphrase | vector | 10 | 2 | 0.500 | 0.905 | 1.000 | 18.0 |
-| pp-19 | paraphrase | vector | 10 | 1 | 0.167 | 0.605 | 1.000 | 18.0 |
-| pp-20 | paraphrase | vector | 10 | 2 | 0.333 | 0.769 | 1.000 | 18.0 |
+| pp-12 | paraphrase | vector | 10 | 1 | 0.333 | 0.321 | 0.250 | 26.0 |
+| pp-13 | paraphrase | vector | 10 | 3 | 1.000 | 0.993 | 1.000 | 23.0 |
+| pp-14 | paraphrase | vector | 10 | 2 | 0.667 | 0.798 | 1.000 | 25.0 |
+| pp-15 | paraphrase | vector | 10 | 2 | 0.250 | 0.323 | 0.200 | 21.0 |
+| pp-16 | paraphrase | vector | 10 | 2 | 0.250 | 0.814 | 1.000 | 21.0 |
+| pp-17 | paraphrase | vector | 10 | 3 | 0.500 | 0.942 | 1.000 | 29.0 |
+| pp-18 | paraphrase | vector | 10 | 2 | 0.500 | 0.905 | 1.000 | 28.0 |
+| pp-19 | paraphrase | vector | 10 | 1 | 0.167 | 0.605 | 1.000 | 20.0 |
+| pp-20 | paraphrase | vector | 10 | 2 | 0.333 | 0.769 | 1.000 | 28.0 |
 
 ## 断言
 
