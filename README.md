@@ -138,6 +138,19 @@ npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web
 
 提交材料映射：4.1 可运行应用（[本 README 的「快速启动 / 4.1 本地启动与 seekdb 连接」](#41-本地启动与-seekdb-连接明确说明) + `dev:docker` + `npm run db:start`）；4.2 完整源码（本仓库 + 模型锁/数据/脚本）；4.3 一页技术说明（[`docs/技术说明.md`](docs/技术说明.md)）。
 
+## 提交方式（测评平台）
+
+按官方说明，判题基于 powercontext 的 `2026-competition-ecosystem` 分支，项目资产放入 `stepfun/`：
+
+| 项 | 值 |
+|---|---|
+| 基线仓库/分支 | <https://github.com/oceanbase/powercontext/tree/2026-competition-ecosystem> |
+| 私有导入仓库 | <https://github.com/simpur-dev/powercontext> |
+| 提交分支 | `2026-competition-ecosystem` |
+| 项目资产目录 | `stepfun/`（本 README 即 `stepfun/README.md`） |
+| 独立源码镜像 | <https://github.com/simpur-dev/SeekVec> |
+| 平台填写 | 分支名 + 该分支上的 commit hash（以提交时远程 HEAD 为准） |
+
 ## 目录结构（主要部分）
 
 ```
