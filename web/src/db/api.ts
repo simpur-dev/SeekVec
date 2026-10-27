@@ -116,7 +116,7 @@ function timeoutSignal(): AbortSignal | undefined {
   return undefined;
 }
 
-function isAbortError(err: unknown): boolean {
+export function isAbortError(err: unknown): boolean {
   return (
     typeof err === 'object' &&
     err !== null &&
@@ -125,14 +125,33 @@ function isAbortError(err: unknown): boolean {
   );
 }
 
-/** 统一请求：JSON 响应 + 60s 超时 + HTTP 错误转异常 */
+/** 合并调用方取消信号与 60s 超时信号；不支持 AbortSignal.any 时以调用方信号为准。 */
+function combineSignals(caller?: AbortSignal): AbortSignal | undefined {
+  const timeout = timeoutSignal();
+  if (!caller) return timeout;
+  if (!timeout) return caller;
+  try {
+    if (typeof AbortSignal.any === 'function') return AbortSignal.any([caller, timeout]);
+  } catch {
+    // fallthrough
+  }
+  return caller;
+}
+
+/** 统一请求：JSON 响应 + 60s 超时 + 可选调用方取消 + HTTP 错误转异常 */
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const signal = init.signal ?? timeoutSignal();
+  const callerSignal = init.signal ?? undefined;
+  const signal = combineSignals(callerSignal);
   let res: Response;
   try {
     res = await fetch(path, { ...init, signal });
   } catch (err) {
     if (isAbortError(err)) {
+      if (callerSignal?.aborted) {
+        const aborted = new Error('请求已取消');
+        aborted.name = 'AbortError';
+        throw aborted;
+      }
       throw new Error(`请求超时（${FETCH_TIMEOUT_MS / 1000}s）：${path}`);
     }
     throw err instanceof Error ? err : new Error(String(err));
@@ -144,8 +163,9 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   return (await res.json()) as T;
 }
 
-function post<T>(path: string, body: unknown): Promise<T> {
+function post<T>(path: string, body: unknown, init: RequestInit = {}): Promise<T> {
   return request<T>(path, {
+    ...init,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -282,15 +302,20 @@ export async function search(args: {
   queryEmbedding: number[];
   nResults?: number;
   keyword?: string;
+  signal?: AbortSignal;
 }): Promise<SearchResult> {
   const hasKeyword = Boolean(args.keyword?.trim());
   const t0 = performance.now();
-  const data = await post<ServerSearchResponse>('/api/search', {
-    collectionName: args.collectionName,
-    queryEmbedding: args.queryEmbedding,
-    nResults: clampNResults(args.nResults),
-    keyword: args.keyword,
-  });
+  const data = await post<ServerSearchResponse>(
+    '/api/search',
+    {
+      collectionName: args.collectionName,
+      queryEmbedding: args.queryEmbedding,
+      nResults: clampNResults(args.nResults),
+      keyword: args.keyword,
+    },
+    args.signal ? { signal: args.signal } : {},
+  );
   const httpMs = performance.now() - t0;
   // server 对混合检索返回 scores（越大越相关），纯向量返回 distances（越小越相关）
   const metric = data.scores ? 'score' : 'distance';

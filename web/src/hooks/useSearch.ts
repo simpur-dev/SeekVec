@@ -16,7 +16,7 @@
  * 混合检索返回 RRF score（越大越相关），ResultCard 按 metric 分别展示。
  */
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { search } from '../db/api';
+import { isAbortError, search } from '../db/api';
 import { detectBackend } from '../inference/backend';
 import { IMAGE_PIPELINE_ENABLED } from '../inference/models';
 import { useModelStore } from '../store/modelStore';
@@ -45,6 +45,7 @@ export function useSearch() {
   const { embed, ready, error: modelError, reload, backend, dtype } = useEmbedding(modelKey);
   // 丢弃“旧模型/旧集合”的在途检索响应，避免切换后旧结果覆盖新状态。
   const searchRequestId = useRef(0);
+  const searchAbortRef = useRef<AbortController | null>(null);
 
   // 当前模型对应的目标集合（activeCollection 失效时回退约定命名）
   const resolution = useMemo(
@@ -55,8 +56,12 @@ export function useSearch() {
   // 切换模型或集合时清空旧结果，避免展示上一模型/集合的检索内容。
   // activeCollection 也会由启动回填/导入后自动设置，清空是幂等的。
   useEffect(() => {
+    // 切换模型/集合时真正中止旧 HTTP，而不是等响应回来再丢弃。
+    searchAbortRef.current?.abort();
+    searchAbortRef.current = null;
+    setSearching(false);
     resetResults();
-  }, [modelKey, activeCollection, resetResults]);
+  }, [modelKey, activeCollection, resetResults, setSearching]);
 
   // 集合提示：active 失效但存在可用回退集合时展示警示条；
   // activeCollection 为空（首次启动）时自动选中回退集合
@@ -68,7 +73,7 @@ export function useSearch() {
   }, [resolution, activeCollection, setActiveCollection, setCollectionNotice]);
 
   const runTextSearchTask = useCallback(
-    async (query: string, keyword: string, nResults: number) => {
+    async (query: string, keyword: string, nResults: number, signal?: AbortSignal) => {
       if (!resolution.collection) {
         setTextResults({
           collectionName: resolution.name,
@@ -91,6 +96,7 @@ export function useSearch() {
         modelKey,
         backend,
         dtype,
+        ...(signal ? { signal } : {}),
       });
       // 模型/集合已经变化，或已有更新的检索请求：丢弃旧响应，不写回 store。
       const currentKb = useKbStore.getState();
@@ -172,18 +178,26 @@ export function useSearch() {
         setError('embedding 模型尚未加载完成，请稍后再试');
         return;
       }
+      searchAbortRef.current?.abort();
+      const controller = new AbortController();
+      searchAbortRef.current = controller;
       setSearching(true);
       setError(null);
       try {
         await Promise.all([
-          runTextSearchTask(query, keyword, nResults),
+          runTextSearchTask(query, keyword, nResults, controller.signal),
           runImageSearch(query, nResults),
         ]);
       } catch (err) {
+        // 旧查询被新查询/切换中止属于正常路径，不显示错误
+        if (isAbortError(err)) return;
         // 检索失败时给出明确错误，而不是界面毫无反应
         setError((err as Error).message || '检索失败');
       } finally {
-        setSearching(false);
+        if (searchAbortRef.current === controller) {
+          searchAbortRef.current = null;
+          setSearching(false);
+        }
       }
     },
     [ready, runTextSearchTask, runImageSearch, setSearching, setError],

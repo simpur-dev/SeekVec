@@ -20,6 +20,8 @@ export interface TextSearchParams {
   modelKey: ModelKey;
   backend?: Backend | null;
   dtype?: Dtype | null;
+  /** 调用方取消信号：模型/集合切换或新查询时中止 HTTP */
+  signal?: AbortSignal;
 }
 
 export interface TextSearchOutcome {
@@ -31,9 +33,17 @@ export interface TextSearchOutcome {
 /** 执行一次文本检索：端侧向量化 + server 检索，返回带分段耗时的结果 */
 export async function runTextSearch(params: TextSearchParams): Promise<TextSearchOutcome> {
   const startedAt = performance.now();
+  const throwIfAborted = () => {
+    if (!params.signal?.aborted) return;
+    const err = new Error('检索已取消');
+    err.name = 'AbortError';
+    throw err;
+  };
+  throwIfAborted();
 
   const embedStart = performance.now();
   const vectors = await params.embed([params.query]);
+  throwIfAborted();
   const embeddingMs = performance.now() - embedStart;
   recordPerf('query.embed', embeddingMs, {
     modelKey: params.modelKey,
@@ -47,6 +57,7 @@ export async function runTextSearch(params: TextSearchParams): Promise<TextSearc
     queryEmbedding: vectors[0],
     nResults: params.nResults,
     keyword: params.keyword,
+    ...(params.signal ? { signal: params.signal } : {}),
   });
 
   const httpMs = result.httpMs ?? result.latencyMs;
