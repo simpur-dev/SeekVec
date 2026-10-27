@@ -1,0 +1,14 @@
+{
+  "steps": [
+    {
+      "step": "request_inflight",
+      "intercepted": true
+    },
+    {
+      "step": "timeout_result",
+      "timedOut": true,
+      "name": "TimeoutError",
+      "message": "请求超时"
+    }
+  ]
+}

@@ -138,6 +138,16 @@ function combineSignals(caller?: AbortSignal): AbortSignal | undefined {
   return caller;
 }
 
+/** 取调用方信号的 abort reason 名称（区分用户取消与超时 signal） */
+function callerAbortReasonName(caller?: AbortSignal): string | null {
+  if (!caller?.aborted) return null;
+  const reason = (caller as unknown as { reason?: unknown }).reason;
+  if (reason && typeof reason === 'object' && typeof (reason as { name?: unknown }).name === 'string') {
+    return (reason as { name: string }).name;
+  }
+  return 'AbortError';
+}
+
 /** 统一请求：JSON 响应 + 60s 超时 + 可选调用方取消 + HTTP 错误转异常 */
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const callerSignal = init.signal ?? undefined;
@@ -148,8 +158,9 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   } catch (err) {
     if (isAbortError(err)) {
       if (callerSignal?.aborted) {
-        const aborted = new Error('请求已取消');
-        aborted.name = 'AbortError';
+        const reasonName = callerAbortReasonName(callerSignal);
+        const aborted = new Error(reasonName === 'TimeoutError' ? '请求超时' : '请求已取消');
+        aborted.name = reasonName === 'TimeoutError' ? 'TimeoutError' : 'AbortError';
         throw aborted;
       }
       throw new Error(`请求超时（${FETCH_TIMEOUT_MS / 1000}s）：${path}`);
