@@ -49,10 +49,11 @@ export function useSearch() {
     [collections, activeCollection, modelKey],
   );
 
-  // 切换模型时清空旧结果，避免展示上一模型的检索内容
+  // 切换模型或集合时清空旧结果，避免展示上一模型/集合的检索内容。
+  // activeCollection 也会由启动回填/导入后自动设置，清空是幂等的。
   useEffect(() => {
     resetResults();
-  }, [modelKey, resetResults]);
+  }, [modelKey, activeCollection, resetResults]);
 
   // 集合提示：active 失效但存在可用回退集合时展示警示条；
   // activeCollection 为空（首次启动）时自动选中回退集合

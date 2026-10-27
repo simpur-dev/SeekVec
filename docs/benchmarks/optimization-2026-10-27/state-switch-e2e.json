@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "step": "ingest_two_collections",
+      "ok": true,
+      "ingest": {
+        "a": {
+          "readMs": 81.56999999284744,
+          "chunkMs": 0.3050000071525574,
+          "embedMs": 124.80500000715256,
+          "writeMs": 839.5649999976158,
+          "refreshMs": 618.26,
+          "cleanupMs": 0,
+          "totalMs": 1208.8550000190735
+        },
+        "b": {
+          "readMs": 4.634999990463257,
+          "chunkMs": 0.025000035762786865,
+          "embedMs": 8.110000014305115,
+          "writeMs": 678.6800000071526,
+          "refreshMs": 606.8,
+          "cleanupMs": 0.004999995231628418,
+          "totalMs": 798.4049999713898
+        }
+      }
+    },
+    {
+      "step": "search_before_switch",
+      "ok": true,
+      "collectionName": "bench_switch_zh_b",
+      "hits": 1,
+      "text": false
+    },
+    {
+      "step": "model_zh_to_en_clears_old_result",
+      "cleared": true
+    },
+    {
+      "step": "switch_back_and_search_A",
+      "ok": true,
+      "collectionName": "bench_switch_zh_a",
+      "hits": 1,
+      "text": false
+    }
+  ]
+}
