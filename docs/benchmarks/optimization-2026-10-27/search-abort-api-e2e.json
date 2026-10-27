@@ -1,0 +1,14 @@
+{
+  "steps": [
+    {
+      "step": "request_inflight",
+      "intercepted": true
+    },
+    {
+      "step": "abort_result",
+      "aborted": true,
+      "name": "AbortError",
+      "message": "请求已取消"
+    }
+  ]
+}
