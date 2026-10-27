@@ -94,7 +94,7 @@ npm run bench          # 模型体积/压缩比 + q8/fp16 vs fp32 一致性（No
 npm run eval:quality   # 标注集检索质量（fp32/q8/fp16）
 npm run bench:browser  # 单组浏览器基准（分阶段计时；--check/--smoke/--headful 等）
 npm run bench:matrix   # ABBA 矩阵：后端/精度/batch/refresh/cold 对比
-npm test               # server + web + scripts 单测（228 项，无外部依赖）
+npm test               # server + web + scripts 单测（229 项，无外部依赖）
 npm run build          # 构建 server + web
 npm run acceptance     # 环境/API/模型/合规自检
 npm run check:compliance  # 赛题合规检查（server 不含推理依赖、web 端侧推理）
@@ -182,7 +182,7 @@ SeekVec/
 
 ## 测试与 CI
 
-- `npm test`：228 项（server 115 / web 71 / scripts 42），纯 Node，无需 seekdb/浏览器/网络
+- `npm test`：229 项（server 115 / web 72 / scripts 42），纯 Node，无需 seekdb/浏览器/网络
 - `npm run check:compliance`：6 项合规检查（server 无推理依赖/代码字样、web 端侧推理等）
 - GitHub Actions（`.github/workflows/ci.yml`）：install → build → 单测 → scripts 类型 → 合规；**不**依赖 seekdb/浏览器（基准与集成手工执行，步骤见复现文档）
 
@@ -192,6 +192,7 @@ SeekVec/
 - **v1.1（stretch）**：图片管线（CLIP）。Schema/接口/模型注册已预留；CLIP 文本塔需 `AutoProcessor + CLIPTextModelWithProjection`，当前 `IMAGE_PIPELINE_ENABLED=false`
 
 详细架构见 [`docs/架构.md`](docs/架构.md)，技术说明见 [`技术说明.md`](技术说明.md)，复现见 [`docs/复现.md`](docs/复现.md)。
+
 
 
 

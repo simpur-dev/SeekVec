@@ -15,7 +15,7 @@
  * 分数语义由 server 决定：纯向量返回 distance（越小越相关），
  * 混合检索返回 RRF score（越大越相关），ResultCard 按 metric 分别展示。
  */
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { search } from '../db/api';
 import { detectBackend } from '../inference/backend';
 import { IMAGE_PIPELINE_ENABLED } from '../inference/models';
@@ -24,6 +24,7 @@ import { useKbStore } from '../store/kbStore';
 import { useSearchStore } from '../store/searchStore';
 import { resolveSearchCollection } from '../store/collectionSelection';
 import { runTextSearch } from '../search/textSearch';
+import { shouldAcceptSearchResult } from '../search/searchGuard';
 import { afterNextPaint } from '../utils/perf';
 import { recordPerf } from '../perf/metrics';
 import { useEmbedding } from './useEmbedding';
@@ -42,6 +43,8 @@ export function useSearch() {
   const resetResults = useSearchStore((s) => s.reset);
 
   const { embed, ready, error: modelError, reload, backend, dtype } = useEmbedding(modelKey);
+  // 丢弃“旧模型/旧集合”的在途检索响应，避免切换后旧结果覆盖新状态。
+  const searchRequestId = useRef(0);
 
   // 当前模型对应的目标集合（activeCollection 失效时回退约定命名）
   const resolution = useMemo(
@@ -78,6 +81,7 @@ export function useSearch() {
         return;
       }
 
+      const requestId = ++searchRequestId.current;
       const outcome = await runTextSearch({
         collectionName: resolution.collection.name,
         query,
@@ -88,6 +92,26 @@ export function useSearch() {
         backend,
         dtype,
       });
+      // 模型/集合已经变化，或已有更新的检索请求：丢弃旧响应，不写回 store。
+      const currentKb = useKbStore.getState();
+      const currentModel = useModelStore.getState().modelKey;
+      const currentResolution = resolveSearchCollection(
+        currentKb.collections,
+        currentKb.activeCollection,
+        currentModel,
+      );
+      if (
+        !shouldAcceptSearchResult({
+          requestId,
+          currentRequestId: searchRequestId.current,
+          modelKey,
+          currentModel,
+          collectionName: resolution.collection.name,
+          currentCollectionName: currentResolution.collection?.name ?? null,
+        })
+      ) {
+        return;
+      }
       const result = outcome.result;
       // 先渲染结果，再计算「端到端 = 到结果渲染完成」并回填
       setTextResults(result);
